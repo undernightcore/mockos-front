@@ -1,0 +1,15 @@
+mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  & > div {
+    color: var(--main-color);
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+  }
+  & > button {
+    color: var(--main-color);
+  }
+}
