@@ -4,6 +4,7 @@ mat-toolbar {
   position: sticky;
   top: 0;
   & > div {
+    cursor: pointer;
     color: var(--main-color);
     display: flex;
     column-gap: 10px;

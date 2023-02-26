@@ -5,12 +5,13 @@ import {
   HttpEvent,
   HttpInterceptor,
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   intercept(
     request: HttpRequest<unknown>,
@@ -22,6 +23,14 @@ export class AuthInterceptor implements HttpInterceptor {
         `Bearer ${this.authService.token}`
       ),
     });
-    return next.handle(authenticatedRequest);
+    return next.handle(authenticatedRequest).pipe(
+      catchError((error) => {
+        if ([401, 403].includes(error.status)) {
+          this.authService.logout();
+          this.router.navigate(['/login']);
+        }
+        return throwError(() => error);
+      })
+    );
   }
 }

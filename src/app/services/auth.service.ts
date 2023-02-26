@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { MessageInterface } from '../interfaces/message.interface';
 import { TokenInterface } from '../interfaces/token.interface';
-import { tap } from 'rxjs';
+import { BehaviorSubject, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,12 +11,19 @@ import { tap } from 'rxjs';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
+  #isLogged = new BehaviorSubject<boolean>(Boolean(this.token));
+  isLogged = this.#isLogged.asObservable();
+
   get token() {
     return localStorage.getItem('token') ?? '';
   }
 
-  #setToken(value: string) {
-    localStorage.setItem('token', value);
+  #setToken(value: string | null) {
+    if (!value) {
+      localStorage.removeItem('token');
+    } else {
+      localStorage.setItem('token', value);
+    }
   }
 
   login(email: string, password: string) {
@@ -25,7 +32,17 @@ export class AuthService {
         email,
         password,
       })
-      .pipe(tap((token) => this.#setToken(token.token)));
+      .pipe(
+        tap((token) => {
+          this.#setToken(token.token);
+          this.#isLogged.next(true);
+        })
+      );
+  }
+
+  logout() {
+    this.#setToken(null);
+    this.#isLogged.next(false);
   }
 
   register(name: string, email: string, password: string) {

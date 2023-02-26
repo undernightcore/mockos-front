@@ -8,7 +8,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
@@ -19,11 +19,13 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
+    HttpClientModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
+      multi: true,
     },
   ],
   bootstrap: [AppComponent],
