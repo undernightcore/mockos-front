@@ -1,0 +1,23 @@
+<div class="verification">
+  <app-navbar></app-navbar>
+  <div *ngIf="successful !== undefined" class="verification__body">
+    <img
+      [src]="
+        'assets/images/' +
+        (successful
+          ? 'undraw_order_confirmed_re_g0if.svg'
+          : 'undraw_qa_engineers_dg-5-p.svg')
+      "
+    />
+    <h1>
+      {{
+        successful
+          ? "Se ha verificado tu cuenta correctamente. Inicia sesión en el siguiente botón"
+          : "El enlace de verificación es inválido. Prueba de nuevo."
+      }}
+    </h1>
+    <button *ngIf="successful" routerLink="/login" mat-button>
+      Iniciar sesión
+    </button>
+  </div>
+</div>
