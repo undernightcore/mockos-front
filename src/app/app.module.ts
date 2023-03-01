@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { VerificationResultComponent } from './pages/verification-result/verification-result.component';
+import { AuthComponent } from './pages/auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { VerificationResultComponent } from './pages/verification-result/verific
     HomeComponent,
     NavbarComponent,
     VerificationResultComponent,
+    AuthComponent,
   ],
   imports: [
     BrowserModule,
