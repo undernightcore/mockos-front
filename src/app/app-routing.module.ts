@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { VerificationResultComponent } from './pages/verification-result/verification-result.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,11 @@ const routes: Routes = [
       successful: false,
     },
     component: VerificationResultComponent,
+  },
+  {
+    title: 'Not found',
+    path: '**',
+    component: NotFoundComponent,
   },
 ];
 
