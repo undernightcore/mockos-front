@@ -1,6 +1,57 @@
 <div class="auth">
   <app-navbar></app-navbar>
-  <div *ngIf="newUser !== undefined">
-    {{newUser ? 'Register' : 'Login'}}
+  <div *ngIf="newUser !== undefined" class="auth__body">
+    <img
+      src="assets/images/undraw_sign__up_nm4k.svg"
+      class="auth__body__img"
+      alt=""
+    />
+    <div class="auth__body__form-container">
+      <h1>{{ newUser ? 'Regístrate!' : 'Logueate!'}}</h1>
+      <form [formGroup]="authForm" class="auth__body__form-container__form">
+        <mat-form-field *ngIf="newUser">
+          <input
+            type="text"
+            matInput
+            formControlName="name"
+            placeholder="Your name"
+          />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            type="email"
+            matInput
+            formControlName="email"
+            placeholder="example@example.com"
+          />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            type="password"
+            matInput
+            formControlName="password"
+            placeholder="Password"
+          />
+        </mat-form-field>
+
+        <mat-form-field *ngIf="newUser">
+          <input
+            type="password"
+            matInput
+            formControlName="repeatPassword"
+            placeholder="Repeat password"
+          />
+        </mat-form-field>
+
+        <button mat-raised-button class="auth__body__form-container__form__dynamic-btn">
+          {{ newUser ? "Register" : "Login" }}
+        </button>
+        <button mat-raised-button *ngIf="!newUser" routerLink="/register" class="auth__body__form-container__form__register-btn">
+          Aún no tengo una cuenta
+        </button>
+      </form>
+    </div>
   </div>
 </div>

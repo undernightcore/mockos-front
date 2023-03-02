@@ -1,0 +1,38 @@
+.auth {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+
+  &__body {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    align-items: center;
+    font-family: var(--main-font);
+    height: 100%;
+    text-align: center;
+    row-gap: 30px;
+    padding: 30px 0;
+    &__form-container {
+      width: 80%;
+      justify-self: center;
+      &__form {
+        display: flex;
+        flex-direction: column;
+
+        &__dynamic-btn {
+          background-color: var(--main-color);
+          color: #fff;
+        }
+        &__register-btn {
+          background-color: var(--disabled-color);
+          margin-top: 15px;
+        }
+      }
+    }
+    & > img {
+      justify-self: center;
+      width: 80%;
+    }
+  }
+}

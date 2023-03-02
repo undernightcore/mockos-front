@@ -12,6 +12,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { VerificationResultComponent } from './pages/verification-result/verification-result.component';
 import { AuthComponent } from './pages/auth/auth.component';
+import { MatInputModule } from "@angular/material/input";
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { AuthComponent } from './pages/auth/auth.component';
     MatToolbarModule,
     MatButtonModule,
     HttpClientModule,
+    MatInputModule,
+    ReactiveFormsModule
   ],
   providers: [
     {
