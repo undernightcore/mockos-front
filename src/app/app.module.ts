@@ -14,6 +14,7 @@ import { VerificationResultComponent } from './pages/verification-result/verific
 import { AuthComponent } from './pages/auth/auth.component';
 import { MatInputModule } from "@angular/material/input";
 import { ReactiveFormsModule } from "@angular/forms";
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ReactiveFormsModule } from "@angular/forms";
     HomeComponent,
     NavbarComponent,
     VerificationResultComponent,
+    NotFoundComponent,
     AuthComponent,
   ],
   imports: [

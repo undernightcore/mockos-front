@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { VerificationResultComponent } from './pages/verification-result/verification-result.component';
 import { AuthComponent } from "./pages/auth/auth.component";
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,11 @@ const routes: Routes = [
       newUser: false,
     },
     component: AuthComponent,
+  },
+  {
+    title: 'Not found',
+    path: '**',
+    component: NotFoundComponent,
   },
 ];
 
