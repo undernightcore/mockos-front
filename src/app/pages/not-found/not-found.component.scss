@@ -1,6 +1,8 @@
 .not-found {
   height: 100vh;
   width: 100vw;
+  display: flex;
+  flex-direction: column;
 
   &__body {
     font-family: var(--main-font);
