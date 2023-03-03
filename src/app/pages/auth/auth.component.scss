@@ -19,14 +19,16 @@
       &__form {
         display: flex;
         flex-direction: column;
-
+        .btn-disabled {
+          background-color: var(--disabled-color);
+        }
         &__dynamic-btn {
-          background-color: var(--main-color);
           color: #fff;
+          background-color: var(--main-color);
         }
         &__register-btn {
-          background-color: var(--disabled-color);
           margin-top: 15px;
+          background-color: var(--disabled-color);
         }
       }
     }

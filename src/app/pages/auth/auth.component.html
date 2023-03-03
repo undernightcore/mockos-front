@@ -7,7 +7,7 @@
       alt=""
     />
     <div class="auth__body__form-container">
-      <h1>{{ newUser ? 'Regístrate!' : 'Logueate!'}}</h1>
+      <h1>{{ newUser ? "Regístrate!" : "Logueate!" }}</h1>
       <form [formGroup]="authForm" class="auth__body__form-container__form">
         <mat-form-field *ngIf="newUser">
           <input
@@ -23,7 +23,8 @@
             type="email"
             matInput
             formControlName="email"
-            placeholder="example@example.com"
+            placeholder="example@email.com"
+            email
           />
         </mat-form-field>
 
@@ -45,13 +46,24 @@
           />
         </mat-form-field>
 
-        <button mat-raised-button class="auth__body__form-container__form__dynamic-btn">
+        <button
+          mat-raised-button
+          (click)="handleAction()"
+          class="auth__body__form-container__form__dynamic-btn"
+          [class.btn-disabled]="authForm.invalid"
+        >
           {{ newUser ? "Register" : "Login" }}
         </button>
-        <button mat-raised-button *ngIf="!newUser" routerLink="/register" class="auth__body__form-container__form__register-btn">
+        <button
+          mat-raised-button
+          *ngIf="!newUser"
+          routerLink="/register"
+          class="auth__body__form-container__form__register-btn"
+        >
           Aún no tengo una cuenta
         </button>
       </form>
+      <h1 *ngIf="passwordMatchError">Si hay error</h1>
     </div>
   </div>
 </div>
