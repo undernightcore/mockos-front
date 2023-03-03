@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { CustomValidators } from '../../validators/password-validator';
+import { iif } from 'rxjs';
+import { repeatPasswordValidator } from '../../validators/repeat-password.validator';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmModalComponent } from '../../components/confirm-modal/confirm-modal.component';
+import { MessageInterface } from '../../interfaces/message.interface';
 
 @Component({
   selector: 'app-auth',
@@ -12,58 +16,71 @@ import { CustomValidators } from '../../validators/password-validator';
 export class AuthComponent implements OnInit {
   newUser?: boolean;
   authForm: FormGroup = new FormGroup({
-    name: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
     password: new FormControl('', [Validators.required]),
   });
+
   constructor(
     private activatedRoute: ActivatedRoute,
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    private dialogService: MatDialog,
+    private router: Router
+  ) {
+    console.log(this.newUser);
+  }
 
   ngOnInit() {
     this.activatedRoute.data.subscribe((data) => {
+      if (data['newUser'] ?? true) {
+        this.#addRegisterControls();
+      }
       this.newUser = data['newUser'] ?? true;
-      if (!this.newUser) return;
-      this.authForm.addControl(
-        'name',
-        new FormControl('', Validators.required)
-      );
-      this.authForm.addControl(
-        'repeatPassword',
-        new FormControl('', [Validators.required])
-      );
-      this.authForm.addValidators(
-        CustomValidators.MatchValidator('password', 'repeatPassword')
-      );
     });
   }
 
-  handleAction() {
-    if (this.newUser) {
-      if (
-        this.authForm.controls['password'].value !==
-        this.authForm.controls['repeatPassword'].value
+  handleSubmit() {
+    if (this.authForm.invalid) return;
+    iif(
+      () => this.newUser ?? true,
+      this.authService.register(
+        this.authForm.controls['name']?.value ?? '',
+        this.authForm.controls['email'].value,
+        this.authForm.controls['password']?.value
+      ),
+      this.authService.login(
+        this.authForm.controls['email'].value,
+        this.authForm.controls['password'].value
       )
-        this.authForm.controls['repeatPassword'].invalid;
-      this.authService
-        .register(
-          this.authForm.controls['name'].value,
-          this.authForm.controls['email'].value,
-          this.authForm.controls['password'].value
-        )
-        .subscribe();
-    } else {
-      this.authService
-        .login(
-          this.authForm.controls['email'].value,
-          this.authForm.controls['password'].value
-        )
-        .subscribe();
-    }
+    ).subscribe((res) => {
+      if (!this.newUser) {
+        this.router.navigate(['/dashboard']);
+        return;
+      }
+      this.dialogService
+        .open(ConfirmModalComponent, {
+          data: {
+            title: 'Valida tu cuenta',
+            message: (res as MessageInterface).message,
+          },
+        })
+        .afterClosed()
+        .subscribe(() => {
+          this.router.navigate(['/login']);
+        });
+    });
   }
 
-  get passwordMatchError() {
-    return this.authForm.getError('mismatch');
+  #addRegisterControls() {
+    this.authForm.addControl(
+      'name',
+      new FormControl('', [Validators.required])
+    );
+    this.authForm.addControl('repeatPassword', new FormControl(''));
+    this.authForm.addValidators(
+      repeatPasswordValidator(
+        this.authForm.controls['password'],
+        this.authForm.controls['repeatPassword']
+      )
+    );
   }
 }

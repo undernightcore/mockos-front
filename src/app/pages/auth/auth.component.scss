@@ -21,9 +21,10 @@
         flex-direction: column;
         .btn-disabled {
           background-color: var(--disabled-color);
+          color: var(--main-color);
         }
         &__dynamic-btn {
-          color: #fff;
+          color: black;
           background-color: var(--main-color);
         }
         &__register-btn {

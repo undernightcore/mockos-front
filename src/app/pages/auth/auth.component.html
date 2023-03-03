@@ -7,14 +7,14 @@
       alt=""
     />
     <div class="auth__body__form-container">
-      <h1>{{ newUser ? "Regístrate!" : "Logueate!" }}</h1>
+      <h1>{{ newUser ? "¡Regístrate!" : "¡Inicia sesión!" }}</h1>
       <form [formGroup]="authForm" class="auth__body__form-container__form">
         <mat-form-field *ngIf="newUser">
           <input
             type="text"
             matInput
             formControlName="name"
-            placeholder="Your name"
+            placeholder="Tu nombre"
           />
         </mat-form-field>
 
@@ -23,7 +23,7 @@
             type="email"
             matInput
             formControlName="email"
-            placeholder="example@email.com"
+            placeholder="Email"
             email
           />
         </mat-form-field>
@@ -33,7 +33,7 @@
             type="password"
             matInput
             formControlName="password"
-            placeholder="Password"
+            placeholder="Contraseña"
           />
         </mat-form-field>
 
@@ -42,13 +42,13 @@
             type="password"
             matInput
             formControlName="repeatPassword"
-            placeholder="Repeat password"
+            placeholder="Repite contraseña"
           />
         </mat-form-field>
 
         <button
           mat-raised-button
-          (click)="handleAction()"
+          (click)="handleSubmit()"
           class="auth__body__form-container__form__dynamic-btn"
           [class.btn-disabled]="authForm.invalid"
         >
@@ -63,7 +63,6 @@
           Aún no tengo una cuenta
         </button>
       </form>
-      <h1 *ngIf="passwordMatchError">Si hay error</h1>
     </div>
   </div>
 </div>

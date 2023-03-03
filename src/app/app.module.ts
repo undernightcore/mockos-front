@@ -12,9 +12,11 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { VerificationResultComponent } from './pages/verification-result/verification-result.component';
 import { AuthComponent } from './pages/auth/auth.component';
-import { MatInputModule } from "@angular/material/input";
-import { ReactiveFormsModule } from "@angular/forms";
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     VerificationResultComponent,
     NotFoundComponent,
     AuthComponent,
+    ConfirmModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,8 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     MatButtonModule,
     HttpClientModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule,
   ],
   providers: [
     {
