@@ -5,6 +5,7 @@ import { VerificationResultRoutingModule } from './verification-result-routing.m
 import { VerificationResultComponent } from './verification-result.component';
 import { NavbarModule } from '../../components/navbar/navbar.module';
 import { MatButtonModule } from '@angular/material/button';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [VerificationResultComponent],
@@ -13,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
     VerificationResultRoutingModule,
     NavbarModule,
     MatButtonModule,
+    TranslateModule,
   ],
 })
 export class VerificationResultModule {}

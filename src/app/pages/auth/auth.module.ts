@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { NavbarModule } from '../../components/navbar/navbar.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [AuthComponent],
@@ -21,6 +22,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatButtonModule,
     NavbarModule,
     MatDialogModule,
+    TranslateModule,
   ],
 })
 export class AuthModule {}

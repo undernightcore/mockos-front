@@ -20,6 +20,8 @@
     "@angular/platform-browser": "^14.0.0",
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
+    "@ngx-translate/core": "^14.0.0",
+    "@ngx-translate/http-loader": "^7.0.0",
     "rxjs": "~7.5.0",
     "sweetalert2": "^11.7.3",
     "tslib": "^2.3.0",

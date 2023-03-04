@@ -1,0 +1,37 @@
+{
+  "COMMON": {
+    "MOCKS": "Mocks",
+    "BUILD": "Construye",
+    "EMAIL": "Email",
+    "PASSWORD": "Contraseña",
+    "YOUR_NAME": "Tu nombre",
+    "REPEAT_PASSWORD": "Repetir contraseña",
+    "LANGUAGES": "Idiomas"
+  },
+  "PAGES": {
+    "HOME": {
+      "FOR_YOUR_API": "para tu API",
+      "NO_CODE_NO_CONF": "sin código ni archivos de configuración",
+      "DESCRIPTION": "Mockos es una herramienta útil y práctica para desarrolladores que buscan probar sus aplicaciones con mocks de API personalizados, de forma colaborativa y sin necesidad de instalar nada en su ordenador."
+    },
+    "AUTH": {
+      "LOG_IN": "¡Iniciar sesión!",
+      "REGISTER": "¡Regístrese ahora!"
+    },
+    "VERIFY": {
+      "TITLE_SUCCESSFUL": "Su cuenta ha sido verificada con éxito. Por favor, inicia sesión usando el botón de abajo",
+      "TITLE_FAILURE": "El enlace de verificación no es válido. Prueba más tarde."
+    },
+    "NOT_FOUND": {
+      "PAGE_NOT_FOUND": "Página no encontrada",
+      "SORRY": "Lo sentimos mucho..."
+    }
+  },
+  "ACTIONS": {
+    "START_NOW": "¡Comienza ahora mismo!",
+    "LOG_IN": "Iniciar sesión",
+    "REGISTER": "Registrarse",
+    "GO_PANEL": "Ir al panel de control",
+    "WITHOUT_ACCOUNT": "¿Aún no tienes cuenta?"
+  }
+}
