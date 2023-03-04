@@ -25,9 +25,7 @@ export class AuthComponent implements OnInit {
     private authService: AuthService,
     private dialogService: MatDialog,
     private router: Router
-  ) {
-    console.log(this.newUser);
-  }
+  ) {}
 
   ngOnInit() {
     this.activatedRoute.data.subscribe((data) => {

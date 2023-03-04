@@ -1,52 +1,30 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { VerificationResultComponent } from './pages/verification-result/verification-result.component';
-import { AuthComponent } from "./pages/auth/auth.component";
-import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 const routes: Routes = [
   {
-    title: 'Home',
     path: '',
-    component: HomeComponent,
+    loadChildren: () =>
+      import('./pages/home/home.module').then((m) => m.HomeModule),
   },
   {
-    title: 'Verification success',
-    path: 'verify/success',
-    data: {
-      successful: true,
-    },
-    component: VerificationResultComponent,
+    path: 'verify',
+    loadChildren: () =>
+      import('./pages/verification-result/verification-result.module').then(
+        (m) => m.VerificationResultModule
+      ),
   },
   {
-    title: 'Verification failed',
-    path: 'verify/failure',
-    data: {
-      successful: false,
-    },
-    component: VerificationResultComponent,
+    path: 'auth',
+    loadChildren: () =>
+      import('./pages/auth/auth.module').then((m) => m.AuthModule),
   },
   {
-    title: 'Register',
-    path: 'register',
-    data: {
-      newUser: true,
-    },
-    component: AuthComponent,
-  },
-  {
-    title: 'Login',
-    path: 'login',
-    data: {
-      newUser: false,
-    },
-    component: AuthComponent,
-  },
-  {
-    title: 'Not found',
     path: '**',
-    component: NotFoundComponent,
+    loadChildren: () =>
+      import('./pages/not-found/not-found.module').then(
+        (m) => m.NotFoundModule
+      ),
   },
 ];
 
