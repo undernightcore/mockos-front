@@ -26,21 +26,24 @@ export class AuthInterceptor implements HttpInterceptor {
     });
     return next.handle(authenticatedRequest).pipe(
       catchError((error) => {
+        this.#throwErrorToast(error.error.errors[0]);
         if ([401, 403].includes(error.status)) {
           this.authService.logout();
-          this.router.navigate(['/login']);
-        } else {
-          Swal.fire({
-            toast: true,
-            position: 'bottom-right',
-            icon: 'error',
-            title: error.error.errors[0],
-            showConfirmButton: false,
-            timer: 2000,
-          });
+          this.router.navigate(['/auth/login']);
         }
         return throwError(() => error);
       })
     );
+  }
+
+  #throwErrorToast(title: string) {
+    Swal.fire({
+      toast: true,
+      position: 'bottom-right',
+      icon: 'error',
+      title,
+      showConfirmButton: false,
+      timer: 2000,
+    });
   }
 }
