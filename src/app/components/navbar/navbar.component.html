@@ -1,8 +1,21 @@
 <mat-toolbar>
-  <div routerLink="/">
-    <img src="assets/icons/drop.svg" /><span>mockos.</span>
+  <div>
+    <img src="assets/icons/drop.svg" /><span routerLink="/">mockos.</span>
+    <button mat-button [mat-menu-trigger-for]="menu">
+      {{ "COMMON.LANGUAGES" | translate }}
+    </button>
+    <mat-menu #menu="matMenu">
+      <button
+        *ngFor="let language of languages"
+        (click)="translateService.use(language)"
+        mat-menu-item
+      >
+        {{ language }}
+      </button>
+    </mat-menu>
   </div>
   <button
+    *ngIf="isLogged !== undefined"
     [routerLink]="isLogged ? '/dashboard' : '/auth/login'"
     color="primary"
     mat-button

@@ -5,7 +5,8 @@
     "EMAIL": "Email",
     "PASSWORD": "Contraseña",
     "YOUR_NAME": "Tu nombre",
-    "REPEAT_PASSWORD": "Repetir contraseña"
+    "REPEAT_PASSWORD": "Repetir contraseña",
+    "LANGUAGES": "Idiomas"
   },
   "PAGES": {
     "HOME": {
