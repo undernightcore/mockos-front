@@ -12,13 +12,14 @@
     />
     <h1>
       {{
-        successful
-          ? "Se ha verificado tu cuenta correctamente. Inicia sesión en el siguiente botón"
-          : "El enlace de verificación es inválido. Prueba de nuevo."
+        (successful
+          ? "PAGES.VERIFY.TITLE_SUCCESSFUL"
+          : "PAGES.VERIFY.TITLE_FAILURE"
+        ) | translate
       }}
     </h1>
-    <button *ngIf="successful" routerLink="/login" mat-button>
-      Iniciar sesión
+    <button *ngIf="successful" routerLink="/auth/login" mat-button>
+      {{ "ACTIONS.LOG_IN" | translate }}
     </button>
   </div>
 </div>

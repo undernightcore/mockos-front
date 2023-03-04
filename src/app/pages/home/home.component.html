@@ -6,16 +6,21 @@
     </div>
     <div>
       <h1>
-        Construye <span>mocks</span> de tu API
-        <span>sin código ni ficheros de configuración</span>
+        {{ "COMMON.BUILD" | translate }}
+        <span>{{ "COMMON.MOCKS" | translate }}</span>
+        {{ "PAGES.HOME.FOR_YOUR_API" | translate }}
+        <span>{{ "PAGES.HOME.NO_CODE_NO_CONF" | translate }}</span>
       </h1>
       <h3>
-        Mockos es una herramienta útil y práctica para desarrolladores que
-        buscan probar sus aplicaciones y sitios web con mocks de APIs
-        personalizadas, de manera colaborativa y sin necesidad de instalar nada
-        en su ordenador.
+        {{ "PAGES.HOME.DESCRIPTION" | translate }}
       </h3>
-      <button mat-button>¡Comienza ahora!</button>
+      <button
+        *ngIf="isLogged !== undefined"
+        [routerLink]="isLogged ? '/dashboard' : '/auth/login'"
+        mat-button
+      >
+        {{ "ACTIONS.START_NOW" | translate }}
+      </button>
     </div>
   </div>
 </div>

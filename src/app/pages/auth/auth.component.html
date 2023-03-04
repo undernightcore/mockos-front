@@ -7,14 +7,14 @@
       alt=""
     />
     <div class="auth__body__form-container">
-      <h1>{{ newUser ? "¡Regístrate!" : "¡Inicia sesión!" }}</h1>
+      <h1>{{ (newUser ? "PAGES.AUTH.REGISTER" : "PAGES.AUTH.LOG_IN") | translate }}</h1>
       <form [formGroup]="authForm" class="auth__body__form-container__form">
         <mat-form-field *ngIf="newUser">
           <input
             type="text"
             matInput
             formControlName="name"
-            placeholder="Tu nombre"
+            [placeholder]="'COMMON.YOUR_NAME' | translate"
           />
         </mat-form-field>
 
@@ -23,7 +23,7 @@
             type="email"
             matInput
             formControlName="email"
-            placeholder="Email"
+            [placeholder]="'COMMON.EMAIL' | translate"
             email
           />
         </mat-form-field>
@@ -33,7 +33,7 @@
             type="password"
             matInput
             formControlName="password"
-            placeholder="Contraseña"
+            [placeholder]="'COMMON.PASSWORD' | translate"
           />
         </mat-form-field>
 
@@ -42,7 +42,7 @@
             type="password"
             matInput
             formControlName="repeatPassword"
-            placeholder="Repite contraseña"
+            [placeholder]="'COMMON.REPEAT_PASSWORD' | translate"
           />
         </mat-form-field>
 
@@ -52,7 +52,7 @@
           class="auth__body__form-container__form__dynamic-btn"
           [class.btn-disabled]="authForm.invalid"
         >
-          {{ newUser ? "Register" : "Login" }}
+          {{ (newUser ? "ACTIONS.REGISTER" : "ACTIONS.LOG_IN") | translate }}
         </button>
         <button
           mat-raised-button
@@ -60,7 +60,7 @@
           routerLink="/auth/register"
           class="auth__body__form-container__form__register-btn"
         >
-          Aún no tengo una cuenta
+          {{'ACTIONS.WITHOUT_ACCOUNT' | translate}}
         </button>
       </form>
     </div>
