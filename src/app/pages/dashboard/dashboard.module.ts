@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard.component';
 import { NavbarModule } from '../../components/navbar/navbar.module';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ProjectCardComponent } from './components/project-card/project-card.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [DashboardComponent, ProjectCardComponent],
@@ -14,6 +15,7 @@ import { ProjectCardComponent } from './components/project-card/project-card.com
     DashboardRoutingModule,
     NavbarModule,
     ScrollingModule,
+    TranslateModule,
   ],
 })
 export class DashboardModule {}

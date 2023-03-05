@@ -1,7 +1,7 @@
 <div class="dashboard">
   <app-navbar></app-navbar>
   <div class="dashboard__banner">
-    <h1>Your projects</h1>
+    <h1>{{'PAGES.DASHBOARD.YOUR_PROJECTS' | translate}}</h1>
   </div>
   <div (scroll)="handleScroll($event)" class="dashboard__body">
     <app-project-card

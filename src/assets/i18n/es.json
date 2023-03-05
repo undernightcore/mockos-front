@@ -23,6 +23,10 @@
       "TITLE_SUCCESSFUL": "Su cuenta ha sido verificada con éxito. Por favor, inicia sesión usando el botón de abajo",
       "TITLE_FAILURE": "El enlace de verificación no es válido. Prueba más tarde."
     },
+    "DASHBOARD": {
+      "YOUR_PROJECTS": "Tus proyectos",
+      "DESCRIPTION_NOT_FOUND": "No hay descripción disponible"
+    },
     "NOT_FOUND": {
       "PAGE_NOT_FOUND": "Página no encontrada",
       "SORRY": "Lo sentimos mucho..."

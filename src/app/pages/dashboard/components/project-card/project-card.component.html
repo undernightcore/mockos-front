@@ -2,6 +2,9 @@
   <img src="assets/icons/drop.svg" />
   <div>
     <h4>{{ project.name }}</h4>
-    <span>{{ project.description ?? 'No hay descripción disponible'}}</span>
+    <span>{{
+      project.description ??
+        ("PAGES.DASHBOARD.DESCRIPTION_NOT_FOUND" | translate)
+    }}</span>
   </div>
 </div>

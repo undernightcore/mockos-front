@@ -23,6 +23,10 @@
       "TITLE_SUCCESSFUL": "Your account has been successfully verified. Please log in using the button below.",
       "TITLE_FAILURE": "The verification link is invalid. Please try again."
     },
+    "DASHBOARD": {
+      "YOUR_PROJECTS": "Your projects",
+      "DESCRIPTION_NOT_FOUND": "Description isn't available"
+    },
     "NOT_FOUND": {
       "PAGE_NOT_FOUND": "Page not found",
       "SORRY": "We are very sorry..."
