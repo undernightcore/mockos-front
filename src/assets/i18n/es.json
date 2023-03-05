@@ -37,6 +37,7 @@
     "LOG_IN": "Iniciar sesión",
     "REGISTER": "Registrarse",
     "GO_PANEL": "Ir al panel de control",
-    "WITHOUT_ACCOUNT": "¿Aún no tienes cuenta?"
+    "WITHOUT_ACCOUNT": "¿Aún no tienes cuenta?",
+    "LOG_OUT": "Cerrar sesión"
   }
 }
