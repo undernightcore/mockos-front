@@ -16,7 +16,8 @@
     },
     "AUTH": {
       "LOG_IN": "¡Iniciar sesión!",
-      "REGISTER": "¡Regístrese ahora!"
+      "REGISTER": "¡Regístrese ahora!",
+      "VERIFY_ACCOUNT": "Verifica tu cuenta"
     },
     "VERIFY": {
       "TITLE_SUCCESSFUL": "Su cuenta ha sido verificada con éxito. Por favor, inicia sesión usando el botón de abajo",

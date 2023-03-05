@@ -16,7 +16,8 @@
     },
     "AUTH": {
       "LOG_IN": "Log in!",
-      "REGISTER": "Register now!"
+      "REGISTER": "Register now!",
+      "VERIFY_ACCOUNT": "Verify your account"
     },
     "VERIFY": {
       "TITLE_SUCCESSFUL": "Your account has been successfully verified. Please log in using the button below.",

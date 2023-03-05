@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { NavbarModule } from '../../components/navbar/navbar.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TranslateModule } from '@ngx-translate/core';
+import { ConfirmModalModule } from '../../components/confirm-modal/confirm-modal.module';
 
 @NgModule({
   declarations: [AuthComponent],
@@ -23,6 +24,7 @@ import { TranslateModule } from '@ngx-translate/core';
     NavbarModule,
     MatDialogModule,
     TranslateModule,
+    ConfirmModalModule,
   ],
 })
 export class AuthModule {}
