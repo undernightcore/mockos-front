@@ -7,6 +7,7 @@ import { repeatPasswordValidator } from '../../validators/repeat-password.valida
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmModalComponent } from '../../components/confirm-modal/confirm-modal.component';
 import { MessageInterface } from '../../interfaces/message.interface';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-auth',
@@ -24,7 +25,8 @@ export class AuthComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private authService: AuthService,
     private dialogService: MatDialog,
-    private router: Router
+    private router: Router,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit() {
@@ -57,13 +59,13 @@ export class AuthComponent implements OnInit {
       this.dialogService
         .open(ConfirmModalComponent, {
           data: {
-            title: 'Valida tu cuenta',
+            title: this.translateService.instant('PAGES.AUTH.VERIFY_ACCOUNT'),
             message: (res as MessageInterface).message,
           },
         })
         .afterClosed()
         .subscribe(() => {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/auth/login']);
         });
     });
   }
