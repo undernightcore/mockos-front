@@ -1,0 +1,10 @@
+<div *ngIf="project" class="project-card">
+  <img src="assets/icons/drop.svg" />
+  <div>
+    <h4>{{ project.name }}</h4>
+    <span>{{
+      project.description ??
+        ("PAGES.DASHBOARD.DESCRIPTION_NOT_FOUND" | translate)
+    }}</span>
+  </div>
+</div>
