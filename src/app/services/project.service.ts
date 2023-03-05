@@ -11,11 +11,11 @@ import { CreateProjectInterface } from '../interfaces/create-project.interface';
 export class ProjectService {
   constructor(private httpClient: HttpClient) {}
 
-  getProjects(page = 1, size = 10) {
+  getProjects(page = 1, perPage = 10) {
     return this.httpClient.get<PaginatedResponseInterface<ProjectInterface>>(
       `${environment.apiUrl}/projects`,
       {
-        params: { page, size },
+        params: { page, perPage },
       }
     );
   }

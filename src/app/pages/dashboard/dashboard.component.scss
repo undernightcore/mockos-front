@@ -1,0 +1,27 @@
+.dashboard {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  &__banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    background-color: var(--main-color);
+
+    & > h1 {
+      color: white;
+      margin: 0;
+    }
+  }
+
+  &__body {
+    padding: 10px;
+    height: 100%;
+    overflow: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}

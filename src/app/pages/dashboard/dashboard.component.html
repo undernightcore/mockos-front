@@ -1,0 +1,11 @@
+<div class="dashboard">
+  <app-navbar></app-navbar>
+  <div class="dashboard__banner">
+    <h1>Your projects</h1>
+  </div>
+  <div (scroll)="handleScroll($event)" class="dashboard__body">
+    <app-project-card
+      [project]="project"
+      *ngFor="let project of projects" ></app-project-card>
+  </div>
+</div>
