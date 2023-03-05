@@ -25,7 +25,9 @@
     },
     "DASHBOARD": {
       "YOUR_PROJECTS": "Tus proyectos",
-      "DESCRIPTION_NOT_FOUND": "No hay descripción disponible"
+      "DESCRIPTION_NOT_FOUND": "No hay descripción disponible",
+      "DELETE_PROJECT": "¿Estás seguro de que quieres eliminar {{project}}?",
+      "DELETE_PROJECT_MESSAGE": "Esta acción no se puede revertir"
     },
     "NOT_FOUND": {
       "PAGE_NOT_FOUND": "Página no encontrada",
@@ -38,6 +40,8 @@
     "REGISTER": "Registrarse",
     "GO_PANEL": "Ir al panel de control",
     "WITHOUT_ACCOUNT": "¿Aún no tienes cuenta?",
-    "LOG_OUT": "Cerrar sesión"
+    "LOG_OUT": "Cerrar sesión",
+    "ACCEPT": "Aceptar",
+    "CANCEL": "Cancelar"
   }
 }

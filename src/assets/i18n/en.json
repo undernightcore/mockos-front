@@ -6,7 +6,9 @@
     "PASSWORD": "Password",
     "YOUR_NAME": "Your name",
     "REPEAT_PASSWORD": "Repeat password",
-    "LANGUAGES": "Languages"
+    "LANGUAGES": "Languages",
+    "ACCEPT": "Accept",
+    "CANCEL": "Cancel"
   },
   "PAGES": {
     "HOME": {
@@ -25,7 +27,9 @@
     },
     "DASHBOARD": {
       "YOUR_PROJECTS": "Your projects",
-      "DESCRIPTION_NOT_FOUND": "Description isn't available"
+      "DESCRIPTION_NOT_FOUND": "Description isn't available",
+      "DELETE_PROJECT": "Are you sure you want to delete {{project}}?",
+      "DELETE_PROJECT_MESSAGE": "This action is irreversible"
     },
     "NOT_FOUND": {
       "PAGE_NOT_FOUND": "Page not found",

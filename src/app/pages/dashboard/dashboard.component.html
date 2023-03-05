@@ -5,6 +5,7 @@
   </div>
   <div (scroll)="handleScroll($event)" class="dashboard__body">
     <app-project-card
+      (delete)="openDeleteModal(project)"
       [project]="project"
       *ngFor="let project of projects" ></app-project-card>
   </div>
