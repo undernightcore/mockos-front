@@ -35,7 +35,10 @@ export class ProjectService {
   }
 
   editProject(id: number, data: CreateProjectInterface) {
-    return this.httpClient.put(`${environment.apiUrl}/projects/${id}`, data);
+    return this.httpClient.put<ProjectInterface>(
+      `${environment.apiUrl}/projects/${id}`,
+      data
+    );
   }
 
   deleteProject(id: number) {

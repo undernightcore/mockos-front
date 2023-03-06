@@ -32,7 +32,8 @@
       "DELETE_PROJECT_MESSAGE": "Esta acción no se puede revertir",
       "CREATE_PROJECT": "Crear proyecto",
       "EDIT_PROJECT": "Editar proyecto",
-      "PROJECT_CREATED": "Proyecto {{project}} creado correctamente"
+      "PROJECT_CREATED": "Proyecto {{project}} creado correctamente",
+      "PROJECT_EDITED": "Proyecto {{project}} editado correctamente"
     },
     "NOT_FOUND": {
       "PAGE_NOT_FOUND": "Página no encontrada",

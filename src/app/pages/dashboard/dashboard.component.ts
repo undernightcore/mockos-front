@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../../services/project.service';
 import { ProjectInterface } from '../../interfaces/project.interface';
-import { finalize } from 'rxjs';
+import { finalize, iif } from 'rxjs';
 import { ChoiceModalComponent } from '../../components/choice-modal/choice-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
@@ -65,17 +65,26 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-  openCreateModal() {
+  openCreateModal(project?: ProjectInterface) {
     this.dialogService
-      .open(ProjectModalComponent)
+      .open(ProjectModalComponent, { data: project })
       .afterClosed()
       .subscribe((data: CreateProjectInterface | undefined) => {
         if (!data) return;
-        this.projectService.createProject(data).subscribe((response) => {
+        iif(
+          () => !project,
+          this.projectService.createProject(data),
+          this.projectService.editProject(project?.id as number, data)
+        ).subscribe((response) => {
           openToast(
-            this.translateService.instant('PAGES.DASHBOARD.PROJECT_CREATED', {
-              project: response.name,
-            }),
+            this.translateService.instant(
+              !project
+                ? 'PAGES.DASHBOARD.PROJECT_CREATED'
+                : 'PAGES.DASHBOARD.PROJECT_EDITED',
+              {
+                project: response.name,
+              }
+            ),
             'success'
           );
           this.#getProjects(1);

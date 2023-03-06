@@ -8,6 +8,7 @@
     <div>
       <app-project-card
         (delete)="openDeleteModal(project)"
+        (edit)="openCreateModal(project)"
         [project]="project"
         *ngFor="let project of projects" ></app-project-card>
     </div>

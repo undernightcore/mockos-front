@@ -8,5 +8,6 @@ import { ProjectInterface } from '../../../../interfaces/project.interface';
 })
 export class ProjectCardComponent {
   @Input() project?: ProjectInterface;
+  @Output() edit = new EventEmitter<void>();
   @Output() delete = new EventEmitter<void>();
 }
