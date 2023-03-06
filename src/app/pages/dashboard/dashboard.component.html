@@ -2,10 +2,15 @@
   <app-navbar></app-navbar>
   <div class="dashboard__banner">
     <h1>{{'PAGES.DASHBOARD.YOUR_PROJECTS' | translate}}</h1>
+    <button mat-button (click)="openCreateModal()"><mat-icon>add</mat-icon></button>
   </div>
   <div (scroll)="handleScroll($event)" class="dashboard__body">
-    <app-project-card
-      [project]="project"
-      *ngFor="let project of projects" ></app-project-card>
+    <div>
+      <app-project-card
+        (delete)="openDeleteModal(project)"
+        (edit)="openCreateModal(project)"
+        [project]="project"
+        *ngFor="let project of projects" ></app-project-card>
+    </div>
   </div>
 </div>

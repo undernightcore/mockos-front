@@ -8,7 +8,7 @@ import {
 import { catchError, Observable, throwError } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
+import { openToast } from '../utils/toast.utils';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -26,7 +26,7 @@ export class AuthInterceptor implements HttpInterceptor {
     });
     return next.handle(authenticatedRequest).pipe(
       catchError((error) => {
-        this.#throwErrorToast(error.error.errors[0]);
+        openToast(error.error.errors[0], 'error');
         if ([401, 403].includes(error.status)) {
           this.authService.logout();
           this.router.navigate(['/auth/login']);
@@ -34,16 +34,5 @@ export class AuthInterceptor implements HttpInterceptor {
         return throwError(() => error);
       })
     );
-  }
-
-  #throwErrorToast(title: string) {
-    Swal.fire({
-      toast: true,
-      position: 'bottom-right',
-      icon: 'error',
-      title,
-      showConfirmButton: false,
-      timer: 2000,
-    });
   }
 }

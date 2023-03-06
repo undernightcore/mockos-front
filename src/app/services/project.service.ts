@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { PaginatedResponseInterface } from '../interfaces/paginated-response.interface';
 import { ProjectInterface } from '../interfaces/project.interface';
 import { CreateProjectInterface } from '../interfaces/create-project.interface';
+import { MessageInterface } from '../interfaces/message.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -34,10 +35,15 @@ export class ProjectService {
   }
 
   editProject(id: number, data: CreateProjectInterface) {
-    return this.httpClient.put(`${environment.apiUrl}/projects/${id}`, data);
+    return this.httpClient.put<ProjectInterface>(
+      `${environment.apiUrl}/projects/${id}`,
+      data
+    );
   }
 
   deleteProject(id: number) {
-    return this.httpClient.delete<void>(`${environment.apiUrl}/projects/${id}`);
+    return this.httpClient.delete<MessageInterface>(
+      `${environment.apiUrl}/projects/${id}`
+    );
   }
 }

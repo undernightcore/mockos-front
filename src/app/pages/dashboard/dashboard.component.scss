@@ -7,12 +7,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 200px;
+    flex-direction: column;
+    gap: 10px;
+    height: 300px;
     background-color: var(--main-color);
 
     & > h1 {
       color: white;
       margin: 0;
+    }
+
+    & > button {
+      background-color: var(--alt-color);
     }
   }
 
@@ -20,12 +26,16 @@
     padding: 10px;
     height: 100%;
     overflow: auto;
-    display: grid;
-    grid-template-columns: 1fr;
-    @media (min-width: 500px) {
-      grid-template-columns: 1fr 1fr;
-    }
 
-    gap: 10px;
+    & > div {
+      grid-template-columns: 1fr;
+      display: grid;
+
+      @media (min-width: 500px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      gap: 10px;
+    }
   }
 }
