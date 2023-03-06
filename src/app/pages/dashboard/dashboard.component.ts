@@ -6,6 +6,8 @@ import { ChoiceModalComponent } from '../../components/choice-modal/choice-modal
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { openToast } from '../../utils/toast.utils';
+import { ProjectModalComponent } from './components/project-modal/project-modal.component';
+import { CreateProjectInterface } from '../../interfaces/create-project.interface';
 
 @Component({
   selector: 'app-dashboard',
@@ -58,6 +60,24 @@ export class DashboardComponent implements OnInit {
         if (!confirmed) return;
         this.projectService.deleteProject(project.id).subscribe((message) => {
           openToast(message.message, 'success');
+          this.#getProjects(1);
+        });
+      });
+  }
+
+  openCreateModal() {
+    this.dialogService
+      .open(ProjectModalComponent)
+      .afterClosed()
+      .subscribe((data: CreateProjectInterface | undefined) => {
+        if (!data) return;
+        this.projectService.createProject(data).subscribe((response) => {
+          openToast(
+            this.translateService.instant('PAGES.DASHBOARD.PROJECT_CREATED', {
+              project: response.name,
+            }),
+            'success'
+          );
           this.#getProjects(1);
         });
       });

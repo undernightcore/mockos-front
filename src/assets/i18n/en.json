@@ -7,8 +7,8 @@
     "YOUR_NAME": "Your name",
     "REPEAT_PASSWORD": "Repeat password",
     "LANGUAGES": "Languages",
-    "ACCEPT": "Accept",
-    "CANCEL": "Cancel"
+    "NAME": "Name",
+    "DESCRIPTION": "Description"
   },
   "PAGES": {
     "HOME": {
@@ -29,7 +29,10 @@
       "YOUR_PROJECTS": "Your projects",
       "DESCRIPTION_NOT_FOUND": "Description isn't available",
       "DELETE_PROJECT": "Are you sure you want to delete {{project}}?",
-      "DELETE_PROJECT_MESSAGE": "This action is irreversible"
+      "DELETE_PROJECT_MESSAGE": "This action is irreversible",
+      "CREATE_PROJECT": "Create project",
+      "EDIT_PROJECT": "Edit project",
+      "PROJECT_CREATED": "Project {{project}} created successfully"
     },
     "NOT_FOUND": {
       "PAGE_NOT_FOUND": "Page not found",
@@ -42,6 +45,8 @@
     "REGISTER": "Register",
     "GO_PANEL": "Go to dashboard",
     "WITHOUT_ACCOUNT": "Don't have an account yet?",
-    "LOG_OUT": "Log out"
+    "LOG_OUT": "Log out",
+    "ACCEPT": "Accept",
+    "CANCEL": "Cancel"
   }
 }

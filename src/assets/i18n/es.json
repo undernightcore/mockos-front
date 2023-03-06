@@ -6,7 +6,9 @@
     "PASSWORD": "Contraseña",
     "YOUR_NAME": "Tu nombre",
     "REPEAT_PASSWORD": "Repetir contraseña",
-    "LANGUAGES": "Idiomas"
+    "LANGUAGES": "Idiomas",
+    "NAME": "Nombre",
+    "DESCRIPTION": "Descripción"
   },
   "PAGES": {
     "HOME": {
@@ -27,7 +29,10 @@
       "YOUR_PROJECTS": "Tus proyectos",
       "DESCRIPTION_NOT_FOUND": "No hay descripción disponible",
       "DELETE_PROJECT": "¿Estás seguro de que quieres eliminar {{project}}?",
-      "DELETE_PROJECT_MESSAGE": "Esta acción no se puede revertir"
+      "DELETE_PROJECT_MESSAGE": "Esta acción no se puede revertir",
+      "CREATE_PROJECT": "Crear proyecto",
+      "EDIT_PROJECT": "Editar proyecto",
+      "PROJECT_CREATED": "Proyecto {{project}} creado correctamente"
     },
     "NOT_FOUND": {
       "PAGE_NOT_FOUND": "Página no encontrada",
