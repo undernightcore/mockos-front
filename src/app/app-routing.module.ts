@@ -20,11 +20,9 @@ const routes: Routes = [
       import('./pages/auth/auth.module').then((m) => m.AuthModule),
   },
   {
-    path: 'dashboard',
+    path: 'projects',
     loadChildren: () =>
-      import('./pages/dashboard/dashboard.module').then(
-        (m) => m.DashboardModule
-      ),
+      import('./pages/projects/projects.module').then((m) => m.ProjectsModule),
   },
   {
     path: '**',

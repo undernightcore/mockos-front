@@ -15,7 +15,7 @@
     </mat-menu>
   </div>
   <div *ngIf="isLogged !== undefined" class="navbar__actions">
-    <button [routerLink]="isLogged ? '/dashboard' : '/auth/login'" mat-button>
+    <button [routerLink]="isLogged ? '/projects' : '/auth/login'" mat-button>
       <mat-icon>{{ (isLogged ? "wysiwyg" : "login")}}</mat-icon>
     </button>
     <button (click)="logOut()" *ngIf="isLogged" mat-button>

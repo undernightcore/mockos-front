@@ -53,7 +53,7 @@ export class AuthComponent implements OnInit {
       )
     ).subscribe((res) => {
       if (!this.newUser) {
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/projects']);
         return;
       }
       this.dialogService
