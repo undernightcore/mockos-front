@@ -2,7 +2,7 @@
   <div class="navbar__info">
     <img src="assets/icons/drop.svg" /><span routerLink="/">mockos.</span>
     <button mat-button [mat-menu-trigger-for]="menu">
-      {{ "COMMON.LANGUAGES" | translate }}
+      <mat-icon>language</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
       <button
@@ -16,10 +16,10 @@
   </div>
   <div *ngIf="isLogged !== undefined" class="navbar__actions">
     <button [routerLink]="isLogged ? '/dashboard' : '/auth/login'" mat-button>
-      {{ (isLogged ? "ACTIONS.GO_PANEL" : "ACTIONS.LOG_IN") | translate }}
+      <mat-icon>{{ (isLogged ? "wysiwyg" : "login")}}</mat-icon>
     </button>
     <button (click)="logOut()" *ngIf="isLogged" mat-button>
-      {{ "ACTIONS.LOG_OUT" | translate }}
+      <mat-icon>logout</mat-icon>
     </button>
   </div>
 </mat-toolbar>

@@ -6,6 +6,7 @@ import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [NavbarComponent],
@@ -16,6 +17,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatButtonModule,
     TranslateModule,
     MatMenuModule,
+    MatIconModule,
   ],
   exports: [NavbarComponent],
 })
