@@ -7,6 +7,11 @@ const routes: Routes = [
     path: '',
     component: ProjectsComponent,
   },
+  {
+    path: ':id',
+    loadChildren: () =>
+      import('./pages/routes/routes.module').then((m) => m.RoutesModule),
+  },
 ];
 
 @NgModule({
