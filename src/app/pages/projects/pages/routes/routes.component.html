@@ -1,1 +1,11 @@
-<p>routes works!</p>
+<div class="routes">
+  <app-navbar></app-navbar>
+  <div *ngIf="routes !== undefined" class="routes__body">
+    <div class="routes__body__list">
+      <app-route-list-item *ngFor="let route of routes" [route]="route"></app-route-list-item>
+    </div>
+    <div class="routes__body__info">
+
+    </div>
+  </div>
+</div>

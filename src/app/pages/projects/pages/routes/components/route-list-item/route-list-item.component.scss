@@ -1,0 +1,43 @@
+.route-list-item {
+  position: relative;
+  padding: 16px;
+  border-bottom: 1px solid var(--disabled-color);
+
+  & > div {
+    display: flex;
+    gap: 24px;
+  }
+
+  &__badge {
+    position: absolute;
+    padding: 2px 8px;
+    color: white;
+    border-radius: 25px;
+    top: 16px;
+    right: 16px;
+  }
+
+  h4, p {
+    margin-bottom: 0;
+  }
+}
+
+.get {
+  background-color: #009cde;
+}
+
+.post {
+  background-color: #00b680;
+}
+
+.delete {
+  background-color: #da5d95;
+}
+
+.put {
+  background-color: #696fd7;
+}
+
+.patch {
+  background-color: #696fd7;
+}

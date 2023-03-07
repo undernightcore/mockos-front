@@ -1,0 +1,7 @@
+<div class="route-list-item">
+  <h4>{{ route.name }}</h4>
+  <p>{{ route.endpoint }}</p>
+  <div [ngClass]="['route-list-item__badge', route.method]">
+    {{ route.method }}
+  </div>
+</div>

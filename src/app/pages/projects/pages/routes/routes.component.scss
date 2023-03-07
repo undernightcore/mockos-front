@@ -1,0 +1,19 @@
+.routes {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  &__body {
+    height: 100%;
+    display: flex;
+    &__list {
+      height: 100%;
+      overflow: auto;
+      width: 400px;
+      border-right: 1px solid var(--disabled-color);
+    }
+    &__info {
+      height: 100%;
+      width: 100%;
+    }
+  }
+}
