@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { DashboardRoutingModule } from './dashboard-routing.module';
-import { DashboardComponent } from './dashboard.component';
+import { ProjectsRoutingModule } from './projects-routing.module';
+import { ProjectsComponent } from './projects.component';
 import { NavbarModule } from '../../components/navbar/navbar.module';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ProjectCardComponent } from './components/project-card/project-card.component';
@@ -18,13 +18,13 @@ import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
-    DashboardComponent,
+    ProjectsComponent,
     ProjectCardComponent,
     ProjectModalComponent,
   ],
   imports: [
     CommonModule,
-    DashboardRoutingModule,
+    ProjectsRoutingModule,
     NavbarModule,
     ScrollingModule,
     TranslateModule,
@@ -37,4 +37,4 @@ import { MatInputModule } from '@angular/material/input';
     MatInputModule,
   ],
 })
-export class DashboardModule {}
+export class ProjectsModule {}

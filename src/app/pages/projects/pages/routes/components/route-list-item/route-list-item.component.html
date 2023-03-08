@@ -1,0 +1,8 @@
+<div class="route-list-item">
+  <div>
+    <h4>{{ route.name }}</h4>
+    <div [style.background-color]="route.enabled ? 'green' : 'var(--disabled-color)'"></div>
+  </div>
+  <p>{{ route.endpoint }}</p>
+  <app-http-chip [method]="route.method"></app-http-chip>
+</div>

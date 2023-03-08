@@ -10,11 +10,11 @@ import { ProjectModalComponent } from './components/project-modal/project-modal.
 import { CreateProjectInterface } from '../../interfaces/create-project.interface';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
+  selector: 'app-projects',
+  templateUrl: './projects.component.html',
+  styleUrls: ['./projects.component.scss'],
 })
-export class DashboardComponent implements OnInit {
+export class ProjectsComponent implements OnInit {
   projects: ProjectInterface[] = [];
   maxProjects = 0;
   #isFetching = false;

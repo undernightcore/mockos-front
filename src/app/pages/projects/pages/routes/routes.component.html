@@ -1,0 +1,25 @@
+<div class="routes">
+  <app-navbar></app-navbar>
+  <div *ngIf="routes" class="routes__body">
+    <div class="routes__body__list">
+      <app-route-list-item (click)="selectRoute(route)" *ngFor="let route of routes" [route]="route"></app-route-list-item>
+    </div>
+    <div class="routes__body__info">
+      <div [formGroup]="selectedRoute" *ngIf="selectedRoute" class="routes__body__info__selected">
+        <div>
+          <div>
+            <h2>{{selectedRoute.value.name}}</h2>
+            <app-http-chip [method]="selectedRoute.value.method"></app-http-chip>
+          </div>
+          <mat-slide-toggle (change)="updateRoute()" formControlName="enabled"></mat-slide-toggle>
+        </div>
+        <mat-form-field>
+          <input (blur)="updateRoute()" formControlName="endpoint" matInput>
+        </mat-form-field>
+      </div>
+      <div *ngIf="!selectedRoute" class="routes__body__info__missing">
+        <h4>{{'PAGES.ROUTES.SELECT_ROUTE' | translate}}</h4>
+      </div>
+    </div>
+  </div>
+</div>

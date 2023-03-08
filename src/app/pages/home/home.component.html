@@ -16,7 +16,7 @@
       </h3>
       <button
         *ngIf="isLogged !== undefined"
-        [routerLink]="isLogged ? '/dashboard' : '/auth/login'"
+        [routerLink]="isLogged ? '/projects' : '/auth/login'"
         mat-button
       >
         {{ "ACTIONS.START_NOW" | translate }}
