@@ -5,14 +5,19 @@
 
   & > div {
     display: flex;
-    gap: 24px;
+    align-items: center;
+    gap: 12px;
+
+    & > div {
+      height: 8px;
+      width: 8px;
+      border-radius: 25px;
+      background-color: red;
+    }
   }
 
-  &__badge {
+  app-http-chip {
     position: absolute;
-    padding: 2px 8px;
-    color: white;
-    border-radius: 25px;
     top: 16px;
     right: 16px;
   }
@@ -20,24 +25,4 @@
   h4, p {
     margin-bottom: 0;
   }
-}
-
-.get {
-  background-color: #009cde;
-}
-
-.post {
-  background-color: #00b680;
-}
-
-.delete {
-  background-color: #da5d95;
-}
-
-.put {
-  background-color: #696fd7;
-}
-
-.patch {
-  background-color: #696fd7;
 }

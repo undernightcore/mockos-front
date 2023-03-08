@@ -1,7 +1,8 @@
 <div class="route-list-item">
-  <h4>{{ route.name }}</h4>
-  <p>{{ route.endpoint }}</p>
-  <div [ngClass]="['route-list-item__badge', route.method]">
-    {{ route.method }}
+  <div>
+    <h4>{{ route.name }}</h4>
+    <div [style.background-color]="route.enabled ? 'green' : 'var(--disabled-color)'"></div>
   </div>
+  <p>{{ route.endpoint }}</p>
+  <app-http-chip [method]="route.method"></app-http-chip>
 </div>

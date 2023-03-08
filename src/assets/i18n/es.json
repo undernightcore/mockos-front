@@ -35,6 +35,10 @@
       "PROJECT_CREATED": "Proyecto {{project}} creado correctamente",
       "PROJECT_EDITED": "Proyecto {{project}} editado correctamente"
     },
+    "ROUTES": {
+      "UPDATED_SUCCESSFULLY": "{{route}} editado correctamente",
+      "SELECT_ROUTE": "Por favor, selecciona una ruta de la lista"
+    },
     "NOT_FOUND": {
       "PAGE_NOT_FOUND": "Página no encontrada",
       "SORRY": "Lo sentimos mucho..."
