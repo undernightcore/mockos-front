@@ -33,7 +33,8 @@
       "CREATE_PROJECT": "Crear proyecto",
       "EDIT_PROJECT": "Editar proyecto",
       "PROJECT_CREATED": "Proyecto {{project}} creado correctamente",
-      "PROJECT_EDITED": "Proyecto {{project}} editado correctamente"
+      "PROJECT_EDITED": "Proyecto {{project}} editado correctamente",
+      "NO_PROJECTS": "Aqui no hay nada..."
     },
     "ROUTES": {
       "UPDATED_SUCCESSFULLY": "{{route}} editado correctamente",

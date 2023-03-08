@@ -5,12 +5,16 @@
     <button mat-button (click)="openCreateModal()"><mat-icon>add</mat-icon></button>
   </div>
   <div (scroll)="handleScroll($event)" class="dashboard__body">
-    <div>
+    <div class="dashboard__body__items" *ngIf="projects?.length">
       <app-project-card
         (delete)="openDeleteModal(project)"
         (edit)="openCreateModal(project)"
         [project]="project"
         *ngFor="let project of projects" ></app-project-card>
+    </div>
+    <div class="dashboard__body__empty" *ngIf="projects?.length === 0">
+      <h4>{{'PAGES.DASHBOARD.NO_PROJECTS' | translate}}</h4>
+      <button (click)="openCreateModal()" mat-button>{{'PAGES.DASHBOARD.CREATE_PROJECT' | translate}}</button>
     </div>
   </div>
 </div>
