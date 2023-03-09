@@ -33,7 +33,8 @@
       "CREATE_PROJECT": "Create project",
       "EDIT_PROJECT": "Edit project",
       "PROJECT_CREATED": "Project {{project}} created successfully",
-      "PROJECT_EDITED": "Project {{project}} edited successfully"
+      "PROJECT_EDITED": "Project {{project}} edited successfully",
+      "NO_PROJECTS": "This looks empty."
     },
     "ROUTES": {
       "UPDATED_SUCCESSFULLY": "{{route}} edited successfully",

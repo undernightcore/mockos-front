@@ -15,7 +15,7 @@ import { CreateProjectInterface } from '../../interfaces/create-project.interfac
   styleUrls: ['./projects.component.scss'],
 })
 export class ProjectsComponent implements OnInit {
-  projects: ProjectInterface[] = [];
+  projects?: ProjectInterface[];
   maxProjects = 0;
   #isFetching = false;
 
@@ -30,6 +30,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   handleScroll(event: Event) {
+    if (!this.projects) return;
     const { scrollTop, scrollHeight, offsetHeight } =
       event.target as HTMLElement;
     if (
@@ -100,7 +101,9 @@ export class ProjectsComponent implements OnInit {
       .pipe(finalize(() => (this.#isFetching = false)))
       .subscribe((projects) => {
         this.projects =
-          page === 1 ? projects.data : [...this.projects, ...projects.data];
+          page === 1
+            ? projects.data
+            : [...(this.projects ?? []), ...projects.data];
         this.maxProjects = projects.meta.total;
       });
   }

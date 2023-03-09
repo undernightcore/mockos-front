@@ -27,7 +27,7 @@
     height: 100%;
     overflow: auto;
 
-    & > div {
+    &__items {
       grid-template-columns: 1fr;
       display: grid;
 
@@ -36,6 +36,15 @@
       }
 
       gap: 10px;
+    }
+
+    &__empty {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+      justify-content: center;
     }
   }
 }
