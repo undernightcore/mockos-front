@@ -1,0 +1,43 @@
+<h1 mat-dialog-title>{{'PAGES.ROUTES.CREATE_NEW_ROUTE' | translate}}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="routeForm">
+    <mat-form-field>
+      <input
+        formControlName="name"
+        [placeholder]="'COMMON.NAME' | translate"
+        matInput
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        formControlName="endpoint"
+        [placeholder]="'COMMON.ENDPOINT' | translate"
+        matInput
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select
+        formControlName="method"
+        [placeholder]="'COMMON.METHOD' | translate"
+      >
+        <mat-select-trigger
+          ><app-http-chip [method]="routeForm.value.method ?? 'get'"></app-http-chip
+        ></mat-select-trigger>
+        <mat-option [value]="method" *ngFor="let method of methodOptions">
+          {{method}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-slide-toggle formControlName="enabled">{{
+      "COMMON.ENABLED" | translate
+    }}</mat-slide-toggle>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button (click)="dialogRef.close()" mat-button>
+    {{ "ACTIONS.CANCEL" | translate }}
+  </button>
+  <button (click)="dialogRef.close(routeForm.value)" mat-button>
+    {{ "ACTIONS.CREATE" | translate }}
+  </button>
+</div>

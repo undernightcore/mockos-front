@@ -12,14 +12,22 @@ import { HttpChipModule } from '../../../../components/http-chip/http-chip.modul
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { TranslateModule } from '@ngx-translate/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { CreateRouteComponent } from './components/create-route/create-route.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { ChoiceModalModule } from '../../../../components/choice-modal/choice-modal.module';
 
 @NgModule({
-  declarations: [RoutesComponent, RouteListItemComponent],
+  declarations: [RoutesComponent, RouteListItemComponent, CreateRouteComponent],
   imports: [
     CommonModule,
     RoutesRoutingModule,
     NavbarModule,
     MatChipsModule,
+    MatFormFieldModule,
     MatInputModule,
     FormsModule,
     HttpChipModule,
@@ -27,6 +35,11 @@ import { TranslateModule } from '@ngx-translate/core';
     MatSlideToggleModule,
     ReactiveFormsModule,
     TranslateModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDialogModule,
+    MatSelectModule,
+    ChoiceModalModule,
   ],
 })
 export class RoutesModule {}

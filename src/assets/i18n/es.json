@@ -8,7 +8,10 @@
     "REPEAT_PASSWORD": "Repetir contraseña",
     "LANGUAGES": "Idiomas",
     "NAME": "Nombre",
-    "DESCRIPTION": "Descripción"
+    "DESCRIPTION": "Descripción",
+    "ENDPOINT": "Endpoint",
+    "METHOD": "Método",
+    "ENABLED": "Habilitado"
   },
   "PAGES": {
     "HOME": {
@@ -38,7 +41,11 @@
     },
     "ROUTES": {
       "UPDATED_SUCCESSFULLY": "{{route}} editado correctamente",
-      "SELECT_ROUTE": "Por favor, selecciona una ruta de la lista"
+      "CREATED_SUCCESSFULLY": "{{route}} creado correctamente",
+      "SELECT_ROUTE": "Por favor, selecciona una ruta de la lista",
+      "CREATE_NEW_ROUTE": "Crear ruta nueva",
+      "DELETE_ROUTE": "¿Estás seguro de que quieres eliminar {{route}}?",
+      "DELETE_ROUTE_MESSAGE": "Esta acción no se puede revertir"
     },
     "NOT_FOUND": {
       "PAGE_NOT_FOUND": "Página no encontrada",
@@ -53,6 +60,7 @@
     "WITHOUT_ACCOUNT": "¿Aún no tienes cuenta?",
     "LOG_OUT": "Cerrar sesión",
     "ACCEPT": "Aceptar",
-    "CANCEL": "Cancelar"
+    "CANCEL": "Cancelar",
+    "CREATE": "Crear"
   }
 }

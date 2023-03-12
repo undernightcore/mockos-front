@@ -10,6 +10,20 @@
       overflow: auto;
       width: 400px;
       border-right: 1px solid var(--disabled-color);
+
+      &__actions {
+        position: sticky;
+        top: 0;
+        background-color: var(--main-color);
+        height: 50px;
+        display: flex;
+        align-items: center;
+        padding: 0 12px;
+
+        & > button {
+          background-color: var(--alt-color);
+        }
+      }
     }
     &__info {
       height: 100%;
@@ -23,6 +37,11 @@
             display: flex;
             align-items: center;
             gap: 16px;
+            
+            & > mat-icon {
+              cursor: pointer;
+            }
+            
             & > h2 {
               margin: 0;
             }

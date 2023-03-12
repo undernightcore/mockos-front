@@ -8,7 +8,10 @@
     "REPEAT_PASSWORD": "Repeat password",
     "LANGUAGES": "Languages",
     "NAME": "Name",
-    "DESCRIPTION": "Description"
+    "DESCRIPTION": "Description",
+    "ENDPOINT": "Endpoint",
+    "METHOD": "Method",
+    "ENABLED": "Enabled"
   },
   "PAGES": {
     "HOME": {
@@ -38,7 +41,11 @@
     },
     "ROUTES": {
       "UPDATED_SUCCESSFULLY": "{{route}} edited successfully",
-      "SELECT_ROUTE": "Please, select a route from the list"
+      "CREATED_SUCCESSFULLY": "{{route}} created successfully",
+      "SELECT_ROUTE": "Please, select a route from the list",
+      "CREATE_NEW_ROUTE": "Create new route",
+      "DELETE_ROUTE": "Are you sure you want to delete {{route}}?",
+      "DELETE_ROUTE_MESSAGE": "This action is irreversible"
     },
     "NOT_FOUND": {
       "PAGE_NOT_FOUND": "Page not found",
@@ -53,6 +60,7 @@
     "WITHOUT_ACCOUNT": "Don't have an account yet?",
     "LOG_OUT": "Log out",
     "ACCEPT": "Accept",
-    "CANCEL": "Cancel"
+    "CANCEL": "Cancel",
+    "CREATE": "Create"
   }
 }
