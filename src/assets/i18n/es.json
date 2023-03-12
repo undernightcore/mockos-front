@@ -43,7 +43,9 @@
       "UPDATED_SUCCESSFULLY": "{{route}} editado correctamente",
       "CREATED_SUCCESSFULLY": "{{route}} creado correctamente",
       "SELECT_ROUTE": "Por favor, selecciona una ruta de la lista",
-      "CREATE_NEW_ROUTE": "Crear ruta nueva"
+      "CREATE_NEW_ROUTE": "Crear ruta nueva",
+      "DELETE_ROUTE": "¿Estás seguro de que quieres eliminar {{route}}?",
+      "DELETE_ROUTE_MESSAGE": "Esta acción no se puede revertir"
     },
     "NOT_FOUND": {
       "PAGE_NOT_FOUND": "Página no encontrada",

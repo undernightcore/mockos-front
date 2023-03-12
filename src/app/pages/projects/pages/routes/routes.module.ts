@@ -18,6 +18,7 @@ import { CreateRouteComponent } from './components/create-route/create-route.com
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { ChoiceModalModule } from '../../../../components/choice-modal/choice-modal.module';
 
 @NgModule({
   declarations: [RoutesComponent, RouteListItemComponent, CreateRouteComponent],
@@ -38,6 +39,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatIconModule,
     MatDialogModule,
     MatSelectModule,
+    ChoiceModalModule,
   ],
 })
 export class RoutesModule {}

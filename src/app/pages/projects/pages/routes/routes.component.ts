@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateRouteComponent } from './components/create-route/create-route.component';
 import { CreateRouteInterface } from '../../../../interfaces/create-route.interface';
+import { ChoiceModalComponent } from '../../../../components/choice-modal/choice-modal.component';
 
 @Component({
   selector: 'app-routes',
@@ -91,6 +92,28 @@ export class RoutesComponent implements OnInit {
           error: () => {
             this.openCreateModal(data);
           },
+        });
+      });
+  }
+
+  openDeleteModal(route: RouteInterface) {
+    this.dialogService
+      .open(ChoiceModalComponent, {
+        data: {
+          title: this.translateService.instant('PAGES.ROUTES.DELETE_ROUTE', {
+            route: route.name,
+          }),
+          message: this.translateService.instant(
+            'PAGES.ROUTES.DELETE_ROUTE_MESSAGE'
+          ),
+        },
+      })
+      .afterClosed()
+      .subscribe((accepted) => {
+        if (!accepted) return;
+        this.routesService.deleteRoute(route.id).subscribe((result) => {
+          openToast(result.message, 'success');
+          this.#getRoutes();
         });
       });
   }

@@ -37,6 +37,11 @@
             display: flex;
             align-items: center;
             gap: 16px;
+            
+            & > mat-icon {
+              cursor: pointer;
+            }
+            
             & > h2 {
               margin: 0;
             }
