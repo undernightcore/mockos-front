@@ -11,7 +11,8 @@
     "DESCRIPTION": "Descripción",
     "ENDPOINT": "Endpoint",
     "METHOD": "Método",
-    "ENABLED": "Habilitado"
+    "ENABLED": "Habilitado",
+    "MEMBERS": "Miembros"
   },
   "PAGES": {
     "HOME": {

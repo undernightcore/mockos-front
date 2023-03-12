@@ -11,7 +11,8 @@
     "DESCRIPTION": "Description",
     "ENDPOINT": "Endpoint",
     "METHOD": "Method",
-    "ENABLED": "Enabled"
+    "ENABLED": "Enabled",
+    "MEMBERS": "Members"
   },
   "PAGES": {
     "HOME": {

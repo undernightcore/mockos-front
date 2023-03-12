@@ -1,0 +1,7 @@
+<app-navbar></app-navbar>
+<div *ngIf="project" class="members">
+  <h2>
+    <span>{{ project.name }}</span>
+    {{ "COMMON.MEMBERS" | translate | lowercase }}
+  </h2>
+</div>

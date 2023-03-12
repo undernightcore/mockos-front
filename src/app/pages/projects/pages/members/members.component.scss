@@ -1,0 +1,10 @@
+.members {
+  font-family: var(--main-font);
+  padding: 24px;
+
+  & > h2 {
+    & > span {
+      color: var(--main-color);
+    }
+  }
+}
