@@ -5,6 +5,9 @@ import { ActivatedRoute } from '@angular/router';
 import { openToast } from '../../../../utils/toast.utils';
 import { FormControl, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateRouteComponent } from './components/create-route/create-route.component';
+import { CreateRouteInterface } from '../../../../interfaces/create-route.interface';
 
 @Component({
   selector: 'app-routes',
@@ -19,7 +22,8 @@ export class RoutesComponent implements OnInit {
   constructor(
     private routesService: RoutesService,
     private activatedRoute: ActivatedRoute,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private dialogService: MatDialog
   ) {}
 
   ngOnInit() {
@@ -62,6 +66,32 @@ export class RoutesComponent implements OnInit {
           );
           if (oldRoute) this.selectedRoute?.setValue(oldRoute);
         },
+      });
+  }
+
+  openCreateModal(retryData?: CreateRouteInterface) {
+    this.dialogService
+      .open(CreateRouteComponent, { width: '500px', data: retryData })
+      .afterClosed()
+      .subscribe((data: CreateRouteInterface | undefined) => {
+        if (!data || this.projectId === undefined) return;
+        this.routesService.createRoute(this.projectId, data).subscribe({
+          next: (newRoute) => {
+            openToast(
+              this.translateService.instant(
+                'PAGES.ROUTES.CREATED_SUCCESSFULLY',
+                {
+                  route: newRoute.name,
+                }
+              ),
+              'success'
+            );
+            this.#getRoutes();
+          },
+          error: () => {
+            this.openCreateModal(data);
+          },
+        });
       });
   }
 
