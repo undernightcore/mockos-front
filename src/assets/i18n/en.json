@@ -48,6 +48,9 @@
       "DELETE_ROUTE": "Are you sure you want to delete {{route}}?",
       "DELETE_ROUTE_MESSAGE": "This action is irreversible"
     },
+    "MEMBERS":{
+      "GO_BACK": "Return to project"
+    },
     "NOT_FOUND": {
       "PAGE_NOT_FOUND": "Page not found",
       "SORRY": "We are very sorry..."

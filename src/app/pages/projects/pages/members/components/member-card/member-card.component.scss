@@ -1,0 +1,20 @@
+.member-card {
+  padding: 20px;
+  border: 4px var(--main-color) solid;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  & > img {
+    width: 50px;
+  }
+  & > div {
+    width: 100%;
+    & > h4 {
+      margin: 0;
+    }
+    & > span {
+      color: lightblue;
+    }
+  }
+}

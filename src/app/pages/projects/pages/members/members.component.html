@@ -1,7 +1,20 @@
-<app-navbar></app-navbar>
 <div *ngIf="project" class="members">
-  <h2>
-    <span>{{ project.name }}</span>
-    {{ "COMMON.MEMBERS" | translate | lowercase }}
-  </h2>
+  <app-navbar></app-navbar>
+  <div class="members__header">
+    <h2>
+      <span>{{ project.name }}</span>
+      {{ "COMMON.MEMBERS" | translate | lowercase }}
+    </h2>
+    <span [routerLink]="['/projects', projectId]">{{
+      "PAGES.MEMBERS.GO_BACK" | translate
+    }}</span>
+  </div>
+  <div (scroll)="handleScroll($event)" class="members__body">
+    <div class="members__body__items">
+      <app-member-card
+        [profile]="member"
+        *ngFor="let member of members"
+      ></app-member-card>
+    </div>
+  </div>
 </div>

@@ -1,10 +1,35 @@
 .members {
   font-family: var(--main-font);
-  padding: 24px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 
-  & > h2 {
+  &__header {
+    padding: 24px;
+    & > h2 {
+      margin-bottom: 0;
+      & > span {
+        color: var(--main-color);
+      }
+    }
     & > span {
-      color: var(--main-color);
+      cursor: pointer;
+    }
+  }
+
+  &__body {
+    height: 100%;
+    overflow: auto;
+    padding: 24px;
+
+    &__items {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: 1fr;
+
+      @media (min-width: 500px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
   }
 }
