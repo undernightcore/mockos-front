@@ -32,6 +32,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  changeLanguage(language: string) {
+    this.translateService.use(language);
+    localStorage.setItem('lang', this.translateService.currentLang);
+  }
+
   logOut() {
     this.authService.logout();
     this.router.navigate(['/']);
