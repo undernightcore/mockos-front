@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { UserInterface } from '../../../../../../interfaces/user.interface';
+import { MemberInterface } from '../../../../../../interfaces/member.interface';
 
 @Component({
   selector: 'app-member-card',
@@ -7,5 +7,5 @@ import { UserInterface } from '../../../../../../interfaces/user.interface';
   styleUrls: ['./member-card.component.scss'],
 })
 export class MemberCardComponent {
-  @Input() profile?: UserInterface;
+  @Input() member?: MemberInterface;
 }

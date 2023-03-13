@@ -1,6 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { DialogRef } from '@angular/cdk/dialog';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -15,13 +14,13 @@ export class InviteModalComponent {
   ]);
 
   constructor(
-    public dialogRef: DialogRef,
+    public dialogRef: MatDialogRef<InviteModalComponent>,
     @Inject(MAT_DIALOG_DATA) private email?: string
   ) {}
 
   handleInvite() {
     this.inviteEmail.markAsTouched();
     if (this.inviteEmail.invalid) return;
-    this.dialogRef.close(this.inviteEmail);
+    this.dialogRef.close(this.inviteEmail.value);
   }
 }

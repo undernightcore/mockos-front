@@ -12,7 +12,9 @@
     "ENDPOINT": "Endpoint",
     "METHOD": "Método",
     "ENABLED": "Habilitado",
-    "MEMBERS": "Miembros"
+    "MEMBERS": "Miembros",
+    "MEMBER": "Miembro",
+    "PENDING": "Pendiente"
   },
   "PAGES": {
     "HOME": {

@@ -5,7 +5,7 @@ import { PaginatedResponseInterface } from '../interfaces/paginated-response.int
 import { ProjectInterface } from '../interfaces/project.interface';
 import { CreateProjectInterface } from '../interfaces/create-project.interface';
 import { MessageInterface } from '../interfaces/message.interface';
-import { UserInterface } from '../interfaces/user.interface';
+import { MemberInterface } from '../interfaces/member.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +23,7 @@ export class ProjectService {
   }
 
   getMemberList(projectId: number, page = 1, perPage = 10) {
-    return this.httpClient.get<PaginatedResponseInterface<UserInterface>>(
+    return this.httpClient.get<PaginatedResponseInterface<MemberInterface>>(
       `${environment.apiUrl}/projects/${projectId}/members`,
       {
         params: { page, perPage },

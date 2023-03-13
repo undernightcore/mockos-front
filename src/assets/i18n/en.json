@@ -12,7 +12,9 @@
     "ENDPOINT": "Endpoint",
     "METHOD": "Method",
     "ENABLED": "Enabled",
-    "MEMBERS": "Members"
+    "MEMBERS": "Members",
+    "MEMBER": "Member",
+    "PENDING": "Pending"
   },
   "PAGES": {
     "HOME": {

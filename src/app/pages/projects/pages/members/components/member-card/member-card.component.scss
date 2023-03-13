@@ -12,6 +12,14 @@
     width: 100%;
     & > h4 {
       margin: 0;
+      & > span {
+        &.enabled {
+          color: green;
+        }
+        &.disabled {
+          color: var(--disabled-color);
+        }
+      }
     }
     & > span {
       color: lightblue;
