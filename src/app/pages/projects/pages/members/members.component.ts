@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { finalize } from 'rxjs';
 import { ProjectInterface } from '../../../../interfaces/project.interface';
 import { UserInterface } from '../../../../interfaces/user.interface';
+import { MatDialog } from '@angular/material/dialog';
+import { InviteModalComponent } from './components/invite-modal/invite-modal.component';
 
 @Component({
   selector: 'app-members',
@@ -19,7 +21,8 @@ export class MembersComponent implements OnInit {
 
   constructor(
     private projectService: ProjectService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private dialogService: MatDialog
   ) {}
 
   ngOnInit() {
@@ -40,6 +43,13 @@ export class MembersComponent implements OnInit {
       return;
     const pageToRequest = this.members.length / 20 + 1;
     this.#getMemberList(pageToRequest);
+  }
+
+  openInviteModal(email?: string) {
+    this.dialogService
+      .open(InviteModalComponent, { width: '500px', data: email })
+      .afterClosed()
+      .subscribe((email?: string) => {});
   }
 
   #getProject() {
