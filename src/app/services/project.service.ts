@@ -56,4 +56,11 @@ export class ProjectService {
       `${environment.apiUrl}/projects/${id}`
     );
   }
+
+  inviteToProject(projectId: number, email: string) {
+    return this.httpClient.post<MessageInterface>(
+      `${environment.apiUrl}/projects/${projectId}/invite/${email}`,
+      undefined
+    );
+  }
 }
