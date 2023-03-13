@@ -10,5 +10,6 @@ export class AppComponent {
   constructor(private translateService: TranslateService) {
     translateService.setDefaultLang('en');
     translateService.use(translateService.getBrowserLang() ?? 'en');
+    localStorage.setItem('lang', `${this.translateService.currentLang}-${this.translateService.currentLang.toUpperCase()}`);
   }
 }
