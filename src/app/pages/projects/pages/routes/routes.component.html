@@ -6,6 +6,9 @@
         <button (click)="openCreateModal()" mat-button>
           <mat-icon>add</mat-icon>
         </button>
+        <button [routerLink]="['/projects', projectId, 'members']" mat-button>
+          <mat-icon>person</mat-icon>
+        </button>
       </div>
       <app-route-list-item
         (click)="selectRoute(route)"

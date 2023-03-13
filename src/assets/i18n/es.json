@@ -11,7 +11,8 @@
     "DESCRIPTION": "Descripción",
     "ENDPOINT": "Endpoint",
     "METHOD": "Método",
-    "ENABLED": "Habilitado"
+    "ENABLED": "Habilitado",
+    "MEMBERS": "Miembros"
   },
   "PAGES": {
     "HOME": {
@@ -46,6 +47,9 @@
       "CREATE_NEW_ROUTE": "Crear ruta nueva",
       "DELETE_ROUTE": "¿Estás seguro de que quieres eliminar {{route}}?",
       "DELETE_ROUTE_MESSAGE": "Esta acción no se puede revertir"
+    },
+    "MEMBERS":{
+      "GO_BACK": "Volver al proyecto"
     },
     "NOT_FOUND": {
       "PAGE_NOT_FOUND": "Página no encontrada",
