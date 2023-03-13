@@ -12,7 +12,9 @@
     "ENDPOINT": "Endpoint",
     "METHOD": "Método",
     "ENABLED": "Habilitado",
-    "MEMBERS": "Miembros"
+    "MEMBERS": "Miembros",
+    "MEMBER": "Miembro",
+    "PENDING": "Pendiente"
   },
   "PAGES": {
     "HOME": {
@@ -49,7 +51,8 @@
       "DELETE_ROUTE_MESSAGE": "Esta acción no se puede revertir"
     },
     "MEMBERS":{
-      "GO_BACK": "Volver al proyecto"
+      "GO_BACK": "Volver al proyecto",
+      "INVITE_USER": "Invitar usuario"
     },
     "NOT_FOUND": {
       "PAGE_NOT_FOUND": "Página no encontrada",
@@ -65,6 +68,7 @@
     "LOG_OUT": "Cerrar sesión",
     "ACCEPT": "Aceptar",
     "CANCEL": "Cancelar",
-    "CREATE": "Crear"
+    "CREATE": "Crear",
+    "INVITE": "Invitar"
   }
 }

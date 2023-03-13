@@ -12,7 +12,9 @@
     "ENDPOINT": "Endpoint",
     "METHOD": "Method",
     "ENABLED": "Enabled",
-    "MEMBERS": "Members"
+    "MEMBERS": "Members",
+    "MEMBER": "Member",
+    "PENDING": "Pending"
   },
   "PAGES": {
     "HOME": {
@@ -49,7 +51,8 @@
       "DELETE_ROUTE_MESSAGE": "This action is irreversible"
     },
     "MEMBERS":{
-      "GO_BACK": "Return to project"
+      "GO_BACK": "Return to project",
+      "INVITE_USER": "Invite user"
     },
     "NOT_FOUND": {
       "PAGE_NOT_FOUND": "Page not found",
@@ -65,6 +68,7 @@
     "LOG_OUT": "Log out",
     "ACCEPT": "Accept",
     "CANCEL": "Cancel",
-    "CREATE": "Create"
+    "CREATE": "Create",
+    "INVITE": "Invite"
   }
 }

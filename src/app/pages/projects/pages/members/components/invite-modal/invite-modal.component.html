@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>{{'PAGES.MEMBERS.INVITE_USER' | translate}}</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input
+      [placeholder]="'COMMON.EMAIL' | translate"
+      matInput
+      [formControl]="inviteEmail"
+    />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button (click)="dialogRef.close()" mat-button>
+    {{ "ACTIONS.CANCEL" | translate }}
+  </button>
+  <button (click)="handleInvite()" mat-button>
+    {{ "ACTIONS.INVITE" | translate }}
+  </button>
+</div>

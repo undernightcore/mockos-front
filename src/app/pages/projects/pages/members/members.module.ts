@@ -6,9 +6,27 @@ import { MembersComponent } from './members.component';
 import { NavbarModule } from '../../../../components/navbar/navbar.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { MemberCardComponent } from './components/member-card/member-card.component';
+import { InviteModalComponent } from './components/invite-modal/invite-modal.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-  declarations: [MembersComponent, MemberCardComponent],
-  imports: [CommonModule, MembersRoutingModule, NavbarModule, TranslateModule],
+  declarations: [MembersComponent, MemberCardComponent, InviteModalComponent],
+  imports: [
+    CommonModule,
+    MembersRoutingModule,
+    NavbarModule,
+    TranslateModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
 })
 export class MembersModule {}

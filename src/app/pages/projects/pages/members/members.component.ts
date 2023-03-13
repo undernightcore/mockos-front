@@ -3,7 +3,10 @@ import { ProjectService } from '../../../../services/project.service';
 import { ActivatedRoute } from '@angular/router';
 import { finalize } from 'rxjs';
 import { ProjectInterface } from '../../../../interfaces/project.interface';
-import { UserInterface } from '../../../../interfaces/user.interface';
+import { MatDialog } from '@angular/material/dialog';
+import { InviteModalComponent } from './components/invite-modal/invite-modal.component';
+import { openToast } from '../../../../utils/toast.utils';
+import { MemberInterface } from '../../../../interfaces/member.interface';
 
 @Component({
   selector: 'app-members',
@@ -13,18 +16,19 @@ import { UserInterface } from '../../../../interfaces/user.interface';
 export class MembersComponent implements OnInit {
   projectId?: number;
   project?: ProjectInterface;
-  members?: UserInterface[];
+  members?: MemberInterface[];
   maxMembers = 0;
   #isFetching = false;
 
   constructor(
     private projectService: ProjectService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private dialogService: MatDialog
   ) {}
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params) => {
-      this.projectId = params['id'];
+      this.projectId = params['id'] ? Number(params['id']) : undefined;
       this.#getProject();
     });
   }
@@ -40,6 +44,26 @@ export class MembersComponent implements OnInit {
       return;
     const pageToRequest = this.members.length / 20 + 1;
     this.#getMemberList(pageToRequest);
+  }
+
+  openInviteModal(email?: string) {
+    this.dialogService
+      .open(InviteModalComponent, { width: '500px', data: email })
+      .afterClosed()
+      .subscribe((newEmail?: string) => {
+        if (!newEmail || this.projectId === undefined) return;
+        this.projectService
+          .inviteToProject(this.projectId, newEmail)
+          .subscribe({
+            next: (message) => {
+              openToast(message.message, 'success');
+              this.#getProject();
+            },
+            error: () => {
+              this.openInviteModal(newEmail);
+            },
+          });
+      });
   }
 
   #getProject() {

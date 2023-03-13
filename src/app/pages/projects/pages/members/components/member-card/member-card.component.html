@@ -1,7 +1,14 @@
-<div *ngIf="profile" class="member-card">
+<div *ngIf="member" class="member-card">
   <img src="assets/icons/drop.svg" />
   <div>
-    <h4>{{ profile.name }}</h4>
-    <span>{{ profile.email }}</span>
+    <h4>
+      {{ member.user.name }}
+      <span [ngClass]="member.verified ? 'enabled' : 'disabled'"
+        >({{
+          (member.verified ? "COMMON.MEMBER" : "COMMON.PENDING") | translate
+        }})</span
+      >
+    </h4>
+    <span>{{ member.user.email }}</span>
   </div>
 </div>

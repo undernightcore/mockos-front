@@ -8,11 +8,12 @@
     <span [routerLink]="['/projects', projectId]">{{
       "PAGES.MEMBERS.GO_BACK" | translate
     }}</span>
+    <button (click)="openInviteModal()" mat-button><mat-icon>add</mat-icon></button>
   </div>
   <div (scroll)="handleScroll($event)" class="members__body">
     <div class="members__body__items">
       <app-member-card
-        [profile]="member"
+        [member]="member"
         *ngFor="let member of members"
       ></app-member-card>
     </div>
