@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RoutesService } from '../../../../services/routes.service';
 import { RouteInterface } from '../../../../interfaces/route.interface';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { openToast } from '../../../../utils/toast.utils';
 import { FormControl, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
@@ -9,41 +9,58 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateRouteComponent } from './components/create-route/create-route.component';
 import { CreateRouteInterface } from '../../../../interfaces/create-route.interface';
 import { ChoiceModalComponent } from '../../../../components/choice-modal/choice-modal.component';
+import { RealtimeService } from '../../../../services/realtime.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-routes',
   templateUrl: './routes.component.html',
   styleUrls: ['./routes.component.scss'],
 })
-export class RoutesComponent implements OnInit {
+export class RoutesComponent implements OnInit, OnDestroy {
   routes?: RouteInterface[];
   selectedRoute?: FormGroup;
   projectId?: number;
+
+  projectSubscription?: Subscription;
+  routeSubscription?: Subscription;
 
   constructor(
     private routesService: RoutesService,
     private activatedRoute: ActivatedRoute,
     private translateService: TranslateService,
-    private dialogService: MatDialog
+    private dialogService: MatDialog,
+    private realtimeService: RealtimeService,
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params) => {
       this.projectId = params['id'];
       this.#getRoutes();
+      this.#listenToChanges();
     });
   }
 
+  ngOnDestroy() {
+    this.projectSubscription?.unsubscribe();
+    this.routeSubscription?.unsubscribe();
+  }
+
   selectRoute(route: RouteInterface) {
-    this.selectedRoute = new FormGroup({
-      id: new FormControl(route.id),
-      name: new FormControl(route.name),
-      method: new FormControl(route.method),
-      endpoint: new FormControl(route.endpoint),
-      enabled: new FormControl(route.enabled),
-      created_at: new FormControl(route.created_at),
-      updated_at: new FormControl(route.updated_at),
-    });
+    this.#setRouteDataToForm(route);
+    this.routeSubscription?.unsubscribe();
+    this.routeSubscription = this.realtimeService
+      .listenRoute(route.id)
+      .subscribe((action) => {
+        if (action === 'updated') {
+          this.routesService.getRoute(route.id).subscribe((data) => {
+            this.#setRouteDataToForm(data);
+          });
+        } else if (action === 'deleted') {
+          this.selectedRoute = undefined;
+        }
+      });
   }
 
   updateRoute() {
@@ -59,7 +76,6 @@ export class RoutesComponent implements OnInit {
             }),
             'success'
           );
-          this.#getRoutes();
         },
         error: () => {
           const oldRoute = this.routes?.find(
@@ -87,7 +103,6 @@ export class RoutesComponent implements OnInit {
               ),
               'success'
             );
-            this.#getRoutes();
           },
           error: () => {
             this.openCreateModal(data);
@@ -113,9 +128,20 @@ export class RoutesComponent implements OnInit {
         if (!accepted) return;
         this.routesService.deleteRoute(route.id).subscribe((result) => {
           openToast(result.message, 'success');
-          this.#getRoutes();
         });
       });
+  }
+
+  #setRouteDataToForm(route: RouteInterface) {
+    this.selectedRoute = new FormGroup({
+      id: new FormControl(route.id),
+      name: new FormControl(route.name),
+      method: new FormControl(route.method),
+      endpoint: new FormControl(route.endpoint),
+      enabled: new FormControl(route.enabled),
+      created_at: new FormControl(route.created_at),
+      updated_at: new FormControl(route.updated_at),
+    });
   }
 
   #getRoutes() {
@@ -123,5 +149,18 @@ export class RoutesComponent implements OnInit {
     this.routesService.getRoutes(this.projectId).subscribe((routes) => {
       this.routes = routes.data;
     });
+  }
+
+  #listenToChanges() {
+    if (this.projectId === undefined || this.projectSubscription) return;
+    this.projectSubscription = this.realtimeService
+      .listenProject(this.projectId)
+      .subscribe((action) => {
+        if (action === 'updated') {
+          this.#getRoutes();
+        } else if (action === 'deleted') {
+          this.router.navigate(['/projects']);
+        }
+      });
   }
 }
