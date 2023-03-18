@@ -11,6 +11,7 @@ import { CreateRouteInterface } from '../../../../interfaces/create-route.interf
 import { ChoiceModalComponent } from '../../../../components/choice-modal/choice-modal.component';
 import { RealtimeService } from '../../../../services/realtime.service';
 import { Subscription } from 'rxjs';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-routes',
@@ -60,6 +61,26 @@ export class RoutesComponent implements OnInit, OnDestroy {
         } else if (action === 'deleted') {
           this.selectedRoute = undefined;
         }
+      });
+  }
+
+  handleSort(event: CdkDragDrop<any>) {
+    if (!this.routes || this.projectId === undefined) return;
+    const previousState = [...this.routes];
+    moveItemInArray(this.routes, event.previousIndex, event.currentIndex);
+    this.routesService
+      .sortRoute(
+        this.projectId,
+        previousState[event.previousIndex].id,
+        previousState[event.currentIndex].id
+      )
+      .subscribe({
+        next: (result) => {
+          openToast(result.message, 'success');
+        },
+        error: () => {
+          this.routes = previousState;
+        },
       });
   }
 

@@ -19,6 +19,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { ChoiceModalModule } from '../../../../components/choice-modal/choice-modal.module';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [RoutesComponent, RouteListItemComponent, CreateRouteComponent],
@@ -40,6 +41,7 @@ import { ChoiceModalModule } from '../../../../components/choice-modal/choice-mo
     MatDialogModule,
     MatSelectModule,
     ChoiceModalModule,
+    DragDropModule,
   ],
 })
 export class RoutesModule {}
