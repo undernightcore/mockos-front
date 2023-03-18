@@ -10,11 +10,17 @@
           <mat-icon>person</mat-icon>
         </button>
       </div>
-      <app-route-list-item
-        (click)="selectRoute(route)"
-        *ngFor="let route of routes"
-        [route]="route"
-      ></app-route-list-item>
+      <div
+        (cdkDropListDropped)="handleSort($event)"
+        cdkDropList
+        class="routes__body__list__items"
+      >
+        <app-route-list-item
+          (click)="selectRoute(route)"
+          *ngFor="let route of routes"
+          [route]="route"
+        ></app-route-list-item>
+      </div>
     </div>
     <div class="routes__body__info">
       <div

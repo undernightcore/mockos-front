@@ -1,8 +1,9 @@
-<div class="route-list-item">
+<div class="route-list-item" cdkDragPreviewClass="height-fit" cdkDrag>
   <div>
     <h4>{{ route.name }}</h4>
     <div [style.background-color]="route.enabled ? 'green' : 'var(--disabled-color)'"></div>
   </div>
   <p>{{ route.endpoint }}</p>
   <app-http-chip [method]="route.method"></app-http-chip>
+  <div class="route-list-item__placeholder" *cdkDragPlaceholder></div>
 </div>
