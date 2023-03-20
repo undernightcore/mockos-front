@@ -25,6 +25,13 @@ const routes: Routes = [
       import('./pages/projects/projects.module').then((m) => m.ProjectsModule),
   },
   {
+    path: 'invitations',
+    loadChildren: () =>
+      import('./pages/invitations/invitations.module').then(
+        (m) => m.InvitationsModule
+      ),
+  },
+  {
     path: '**',
     loadChildren: () =>
       import('./pages/not-found/not-found.module').then(

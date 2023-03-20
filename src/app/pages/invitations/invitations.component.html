@@ -1,0 +1,31 @@
+<div class="invitations">
+  <app-navbar></app-navbar>
+  <div class="invitations__header">
+    <h2>
+      {{ "PAGES.INVITATIONS.TITLE" | translate }}
+    </h2>
+    <span routerLink="/projects">{{
+      "PAGES.INVITATIONS.GO_BACK" | translate
+    }}</span>
+  </div>
+  <div
+    *ngIf="invitations?.length"
+    (scroll)="handleScroll($event)"
+    class="invitations__body"
+  >
+    <div class="invitations__body__items">
+      <app-invitation-card
+        (selected)="openAcceptModal(invitation)"
+        [invitation]="invitation"
+        *ngFor="let invitation of invitations"
+      ></app-invitation-card>
+    </div>
+  </div>
+  <div *ngIf="invitations && !invitations.length" class="invitations__empty">
+    <img src="assets/images/undraw_coffee_with_friends_3cbj.svg" />
+    <h1>
+      {{ "PAGES.INVITATIONS.NOT_INVITED" | translate }}
+      <span>{{ "COMMON.YET" | translate | lowercase }}</span>
+    </h1>
+  </div>
+</div>

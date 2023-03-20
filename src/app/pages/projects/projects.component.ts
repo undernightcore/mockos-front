@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { openToast } from '../../utils/toast.utils';
 import { ProjectModalComponent } from './components/project-modal/project-modal.component';
 import { CreateProjectInterface } from '../../interfaces/create-project.interface';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-projects',
@@ -17,16 +18,19 @@ import { CreateProjectInterface } from '../../interfaces/create-project.interfac
 export class ProjectsComponent implements OnInit {
   projects?: ProjectInterface[];
   maxProjects = 0;
+  invitationNumber?: number;
   #isFetching = false;
 
   constructor(
     private projectService: ProjectService,
     private dialogService: MatDialog,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
     this.#getProjects(1);
+    this.#getInvitationAmount();
   }
 
   handleScroll(event: Event) {
@@ -106,5 +110,11 @@ export class ProjectsComponent implements OnInit {
             : [...(this.projects ?? []), ...projects.data];
         this.maxProjects = projects.meta.total;
       });
+  }
+
+  #getInvitationAmount() {
+    this.userService.getInvitations(1, 1).subscribe((invitations) => {
+      this.invitationNumber = invitations.meta.total;
+    });
   }
 }

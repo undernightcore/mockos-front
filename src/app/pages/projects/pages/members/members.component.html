@@ -1,6 +1,6 @@
-<div *ngIf="project" class="members">
+<div class="members">
   <app-navbar></app-navbar>
-  <div class="members__header">
+  <div *ngIf="project" class="members__header">
     <h2>
       <span>{{ project.name }}</span>
       {{ "COMMON.MEMBERS" | translate | lowercase }}
