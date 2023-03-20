@@ -1,0 +1,9 @@
+<div *ngIf="invitation" class="invitation-card">
+  <img src="assets/icons/drop.svg" />
+  <div>
+    <h4>
+      You have been invited to <span>{{ invitation.project.name }}</span>
+    </h4>
+    <span (click)="selected.emit()">Haz click aquí para aceptar</span>
+  </div>
+</div>
