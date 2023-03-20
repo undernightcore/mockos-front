@@ -1,8 +1,18 @@
 <div class="dashboard">
   <app-navbar></app-navbar>
   <div class="dashboard__banner">
-    <h1>{{'PAGES.DASHBOARD.YOUR_PROJECTS' | translate}}</h1>
-    <button mat-button (click)="openCreateModal()"><mat-icon>add</mat-icon></button>
+    <h1>{{ "PAGES.DASHBOARD.YOUR_PROJECTS" | translate }}</h1>
+    <div>
+      <button mat-button (click)="openCreateModal()">
+        <mat-icon>add</mat-icon>
+      </button>
+      <button
+        mat-button
+        [matBadge]="invitationNumber"
+      >
+        <mat-icon>person</mat-icon>
+      </button>
+    </div>
   </div>
   <div (scroll)="handleScroll($event)" class="dashboard__body">
     <div class="dashboard__body__items" *ngIf="projects?.length">
@@ -10,11 +20,14 @@
         (delete)="openDeleteModal(project)"
         (edit)="openCreateModal(project)"
         [project]="project"
-        *ngFor="let project of projects" ></app-project-card>
+        *ngFor="let project of projects"
+      ></app-project-card>
     </div>
     <div class="dashboard__body__empty" *ngIf="projects?.length === 0">
-      <h4>{{'PAGES.DASHBOARD.NO_PROJECTS' | translate}}</h4>
-      <button (click)="openCreateModal()" mat-button>{{'PAGES.DASHBOARD.CREATE_PROJECT' | translate}}</button>
+      <h4>{{ "PAGES.DASHBOARD.NO_PROJECTS" | translate }}</h4>
+      <button (click)="openCreateModal()" mat-button>
+        {{ "PAGES.DASHBOARD.CREATE_PROJECT" | translate }}
+      </button>
     </div>
   </div>
 </div>

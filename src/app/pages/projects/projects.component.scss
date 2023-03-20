@@ -17,8 +17,12 @@
       margin: 0;
     }
 
-    & > button {
-      background-color: var(--alt-color);
+    & > div {
+      display: flex;
+      gap: 12px;
+      & > button {
+        background-color: var(--alt-color);
+      }
     }
   }
 
