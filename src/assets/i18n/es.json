@@ -14,7 +14,8 @@
     "ENABLED": "Habilitado",
     "MEMBERS": "Miembros",
     "MEMBER": "Miembro",
-    "PENDING": "Pendiente"
+    "PENDING": "Pendiente",
+    "YET": "Aún"
   },
   "PAGES": {
     "HOME": {
@@ -60,7 +61,8 @@
       "INVITED_TO": "Has sido invitado a",
       "ACCEPT": "Haz click aquí para aceptar",
       "ACCEPT_TITLE": "¿Quieres unirte a {{project}}?",
-      "ACCEPT_MESSAGE": "Esta acción PUEDE revertirse simplemente saliendote del proyecto más tarde"
+      "ACCEPT_MESSAGE": "Esta acción PUEDE revertirse simplemente saliendote del proyecto más tarde",
+      "NOT_INVITED": "No te han invitado a ningún proyecto"
     },
     "NOT_FOUND": {
       "PAGE_NOT_FOUND": "Página no encontrada",

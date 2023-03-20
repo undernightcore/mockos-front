@@ -14,7 +14,8 @@
     "ENABLED": "Enabled",
     "MEMBERS": "Members",
     "MEMBER": "Member",
-    "PENDING": "Pending"
+    "PENDING": "Pending",
+    "YET": "Yet"
   },
   "PAGES": {
     "HOME": {
@@ -60,7 +61,8 @@
       "INVITED_TO": "You have been invited to",
       "ACCEPT": "Click here to accept",
       "ACCEPT_TITLE": "Do you want to join {{project}}?",
-      "ACCEPT_MESSAGE": "This action CAN BE reverted by simply leaving the project later"
+      "ACCEPT_MESSAGE": "This action CAN BE reverted by simply leaving the project later",
+      "NOT_INVITED": "You have not been invited to any project"
     },
     "NOT_FOUND": {
       "PAGE_NOT_FOUND": "Page not found",

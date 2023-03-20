@@ -34,4 +34,42 @@
       }
     }
   }
+
+  &__empty {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    padding: 36px;
+
+    & > img {
+      height: 200px
+    }
+
+    & > h1 {
+      & > span {
+        animation: rainbow_animation 5s linear 0s infinite;
+      }
+    }
+  }
+}
+
+@keyframes rainbow_animation {
+  from {
+    color: #6666ff;
+  }
+  10% {
+    color: #0099ff;
+  }
+  50% {
+    color: #2bbb39;
+  }
+  75% {
+    color: #ff3399;
+  }
+  100% {
+    color: #6666ff;
+  }
 }
