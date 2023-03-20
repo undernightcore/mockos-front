@@ -7,7 +7,11 @@
       alt=""
     />
     <div class="auth__body__form-container">
-      <h1>{{ (newUser ? "PAGES.AUTH.REGISTER" : "PAGES.AUTH.LOG_IN") | translate }}</h1>
+      <h1>
+        {{
+          (newUser ? "PAGES.AUTH.REGISTER" : "PAGES.AUTH.LOG_IN") | translate
+        }}
+      </h1>
       <form [formGroup]="authForm" class="auth__body__form-container__form">
         <mat-form-field *ngIf="newUser">
           <input
@@ -46,23 +50,26 @@
           />
         </mat-form-field>
 
+      </form>
+      <div class="auth__body__buttons">
         <button
           mat-raised-button
           (click)="handleSubmit()"
-          class="auth__body__form-container__form__dynamic-btn"
+          class="auth__body__buttons__dynamic-btn"
           [class.btn-disabled]="authForm.invalid"
         >
           {{ (newUser ? "ACTIONS.REGISTER" : "ACTIONS.LOG_IN") | translate }}
         </button>
         <button
-          mat-raised-button
+          mat-button
           *ngIf="!newUser"
           routerLink="/auth/register"
-          class="auth__body__form-container__form__register-btn"
+          class="auth__body__buttons__register-btn"
         >
-          {{'ACTIONS.WITHOUT_ACCOUNT' | translate}}
+          {{ "ACTIONS.WITHOUT_ACCOUNT" | translate }}
         </button>
-      </form>
+
+      </div>
     </div>
   </div>
 </div>
