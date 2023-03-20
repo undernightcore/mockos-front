@@ -2,11 +2,10 @@
   <app-navbar></app-navbar>
   <div *ngIf="invitations" class="invitations__header">
     <h2>
-      <span>Invitations</span>
-      {{ "COMMON.MEMBERS" | translate | lowercase }}
+      {{ "PAGES.INVITATIONS.TITLE" | translate }}
     </h2>
     <span routerLink="/projects">{{
-      "PAGES.MEMBERS.GO_BACK" | translate
+      "PAGES.INVITATIONS.GO_BACK" | translate
     }}</span>
   </div>
   <div (scroll)="handleScroll($event)" class="invitations__body">

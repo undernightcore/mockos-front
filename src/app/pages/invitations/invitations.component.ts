@@ -4,6 +4,8 @@ import { finalize } from 'rxjs';
 import { InvitationInterface } from '../../interfaces/invitation.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { ChoiceModalComponent } from '../../components/choice-modal/choice-modal.component';
+import { openToast } from '../../utils/toast.utils';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-invitations',
@@ -17,7 +19,8 @@ export class InvitationsComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private dialogService: MatDialog
+    private dialogService: MatDialog,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit() {
@@ -41,14 +44,24 @@ export class InvitationsComponent implements OnInit {
     this.dialogService
       .open(ChoiceModalComponent, {
         data: {
-          title: 'Do you want to join project?',
-          message:
-            'This action CAN BE reverted by simply leaving the project later',
+          title: this.translateService.instant(
+            'PAGES.INVITATIONS.ACCEPT_TITLE',
+            { project: invitation.project.name }
+          ),
+          message: this.translateService.instant(
+            'PAGES.INVITATIONS.ACCEPT_MESSAGE'
+          ),
         },
       })
       .afterClosed()
       .subscribe((accept) => {
         if (!accept) return;
+        this.userService
+          .acceptInvitation(invitation.id)
+          .subscribe((message) => {
+            openToast(message.message, 'success');
+            this.#getInvitationsList(1);
+          });
       });
   }
 

@@ -2,8 +2,11 @@
   <img src="assets/icons/drop.svg" />
   <div>
     <h4>
-      You have been invited to <span>{{ invitation.project.name }}</span>
+      {{ "PAGES.INVITATIONS.INVITED_TO" | translate }}
+      <span>{{ invitation.project.name }}</span>
     </h4>
-    <span (click)="selected.emit()">Haz click aquí para aceptar</span>
+    <span (click)="selected.emit()">{{
+      "PAGES.INVITATIONS.ACCEPT" | translate
+    }}</span>
   </div>
 </div>
