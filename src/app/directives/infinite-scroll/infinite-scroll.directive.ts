@@ -27,7 +27,7 @@ export class InfiniteScrollDirective implements OnChanges {
 
   ngOnChanges() {
     const { scrollHeight, clientHeight } = this.element.nativeElement;
-    if (scrollHeight !== clientHeight && this.currentItems < this.maxItems) {
+    if (scrollHeight === clientHeight && this.currentItems < this.maxItems) {
       this.newPageNeeded.emit(this.currentPage + 1);
     }
   }

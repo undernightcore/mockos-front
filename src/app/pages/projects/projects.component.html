@@ -15,7 +15,15 @@
       </button>
     </div>
   </div>
-  <div (scroll)="handleScroll($event)" class="dashboard__body">
+  <div
+    *ngIf="projects"
+    infiniteScroll
+    [maxItems]="maxProjects"
+    [itemsPerPage]="20"
+    [currentItems]="projects.length"
+    (newPageNeeded)="getProjects($event)"
+    class="dashboard__body"
+  >
     <div class="dashboard__body__items" *ngIf="projects?.length">
       <app-project-card
         (delete)="openDeleteModal(project)"

@@ -29,21 +29,8 @@ export class ProjectsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.#getProjects(1);
+    this.getProjects(1);
     this.#getInvitationAmount();
-  }
-
-  handleScroll(event: Event) {
-    if (!this.projects) return;
-    const { scrollTop, scrollHeight, offsetHeight } =
-      event.target as HTMLElement;
-    if (
-      scrollHeight - (scrollTop + offsetHeight) > 200 ||
-      this.projects.length >= this.maxProjects
-    )
-      return;
-    const pageToRequest = this.projects.length / 20 + 1;
-    this.#getProjects(pageToRequest);
   }
 
   openDeleteModal(project: ProjectInterface) {
@@ -65,7 +52,7 @@ export class ProjectsComponent implements OnInit {
         if (!confirmed) return;
         this.projectService.deleteProject(project.id).subscribe((message) => {
           openToast(message.message, 'success');
-          this.#getProjects(1);
+          this.getProjects(1);
         });
       });
   }
@@ -92,12 +79,12 @@ export class ProjectsComponent implements OnInit {
             ),
             'success'
           );
-          this.#getProjects(1);
+          this.getProjects(1);
         });
       });
   }
 
-  #getProjects(page: number) {
+  getProjects(page: number) {
     if (this.#isFetching) return;
     this.#isFetching = true;
     this.projectService
