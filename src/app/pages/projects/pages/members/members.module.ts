@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { InfiniteScrollModule } from '../../../../directives/infinite-scroll/infinite-scroll.module';
 
 @NgModule({
   declarations: [MembersComponent, MemberCardComponent, InviteModalComponent],
@@ -27,6 +28,7 @@ import { MatIconModule } from '@angular/material/icon';
     ReactiveFormsModule,
     MatButtonModule,
     MatIconModule,
+    InfiniteScrollModule,
   ],
 })
 export class MembersModule {}

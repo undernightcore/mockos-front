@@ -33,19 +33,6 @@ export class MembersComponent implements OnInit {
     });
   }
 
-  handleScroll(event: Event) {
-    if (!this.members) return;
-    const { scrollTop, scrollHeight, offsetHeight } =
-      event.target as HTMLElement;
-    if (
-      scrollHeight - (scrollTop + offsetHeight) > 200 ||
-      this.members.length >= this.maxMembers
-    )
-      return;
-    const pageToRequest = this.members.length / 20 + 1;
-    this.#getMemberList(pageToRequest);
-  }
-
   openInviteModal(email?: string) {
     this.dialogService
       .open(InviteModalComponent, { width: '500px', data: email })
@@ -70,11 +57,11 @@ export class MembersComponent implements OnInit {
     if (this.projectId === undefined) return;
     this.projectService.getProject(this.projectId).subscribe((project) => {
       this.project = project;
-      this.#getMemberList(1);
+      this.getMemberList(1);
     });
   }
 
-  #getMemberList(page: number) {
+  getMemberList(page: number) {
     if (this.#isFetching || this.projectId === undefined) return;
     this.#isFetching = true;
     this.projectService

@@ -8,9 +8,19 @@
     <span [routerLink]="['/projects', projectId]">{{
       "PAGES.MEMBERS.GO_BACK" | translate
     }}</span>
-    <button (click)="openInviteModal()" mat-button><mat-icon>add</mat-icon></button>
+    <button (click)="openInviteModal()" mat-button>
+      <mat-icon>add</mat-icon>
+    </button>
   </div>
-  <div (scroll)="handleScroll($event)" class="members__body">
+  <div
+    *ngIf="members"
+    infiniteScroll
+    [maxItems]="maxMembers"
+    [currentItems]="members.length"
+    [itemsPerPage]="20"
+    (newPageNeeded)="getMemberList($event)"
+    class="members__body"
+  >
     <div class="members__body__items">
       <app-member-card
         [member]="member"
