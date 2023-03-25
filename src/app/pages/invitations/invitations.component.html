@@ -9,8 +9,12 @@
     }}</span>
   </div>
   <div
-    *ngIf="invitations?.length"
-    (scroll)="handleScroll($event)"
+    *ngIf="invitations && invitations.length"
+    infiniteScroll
+    [maxItems]="maxInvitations"
+    [itemsPerPage]="20"
+    [currentItems]="invitations.length"
+    (newPageNeeded)="getInvitationsList($event)"
     class="invitations__body"
   >
     <div class="invitations__body__items">
