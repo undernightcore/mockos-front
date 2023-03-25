@@ -16,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatBadgeModule } from '@angular/material/badge';
+import { InfiniteScrollModule } from '../../directives/infinite-scroll/infinite-scroll.module';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatFormFieldModule,
     MatInputModule,
     MatBadgeModule,
+    InfiniteScrollModule,
   ],
 })
 export class ProjectsModule {}

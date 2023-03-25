@@ -10,7 +10,7 @@ import { CreateRouteComponent } from './components/create-route/create-route.com
 import { CreateRouteInterface } from '../../../../interfaces/create-route.interface';
 import { ChoiceModalComponent } from '../../../../components/choice-modal/choice-modal.component';
 import { RealtimeService } from '../../../../services/realtime.service';
-import { Subscription } from 'rxjs';
+import { finalize, Subscription } from 'rxjs';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -20,8 +20,11 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 })
 export class RoutesComponent implements OnInit, OnDestroy {
   routes?: RouteInterface[];
+  maxRoutes = 0;
   selectedRoute?: FormGroup;
   projectId?: number;
+
+  #isFetching = false;
 
   projectSubscription?: Subscription;
   routeSubscription?: Subscription;
@@ -38,7 +41,7 @@ export class RoutesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.activatedRoute.params.subscribe((params) => {
       this.projectId = params['id'];
-      this.#getRoutes();
+      this.getRoutes(1);
       this.#listenToChanges();
     });
   }
@@ -46,6 +49,19 @@ export class RoutesComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.projectSubscription?.unsubscribe();
     this.routeSubscription?.unsubscribe();
+  }
+
+  getRoutes(page: number, perPage = 20) {
+    if (this.projectId === undefined || this.#isFetching) return;
+    this.#isFetching = true;
+    this.routesService
+      .getRoutes(this.projectId, undefined, page, perPage)
+      .pipe(finalize(() => (this.#isFetching = false)))
+      .subscribe((routes) => {
+        this.routes =
+          page === 1 ? routes.data : [...(this.routes ?? []), ...routes.data];
+        this.maxRoutes = routes.meta.total;
+      });
   }
 
   selectRoute(route: RouteInterface) {
@@ -165,20 +181,18 @@ export class RoutesComponent implements OnInit, OnDestroy {
     });
   }
 
-  #getRoutes() {
-    if (this.projectId === undefined) return;
-    this.routesService.getRoutes(this.projectId).subscribe((routes) => {
-      this.routes = routes.data;
-    });
-  }
-
   #listenToChanges() {
-    if (this.projectId === undefined || this.projectSubscription) return;
+    if (
+      this.projectId === undefined ||
+      !this.routes ||
+      this.projectSubscription
+    )
+      return;
     this.projectSubscription = this.realtimeService
       .listenProject(this.projectId)
       .subscribe((action) => {
         if (action === 'updated') {
-          this.#getRoutes();
+          this.getRoutes(1, this.routes?.length as number);
         } else if (action === 'deleted') {
           this.router.navigate(['/projects']);
         }

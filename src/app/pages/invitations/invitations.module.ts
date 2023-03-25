@@ -7,6 +7,7 @@ import { NavbarModule } from '../../components/navbar/navbar.module';
 import { InvitationCardComponent } from './components/invitation-card/invitation-card.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { ChoiceModalModule } from '../../components/choice-modal/choice-modal.module';
+import { InfiniteScrollModule } from '../../directives/infinite-scroll/infinite-scroll.module';
 
 @NgModule({
   declarations: [InvitationsComponent, InvitationCardComponent],
@@ -16,6 +17,7 @@ import { ChoiceModalModule } from '../../components/choice-modal/choice-modal.mo
     NavbarModule,
     TranslateModule,
     ChoiceModalModule,
+    InfiniteScrollModule,
   ],
 })
 export class InvitationsModule {}

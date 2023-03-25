@@ -24,20 +24,7 @@ export class InvitationsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.#getInvitationsList(1);
-  }
-
-  handleScroll(event: Event) {
-    if (!this.invitations) return;
-    const { scrollTop, scrollHeight, offsetHeight } =
-      event.target as HTMLElement;
-    if (
-      scrollHeight - (scrollTop + offsetHeight) > 200 ||
-      this.invitations.length >= this.maxInvitations
-    )
-      return;
-    const pageToRequest = this.invitations.length / 20 + 1;
-    this.#getInvitationsList(pageToRequest);
+    this.getInvitationsList(1);
   }
 
   openAcceptModal(invitation: InvitationInterface) {
@@ -60,12 +47,12 @@ export class InvitationsComponent implements OnInit {
           .acceptInvitation(invitation.id)
           .subscribe((message) => {
             openToast(message.message, 'success');
-            this.#getInvitationsList(1);
+            this.getInvitationsList(1);
           });
       });
   }
 
-  #getInvitationsList(page: number) {
+  getInvitationsList(page: number) {
     if (this.#isFetching) return;
     this.#isFetching = true;
     this.userService
