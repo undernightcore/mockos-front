@@ -38,4 +38,17 @@ export class RealtimeService {
       })
     );
   }
+
+  listenResponse(responseId: number) {
+    return new Observable<RealtimeType>((subscriber) => {
+      this.socket.on(`response:${responseId}`, (data) => {
+        subscriber.next(data);
+      });
+    }).pipe(
+      tap({
+        unsubscribe: () =>
+          this.socket.removeAllListeners(`response:${responseId}`),
+      })
+    );
+  }
 }
