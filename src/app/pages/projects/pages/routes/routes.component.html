@@ -1,6 +1,6 @@
 <div class="routes">
   <app-navbar></app-navbar>
-  <div *ngIf="routes" class="routes__body">
+  <div class="routes__body">
     <div class="routes__body__list">
       <div class="routes__body__list__actions">
         <button (click)="openCreateModal()" mat-button>
@@ -11,8 +11,14 @@
         </button>
       </div>
       <div
+        *ngIf="routes"
         (cdkDropListDropped)="handleSort($event)"
         cdkDropList
+        infiniteScroll
+        [maxItems]="maxRoutes"
+        [currentItems]="routes.length"
+        [itemsPerPage]="20"
+        (newPageNeeded)="getRoutes($event, 20)"
         class="routes__body__list__items"
       >
         <app-route-list-item

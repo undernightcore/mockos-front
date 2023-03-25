@@ -20,6 +20,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { ChoiceModalModule } from '../../../../components/choice-modal/choice-modal.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { InfiniteScrollModule } from '../../../../directives/infinite-scroll/infinite-scroll.module';
 
 @NgModule({
   declarations: [RoutesComponent, RouteListItemComponent, CreateRouteComponent],
@@ -42,6 +43,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatSelectModule,
     ChoiceModalModule,
     DragDropModule,
+    InfiniteScrollModule,
   ],
 })
 export class RoutesModule {}
