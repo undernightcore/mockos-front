@@ -49,7 +49,9 @@
       "SELECT_ROUTE": "Por favor, selecciona una ruta de la lista",
       "CREATE_NEW_ROUTE": "Crear ruta nueva",
       "DELETE_ROUTE": "¿Estás seguro de que quieres eliminar {{route}}?",
-      "DELETE_ROUTE_MESSAGE": "Esta acción no se puede revertir"
+      "DELETE_ROUTE_MESSAGE": "Esta acción no se puede revertir",
+      "RESPONSES": "Respuestas",
+      "RESPONSES_NOT_FOUND": "Aún no has creado ninguna respuesta"
     },
     "MEMBERS": {
       "GO_BACK": "Volver al proyecto",
