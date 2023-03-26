@@ -22,6 +22,8 @@
     "@angular/router": "^14.0.0",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
+    "@types/jsoneditor": "^9.9.0",
+    "jsoneditor": "^9.10.0",
     "rxjs": "~7.5.0",
     "socket.io-client": "^4.6.1",
     "sweetalert2": "^11.7.3",

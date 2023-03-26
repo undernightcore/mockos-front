@@ -14,6 +14,7 @@ import { finalize, Subscription } from 'rxjs';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ResponsesService } from '../../../../services/responses.service';
 import { ResponseInterface } from '../../../../interfaces/response.interface';
+import { CreateResponseComponent } from './components/create-response/create-response.component';
 
 @Component({
   selector: 'app-routes',
@@ -161,6 +162,13 @@ export class RoutesComponent implements OnInit, OnDestroy {
           },
         });
       });
+  }
+
+  openCreateResponseModal() {
+    this.dialogService.open(CreateResponseComponent, {
+      height: '90%',
+      width: '70%',
+    });
   }
 
   openDeleteModal(route: RouteInterface) {

@@ -52,7 +52,10 @@
         <mat-form-field>
           <input (blur)="updateRoute()" formControlName="endpoint" matInput />
         </mat-form-field>
-        <h2>{{ "PAGES.ROUTES.RESPONSES" | translate }}</h2>
+        <div class="routes__body__info__selected__title">
+          <h2>{{ "PAGES.ROUTES.RESPONSES" | translate }}</h2>
+          <button (click)="openCreateResponseModal()" mat-button><mat-icon>add</mat-icon></button>
+        </div>
         <div
           *ngIf="responses"
           infiniteScroll

@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>Create response</h1>
+<div class="main-content" mat-dialog-content>
+  <div class="main-content__form">
+    <form [formGroup]="responseForm">
+      <mat-form-field>
+        <input formControlName="name" matInput placeholder="Name" />
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="status" type="number" matInput placeholder="Status code" />
+      </mat-form-field>
+      <div>
+        <mat-slide-toggle formControlName="enabled">Enabled</mat-slide-toggle>
+      </div>
+    </form>
+  </div>
+  <div class="main-content__editor" #editor></div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button>
+    {{ "ACTIONS.CANCEL" | translate }}
+  </button>
+  <button (click)="handleSave()" mat-button>
+    {{ "ACTIONS.CREATE" | translate }}
+  </button>
+</div>

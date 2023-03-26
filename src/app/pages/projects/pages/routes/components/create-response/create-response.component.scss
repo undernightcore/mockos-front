@@ -1,0 +1,24 @@
+:host {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.main-content {
+  height: 100%;
+  max-height: none;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  &__editor {
+    height: 100%;
+  }
+
+  & > div {
+    width: 100%;
+  }
+}
