@@ -1,0 +1,11 @@
+<div
+  *ngIf="response"
+  class="response-card"
+  [ngClass]="response.enabled ? 'enabled' : 'disabled'"
+>
+  <img src="assets/icons/drop.svg" />
+  <div>
+    <h4>{{ response.name }}</h4>
+    <span>{{ response.status }}</span>
+  </div>
+</div>

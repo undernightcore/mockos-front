@@ -1,0 +1,30 @@
+.response-card {
+  padding: 20px;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  & > img {
+    width: 50px;
+  }
+  & > div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    & > h4 {
+      margin: 0;
+    }
+
+    & > span {
+      color: var(--main-color);
+    }
+  }
+}
+
+.enabled {
+  border: 4px var(--main-color) solid;
+}
+
+.disabled {
+  border: 4px var(--disabled-color) solid;
+}

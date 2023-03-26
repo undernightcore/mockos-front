@@ -34,7 +34,7 @@
         *ngIf="selectedRoute"
         class="routes__body__info__selected"
       >
-        <div>
+        <div class="routes__body__info__selected__info">
           <div>
             <h2>{{ selectedRoute.value.name }}</h2>
             <app-http-chip
@@ -52,6 +52,23 @@
         <mat-form-field>
           <input (blur)="updateRoute()" formControlName="endpoint" matInput />
         </mat-form-field>
+        <h2>Responses</h2>
+        <div
+          *ngIf="responses"
+          infiniteScroll
+          [maxItems]="maxResponses"
+          [currentItems]="responses.length"
+          [itemsPerPage]="20"
+          (newPageNeeded)="getResponses($event)"
+          class="routes__body__info__selected__responses"
+        >
+          <div>
+            <app-response-list-item
+              [response]="response"
+              *ngFor="let response of responses"
+            ></app-response-list-item>
+          </div>
+        </div>
       </div>
       <div *ngIf="!selectedRoute" class="routes__body__info__missing">
         <h4>{{ "PAGES.ROUTES.SELECT_ROUTE" | translate }}</h4>
