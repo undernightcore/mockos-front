@@ -12,6 +12,8 @@ import { ChoiceModalComponent } from '../../../../components/choice-modal/choice
 import { RealtimeService } from '../../../../services/realtime.service';
 import { finalize, Subscription } from 'rxjs';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { ResponsesService } from '../../../../services/responses.service';
+import { ResponseInterface } from '../../../../interfaces/response.interface';
 
 @Component({
   selector: 'app-routes',
@@ -20,17 +22,24 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 })
 export class RoutesComponent implements OnInit, OnDestroy {
   routes?: RouteInterface[];
+  responses?: ResponseInterface[];
+
   maxRoutes = 0;
+  maxResponses = 0;
+
   selectedRoute?: FormGroup;
   projectId?: number;
 
-  #isFetching = false;
+  #isFetchingRoutes = false;
+  #isFetchingResponses = false;
 
   projectSubscription?: Subscription;
   routeSubscription?: Subscription;
+  responseSubscription?: Subscription;
 
   constructor(
     private routesService: RoutesService,
+    private responsesService: ResponsesService,
     private activatedRoute: ActivatedRoute,
     private translateService: TranslateService,
     private dialogService: MatDialog,
@@ -42,21 +51,22 @@ export class RoutesComponent implements OnInit, OnDestroy {
     this.activatedRoute.params.subscribe((params) => {
       this.projectId = params['id'];
       this.getRoutes(1);
-      this.#listenToChanges();
+      this.#listenToProjectChanges();
     });
   }
 
   ngOnDestroy() {
     this.projectSubscription?.unsubscribe();
     this.routeSubscription?.unsubscribe();
+    this.responseSubscription?.unsubscribe();
   }
 
   getRoutes(page: number, perPage = 20) {
-    if (this.projectId === undefined || this.#isFetching) return;
-    this.#isFetching = true;
+    if (this.projectId === undefined || this.#isFetchingRoutes) return;
+    this.#isFetchingRoutes = true;
     this.routesService
       .getRoutes(this.projectId, undefined, page, perPage)
-      .pipe(finalize(() => (this.#isFetching = false)))
+      .pipe(finalize(() => (this.#isFetchingRoutes = false)))
       .subscribe((routes) => {
         this.routes =
           page === 1 ? routes.data : [...(this.routes ?? []), ...routes.data];
@@ -64,20 +74,25 @@ export class RoutesComponent implements OnInit, OnDestroy {
       });
   }
 
+  getResponses(page: number, perPage = 20) {
+    if (this.selectedRoute === undefined || this.#isFetchingResponses) return;
+    this.#isFetchingResponses = true;
+    this.responsesService
+      .getResponses(this.selectedRoute.value.id, page, perPage)
+      .pipe(finalize(() => (this.#isFetchingResponses = false)))
+      .subscribe((responses) => {
+        this.responses =
+          page === 1
+            ? responses.data
+            : [...(this.responses ?? []), ...responses.data];
+        this.maxResponses = responses.meta.total;
+      });
+  }
+
   selectRoute(route: RouteInterface) {
     this.#setRouteDataToForm(route);
-    this.routeSubscription?.unsubscribe();
-    this.routeSubscription = this.realtimeService
-      .listenRoute(route.id)
-      .subscribe((action) => {
-        if (action === 'updated') {
-          this.routesService.getRoute(route.id).subscribe((data) => {
-            this.#setRouteDataToForm(data);
-          });
-        } else if (action === 'deleted') {
-          this.selectedRoute = undefined;
-        }
-      });
+    this.#listenToRouteChanges(route.id);
+    this.getResponses(1);
   }
 
   handleSort(event: CdkDragDrop<any>) {
@@ -181,20 +196,38 @@ export class RoutesComponent implements OnInit, OnDestroy {
     });
   }
 
-  #listenToChanges() {
-    if (
-      this.projectId === undefined ||
-      !this.routes ||
-      this.projectSubscription
-    )
-      return;
+  #listenToProjectChanges() {
+    if (this.projectId === undefined) return;
+    this.projectSubscription?.unsubscribe();
     this.projectSubscription = this.realtimeService
       .listenProject(this.projectId)
       .subscribe((action) => {
+        if (!this.routes) return;
         if (action === 'updated') {
-          this.getRoutes(1, this.routes?.length as number);
+          this.getRoutes(1, Math.ceil((this.routes.length + 0.01) / 20) * 20);
         } else if (action === 'deleted') {
           this.router.navigate(['/projects']);
+        }
+      });
+  }
+
+  #listenToRouteChanges(routeId: number) {
+    if (this.projectId === undefined) return;
+    this.routeSubscription?.unsubscribe();
+    this.routeSubscription = this.realtimeService
+      .listenRoute(routeId)
+      .subscribe((action) => {
+        if (action === 'updated') {
+          this.routesService.getRoute(routeId).subscribe((data) => {
+            this.#setRouteDataToForm(data);
+            if (!this.responses) return;
+            this.getResponses(
+              1,
+              Math.ceil((this.responses.length + 0.01) / 20) * 20
+            );
+          });
+        } else if (action === 'deleted') {
+          this.selectedRoute = undefined;
         }
       });
   }

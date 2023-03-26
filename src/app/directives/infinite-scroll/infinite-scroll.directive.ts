@@ -1,17 +1,17 @@
 import {
+  AfterContentChecked,
   Directive,
   ElementRef,
   EventEmitter,
   HostListener,
   Input,
-  OnChanges,
   Output,
 } from '@angular/core';
 
 @Directive({
   selector: '[infiniteScroll]',
 })
-export class InfiniteScrollDirective implements OnChanges {
+export class InfiniteScrollDirective implements AfterContentChecked {
   @Input() maxItems = 0;
   @Input() currentItems = 0;
   @Input() itemsPerPage = 0;
@@ -25,11 +25,16 @@ export class InfiniteScrollDirective implements OnChanges {
     return Math.floor(this.currentItems / this.itemsPerPage);
   }
 
-  ngOnChanges() {
+  get notEnoughScroll() {
     const { scrollHeight, clientHeight } = this.element.nativeElement;
-    if (scrollHeight === clientHeight && this.currentItems < this.maxItems) {
-      this.newPageNeeded.emit(this.currentPage + 1);
-    }
+    return (
+      scrollHeight - this.heightThreshold < clientHeight &&
+      this.currentItems < this.maxItems
+    );
+  }
+
+  ngAfterContentChecked() {
+    if (this.notEnoughScroll) this.newPageNeeded.emit(this.currentPage + 1);
   }
 
   @HostListener('scroll', ['$event'])

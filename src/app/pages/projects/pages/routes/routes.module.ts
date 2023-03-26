@@ -21,9 +21,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { ChoiceModalModule } from '../../../../components/choice-modal/choice-modal.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { InfiniteScrollModule } from '../../../../directives/infinite-scroll/infinite-scroll.module';
+import { ResponseListItemComponent } from './components/response-list-item/response-list-item.component';
 
 @NgModule({
-  declarations: [RoutesComponent, RouteListItemComponent, CreateRouteComponent],
+  declarations: [RoutesComponent, RouteListItemComponent, CreateRouteComponent, ResponseListItemComponent],
   imports: [
     CommonModule,
     RoutesRoutingModule,
