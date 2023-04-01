@@ -51,7 +51,8 @@
       "DELETE_ROUTE": "Are you sure you want to delete {{route}}?",
       "DELETE_ROUTE_MESSAGE": "This action is irreversible",
       "RESPONSES": "Responses",
-      "RESPONSES_NOT_FOUND": "You have not created a response yet"
+      "RESPONSES_NOT_FOUND": "You have not created a response yet",
+      "INVALID_JSON": "JSON is invalid"
     },
     "MEMBERS": {
       "GO_BACK": "Return to project",

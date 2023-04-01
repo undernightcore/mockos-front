@@ -18,6 +18,16 @@
     height: 100%;
   }
 
+  &__form {
+    &__alert {
+      margin-top: 16px;
+      color: white;
+      background-color: lightcoral;
+      box-sizing: border-box;
+      padding: 8px;
+    }
+  }
+
   & > div {
     width: 100%;
   }

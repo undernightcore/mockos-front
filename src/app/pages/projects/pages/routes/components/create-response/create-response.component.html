@@ -6,12 +6,23 @@
         <input formControlName="name" matInput placeholder="Name" />
       </mat-form-field>
       <mat-form-field>
-        <input formControlName="status" type="number" matInput placeholder="Status code" />
+        <input
+          formControlName="status"
+          type="number"
+          matInput
+          placeholder="Status code"
+        />
       </mat-form-field>
       <div>
         <mat-slide-toggle formControlName="enabled">Enabled</mat-slide-toggle>
       </div>
     </form>
+    <div
+      *ngIf="responseForm.controls.body.invalid"
+      class="main-content__form__alert"
+    >
+      {{ "PAGES.ROUTES.INVALID_JSON" | translate }}
+    </div>
   </div>
   <div class="main-content__editor" #editor></div>
 </div>

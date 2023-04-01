@@ -51,7 +51,8 @@
       "DELETE_ROUTE": "¿Estás seguro de que quieres eliminar {{route}}?",
       "DELETE_ROUTE_MESSAGE": "Esta acción no se puede revertir",
       "RESPONSES": "Respuestas",
-      "RESPONSES_NOT_FOUND": "Aún no has creado ninguna respuesta"
+      "RESPONSES_NOT_FOUND": "Aún no has creado ninguna respuesta",
+      "INVALID_JSON": "La estructura del JSON es inválida"
     },
     "MEMBERS": {
       "GO_BACK": "Volver al proyecto",
