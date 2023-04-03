@@ -1,0 +1,36 @@
+<div class="compare-responses">
+  <div mat-dialog-title>
+    {{ "PAGES.ROUTES.COMPARING_RESPONSES" | translate }}
+  </div>
+  <div class="compare-responses__content" mat-dialog-content>
+    <div class="compare-responses__content__column">
+      <div class="compare-responses__content__column__info">
+        {{ "PAGES.ROUTES.LOCAL_CHANGES" | translate }}
+      </div>
+      <div
+        class="compare-responses__content__column__editor"
+        #localEditor
+      ></div>
+    </div>
+    <div class="compare-responses__content__column">
+      <div class="compare-responses__content__column__info">
+        <span>{{ "PAGES.ROUTES.REMOTE_CHANGES" | translate }}</span>
+        <span *ngIf="updatedAgo !== undefined"
+          >{{ "COMMON.UPDATED" | translate }} {{ updatedAgo }}</span
+        >
+      </div>
+      <div
+        class="compare-responses__content__column__editor"
+        #originEditor
+      ></div>
+    </div>
+  </div>
+  <div *ngIf="originChanges" mat-dialog-actions>
+    <button mat-button (click)="selectResponse(localChanges)">
+      {{ "ACTIONS.KEEP_LEFT" | translate }}
+    </button>
+    <button mat-button (click)="selectResponse(originChanges)">
+      {{ "ACTIONS.KEEP_RIGHT" | translate }}
+    </button>
+  </div>
+</div>

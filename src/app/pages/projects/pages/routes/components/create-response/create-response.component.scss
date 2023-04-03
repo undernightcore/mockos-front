@@ -26,6 +26,21 @@
       box-sizing: border-box;
       padding: 8px;
     }
+
+    &__warning {
+      margin-top: 16px;
+      color: white;
+      background-color: lightsalmon;
+      box-sizing: border-box;
+      padding: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      & > button {
+        background-color: var(--alt-color);
+      }
+    }
   }
 
   & > div {

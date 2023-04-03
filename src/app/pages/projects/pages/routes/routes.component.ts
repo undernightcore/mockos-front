@@ -141,7 +141,11 @@ export class RoutesComponent implements OnInit, OnDestroy {
 
   openCreateModal(retryData?: CreateRouteInterface) {
     this.dialogService
-      .open(CreateRouteComponent, { width: '500px', data: retryData })
+      .open(CreateRouteComponent, {
+        closeOnNavigation: true,
+        width: '500px',
+        data: retryData,
+      })
       .afterClosed()
       .subscribe((data: CreateRouteInterface | undefined) => {
         if (!data || this.projectId === undefined) return;
@@ -167,6 +171,7 @@ export class RoutesComponent implements OnInit, OnDestroy {
   openCreateResponseModal(responseData?: ResponseInterface) {
     if (!this.selectedRoute) return;
     this.dialogService.open(CreateResponseComponent, {
+      closeOnNavigation: true,
       height: '90%',
       width: '70%',
       data: { routeId: this.selectedRoute.value.id, responseData },
@@ -176,6 +181,7 @@ export class RoutesComponent implements OnInit, OnDestroy {
   openDeleteModal(route: RouteInterface) {
     this.dialogService
       .open(ChoiceModalComponent, {
+        closeOnNavigation: true,
         data: {
           title: this.translateService.instant('PAGES.ROUTES.DELETE_TITLE', {
             element: route.name,
@@ -195,6 +201,7 @@ export class RoutesComponent implements OnInit, OnDestroy {
   openDeleteResponseModal(response: ResponseInterface) {
     this.dialogService
       .open(ChoiceModalComponent, {
+        closeOnNavigation: true,
         data: {
           title: this.translateService.instant('PAGES.ROUTES.DELETE_TITLE', {
             element: response.name,

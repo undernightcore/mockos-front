@@ -15,7 +15,8 @@
     "MEMBERS": "Miembros",
     "MEMBER": "Miembro",
     "PENDING": "Pendiente",
-    "YET": "Aún"
+    "YET": "Aún",
+    "UPDATED": "Actualizado"
   },
   "PAGES": {
     "HOME": {
@@ -54,7 +55,12 @@
       "RESPONSES_NOT_FOUND": "Aún no has creado ninguna respuesta",
       "INVALID_JSON": "La estructura del JSON es inválida",
       "CREATE_RESPONSE": "Crear respuesta",
-      "EDIT_RESPONSE": "Editar respuesta"
+      "EDIT_RESPONSE": "Editar respuesta",
+      "RESPONSE_UNEXPECTEDLY_DELETED": "La respuesta que estabas editando ha sido eliminada... Ahora es como si la estuvieras creando",
+      "NEW_CHANGES": "There are new changes for this response.",
+      "LOCAL_CHANGES": "Cambios en local",
+      "REMOTE_CHANGES": "Cambios en remoto",
+      "COMPARING_RESPONSES": "Comparando respuestas"
     },
     "MEMBERS": {
       "GO_BACK": "Volver al proyecto",
@@ -85,6 +91,9 @@
     "CANCEL": "Cancelar",
     "CREATE": "Crear",
     "INVITE": "Invitar",
-    "UPDATE": "Actualizar"
+    "UPDATE": "Actualizar",
+    "COMPARE_AND_SAVE": "Comparar y guardar",
+    "KEEP_LEFT": "Guardar izquierda",
+    "KEEP_RIGHT": "Guardar derecha"
   }
 }

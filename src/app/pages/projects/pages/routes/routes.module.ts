@@ -23,9 +23,10 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { InfiniteScrollModule } from '../../../../directives/infinite-scroll/infinite-scroll.module';
 import { ResponseListItemComponent } from './components/response-list-item/response-list-item.component';
 import { CreateResponseComponent } from './components/create-response/create-response.component';
+import { CompareResponsesComponent } from './components/compare-responses/compare-responses.component';
 
 @NgModule({
-  declarations: [RoutesComponent, RouteListItemComponent, CreateRouteComponent, ResponseListItemComponent, CreateResponseComponent],
+  declarations: [RoutesComponent, RouteListItemComponent, CreateRouteComponent, ResponseListItemComponent, CreateResponseComponent, CompareResponsesComponent],
   imports: [
     CommonModule,
     RoutesRoutingModule,

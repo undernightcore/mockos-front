@@ -15,7 +15,8 @@
     "MEMBERS": "Members",
     "MEMBER": "Member",
     "PENDING": "Pending",
-    "YET": "Yet"
+    "YET": "Yet",
+    "UPDATED": "Updated"
   },
   "PAGES": {
     "HOME": {
@@ -54,7 +55,12 @@
       "RESPONSES_NOT_FOUND": "You have not created a response yet",
       "INVALID_JSON": "JSON is invalid",
       "CREATE_RESPONSE": "Create response",
-      "EDIT_RESPONSE": "Edit response"
+      "EDIT_RESPONSE": "Edit response",
+      "RESPONSE_UNEXPECTEDLY_DELETED": "The response you were editing has been removed... Now you'll be creating it as a new one",
+      "NEW_CHANGES": "There are new changes for this response.",
+      "LOCAL_CHANGES": "Local changes",
+      "REMOTE_CHANGES": "Remote changes",
+      "COMPARING_RESPONSES": "Comparing responses"
     },
     "MEMBERS": {
       "GO_BACK": "Return to project",
@@ -85,6 +91,9 @@
     "CANCEL": "Cancel",
     "CREATE": "Create",
     "INVITE": "Invite",
-    "UPDATE": "Update"
+    "UPDATE": "Update",
+    "COMPARE_AND_SAVE": "Compare and save",
+    "KEEP_LEFT": "Keep left",
+    "KEEP_RIGHT": "Keep right"
   }
 }
