@@ -14,6 +14,7 @@ import { finalize, Subscription } from 'rxjs';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ResponsesService } from '../../../../services/responses.service';
 import { ResponseInterface } from '../../../../interfaces/response.interface';
+import { CreateResponseComponent } from './components/create-response/create-response.component';
 
 @Component({
   selector: 'app-routes',
@@ -163,16 +164,23 @@ export class RoutesComponent implements OnInit, OnDestroy {
       });
   }
 
+  openCreateResponseModal(responseData?: ResponseInterface) {
+    if (!this.selectedRoute) return;
+    this.dialogService.open(CreateResponseComponent, {
+      height: '90%',
+      width: '70%',
+      data: { routeId: this.selectedRoute.value.id, responseData },
+    });
+  }
+
   openDeleteModal(route: RouteInterface) {
     this.dialogService
       .open(ChoiceModalComponent, {
         data: {
-          title: this.translateService.instant('PAGES.ROUTES.DELETE_ROUTE', {
-            route: route.name,
+          title: this.translateService.instant('PAGES.ROUTES.DELETE_TITLE', {
+            element: route.name,
           }),
-          message: this.translateService.instant(
-            'PAGES.ROUTES.DELETE_ROUTE_MESSAGE'
-          ),
+          message: this.translateService.instant('PAGES.ROUTES.DELETE_MESSAGE'),
         },
       })
       .afterClosed()
@@ -181,6 +189,27 @@ export class RoutesComponent implements OnInit, OnDestroy {
         this.routesService.deleteRoute(route.id).subscribe((result) => {
           openToast(result.message, 'success');
         });
+      });
+  }
+
+  openDeleteResponseModal(response: ResponseInterface) {
+    this.dialogService
+      .open(ChoiceModalComponent, {
+        data: {
+          title: this.translateService.instant('PAGES.ROUTES.DELETE_TITLE', {
+            element: response.name,
+          }),
+          message: this.translateService.instant('PAGES.ROUTES.DELETE_MESSAGE'),
+        },
+      })
+      .afterClosed()
+      .subscribe((accepted) => {
+        if (!accepted) return;
+        this.responsesService
+          .deleteResponse(response.id)
+          .subscribe((result) => {
+            openToast(result.message, 'success');
+          });
       });
   }
 
