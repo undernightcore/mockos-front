@@ -164,12 +164,12 @@ export class RoutesComponent implements OnInit, OnDestroy {
       });
   }
 
-  openCreateResponseModal() {
+  openCreateResponseModal(responseData?: ResponseInterface) {
     if (!this.selectedRoute) return;
     this.dialogService.open(CreateResponseComponent, {
       height: '90%',
       width: '70%',
-      data: { routeId: this.selectedRoute.value.id },
+      data: { routeId: this.selectedRoute.value.id, responseData },
     });
   }
 

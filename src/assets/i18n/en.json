@@ -82,6 +82,7 @@
     "ACCEPT": "Accept",
     "CANCEL": "Cancel",
     "CREATE": "Create",
-    "INVITE": "Invite"
+    "INVITE": "Invite",
+    "UPDATE": "Update"
   }
 }

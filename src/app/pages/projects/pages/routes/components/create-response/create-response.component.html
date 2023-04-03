@@ -27,10 +27,10 @@
   <div class="main-content__editor" #editor></div>
 </div>
 <div mat-dialog-actions>
-  <button mat-button>
+  <button (click)="dialogRef.close()" mat-button>
     {{ "ACTIONS.CANCEL" | translate }}
   </button>
   <button (click)="handleSave()" mat-button>
-    {{ "ACTIONS.CREATE" | translate }}
+    {{ (data.responseData ? "ACTIONS.UPDATE" : "ACTIONS.CREATE") | translate }}
   </button>
 </div>

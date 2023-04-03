@@ -14,6 +14,7 @@ import { ResponseModalDataInterface } from './interfaces/response-modal-data.int
 import { CreateResponseInterface } from '../../../../../../interfaces/create-response.interface';
 import { DialogRef } from '@angular/cdk/dialog';
 import { openToast } from '../../../../../../utils/toast.utils';
+import { iif } from 'rxjs';
 
 @Component({
   selector: 'app-create-response',
@@ -25,20 +26,24 @@ export class CreateResponseComponent implements AfterViewInit {
   editor?: JSONEditor;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) private data: ResponseModalDataInterface,
-    private dialogRef: DialogRef,
+    @Inject(MAT_DIALOG_DATA) public data: ResponseModalDataInterface,
+    public dialogRef: DialogRef,
     private responsesService: ResponsesService
   ) {}
 
   responseForm = new FormGroup({
-    name: new FormControl('Default', [Validators.required]),
-    status: new FormControl(200, [
+    name: new FormControl(this.data.responseData?.name ?? 'Default', [
+      Validators.required,
+    ]),
+    status: new FormControl(this.data.responseData?.status ?? 200, [
       Validators.required,
       Validators.min(100),
       Validators.max(599),
     ]),
-    body: new FormControl('{}', [jsonValidator]),
-    enabled: new FormControl(true),
+    body: new FormControl(this.data.responseData?.body ?? '{}', [
+      jsonValidator,
+    ]),
+    enabled: new FormControl(this.data.responseData?.enabled ?? true),
   });
 
   ngAfterViewInit() {
@@ -55,14 +60,19 @@ export class CreateResponseComponent implements AfterViewInit {
 
   handleSave() {
     if (this.responseForm.invalid) return;
-    this.responsesService
-      .createResponse(
+    iif(
+      () => Boolean(this.data.responseData),
+      this.responsesService.editResponse(
+        this.data.responseData?.id as number,
+        this.responseForm.value as CreateResponseInterface
+      ),
+      this.responsesService.createResponse(
         this.data.routeId,
         this.responseForm.value as CreateResponseInterface
       )
-      .subscribe((response) => {
-        openToast(response.message, 'success');
-        this.dialogRef.close();
-      });
+    ).subscribe((response) => {
+      openToast(response.message, 'success');
+      this.dialogRef.close();
+    });
   }
 }

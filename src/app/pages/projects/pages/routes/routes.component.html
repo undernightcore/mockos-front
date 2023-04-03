@@ -54,7 +54,9 @@
         </mat-form-field>
         <div class="routes__body__info__selected__title">
           <h2>{{ "PAGES.ROUTES.RESPONSES" | translate }}</h2>
-          <button (click)="openCreateResponseModal()" mat-button><mat-icon>add</mat-icon></button>
+          <button (click)="openCreateResponseModal()" mat-button>
+            <mat-icon>add</mat-icon>
+          </button>
         </div>
         <div
           *ngIf="responses"
@@ -70,6 +72,7 @@
             *ngIf="responses.length"
           >
             <app-response-list-item
+              (click)="openCreateResponseModal(response)"
               [response]="response"
               *ngFor="let response of responses"
             ></app-response-list-item>
