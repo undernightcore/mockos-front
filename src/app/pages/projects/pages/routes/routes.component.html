@@ -72,7 +72,8 @@
             *ngIf="responses.length"
           >
             <app-response-list-item
-              (click)="openCreateResponseModal(response)"
+              (select)="openCreateResponseModal(response)"
+              (delete)="openDeleteResponseModal(response)"
               [response]="response"
               *ngFor="let response of responses"
             ></app-response-list-item>

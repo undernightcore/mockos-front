@@ -48,11 +48,13 @@
       "CREATED_SUCCESSFULLY": "{{route}} creado correctamente",
       "SELECT_ROUTE": "Por favor, selecciona una ruta de la lista",
       "CREATE_NEW_ROUTE": "Crear ruta nueva",
-      "DELETE_ROUTE": "¿Estás seguro de que quieres eliminar {{route}}?",
-      "DELETE_ROUTE_MESSAGE": "Esta acción no se puede revertir",
+      "DELETE_TITLE": "¿Estás seguro de que quieres eliminar {{element}}?",
+      "DELETE_MESSAGE": "Esta acción no se puede revertir",
       "RESPONSES": "Respuestas",
       "RESPONSES_NOT_FOUND": "Aún no has creado ninguna respuesta",
-      "INVALID_JSON": "La estructura del JSON es inválida"
+      "INVALID_JSON": "La estructura del JSON es inválida",
+      "CREATE_RESPONSE": "Crear respuesta",
+      "EDIT_RESPONSE": "Editar respuesta"
     },
     "MEMBERS": {
       "GO_BACK": "Volver al proyecto",

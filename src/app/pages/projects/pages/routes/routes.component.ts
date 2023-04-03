@@ -177,12 +177,10 @@ export class RoutesComponent implements OnInit, OnDestroy {
     this.dialogService
       .open(ChoiceModalComponent, {
         data: {
-          title: this.translateService.instant('PAGES.ROUTES.DELETE_ROUTE', {
-            route: route.name,
+          title: this.translateService.instant('PAGES.ROUTES.DELETE_TITLE', {
+            element: route.name,
           }),
-          message: this.translateService.instant(
-            'PAGES.ROUTES.DELETE_ROUTE_MESSAGE'
-          ),
+          message: this.translateService.instant('PAGES.ROUTES.DELETE_MESSAGE'),
         },
       })
       .afterClosed()
@@ -191,6 +189,27 @@ export class RoutesComponent implements OnInit, OnDestroy {
         this.routesService.deleteRoute(route.id).subscribe((result) => {
           openToast(result.message, 'success');
         });
+      });
+  }
+
+  openDeleteResponseModal(response: ResponseInterface) {
+    this.dialogService
+      .open(ChoiceModalComponent, {
+        data: {
+          title: this.translateService.instant('PAGES.ROUTES.DELETE_TITLE', {
+            element: response.name,
+          }),
+          message: this.translateService.instant('PAGES.ROUTES.DELETE_MESSAGE'),
+        },
+      })
+      .afterClosed()
+      .subscribe((accepted) => {
+        if (!accepted) return;
+        this.responsesService
+          .deleteResponse(response.id)
+          .subscribe((result) => {
+            openToast(result.message, 'success');
+          });
       });
   }
 

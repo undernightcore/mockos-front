@@ -48,11 +48,13 @@
       "CREATED_SUCCESSFULLY": "{{route}} created successfully",
       "SELECT_ROUTE": "Please, select a route from the list",
       "CREATE_NEW_ROUTE": "Create new route",
-      "DELETE_ROUTE": "Are you sure you want to delete {{route}}?",
-      "DELETE_ROUTE_MESSAGE": "This action is irreversible",
+      "DELETE_TITLE": "Are you sure you want to delete {{element}}?",
+      "DELETE_MESSAGE": "This action is irreversible",
       "RESPONSES": "Responses",
       "RESPONSES_NOT_FOUND": "You have not created a response yet",
-      "INVALID_JSON": "JSON is invalid"
+      "INVALID_JSON": "JSON is invalid",
+      "CREATE_RESPONSE": "Create response",
+      "EDIT_RESPONSE": "Edit response"
     },
     "MEMBERS": {
       "GO_BACK": "Return to project",

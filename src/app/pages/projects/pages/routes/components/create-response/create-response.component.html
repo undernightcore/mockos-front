@@ -1,4 +1,11 @@
-<h1 mat-dialog-title>Create response</h1>
+<h1 mat-dialog-title>
+  {{
+    (data.responseData
+      ? "PAGES.ROUTES.EDIT_RESPONSE"
+      : "PAGES.ROUTES.CREATE_RESPONSE"
+    ) | translate
+  }}
+</h1>
 <div class="main-content" mat-dialog-content>
   <div class="main-content__form">
     <form [formGroup]="responseForm">

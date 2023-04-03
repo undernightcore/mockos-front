@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ResponseInterface } from '../../../../../../interfaces/response.interface';
 
 @Component({
@@ -6,10 +6,8 @@ import { ResponseInterface } from '../../../../../../interfaces/response.interfa
   templateUrl: './response-list-item.component.html',
   styleUrls: ['./response-list-item.component.scss'],
 })
-export class ResponseListItemComponent implements OnInit {
+export class ResponseListItemComponent {
   @Input() response?: ResponseInterface;
-
-  constructor() {}
-
-  ngOnInit(): void {}
+  @Output() delete = new EventEmitter<void>();
+  @Output() select = new EventEmitter<void>();
 }
