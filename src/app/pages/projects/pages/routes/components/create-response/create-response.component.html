@@ -21,9 +21,17 @@
         />
       </mat-form-field>
       <div>
-        <mat-slide-toggle formControlName="enabled">Enabled</mat-slide-toggle>
+        <mat-slide-toggle formControlName="enabled">{{
+          "COMMON.ENABLED" | translate
+        }}</mat-slide-toggle>
       </div>
     </form>
+    <div *ngIf="newChanges" class="main-content__form__warning">
+      <span>{{ "PAGES.ROUTES.NEW_CHANGES" | translate }}</span>
+      <button (click)="compareChanges()" mat-button>
+        {{ "ACTIONS.COMPARE_AND_SAVE" | translate }}
+      </button>
+    </div>
     <div
       *ngIf="responseForm.controls.body.invalid"
       class="main-content__form__alert"
