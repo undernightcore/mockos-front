@@ -1,6 +1,6 @@
 <div *ngIf="invitation" class="invitation-card">
   <img src="assets/icons/drop.svg" />
-  <div>
+  <div class="invitation-card__info">
     <h4>
       {{ "PAGES.INVITATIONS.INVITED_TO" | translate }}
       <span>{{ invitation.project.name }}</span>
@@ -8,5 +8,8 @@
     <span (click)="selected.emit()">{{
       "PAGES.INVITATIONS.ACCEPT" | translate
     }}</span>
+  </div>
+  <div (click)="deleted.emit()" class="invitation-card__delete">
+    <mat-icon>delete</mat-icon>
   </div>
 </div>

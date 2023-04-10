@@ -9,7 +9,7 @@
   & > img {
     width: 50px;
   }
-  & > div {
+  &__info {
     width: 100%;
     & > h4 {
       & > span {
@@ -21,5 +21,11 @@
       color: grey;
       cursor: pointer;
     }
+  }
+  &__delete {
+    & > mat-icon {
+      cursor: pointer;
+    }
+    width: fit-content;
   }
 }

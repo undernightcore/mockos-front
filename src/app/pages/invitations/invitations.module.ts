@@ -8,6 +8,7 @@ import { InvitationCardComponent } from './components/invitation-card/invitation
 import { TranslateModule } from '@ngx-translate/core';
 import { ChoiceModalModule } from '../../components/choice-modal/choice-modal.module';
 import { InfiniteScrollModule } from '../../directives/infinite-scroll/infinite-scroll.module';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [InvitationsComponent, InvitationCardComponent],
@@ -18,6 +19,7 @@ import { InfiniteScrollModule } from '../../directives/infinite-scroll/infinite-
     TranslateModule,
     ChoiceModalModule,
     InfiniteScrollModule,
+    MatIconModule,
   ],
 })
 export class InvitationsModule {}

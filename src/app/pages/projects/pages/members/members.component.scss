@@ -17,9 +17,17 @@
       width: fit-content;
       display: block;
     }
-    & > button {
-      margin-top: 12px;
-      background-color: var(--alt-color);
+    &__actions {
+      display: flex;
+      gap: 12px;
+      & > button {
+        margin-top: 12px;
+        background-color: var(--alt-color);
+
+        &:nth-child(2) {
+          background-color: indianred;
+        }
+      }
     }
   }
 

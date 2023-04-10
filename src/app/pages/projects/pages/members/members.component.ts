@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../../../../services/project.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { ProjectInterface } from '../../../../interfaces/project.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { InviteModalComponent } from './components/invite-modal/invite-modal.component';
 import { openToast } from '../../../../utils/toast.utils';
 import { MemberInterface } from '../../../../interfaces/member.interface';
+import { ChoiceModalComponent } from '../../../../components/choice-modal/choice-modal.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-members',
@@ -23,7 +25,9 @@ export class MembersComponent implements OnInit {
   constructor(
     private projectService: ProjectService,
     private activatedRoute: ActivatedRoute,
-    private dialogService: MatDialog
+    private dialogService: MatDialog,
+    private router: Router,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit() {
@@ -49,6 +53,28 @@ export class MembersComponent implements OnInit {
             error: () => {
               this.openInviteModal(newEmail);
             },
+          });
+      });
+  }
+
+  openLeaveModal() {
+    if (!this.projectId) return;
+    const title = this.translateService.instant(
+      'PAGES.MEMBERS.LEAVE_PROJECT_TITLE'
+    );
+    const message = this.translateService.instant(
+      'PAGES.MEMBERS.LEAVE_PROJECT_MESSAGE'
+    );
+    this.dialogService
+      .open(ChoiceModalComponent, { data: { title, message } })
+      .afterClosed()
+      .subscribe((leave) => {
+        if (!leave) return;
+        this.projectService
+          .leaveProject(this.projectId!)
+          .subscribe((message) => {
+            openToast(message.message, 'success');
+            this.router.navigate(['/projects']);
           });
       });
   }

@@ -8,9 +8,14 @@
     <span [routerLink]="['/projects', projectId]">{{
       "PAGES.MEMBERS.GO_BACK" | translate
     }}</span>
-    <button (click)="openInviteModal()" mat-button>
-      <mat-icon>add</mat-icon>
-    </button>
+    <div class="members__header__actions">
+      <button (click)="openInviteModal()" mat-button>
+        <mat-icon>add</mat-icon>
+      </button>
+      <button (click)="openLeaveModal()" mat-button>
+        <mat-icon>logout</mat-icon>
+      </button>
+    </div>
   </div>
   <div
     *ngIf="members"

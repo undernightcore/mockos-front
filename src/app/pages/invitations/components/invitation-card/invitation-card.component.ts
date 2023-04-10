@@ -9,4 +9,5 @@ import { InvitationInterface } from '../../../../interfaces/invitation.interface
 export class InvitationCardComponent {
   @Input() invitation?: InvitationInterface;
   @Output() selected = new EventEmitter<void>();
+  @Output() deleted = new EventEmitter<void>();
 }
