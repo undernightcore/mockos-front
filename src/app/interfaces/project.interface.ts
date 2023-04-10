@@ -7,5 +7,5 @@ export interface ProjectInterface {
 }
 
 export interface ForkedProjectInterface extends ProjectInterface {
-  forkedProject: ProjectInterface;
+  forkedProject: ProjectInterface | null;
 }

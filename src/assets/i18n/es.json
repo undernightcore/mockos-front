@@ -16,7 +16,8 @@
     "MEMBER": "Miembro",
     "PENDING": "Pendiente",
     "YET": "Aún",
-    "UPDATED": "Actualizado"
+    "UPDATED": "Actualizado",
+    "ORIGIN": "Origen"
   },
   "PAGES": {
     "HOME": {
@@ -60,7 +61,9 @@
       "NEW_CHANGES": "There are new changes for this response.",
       "LOCAL_CHANGES": "Cambios en local",
       "REMOTE_CHANGES": "Cambios en remoto",
-      "COMPARING_RESPONSES": "Comparando respuestas"
+      "COMPARING_RESPONSES": "Comparando respuestas",
+      "FORKING_PROJECT": "Estás haciendo una rama del proyecto. Serás el único miembro, pero funciona como cualquier otro projecto normal.",
+      "FORKED_FROM": "Rama de"
     },
     "MEMBERS": {
       "GO_BACK": "Volver al proyecto",

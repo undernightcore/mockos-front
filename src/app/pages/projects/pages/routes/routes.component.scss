@@ -32,6 +32,9 @@
 
         & > button {
           background-color: var(--alt-color);
+          img {
+            height: 18px;
+          }
         }
       }
 

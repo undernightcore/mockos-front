@@ -10,13 +10,14 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class ProjectModalComponent {
   projectForm = new FormGroup({
-    name: new FormControl(this.data?.name ?? '', Validators.required),
-    description: new FormControl(this.data?.description ?? ''),
+    name: new FormControl(this.data.project?.name ?? '', Validators.required),
+    description: new FormControl(this.data.project?.description ?? ''),
   });
 
   constructor(
     public dialogRef: MatDialogRef<ProjectModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data?: ProjectInterface
+    @Inject(MAT_DIALOG_DATA)
+    public data: { message?: string; project?: ProjectInterface }
   ) {}
 
   handleSave() {

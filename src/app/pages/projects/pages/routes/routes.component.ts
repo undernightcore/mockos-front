@@ -15,6 +15,9 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ResponsesService } from '../../../../services/responses.service';
 import { ResponseInterface } from '../../../../interfaces/response.interface';
 import { CreateResponseComponent } from './components/create-response/create-response.component';
+import { ProjectModalComponent } from '../../components/project-modal/project-modal.component';
+import { CreateProjectInterface } from '../../../../interfaces/create-project.interface';
+import { ProjectService } from '../../../../services/project.service';
 
 @Component({
   selector: 'app-routes',
@@ -40,6 +43,7 @@ export class RoutesComponent implements OnInit, OnDestroy {
 
   constructor(
     private routesService: RoutesService,
+    private projectsService: ProjectService,
     private responsesService: ResponsesService,
     private activatedRoute: ActivatedRoute,
     private translateService: TranslateService,
@@ -165,6 +169,33 @@ export class RoutesComponent implements OnInit, OnDestroy {
             this.openCreateModal(data);
           },
         });
+      });
+  }
+
+  openForkModal(project?: CreateProjectInterface) {
+    if (!this.projectId) return;
+    const message = this.translateService.instant(
+      'PAGES.ROUTES.FORKING_PROJECT'
+    );
+    this.dialogService
+      .open(ProjectModalComponent, {
+        data: { message, project },
+        closeOnNavigation: true,
+      })
+      .afterClosed()
+      .subscribe((newProject?: CreateProjectInterface) => {
+        if (!newProject) return;
+        this.projectsService
+          .forkProject(this.projectId!, newProject)
+          .subscribe({
+            next: (data) => {
+              openToast(data.message, 'success');
+              this.router.navigate(['/projects']);
+            },
+            error: () => {
+              this.openForkModal(newProject);
+            },
+          });
       });
   }
 

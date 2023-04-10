@@ -68,7 +68,7 @@ export class ProjectService {
 
   forkProject(projectId: number, data: CreateProjectInterface) {
     return this.httpClient.post<MessageInterface>(
-      `${environment.apiUrl}/projects/${projectId}/fork/`,
+      `${environment.apiUrl}/projects/${projectId}/fork`,
       data
     );
   }

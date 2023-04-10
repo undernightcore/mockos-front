@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../../services/project.service';
-import { ProjectInterface } from '../../interfaces/project.interface';
+import { ForkedProjectInterface } from '../../interfaces/project.interface';
 import { finalize, iif } from 'rxjs';
 import { ChoiceModalComponent } from '../../components/choice-modal/choice-modal.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -16,7 +16,7 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./projects.component.scss'],
 })
 export class ProjectsComponent implements OnInit {
-  projects?: ProjectInterface[];
+  projects?: ForkedProjectInterface[];
   maxProjects = 0;
   invitationNumber?: number;
   #isFetching = false;
@@ -33,7 +33,7 @@ export class ProjectsComponent implements OnInit {
     this.#getInvitationAmount();
   }
 
-  openDeleteModal(project: ProjectInterface) {
+  openDeleteModal(project: ForkedProjectInterface) {
     this.dialogService
       .open(ChoiceModalComponent, {
         data: {
@@ -57,9 +57,9 @@ export class ProjectsComponent implements OnInit {
       });
   }
 
-  openCreateModal(project?: ProjectInterface) {
+  openCreateModal(project?: ForkedProjectInterface) {
     this.dialogService
-      .open(ProjectModalComponent, { data: project })
+      .open(ProjectModalComponent, { data: { project } })
       .afterClosed()
       .subscribe((data: CreateProjectInterface | undefined) => {
         if (!data) return;
