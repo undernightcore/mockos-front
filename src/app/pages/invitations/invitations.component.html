@@ -19,6 +19,7 @@
   >
     <div class="invitations__body__items">
       <app-invitation-card
+        (deleted)="openRejectModal(invitation)"
         (selected)="openAcceptModal(invitation)"
         [invitation]="invitation"
         *ngFor="let invitation of invitations"

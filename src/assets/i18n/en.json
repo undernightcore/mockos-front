@@ -67,7 +67,9 @@
     },
     "MEMBERS": {
       "GO_BACK": "Return to project",
-      "INVITE_USER": "Invite user"
+      "INVITE_USER": "Invite user",
+      "LEAVE_PROJECT_TITLE": "Do you want to leave this project?",
+      "LEAVE_PROJECT_MESSAGE": "If you leave the project, you will have to be invited back to modify and use the mocks"
     },
     "INVITATIONS": {
       "GO_BACK": "Return to project list",
@@ -76,7 +78,9 @@
       "ACCEPT": "Click here to accept",
       "ACCEPT_TITLE": "Do you want to join {{project}}?",
       "ACCEPT_MESSAGE": "This action CAN BE reverted by simply leaving the project later",
-      "NOT_INVITED": "You have not been invited to any project"
+      "NOT_INVITED": "You have not been invited to any project",
+      "REJECT_TITLE": "Do you want to reject the invitation to {{project}}?",
+      "REJECT_MESSAGE": "If you change your mind they will have to invite you again"
     },
     "NOT_FOUND": {
       "PAGE_NOT_FOUND": "Page not found",

@@ -20,7 +20,14 @@ export class UserService {
 
   acceptInvitation(invitationId: number) {
     return this.httpClient.post<MessageInterface>(
-      `${environment.apiUrl}/invitations/${invitationId}`,
+      `${environment.apiUrl}/invitations/${invitationId}/accept`,
+      {}
+    );
+  }
+
+  rejectInvitation(invitationId: number) {
+    return this.httpClient.post<MessageInterface>(
+      `${environment.apiUrl}/invitations/${invitationId}/reject`,
       {}
     );
   }

@@ -52,6 +52,31 @@ export class InvitationsComponent implements OnInit {
       });
   }
 
+  openRejectModal(invitation: InvitationInterface) {
+    this.dialogService
+      .open(ChoiceModalComponent, {
+        data: {
+          title: this.translateService.instant(
+            'PAGES.INVITATIONS.REJECT_TITLE',
+            { project: invitation.project.name }
+          ),
+          message: this.translateService.instant(
+            'PAGES.INVITATIONS.REJECT_MESSAGE'
+          ),
+        },
+      })
+      .afterClosed()
+      .subscribe((reject) => {
+        if (!reject) return;
+        this.userService
+          .rejectInvitation(invitation.id)
+          .subscribe((message) => {
+            openToast(message.message, 'success');
+            this.getInvitationsList(1);
+          });
+      });
+  }
+
   getInvitationsList(page: number) {
     if (this.#isFetching) return;
     this.#isFetching = true;

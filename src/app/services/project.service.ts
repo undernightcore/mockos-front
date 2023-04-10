@@ -72,4 +72,11 @@ export class ProjectService {
       data
     );
   }
+
+  leaveProject(projectId: number) {
+    return this.httpClient.post<MessageInterface>(
+      `${environment.apiUrl}/projects/${projectId}/leave`,
+      undefined
+    );
+  }
 }
