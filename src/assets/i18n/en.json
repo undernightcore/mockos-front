@@ -16,7 +16,8 @@
     "MEMBER": "Member",
     "PENDING": "Pending",
     "YET": "Yet",
-    "UPDATED": "Updated"
+    "UPDATED": "Updated",
+    "ORIGIN": "Origin"
   },
   "PAGES": {
     "HOME": {
@@ -60,7 +61,9 @@
       "NEW_CHANGES": "There are new changes for this response.",
       "LOCAL_CHANGES": "Local changes",
       "REMOTE_CHANGES": "Remote changes",
-      "COMPARING_RESPONSES": "Comparing responses"
+      "COMPARING_RESPONSES": "Comparing responses",
+      "FORKING_PROJECT": "You are forking this project. You'll be the only member at first, but it works just like another project.",
+      "FORKED_FROM": "Forked from"
     },
     "MEMBERS": {
       "GO_BACK": "Return to project",

@@ -17,6 +17,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatBadgeModule } from '@angular/material/badge';
 import { InfiniteScrollModule } from '../../directives/infinite-scroll/infinite-scroll.module';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { InfiniteScrollModule } from '../../directives/infinite-scroll/infinite-
     MatInputModule,
     MatBadgeModule,
     InfiniteScrollModule,
+    MatChipsModule,
   ],
 })
 export class ProjectsModule {}

@@ -2,7 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { PaginatedResponseInterface } from '../interfaces/paginated-response.interface';
-import { ProjectInterface } from '../interfaces/project.interface';
+import {
+  ForkedProjectInterface,
+  ProjectInterface,
+} from '../interfaces/project.interface';
 import { CreateProjectInterface } from '../interfaces/create-project.interface';
 import { MessageInterface } from '../interfaces/message.interface';
 import { MemberInterface } from '../interfaces/member.interface';
@@ -14,12 +17,11 @@ export class ProjectService {
   constructor(private httpClient: HttpClient) {}
 
   getProjects(page = 1, perPage = 10) {
-    return this.httpClient.get<PaginatedResponseInterface<ProjectInterface>>(
-      `${environment.apiUrl}/projects`,
-      {
-        params: { page, perPage },
-      }
-    );
+    return this.httpClient.get<
+      PaginatedResponseInterface<ForkedProjectInterface>
+    >(`${environment.apiUrl}/projects`, {
+      params: { page, perPage },
+    });
   }
 
   getMemberList(projectId: number, page = 1, perPage = 10) {
@@ -61,6 +63,13 @@ export class ProjectService {
     return this.httpClient.post<MessageInterface>(
       `${environment.apiUrl}/projects/${projectId}/invite/${email}`,
       undefined
+    );
+  }
+
+  forkProject(projectId: number, data: CreateProjectInterface) {
+    return this.httpClient.post<MessageInterface>(
+      `${environment.apiUrl}/projects/${projectId}/fork`,
+      data
     );
   }
 }

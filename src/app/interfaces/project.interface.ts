@@ -5,3 +5,7 @@ export interface ProjectInterface {
   created_at: string;
   updated_at: string;
 }
+
+export interface ForkedProjectInterface extends ProjectInterface {
+  forkedProject: ProjectInterface | null;
+}

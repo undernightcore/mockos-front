@@ -1,7 +1,18 @@
 <div *ngIf="project" class="project-card">
   <img src="assets/icons/drop.svg" />
   <div [routerLink]="['/projects', project.id]">
-    <h4>{{ project.name }}</h4>
+    <div>
+      <h4>{{ project.name }}</h4>
+      <div>
+        {{
+          project.forkedProject
+            ? ("PAGES.ROUTES.FORKED_FROM" | translate) +
+              " " +
+              project.forkedProject.name
+            : ("COMMON.ORIGIN" | translate)
+        }}
+      </div>
+    </div>
     <span>{{
       project.description ??
         ("PAGES.DASHBOARD.DESCRIPTION_NOT_FOUND" | translate)

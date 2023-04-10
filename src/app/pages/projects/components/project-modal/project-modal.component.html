@@ -1,16 +1,27 @@
 <h1 mat-dialog-title>
   {{
-    (data ? "PAGES.DASHBOARD.EDIT_PROJECT" : "PAGES.DASHBOARD.CREATE_PROJECT")
-      | translate
+    (data.project
+      ? "PAGES.DASHBOARD.EDIT_PROJECT"
+      : "PAGES.DASHBOARD.CREATE_PROJECT"
+    ) | translate
   }}
 </h1>
 <div mat-dialog-content>
+  <div class="message" *ngIf="data.message">{{ data.message }}</div>
   <form [formGroup]="projectForm">
     <mat-form-field>
-      <input [placeholder]="'COMMON.NAME' | translate" matInput formControlName="name">
+      <input
+        [placeholder]="'COMMON.NAME' | translate"
+        matInput
+        formControlName="name"
+      />
     </mat-form-field>
     <mat-form-field>
-      <input [placeholder]="'COMMON.DESCRIPTION' | translate" matInput formControlName="description">
+      <input
+        [placeholder]="'COMMON.DESCRIPTION' | translate"
+        matInput
+        formControlName="description"
+      />
     </mat-form-field>
   </form>
 </div>

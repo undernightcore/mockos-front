@@ -10,11 +10,22 @@
   }
   & > div {
     width: 100%;
-    & > h4 {
-      margin: 0;
+    & > div {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      & > h4 {
+        margin: 0;
+      }
+      & > div {
+        font-size: 12px;
+        background-color: var(--alt-color);
+        padding: 0 12px;
+        border-radius: 25px;
+      }
     }
     & > span {
-      color: lightblue;
+      color: var(--main-color);
     }
   }
   & > mat-icon {

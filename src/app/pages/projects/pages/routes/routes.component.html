@@ -9,6 +9,9 @@
         <button [routerLink]="['/projects', projectId, 'members']" mat-button>
           <mat-icon>person</mat-icon>
         </button>
+        <button (click)="openForkModal()" mat-button>
+          <img src="assets/icons/source-control.svg">
+        </button>
       </div>
       <div
         *ngIf="routes"
