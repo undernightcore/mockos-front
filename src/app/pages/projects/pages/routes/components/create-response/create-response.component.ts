@@ -28,6 +28,7 @@ import { CompareResponsesComponent } from '../compare-responses/compare-response
 export class CreateResponseComponent implements AfterViewInit, OnDestroy {
   @ViewChild('editor') editorElement!: ElementRef;
   editor?: JSONEditor;
+  selectedFile?: Blob;
   responseSubscription?: Subscription;
   newChanges = false;
 

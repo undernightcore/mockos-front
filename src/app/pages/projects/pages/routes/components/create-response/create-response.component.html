@@ -39,7 +39,16 @@
       {{ "PAGES.ROUTES.INVALID_JSON" | translate }}
     </div>
   </div>
-  <div class="main-content__editor" #editor></div>
+  <mat-tab-group>
+    <mat-tab label="JSON">
+      <div class="main-content__editor" #editor></div>
+    </mat-tab>
+    <mat-tab label="File">
+      <div class="main-content__upload">
+
+      </div>
+    </mat-tab>
+  </mat-tab-group>
 </div>
 <div mat-dialog-actions>
   <button (click)="dialogRef.close()" mat-button>
