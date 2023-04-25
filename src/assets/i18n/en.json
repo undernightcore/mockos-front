@@ -17,7 +17,9 @@
     "PENDING": "Pending",
     "YET": "Yet",
     "UPDATED": "Updated",
-    "ORIGIN": "Origin"
+    "ORIGIN": "Origin",
+    "FILE": "File",
+    "TEXT": "Text"
   },
   "PAGES": {
     "HOME": {
@@ -63,7 +65,8 @@
       "REMOTE_CHANGES": "Remote changes",
       "COMPARING_RESPONSES": "Comparing responses",
       "FORKING_PROJECT": "You are forking this project. You'll be the only member at first, but it works just like another project.",
-      "FORKED_FROM": "Forked from"
+      "FORKED_FROM": "Forked from",
+      "CLICK_TO_UPLOAD": "Click to upload file"
     },
     "MEMBERS": {
       "GO_BACK": "Return to project",

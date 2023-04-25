@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>
   {{
-    (data.responseData
+    (isEditing
       ? "PAGES.ROUTES.EDIT_RESPONSE"
       : "PAGES.ROUTES.CREATE_RESPONSE"
     ) | translate
@@ -39,22 +39,29 @@
       {{ "PAGES.ROUTES.INVALID_JSON" | translate }}
     </div>
   </div>
-  <mat-tab-group>
-    <mat-tab label="JSON">
+  <mat-tab-group [(selectedIndex)]="selectedTab" (selectedIndexChange)="handleTabChange()">
+    <mat-tab [label]="'COMMON.TEXT' | translate">
       <div class="main-content__editor" #editor></div>
     </mat-tab>
-    <mat-tab label="File">
-      <div class="main-content__upload">
-
+    <mat-tab [label]="'COMMON.FILE' | translate">
+      <input
+        (change)="selectedFile = fileInput.files?.item(0) ?? undefined"
+        #fileInput
+        [style.display]="'none'"
+        type="file"
+      />
+      <div (click)="fileInput.click()" class="main-content__upload">
+        <mat-icon>upload</mat-icon>
+        <h4>{{ selectedFile?.name ?? fileInBack ?? "PAGES.ROUTES.CLICK_TO_UPLOAD" | translate }}</h4>
       </div>
     </mat-tab>
   </mat-tab-group>
 </div>
 <div mat-dialog-actions>
-  <button (click)="dialogRef.close()" mat-button>
+  <button [disabled]="saving" (click)="dialogRef.close()" mat-button>
     {{ "ACTIONS.CANCEL" | translate }}
   </button>
-  <button (click)="handleSave()" mat-button>
-    {{ (data.responseData ? "ACTIONS.UPDATE" : "ACTIONS.CREATE") | translate }}
+  <button [disabled]="saving" (click)="handleSave()" mat-button>
+    {{ (isEditing ? "ACTIONS.UPDATE" : "ACTIONS.CREATE") | translate }}
   </button>
 </div>

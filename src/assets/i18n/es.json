@@ -17,7 +17,9 @@
     "PENDING": "Pendiente",
     "YET": "Aún",
     "UPDATED": "Actualizado",
-    "ORIGIN": "Origen"
+    "ORIGIN": "Origen",
+    "FILE": "Archivo",
+    "TEXT": "Texto"
   },
   "PAGES": {
     "HOME": {
@@ -63,7 +65,8 @@
       "REMOTE_CHANGES": "Cambios en remoto",
       "COMPARING_RESPONSES": "Comparando respuestas",
       "FORKING_PROJECT": "Estás haciendo una rama del proyecto. Serás el único miembro, pero funciona como cualquier otro projecto normal.",
-      "FORKED_FROM": "Rama de"
+      "FORKED_FROM": "Rama de",
+      "CLICK_TO_UPLOAD": "Haz click para subir un archivo"
     },
     "MEMBERS": {
       "GO_BACK": "Volver al proyecto",
