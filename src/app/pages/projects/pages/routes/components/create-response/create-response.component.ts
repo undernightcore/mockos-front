@@ -15,10 +15,11 @@ import { ResponseModalDataInterface } from './interfaces/response-modal-data.int
 import { CreateResponseInterface } from '../../../../../../interfaces/create-response.interface';
 import { DialogRef } from '@angular/cdk/dialog';
 import { openToast } from '../../../../../../utils/toast.utils';
-import { iif, Subscription } from 'rxjs';
+import { finalize, iif, Subscription } from 'rxjs';
 import { RealtimeService } from '../../../../../../services/realtime.service';
 import { TranslateService } from '@ngx-translate/core';
 import { CompareResponsesComponent } from '../compare-responses/compare-responses.component';
+import { CreateResponseWithFileModel } from '../../../../../../models/create-response-with-file.model';
 
 @Component({
   selector: 'app-create-response',
@@ -31,14 +32,21 @@ export class CreateResponseComponent implements AfterViewInit, OnDestroy {
   responseSubscription?: Subscription;
   newChanges = false;
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: ResponseModalDataInterface,
-    public dialogRef: DialogRef,
-    private responsesService: ResponsesService,
-    private realtimeService: RealtimeService,
-    private translateService: TranslateService,
-    private dialogService: MatDialog
-  ) {}
+  get isEditing() {
+    return Boolean(this.data.responseData);
+  }
+  get fileInBack() {
+    return this.data.responseData?.is_file
+      ? this.data.responseData?.body
+      : undefined;
+  }
+  get fileMode() {
+    return this.selectedTab === 1 && (this.selectedFile || this.fileInBack);
+  }
+  selectedTab = this.fileInBack ? 1 : 0;
+  selectedFile = this.data.selectedFile;
+
+  saving = false;
 
   responseForm = new FormGroup({
     name: new FormControl(this.data.responseData?.name ?? 'Default', [
@@ -49,11 +57,21 @@ export class CreateResponseComponent implements AfterViewInit, OnDestroy {
       Validators.min(100),
       Validators.max(599),
     ]),
-    body: new FormControl(this.data.responseData?.body ?? '{}', [
-      jsonValidator,
-    ]),
+    body: new FormControl(
+      this.fileInBack ? '{}' : this.data.responseData?.body,
+      [jsonValidator]
+    ),
     enabled: new FormControl(this.data.responseData?.enabled ?? true),
   });
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: ResponseModalDataInterface,
+    public dialogRef: DialogRef,
+    private responsesService: ResponsesService,
+    private realtimeService: RealtimeService,
+    private translateService: TranslateService,
+    private dialogService: MatDialog
+  ) {}
 
   ngAfterViewInit() {
     this.editor = new JSONEditor(this.editorElement.nativeElement, {
@@ -73,27 +91,45 @@ export class CreateResponseComponent implements AfterViewInit, OnDestroy {
   }
 
   handleSave() {
-    if (this.responseForm.invalid) return;
+    if (this.responseForm.invalid && this.selectedTab === 0) return;
+    const body =
+      this.selectedTab === 1
+        ? new CreateResponseWithFileModel(
+            this.responseForm.value as CreateResponseInterface,
+            this.selectedFile
+          ).formData
+        : (this.responseForm.value as CreateResponseInterface);
+    this.saving = true;
     iif(
       () => Boolean(this.data.responseData),
       this.responsesService.editResponse(
         this.data.responseData?.id as number,
-        this.responseForm.value as CreateResponseInterface
+        body,
+        this.selectedTab === 1
       ),
       this.responsesService.createResponse(
         this.data.routeId,
-        this.responseForm.value as CreateResponseInterface
+        body,
+        this.selectedTab === 1
       )
-    ).subscribe({
-      next: (response) => {
-        openToast(response.message, 'success');
-        this.dialogRef.close();
-      },
-      error: (error) => {
-        if (error.status !== 404) return;
-        this.#changeToCreateUnexpectedly();
-      },
-    });
+    )
+      .pipe(finalize(() => (this.saving = false)))
+      .subscribe({
+        next: (response) => {
+          openToast(response.message, 'success');
+          this.dialogRef.close();
+        },
+        error: (error) => {
+          if (error.status !== 404) return;
+          this.#changeToCreateUnexpectedly();
+        },
+      });
+  }
+
+  handleTabChange() {
+    this.selectedFile = undefined;
+    // TODO: Force editor resizing, should get better solution
+    this.editor?.validate();
   }
 
   compareChanges() {
@@ -107,8 +143,12 @@ export class CreateResponseComponent implements AfterViewInit, OnDestroy {
         routeId: this.data.routeId,
         responseData: {
           ...this.data.responseData,
-          ...this.responseForm.value,
+          is_file: this.fileMode,
+          body: this.fileMode
+            ? this.selectedFile?.name ?? this.fileInBack
+            : this.responseForm.value.body,
         },
+        selectedFile: this.selectedFile,
       },
     });
   }

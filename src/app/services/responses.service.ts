@@ -25,17 +25,27 @@ export class ResponsesService {
     );
   }
 
-  createResponse(routeId: number, data: CreateResponseInterface) {
+  createResponse(
+    routeId: number,
+    data: CreateResponseInterface | FormData,
+    isFile: boolean
+  ) {
     return this.httpClient.post<MessageInterface>(
       `${environment.apiUrl}/routes/${routeId}/responses`,
-      data
+      data,
+      isFile ? { params: { isFile } } : undefined
     );
   }
 
-  editResponse(responseId: number, data: CreateResponseInterface) {
+  editResponse(
+    responseId: number,
+    data: CreateResponseInterface | FormData,
+    isFile: boolean
+  ) {
     return this.httpClient.put<MessageInterface>(
       `${environment.apiUrl}/responses/${responseId}`,
-      data
+      data,
+      isFile ? { params: { isFile } } : undefined
     );
   }
 

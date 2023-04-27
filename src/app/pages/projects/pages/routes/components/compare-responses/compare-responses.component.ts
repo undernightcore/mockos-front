@@ -26,10 +26,22 @@ import { CreateResponseComponent } from '../create-response/create-response.comp
 export class CompareResponsesComponent implements AfterViewInit, OnDestroy {
   localChanges: ResponseInterface;
   localEditor?: JSONEditor;
+  localFile? = this.data.selectedFile;
+  get localFileName() {
+    return (
+      this.localFile?.name ??
+      (this.data.responseData?.is_file
+        ? this.data.responseData.body
+        : undefined)
+    );
+  }
   @ViewChild('localEditor') localEditorElement!: ElementRef;
 
   originChanges?: ResponseInterface;
   originEditor?: JSONEditor;
+  get originFileName() {
+    return this.originChanges?.is_file ? this.originChanges.body : undefined;
+  }
   @ViewChild('originEditor') originEditorElement!: ElementRef;
 
   intervalSubscription?: Subscription;
@@ -63,16 +75,34 @@ export class CompareResponsesComponent implements AfterViewInit, OnDestroy {
     this.#getResponse();
   }
 
-  selectResponse(response: ResponseInterface) {
+  keepLocal() {
+    if (!this.originChanges) return;
+    this.#returnToResponseModal({
+      routeId: this.data.routeId,
+      responseData: {
+        ...this.data.responseData,
+        ...this.localChanges,
+        ...(this.localFile ? { body: this.originFileName, is_file: true } : {}),
+      },
+      selectedFile: this.localFile,
+    });
+  }
+
+  keepOrigin() {
+    if (!this.originChanges) return;
+    this.#returnToResponseModal({
+      routeId: this.data.routeId,
+      responseData: { ...this.data.responseData, ...this.originChanges },
+    });
+  }
+
+  #returnToResponseModal(state: ResponseModalDataInterface) {
     this.dialogRef.close();
     this.dialogService.open(CreateResponseComponent, {
       height: '90%',
       width: '70%',
-      data: {
-        closeOnNavigation: true,
-        routeId: this.data.routeId,
-        responseData: { ...this.data.responseData, ...response },
-      },
+      closeOnNavigation: true,
+      data: state,
     });
   }
 

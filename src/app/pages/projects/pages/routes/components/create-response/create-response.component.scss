@@ -14,8 +14,24 @@
     width: 100%;
   }
 
-  &__editor {
+  &__editor, &__upload {
     height: 100%;
+  }
+
+  &__upload {
+    cursor: pointer;
+    display: flex;
+    gap: 12px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    & > mat-icon {
+      color: var(--main-color);
+      height: 52px;
+      width: 52px;
+      font-size: 52px;
+    }
   }
 
   &__form {
@@ -39,6 +55,15 @@
 
       & > button {
         background-color: var(--alt-color);
+      }
+    }
+  }
+
+  & > mat-tab-group {
+    height: 100%;
+    &::ng-deep {
+      .mat-tab-body-wrapper {
+        height: 100%;
       }
     }
   }
