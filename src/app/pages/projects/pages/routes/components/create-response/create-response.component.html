@@ -33,7 +33,7 @@
       </button>
     </div>
     <div
-      *ngIf="responseForm.controls.body.invalid"
+      *ngIf="responseForm.controls.body.invalid && selectedTab === 0"
       class="main-content__form__alert"
     >
       {{ "PAGES.ROUTES.INVALID_JSON" | translate }}

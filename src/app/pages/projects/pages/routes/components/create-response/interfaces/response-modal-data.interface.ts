@@ -3,4 +3,5 @@ import { ResponseInterface } from '../../../../../../../interfaces/response.inte
 export interface ResponseModalDataInterface {
   routeId: number;
   responseData?: ResponseInterface;
+  selectedFile?: File;
 }

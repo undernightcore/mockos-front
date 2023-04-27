@@ -35,11 +35,16 @@ export class CreateResponseComponent implements AfterViewInit, OnDestroy {
   get isEditing() {
     return Boolean(this.data.responseData);
   }
-  fileInBack = this.data.responseData?.is_file
-    ? this.data.responseData?.body
-    : undefined;
+  get fileInBack() {
+    return this.data.responseData?.is_file
+      ? this.data.responseData?.body
+      : undefined;
+  }
+  get fileMode() {
+    return this.selectedTab === 1 && (this.selectedFile || this.fileInBack);
+  }
   selectedTab = this.fileInBack ? 1 : 0;
-  selectedFile?: File;
+  selectedFile = this.data.selectedFile;
 
   saving = false;
 
@@ -53,9 +58,7 @@ export class CreateResponseComponent implements AfterViewInit, OnDestroy {
       Validators.max(599),
     ]),
     body: new FormControl(
-      this.fileInBack || !this.data.responseData
-        ? '{}'
-        : this.data.responseData.body,
+      this.fileInBack ? '{}' : this.data.responseData?.body,
       [jsonValidator]
     ),
     enabled: new FormControl(this.data.responseData?.enabled ?? true),
@@ -88,7 +91,7 @@ export class CreateResponseComponent implements AfterViewInit, OnDestroy {
   }
 
   handleSave() {
-    if (this.responseForm.invalid) return;
+    if (this.responseForm.invalid && this.selectedTab === 0) return;
     const body =
       this.selectedTab === 1
         ? new CreateResponseWithFileModel(
@@ -140,8 +143,12 @@ export class CreateResponseComponent implements AfterViewInit, OnDestroy {
         routeId: this.data.routeId,
         responseData: {
           ...this.data.responseData,
-          ...this.responseForm.value,
+          is_file: this.fileMode,
+          body: this.fileMode
+            ? this.selectedFile?.name ?? this.fileInBack
+            : this.responseForm.value.body,
         },
+        selectedFile: this.selectedFile,
       },
     });
   }
@@ -162,7 +169,6 @@ export class CreateResponseComponent implements AfterViewInit, OnDestroy {
   #changeToCreateUnexpectedly() {
     this.responseSubscription?.unsubscribe();
     this.data.responseData = undefined;
-    this.fileInBack = undefined;
     openToast(
       this.translateService.instant(
         'PAGES.ROUTES.RESPONSE_UNEXPECTEDLY_DELETED'

@@ -60,7 +60,7 @@
       "CREATE_RESPONSE": "Crear respuesta",
       "EDIT_RESPONSE": "Editar respuesta",
       "RESPONSE_UNEXPECTEDLY_DELETED": "La respuesta que estabas editando ha sido eliminada... Ahora es como si la estuvieras creando",
-      "NEW_CHANGES": "There are new changes for this response.",
+      "NEW_CHANGES": "Hay nuevos cambios para esta respuesta",
       "LOCAL_CHANGES": "Cambios en local",
       "REMOTE_CHANGES": "Cambios en remoto",
       "COMPARING_RESPONSES": "Comparando respuestas",

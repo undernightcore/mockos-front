@@ -28,6 +28,21 @@
       &__editor {
         height: 100%;
       }
+
+      &__upload {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+
+        & > mat-icon {
+          height: 52px;
+          width: 52px;
+          font-size: 52px;
+        }
+      }
     }
   }
 }

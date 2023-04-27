@@ -8,9 +8,17 @@
         {{ "PAGES.ROUTES.LOCAL_CHANGES" | translate }}
       </div>
       <div
+        [style.display]="localFileName ? 'none' : ''"
         class="compare-responses__content__column__editor"
         #localEditor
       ></div>
+      <div
+        *ngIf="localFileName"
+        class="compare-responses__content__column__upload"
+      >
+        <mat-icon>upload</mat-icon>
+        <h4>{{ localFileName }}</h4>
+      </div>
     </div>
     <div class="compare-responses__content__column">
       <div class="compare-responses__content__column__info">
@@ -20,16 +28,27 @@
         >
       </div>
       <div
+        [style.display]="originFileName ? 'none' : ''"
         class="compare-responses__content__column__editor"
         #originEditor
       ></div>
+      <div
+        *ngIf="originFileName"
+        class="compare-responses__content__column__upload"
+      >
+        <mat-icon>upload</mat-icon>
+        <h4>{{ originFileName }}</h4>
+      </div>
     </div>
   </div>
   <div *ngIf="originChanges" mat-dialog-actions>
-    <button mat-button (click)="selectResponse(localChanges)">
+    <button
+      mat-button
+      (click)="keepLocal()"
+    >
       {{ "ACTIONS.KEEP_LEFT" | translate }}
     </button>
-    <button mat-button (click)="selectResponse(originChanges)">
+    <button mat-button (click)="keepOrigin()">
       {{ "ACTIONS.KEEP_RIGHT" | translate }}
     </button>
   </div>
