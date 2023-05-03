@@ -66,7 +66,10 @@
       "COMPARING_RESPONSES": "Comparando respuestas",
       "FORKING_PROJECT": "Estás haciendo una rama del proyecto. Serás el único miembro, pero funciona como cualquier otro projecto normal.",
       "FORKED_FROM": "Rama de",
-      "CLICK_TO_UPLOAD": "Haz click para subir un archivo"
+      "CLICK_TO_UPLOAD": "Haz click para subir un archivo",
+      "INTEGRATE": "Integrar con tu proyecto",
+      "YOUR_PROJECT_ID": "Tu ID de proyecto",
+      "YOUR_TOKEN": "Tu token"
     },
     "MEMBERS": {
       "GO_BACK": "Volver al proyecto",

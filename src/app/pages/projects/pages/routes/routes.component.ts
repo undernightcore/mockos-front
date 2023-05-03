@@ -175,7 +175,11 @@ export class RoutesComponent implements OnInit, OnDestroy {
 
   openCodeModal(projectId?: number) {
     if (!projectId) return;
-    this.dialogService.open(CodeInfoComponent, { data: projectId });
+    this.dialogService.open(CodeInfoComponent, {
+      data: projectId,
+      height: '80%',
+      width: '70%',
+    });
   }
 
   openForkModal(project?: CreateProjectInterface) {
