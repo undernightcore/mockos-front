@@ -25,9 +25,10 @@ import { ResponseListItemComponent } from './components/response-list-item/respo
 import { CreateResponseComponent } from './components/create-response/create-response.component';
 import { CompareResponsesComponent } from './components/compare-responses/compare-responses.component';
 import { MatTabsModule } from "@angular/material/tabs";
+import { CodeInfoComponent } from './components/code-info/code-info.component';
 
 @NgModule({
-  declarations: [RoutesComponent, RouteListItemComponent, CreateRouteComponent, ResponseListItemComponent, CreateResponseComponent, CompareResponsesComponent],
+  declarations: [RoutesComponent, RouteListItemComponent, CreateRouteComponent, ResponseListItemComponent, CreateResponseComponent, CompareResponsesComponent, CodeInfoComponent],
   imports: [
     CommonModule,
     RoutesRoutingModule,

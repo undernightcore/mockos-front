@@ -12,6 +12,9 @@
         <button (click)="openForkModal()" mat-button>
           <img src="assets/icons/source-control.svg">
         </button>
+        <button (click)="openCodeModal(projectId)" mat-button>
+         <mat-icon>code</mat-icon>
+        </button>
       </div>
       <div
         *ngIf="routes"
