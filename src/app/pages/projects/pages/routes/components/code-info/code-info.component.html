@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>{{ "PAGES.ROUTES.INTEGRATE" | translate }}</h1>
+<div mat-dialog-content class="code-info">
+  <div class="code-info__section">
+    <h2>{{ "PAGES.ROUTES.YOUR_PROJECT_ID" | translate }}</h2>
+    <span>{{ projectId }}</span>
+  </div>
+  <div class="code-info__section">
+    <h2>
+      {{ "PAGES.ROUTES.YOUR_TOKEN" | translate }}
+      <mat-icon (click)="toggleVisibility()">{{
+        visible ? "visibility_off" : "visibility"
+      }}</mat-icon>
+    </h2>
+    <span>{{ visible ? token : "***********" }}</span>
+  </div>
+  <div class="code-info__section">
+    <mat-tab-group>
+      <mat-tab (click)="setFwkConf('angular')" label="Angular"></mat-tab>
+    </mat-tab-group>
+    <div #editor></div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button (click)="dialogRef.close()" mat-button>
+    {{ "ACTIONS.ACCEPT" | translate }}
+  </button>
+</div>

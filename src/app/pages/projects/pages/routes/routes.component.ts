@@ -18,6 +18,7 @@ import { CreateResponseComponent } from './components/create-response/create-res
 import { ProjectModalComponent } from '../../components/project-modal/project-modal.component';
 import { CreateProjectInterface } from '../../../../interfaces/create-project.interface';
 import { ProjectService } from '../../../../services/project.service';
+import { CodeInfoComponent } from './components/code-info/code-info.component';
 
 @Component({
   selector: 'app-routes',
@@ -170,6 +171,15 @@ export class RoutesComponent implements OnInit, OnDestroy {
           },
         });
       });
+  }
+
+  openCodeModal(projectId?: number) {
+    if (!projectId) return;
+    this.dialogService.open(CodeInfoComponent, {
+      data: projectId,
+      height: '80%',
+      width: '70%',
+    });
   }
 
   openForkModal(project?: CreateProjectInterface) {
