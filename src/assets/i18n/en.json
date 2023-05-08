@@ -107,6 +107,7 @@
     "UPDATE": "Update",
     "COMPARE_AND_SAVE": "Compare and save",
     "KEEP_LEFT": "Keep left",
-    "KEEP_RIGHT": "Keep right"
+    "KEEP_RIGHT": "Keep right",
+    "PRETTIFY_JSON": "Prettify JSON"
   }
 }
