@@ -1,9 +1,9 @@
-import { CreateResponseInterface } from '../interfaces/create-response.interface';
+import { CreateResponseModel } from './create-response.model';
 
 export class CreateResponseWithFileModel {
   formData = new FormData();
 
-  constructor(data: CreateResponseInterface, file?: File) {
+  constructor(data: CreateResponseModel, file?: File) {
     if (file) this.formData.append('body', file);
     this.formData.append('name', data.name);
     this.formData.append('status', String(data.status));

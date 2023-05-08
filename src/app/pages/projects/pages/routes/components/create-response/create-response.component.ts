@@ -20,6 +20,7 @@ import { RealtimeService } from '../../../../../../services/realtime.service';
 import { TranslateService } from '@ngx-translate/core';
 import { CompareResponsesComponent } from '../compare-responses/compare-responses.component';
 import { CreateResponseWithFileModel } from '../../../../../../models/create-response-with-file.model';
+import { CreateResponseModel } from '../../../../../../models/create-response.model';
 
 @Component({
   selector: 'app-create-response',
@@ -58,8 +59,8 @@ export class CreateResponseComponent implements AfterViewInit, OnDestroy {
       Validators.max(599),
     ]),
     body: new FormControl(
-      this.fileInBack ? '{}' : this.data.responseData?.body,
-      [jsonValidator]
+      this.fileInBack ? '{}' : this.data.responseData?.body ?? '{}',
+      [Validators.required, jsonValidator]
     ),
     enabled: new FormControl(this.data.responseData?.enabled ?? true),
   });
@@ -95,10 +96,14 @@ export class CreateResponseComponent implements AfterViewInit, OnDestroy {
     const body =
       this.selectedTab === 1
         ? new CreateResponseWithFileModel(
-            this.responseForm.value as CreateResponseInterface,
+            new CreateResponseModel(
+              this.responseForm.value as CreateResponseInterface
+            ),
             this.selectedFile
           ).formData
-        : (this.responseForm.value as CreateResponseInterface);
+        : new CreateResponseModel(
+            this.responseForm.value as CreateResponseInterface
+          );
     this.saving = true;
     iif(
       () => Boolean(this.data.responseData),
