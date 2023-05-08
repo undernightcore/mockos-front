@@ -1,9 +1,7 @@
 <h1 mat-dialog-title>
   {{
-    (isEditing
-      ? "PAGES.ROUTES.EDIT_RESPONSE"
-      : "PAGES.ROUTES.CREATE_RESPONSE"
-    ) | translate
+    (isEditing ? "PAGES.ROUTES.EDIT_RESPONSE" : "PAGES.ROUTES.CREATE_RESPONSE")
+      | translate
   }}
 </h1>
 <div class="main-content" mat-dialog-content>
@@ -39,8 +37,11 @@
       {{ "PAGES.ROUTES.INVALID_JSON" | translate }}
     </div>
   </div>
-  <mat-tab-group [(selectedIndex)]="selectedTab" (selectedIndexChange)="handleTabChange()">
-    <mat-tab [label]="'COMMON.TEXT' | translate">
+  <mat-tab-group
+    [(selectedIndex)]="selectedTab"
+    (selectedIndexChange)="handleTabChange()"
+  >
+    <mat-tab label="JSON">
       <div class="main-content__editor" #editor></div>
     </mat-tab>
     <mat-tab [label]="'COMMON.FILE' | translate">
@@ -52,16 +53,31 @@
       />
       <div (click)="fileInput.click()" class="main-content__upload">
         <mat-icon>upload</mat-icon>
-        <h4>{{ selectedFile?.name ?? fileInBack ?? "PAGES.ROUTES.CLICK_TO_UPLOAD" | translate }}</h4>
+        <h4>
+          {{
+            selectedFile?.name ?? fileInBack ?? "PAGES.ROUTES.CLICK_TO_UPLOAD"
+              | translate
+          }}
+        </h4>
       </div>
     </mat-tab>
   </mat-tab-group>
 </div>
-<div mat-dialog-actions>
-  <button [disabled]="saving" (click)="dialogRef.close()" mat-button>
-    {{ "ACTIONS.CANCEL" | translate }}
-  </button>
-  <button [disabled]="saving" (click)="handleSave()" mat-button>
-    {{ (isEditing ? "ACTIONS.UPDATE" : "ACTIONS.CREATE") | translate }}
+<div class="actions" mat-dialog-actions>
+  <div>
+    <button [disabled]="saving" (click)="dialogRef.close()" mat-button>
+      {{ "ACTIONS.CANCEL" | translate }}
+    </button>
+    <button [disabled]="saving" (click)="handleSave()" mat-button>
+      {{ (isEditing ? "ACTIONS.UPDATE" : "ACTIONS.CREATE") | translate }}
+    </button>
+  </div>
+  <button
+    [disabled]="responseForm.controls.body.invalid"
+    *ngIf="this.selectedTab === 0"
+    mat-button
+    (click)="prettifyJson()"
+  >
+    Prettify JSON
   </button>
 </div>

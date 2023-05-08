@@ -21,6 +21,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { CompareResponsesComponent } from '../compare-responses/compare-responses.component';
 import { CreateResponseWithFileModel } from '../../../../../../models/create-response-with-file.model';
 import { CreateResponseModel } from '../../../../../../models/create-response.model';
+import { prettifyJson } from '../../../../../../utils/string.utils';
 
 @Component({
   selector: 'app-create-response',
@@ -42,7 +43,9 @@ export class CreateResponseComponent implements AfterViewInit, OnDestroy {
       : undefined;
   }
   get fileMode() {
-    return this.selectedTab === 1 && (this.selectedFile || this.fileInBack);
+    return (
+      this.selectedTab === 1 && Boolean(this.selectedFile || this.fileInBack)
+    );
   }
   selectedTab = this.fileInBack ? 1 : 0;
   selectedFile = this.data.selectedFile;
@@ -156,6 +159,13 @@ export class CreateResponseComponent implements AfterViewInit, OnDestroy {
         selectedFile: this.selectedFile,
       },
     });
+  }
+
+  prettifyJson() {
+    this.responseForm.controls.body.setValue(
+      prettifyJson(this.responseForm.value.body as string)
+    );
+    this.editor?.setText(prettifyJson(this.responseForm.value.body as string));
   }
 
   #listenToChanges() {
