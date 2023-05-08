@@ -19,6 +19,7 @@ import { ProjectModalComponent } from '../../components/project-modal/project-mo
 import { CreateProjectInterface } from '../../../../interfaces/create-project.interface';
 import { ProjectService } from '../../../../services/project.service';
 import { CodeInfoComponent } from './components/code-info/code-info.component';
+import { ResponseModel } from '../../../../models/response.model';
 
 @Component({
   selector: 'app-routes',
@@ -27,7 +28,7 @@ import { CodeInfoComponent } from './components/code-info/code-info.component';
 })
 export class RoutesComponent implements OnInit, OnDestroy {
   routes?: RouteInterface[];
-  responses?: ResponseInterface[];
+  responses?: ResponseModel[];
 
   maxRoutes = 0;
   maxResponses = 0;
