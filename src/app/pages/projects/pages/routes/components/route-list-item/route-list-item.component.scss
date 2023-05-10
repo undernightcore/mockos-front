@@ -27,6 +27,12 @@
     margin-bottom: 0;
   }
 
+  & > p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 52px;
+  }
+
   &__placeholder {
     height: 77px;
     background-color: lightgray;
