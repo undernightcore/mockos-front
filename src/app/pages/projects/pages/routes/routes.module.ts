@@ -27,6 +27,7 @@ import { CompareResponsesComponent } from './components/compare-responses/compar
 import { MatTabsModule } from '@angular/material/tabs';
 import { CodeInfoComponent } from './components/code-info/code-info.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { RouteInfoComponent } from './components/route-info/route-info.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { MatMenuModule } from '@angular/material/menu';
     CreateResponseComponent,
     CompareResponsesComponent,
     CodeInfoComponent,
+    RouteInfoComponent,
   ],
   imports: [
     CommonModule,

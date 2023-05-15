@@ -1,0 +1,79 @@
+<div
+  [formGroup]="routeForm"
+  *ngIf="routeForm"
+  class="route-info"
+>
+  <div class="route-info__info">
+    <div>
+      <mat-form-field *ngIf="isEditingTitle" appearance="fill">
+        <input formControlName="name" matInput />
+      </mat-form-field>
+      <h1 *ngIf="!isEditingTitle">{{ routeForm.value.name }}</h1>
+      <app-http-chip
+        [method]="routeForm.value.method"
+        [matMenuTriggerFor]="methodMenu"
+      ></app-http-chip>
+      <mat-menu #methodMenu="matMenu">
+        <button (click)="selectMethod('get')" mat-menu-item>get</button>
+        <button (click)="selectMethod('post')" mat-menu-item>post</button>
+        <button (click)="selectMethod('put')" mat-menu-item>put</button>
+        <button (click)="selectMethod('patch')" mat-menu-item>
+          patch
+        </button>
+        <button (click)="selectMethod('delete')" mat-menu-item>
+          delete
+        </button>
+      </mat-menu>
+      <mat-icon
+        (click)="
+                isEditingTitle ? updateRoute() : (isEditingTitle = true)
+              "
+      >{{ isEditingTitle ? "save" : "edit" }}</mat-icon
+      >
+      <mat-icon (click)="openDeleteModal(routeForm.value)"
+      >delete</mat-icon
+      >
+    </div>
+    <mat-slide-toggle
+      (change)="updateRoute()"
+      formControlName="enabled"
+    ></mat-slide-toggle>
+  </div>
+  <mat-form-field>
+    <input (blur)="updateRoute()" formControlName="endpoint" matInput />
+  </mat-form-field>
+  <div class="route-info__title">
+    <h2>{{ "PAGES.ROUTES.RESPONSES" | translate }}</h2>
+    <button (click)="openCreateResponseModal()" mat-button>
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <div
+    *ngIf="responses"
+    infiniteScroll
+    [maxItems]="maxResponses"
+    [currentItems]="responses.length"
+    [itemsPerPage]="20"
+    (newPageNeeded)="getResponses($event)"
+    class="route-info__responses"
+  >
+    <div
+      class="route-info__responses__grid"
+      *ngIf="responses.length"
+    >
+      <app-response-list-item
+        (select)="openCreateResponseModal(response)"
+        (delete)="openDeleteResponseModal(response)"
+        [response]="response"
+        *ngFor="let response of responses"
+      ></app-response-list-item>
+    </div>
+    <div
+      class="route-info__responses__empty"
+      *ngIf="!responses.length"
+    >
+      <img src="assets/images/undraw_drink_coffee_0asa.svg" />
+      <h3>{{ "PAGES.ROUTES.RESPONSES_NOT_FOUND" | translate }}</h3>
+    </div>
+  </div>
+</div>

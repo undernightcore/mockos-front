@@ -35,85 +35,11 @@
       </div>
     </div>
     <div class="routes__body__info">
-      <div
-        [formGroup]="selectedRoute"
+      <app-route-info
         *ngIf="selectedRoute"
-        class="routes__body__info__selected"
-      >
-        <div class="routes__body__info__selected__info">
-          <div>
-            <mat-form-field *ngIf="editingTitle" appearance="fill">
-              <input formControlName="name" matInput />
-            </mat-form-field>
-            <h1 *ngIf="!editingTitle">{{ selectedRoute.value.name }}</h1>
-            <app-http-chip
-              [method]="selectedRoute.value.method"
-              [matMenuTriggerFor]="methodMenu"
-            ></app-http-chip>
-            <mat-menu #methodMenu="matMenu">
-              <button (click)="selectMethod('get')" mat-menu-item>get</button>
-              <button (click)="selectMethod('post')" mat-menu-item>post</button>
-              <button (click)="selectMethod('put')" mat-menu-item>put</button>
-              <button (click)="selectMethod('patch')" mat-menu-item>
-                patch
-              </button>
-              <button (click)="selectMethod('delete')" mat-menu-item>
-                delete
-              </button>
-            </mat-menu>
-            <mat-icon
-              (click)="
-                editingTitle ? updateRoute() : (this.editingTitle = true)
-              "
-              >{{ editingTitle ? "save" : "edit" }}</mat-icon
-            >
-            <mat-icon (click)="openDeleteModal(selectedRoute.value)"
-              >delete</mat-icon
-            >
-          </div>
-          <mat-slide-toggle
-            (change)="updateRoute()"
-            formControlName="enabled"
-          ></mat-slide-toggle>
-        </div>
-        <mat-form-field>
-          <input (blur)="updateRoute()" formControlName="endpoint" matInput />
-        </mat-form-field>
-        <div class="routes__body__info__selected__title">
-          <h2>{{ "PAGES.ROUTES.RESPONSES" | translate }}</h2>
-          <button (click)="openCreateResponseModal()" mat-button>
-            <mat-icon>add</mat-icon>
-          </button>
-        </div>
-        <div
-          *ngIf="responses"
-          infiniteScroll
-          [maxItems]="maxResponses"
-          [currentItems]="responses.length"
-          [itemsPerPage]="20"
-          (newPageNeeded)="getResponses($event)"
-          class="routes__body__info__selected__responses"
-        >
-          <div
-            class="routes__body__info__selected__responses__grid"
-            *ngIf="responses.length"
-          >
-            <app-response-list-item
-              (select)="openCreateResponseModal(response)"
-              (delete)="openDeleteResponseModal(response)"
-              [response]="response"
-              *ngFor="let response of responses"
-            ></app-response-list-item>
-          </div>
-          <div
-            class="routes__body__info__selected__responses__empty"
-            *ngIf="!responses.length"
-          >
-            <img src="assets/images/undraw_drink_coffee_0asa.svg" />
-            <h3>{{ "PAGES.ROUTES.RESPONSES_NOT_FOUND" | translate }}</h3>
-          </div>
-        </div>
-      </div>
+        (updatedRoute)="updateRoute($event)"
+        [route]="selectedRoute"
+      ></app-route-info>
       <div *ngIf="!selectedRoute" class="routes__body__info__missing">
         <h4>{{ "PAGES.ROUTES.SELECT_ROUTE" | translate }}</h4>
       </div>
