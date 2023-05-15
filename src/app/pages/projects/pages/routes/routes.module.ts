@@ -24,11 +24,19 @@ import { InfiniteScrollModule } from '../../../../directives/infinite-scroll/inf
 import { ResponseListItemComponent } from './components/response-list-item/response-list-item.component';
 import { CreateResponseComponent } from './components/create-response/create-response.component';
 import { CompareResponsesComponent } from './components/compare-responses/compare-responses.component';
-import { MatTabsModule } from "@angular/material/tabs";
+import { MatTabsModule } from '@angular/material/tabs';
 import { CodeInfoComponent } from './components/code-info/code-info.component';
 
 @NgModule({
-  declarations: [RoutesComponent, RouteListItemComponent, CreateRouteComponent, ResponseListItemComponent, CreateResponseComponent, CompareResponsesComponent, CodeInfoComponent],
+  declarations: [
+    RoutesComponent,
+    RouteListItemComponent,
+    CreateRouteComponent,
+    ResponseListItemComponent,
+    CreateResponseComponent,
+    CompareResponsesComponent,
+    CodeInfoComponent,
+  ],
   imports: [
     CommonModule,
     RoutesRoutingModule,
@@ -49,7 +57,7 @@ import { CodeInfoComponent } from './components/code-info/code-info.component';
     ChoiceModalModule,
     DragDropModule,
     InfiniteScrollModule,
-    MatTabsModule
-  ]
+    MatTabsModule,
+  ],
 })
 export class RoutesModule {}
