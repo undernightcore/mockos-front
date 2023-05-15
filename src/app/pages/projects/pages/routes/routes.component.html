@@ -10,10 +10,10 @@
           <mat-icon>person</mat-icon>
         </button>
         <button (click)="openForkModal()" mat-button>
-          <img src="assets/icons/source-control.svg">
+          <img src="assets/icons/source-control.svg" />
         </button>
         <button (click)="openCodeModal(projectId)" mat-button>
-         <mat-icon>code</mat-icon>
+          <mat-icon>code</mat-icon>
         </button>
       </div>
       <div
@@ -42,10 +42,16 @@
       >
         <div class="routes__body__info__selected__info">
           <div>
-            <h2>{{ selectedRoute.value.name }}</h2>
+            <mat-form-field *ngIf="editingTitle" appearance="fill">
+              <input formControlName="name" matInput />
+            </mat-form-field>
+            <h1 *ngIf="!editingTitle">{{ selectedRoute.value.name }}</h1>
             <app-http-chip
               [method]="selectedRoute.value.method"
             ></app-http-chip>
+            <mat-icon (click)="editingTitle ? updateRoute() : this.editingTitle = true">{{
+              editingTitle ? "save" : "edit"
+            }}</mat-icon>
             <mat-icon (click)="openDeleteModal(selectedRoute.value)"
               >delete</mat-icon
             >

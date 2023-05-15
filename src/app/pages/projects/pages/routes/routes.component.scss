@@ -63,8 +63,24 @@
               cursor: pointer;
             }
 
-            & > h2 {
-              margin: 0;
+            & > h1 {
+              margin-bottom: 0;
+            }
+
+            & > mat-form-field {
+              width: 500px;
+              &::ng-deep {
+                .mat-form-field-infix {
+                  border-top: none;
+                }
+                .mat-form-field-wrapper {
+                  margin-bottom: -1.34em;
+                }
+              }
+              input {
+                font-size: 22px;
+                font-weight: 500;
+              }
             }
           }
         }

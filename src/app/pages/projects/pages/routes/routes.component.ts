@@ -35,6 +35,7 @@ export class RoutesComponent implements OnInit, OnDestroy {
 
   selectedRoute?: FormGroup;
   projectId?: number;
+  editingTitle = false;
 
   #isFetchingRoutes = false;
   #isFetchingResponses = false;
@@ -97,6 +98,7 @@ export class RoutesComponent implements OnInit, OnDestroy {
   }
 
   selectRoute(route: RouteInterface) {
+    this.editingTitle = false;
     this.#setRouteDataToForm(route);
     this.#listenToRouteChanges(route.id);
     this.getResponses(1);
@@ -124,6 +126,7 @@ export class RoutesComponent implements OnInit, OnDestroy {
 
   updateRoute() {
     if (!this.selectedRoute || this.selectedRoute.invalid) return;
+    this.editingTitle = false;
     this.routesService
       .editRoute(this.selectedRoute.value.id, this.selectedRoute.value)
       .subscribe({
