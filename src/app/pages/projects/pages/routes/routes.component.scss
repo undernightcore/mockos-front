@@ -66,6 +66,10 @@
             & > h1 {
               margin-bottom: 0;
             }
+            
+            & > app-http-chip {
+              cursor: pointer;
+            }
 
             & > mat-form-field {
               width: 500px;

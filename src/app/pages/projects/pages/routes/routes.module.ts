@@ -26,6 +26,7 @@ import { CreateResponseComponent } from './components/create-response/create-res
 import { CompareResponsesComponent } from './components/compare-responses/compare-responses.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CodeInfoComponent } from './components/code-info/code-info.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { CodeInfoComponent } from './components/code-info/code-info.component';
     DragDropModule,
     InfiniteScrollModule,
     MatTabsModule,
+    MatMenuModule,
   ],
 })
 export class RoutesModule {}
