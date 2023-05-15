@@ -48,10 +48,25 @@
             <h1 *ngIf="!editingTitle">{{ selectedRoute.value.name }}</h1>
             <app-http-chip
               [method]="selectedRoute.value.method"
+              [matMenuTriggerFor]="methodMenu"
             ></app-http-chip>
-            <mat-icon (click)="editingTitle ? updateRoute() : this.editingTitle = true">{{
-              editingTitle ? "save" : "edit"
-            }}</mat-icon>
+            <mat-menu #methodMenu="matMenu">
+              <button (click)="selectMethod('get')" mat-menu-item>get</button>
+              <button (click)="selectMethod('post')" mat-menu-item>post</button>
+              <button (click)="selectMethod('put')" mat-menu-item>put</button>
+              <button (click)="selectMethod('patch')" mat-menu-item>
+                patch
+              </button>
+              <button (click)="selectMethod('delete')" mat-menu-item>
+                delete
+              </button>
+            </mat-menu>
+            <mat-icon
+              (click)="
+                editingTitle ? updateRoute() : (this.editingTitle = true)
+              "
+              >{{ editingTitle ? "save" : "edit" }}</mat-icon
+            >
             <mat-icon (click)="openDeleteModal(selectedRoute.value)"
               >delete</mat-icon
             >

@@ -1,6 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RoutesService } from '../../../../services/routes.service';
-import { RouteInterface } from '../../../../interfaces/route.interface';
+import {
+  HttpMethods,
+  RouteInterface,
+} from '../../../../interfaces/route.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { openToast } from '../../../../utils/toast.utils';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -102,6 +105,11 @@ export class RoutesComponent implements OnInit, OnDestroy {
     this.#setRouteDataToForm(route);
     this.#listenToRouteChanges(route.id);
     this.getResponses(1);
+  }
+
+  selectMethod(method: HttpMethods) {
+    this.selectedRoute?.controls['method'].setValue(method);
+    this.updateRoute();
   }
 
   handleSort(event: CdkDragDrop<any>) {
