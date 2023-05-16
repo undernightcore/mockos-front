@@ -1,10 +1,10 @@
 <div class="home">
   <app-navbar></app-navbar>
-  <div class="home__banner">
-    <div>
-      <img src="assets/images/undraw_building_blocks_re_5ahy.svg" />
+  <div class="home__content">
+    <div class="home__content__section">
+      <img src="assets/icons/drop.svg" />
     </div>
-    <div>
+    <div class="home__content__section">
       <h1>
         {{ "COMMON.BUILD" | translate }}
         <span>{{ "COMMON.MOCKS" | translate }}</span>
@@ -21,6 +21,21 @@
       >
         {{ "ACTIONS.START_NOW" | translate }}
       </button>
+    </div>
+    <div class="home__content__row">
+      <div class="home__content__row__column">
+        <img src="assets/images/screenshots/edit-response.png" />
+      </div>
+      <div class="home__content__row__column">
+        <h1>
+          <span>Simple</span> yet <span>complete</span> way to mock
+          <span>JSON and File responses</span>
+        </h1>
+        <h3>
+          Allow to edit JSON with a simple and error proof editor. You also can
+          upload files of up to 8MB (configurable)
+        </h3>
+      </div>
     </div>
   </div>
 </div>
