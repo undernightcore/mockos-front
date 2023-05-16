@@ -1,0 +1,83 @@
+.route-info {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  box-sizing: border-box;
+  overflow: auto;
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    & > div {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+
+      & > mat-icon {
+        cursor: pointer;
+      }
+
+      & > h1 {
+        margin-bottom: 0;
+      }
+
+      & > app-http-chip {
+        cursor: pointer;
+      }
+
+      & > mat-form-field {
+        width: 500px;
+        &::ng-deep {
+          .mat-form-field-infix {
+            border-top: none;
+          }
+          .mat-form-field-wrapper {
+            margin-bottom: -1.34em;
+          }
+        }
+        input {
+          font-size: 22px;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+
+  &__title {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 12px;
+
+    & > h2 {
+      margin: 0;
+    }
+
+    & > button {
+      background-color: var(--alt-color);
+    }
+  }
+
+  &__responses {
+    height: 100%;
+    overflow: auto;
+    &__grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(2, 1fr);
+    }
+    &__empty {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+
+      & > img {
+        height: 200px;
+      }
+    }
+  }
+}
