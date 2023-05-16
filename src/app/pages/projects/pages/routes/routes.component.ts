@@ -98,7 +98,6 @@ export class RoutesComponent implements OnInit, OnDestroy {
   updateRoute(value: RouteInterface) {
     this.routesService.editRoute(value.id, value).subscribe({
       next: (newRoute) => {
-        this.selectedRoute = newRoute;
         openToast(
           this.translateService.instant('PAGES.ROUTES.UPDATED_SUCCESSFULLY', {
             route: newRoute.name,
