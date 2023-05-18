@@ -3,12 +3,13 @@
   class="response-card"
   [ngClass]="response.enabled ? 'enabled' : 'disabled'"
 >
-  <img (click)="select.emit()" src="assets/icons/drop.svg" />
-  <div (click)="select.emit()" class="response-card__info">
+  <img (click)="edit.emit()" src="assets/icons/drop.svg" />
+  <div (click)="edit.emit()" class="response-card__info">
     <h4>{{ response.name }}</h4>
     <span>{{ response.status }}</span>
   </div>
-  <div class="response-card__delete">
+  <div class="response-card__actions">
+    <mat-icon *ngIf="!response.enabled" (click)="select.emit()">swap_horiz</mat-icon>
     <mat-icon (click)="delete.emit()">delete</mat-icon>
   </div>
 </div>
