@@ -27,13 +27,9 @@
         <img src="assets/images/screenshots/edit-response.png" />
       </div>
       <div class="home__content__row__column">
-        <h1>
-          <span>Simple</span> yet <span>complete</span> way to mock
-          <span>JSON and File responses</span>
-        </h1>
+        <h1 [innerHTML]="'PAGES.HOME.SECTIONS.CREATE.TITLE' | translate"></h1>
         <h3>
-          Allow to edit JSON with a simple and error proof editor. You also can
-          upload files of up to 8MB (configurable)
+          {{ "PAGES.HOME.SECTIONS.CREATE.DESCRIPTION" | translate }}
         </h3>
       </div>
     </div>
@@ -42,14 +38,9 @@
         <img src="assets/images/gifs/comparing-responses.gif" />
       </div>
       <div class="home__content__row__column">
-        <h1>
-          <span>Truly reactive</span> and
-          <span>collaborative</span> functionality,
-          <span>no messy files involved</span>
-        </h1>
+        <h1 [innerHTML]="'PAGES.HOME.SECTIONS.COMPARE.TITLE' | translate"></h1>
         <h3>
-          There is not a need to share and maintain ugly config files anymore,
-          stay agile even when it comes to mocking APIs
+          {{ "PAGES.HOME.SECTIONS.COMPARE.DESCRIPTION" | translate }}
         </h3>
       </div>
     </div>
@@ -58,13 +49,9 @@
         <img src="assets/images/gifs/inviting-user.gif" />
       </div>
       <div class="home__content__row__column">
-        <h1>
-          <span>Invite your friends </span> to the party!
-          <span>They might not accept</span> your request tho...
-        </h1>
+        <h1 [innerHTML]="'PAGES.HOME.SECTIONS.INVITE.TITLE' | translate"></h1>
         <h3>
-          Mocking is tough, but way easier and funnier with friends and
-          colleagues! Make use of Mockos fully featured friends system!
+          {{ "PAGES.HOME.SECTIONS.INVITE.DESCRIPTION" | translate }}
         </h3>
       </div>
     </div>
@@ -73,13 +60,9 @@
         <img src="assets/images/gifs/forking-project.gif" />
       </div>
       <div class="home__content__row__column">
-        <h1>
-          <span>Not feeling social?</span> We got you covered! Just
-          <span>branch and work on your own</span>
-        </h1>
+        <h1 [innerHTML]="'PAGES.HOME.SECTIONS.BRANCH.TITLE' | translate"></h1>
         <h3>
-          Are you are introducing changes that might break someone's code?
-          Create a branch of the project and merge back when you are ready.
+          {{ "PAGES.HOME.SECTIONS.BRANCH.DESCRIPTION" | translate }}
         </h3>
       </div>
     </div>

@@ -67,11 +67,15 @@
           width: 70%;
           text-align: center;
         }
+        ::ng-deep {
+          h1 {
+            & > span {
+              color: var(--main-color);
+            }
+          }
+        }
 
         & > h1 {
-          & > span {
-            color: var(--main-color);
-          }
           font-family: var(--main-font);
           text-align: center;
         }

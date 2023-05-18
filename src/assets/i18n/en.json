@@ -25,7 +25,25 @@
     "HOME": {
       "FOR_YOUR_API": "for your API",
       "NO_CODE_NO_CONF": "without code or config files",
-      "DESCRIPTION": "Mockos is a useful and practical tool for developers looking to test their applications with custom API mocks, in a collaborative way and without the need to install anything on their computer."
+      "DESCRIPTION": "Mockos is a useful and practical tool for developers looking to test their applications with custom API mocks, in a collaborative way and without the need to install anything on their computer.",
+      "SECTIONS": {
+        "CREATE": {
+          "TITLE": "<span>Simple</span> yet <span>complete</span> way to mock <span>JSON and File responses</span>",
+          "DESCRIPTION": "Allow to edit JSON with a simple and error proof editor. You also can upload files of up to 8MB (configurable)"
+        },
+        "COMPARE": {
+          "TITLE": "<span>Truly reactive</span> and <span>collaborative</span> functionality, <span>no messy files involved</span>",
+          "DESCRIPTION": "There is not a need to share and maintain ugly config files anymore, stay agile even when it comes to mocking APIs"
+        },
+        "INVITE": {
+          "TITLE": "<span>Invite your friends</span> to the party! <span>They might not accept</span> your request tho...",
+          "DESCRIPTION": "Mocking is tough, but way easier and funnier with friends and colleagues! Make use of Mockos fully featured friends system!"
+        },
+        "BRANCH": {
+          "TITLE": "<span>Not feeling social?</span> We got you covered! Just <span>branch and work on your own</span>",
+          "DESCRIPTION": "Are you are introducing changes that might break someone's code? Create a branch of the project and merge back when you are ready."
+        }
+      }
     },
     "AUTH": {
       "LOG_IN": "Log in!",
