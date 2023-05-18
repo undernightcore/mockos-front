@@ -63,6 +63,18 @@ export class RouteInfoComponent {
     this.updateRoute();
   }
 
+  selectResponse(response: ResponseInterface) {
+    this.responsesService
+      .editResponse(
+        response.id,
+        { ...response, enabled: true },
+        response.is_file
+      )
+      .subscribe((result) => {
+        openToast(result.message, 'success');
+      });
+  }
+
   updateRoute() {
     if (!this.routeForm || this.routeForm.invalid) return;
     this.updatedRoute.emit(this.routeForm.value);
