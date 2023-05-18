@@ -1,10 +1,10 @@
 <div class="home">
   <app-navbar></app-navbar>
-  <div class="home__banner">
-    <div>
-      <img src="assets/images/undraw_building_blocks_re_5ahy.svg" />
+  <div class="home__content">
+    <div class="home__content__section">
+      <img src="assets/icons/drop.svg" />
     </div>
-    <div>
+    <div class="home__content__section">
       <h1>
         {{ "COMMON.BUILD" | translate }}
         <span>{{ "COMMON.MOCKS" | translate }}</span>
@@ -21,6 +21,54 @@
       >
         {{ "ACTIONS.START_NOW" | translate }}
       </button>
+    </div>
+    <div class="home__content__row">
+      <div class="home__content__row__column">
+        <img src="assets/images/screenshots/edit-response.png" />
+      </div>
+      <div class="home__content__row__column">
+        <h1 [innerHTML]="'PAGES.HOME.SECTIONS.CREATE.TITLE' | translate"></h1>
+        <h3>
+          {{ "PAGES.HOME.SECTIONS.CREATE.DESCRIPTION" | translate }}
+        </h3>
+      </div>
+    </div>
+    <div class="home__content__row">
+      <div class="home__content__row__column">
+        <img src="assets/images/gifs/comparing-responses.gif" />
+      </div>
+      <div class="home__content__row__column">
+        <h1 [innerHTML]="'PAGES.HOME.SECTIONS.COMPARE.TITLE' | translate"></h1>
+        <h3>
+          {{ "PAGES.HOME.SECTIONS.COMPARE.DESCRIPTION" | translate }}
+        </h3>
+      </div>
+    </div>
+    <div class="home__content__row">
+      <div class="home__content__row__column">
+        <img src="assets/images/gifs/inviting-user.gif" />
+      </div>
+      <div class="home__content__row__column">
+        <h1 [innerHTML]="'PAGES.HOME.SECTIONS.INVITE.TITLE' | translate"></h1>
+        <h3>
+          {{ "PAGES.HOME.SECTIONS.INVITE.DESCRIPTION" | translate }}
+        </h3>
+      </div>
+    </div>
+    <div class="home__content__row">
+      <div class="home__content__row__column">
+        <img src="assets/images/gifs/forking-project.gif" />
+      </div>
+      <div class="home__content__row__column">
+        <h1 [innerHTML]="'PAGES.HOME.SECTIONS.BRANCH.TITLE' | translate"></h1>
+        <h3>
+          {{ "PAGES.HOME.SECTIONS.BRANCH.DESCRIPTION" | translate }}
+        </h3>
+      </div>
+    </div>
+    <div class="home__content__section">
+      <img src="assets/icons/drop.svg" />
+      <h1>Easier than <span>"sacarse los mockos"</span></h1>
     </div>
   </div>
 </div>

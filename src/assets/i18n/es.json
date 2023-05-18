@@ -25,7 +25,25 @@
     "HOME": {
       "FOR_YOUR_API": "para tu API",
       "NO_CODE_NO_CONF": "sin código ni archivos de configuración",
-      "DESCRIPTION": "Mockos es una herramienta útil y práctica para desarrolladores que buscan probar sus aplicaciones con mocks de API personalizados, de forma colaborativa y sin necesidad de instalar nada en su ordenador."
+      "DESCRIPTION": "Mockos es una herramienta útil y práctica para desarrolladores que buscan probar sus aplicaciones con mocks de API personalizados, de forma colaborativa y sin necesidad de instalar nada en su ordenador.",
+      "SECTIONS": {
+        "CREATE": {
+          "TITLE": "Una forma <span>simple</span> pero <span>completa</span> de mockear <span>respuestas JSON y ficheros</span>",
+          "DESCRIPTION": "Permite editar JSON con un editor sencillo y a prueba de errores. También puedes cargar archivos de hasta 8 MB (configurable)"
+        },
+        "COMPARE": {
+          "TITLE": "Funcionalidad completamente <span>reactiva</span> y <span>colaborativa</span>, <span> no mas ficheros de configuración</span>",
+          "DESCRIPTION": "Ya no es necesario compartir y mantener archivos de configuración poco estéticos, mantente ágil incluso al mockear APIs"
+        },
+        "INVITE": {
+          "TITLE": "¡<span>Invita a tus amigos</span> a la fiesta! <span>Puede que no acepten...</span> ¡Pero <span>no pasa nada!</span>",
+          "DESCRIPTION": "Mockear puede ser complicado, ¡pero es mucho más fácil y divertido con amigos! ¡Aprovecha el sistema de amigos completamente equipado de Mockos!"
+        },
+        "BRANCH": {
+          "TITLE": "<span>¿No te apetece socializar?</span> ¡Pues tenemos algo para ti! Ya puedes <span>hacer ramas y trabajar por tu cuenta</span>",
+          "DESCRIPTION": "¿Estás introduciendo cambios que podrían romper el código de alguien? Crea una rama del proyecto y mergea cuando estés listo."
+        }
+      }
     },
     "AUTH": {
       "LOG_IN": "¡Iniciar sesión!",
