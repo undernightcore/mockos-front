@@ -20,6 +20,12 @@
       text-align: center;
       padding: 0 50px;
 
+      &:last-child {
+        & > img {
+          height: 50px;
+        }
+      }
+
       & > h1 {
         & > span {
           color: var(--main-color);
@@ -34,6 +40,16 @@
 
     &__row {
       display: flex;
+      flex-direction: row;
+
+      &:nth-child(even) {
+        flex-direction: row-reverse;
+
+        @media (max-width: 1000px) {
+          flex-direction: column;
+          gap: 24px;
+        }
+      }
 
       @media (max-width: 1000px) {
         flex-direction: column;
