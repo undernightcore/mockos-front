@@ -1,27 +1,76 @@
-# MockosFront
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.5.
+![Banner](src/assets/images/graphics/mockos-banner.png)
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Mockos - Build mocks for your API without code or config files
 
-## Code scaffolding
+Mockos is a **useful and practical tool for developers** looking to test their applications with **custom API mocks**, in a **collaborative way and without the need to install anything** on their computer.
+## Live demo
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+https://mockos.puntaserver.com (Proudly hosted using Coolify.io)
 
-## Build
+If you find any bugs/vulnerabilities feel free to open a new issue or/and contact me at undernightcore@gmail.com.
+## Features
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Create API responses using a **simple JSON editor**.
+- Stay in sync with other people thanks to **realtime and compare capabilities**. 
+- Create **multiple projects** and invite **multiple members** to help you mock API responses.
+- Simplified **branch system** in case you introduce **breaking changes**.
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Run for development (only frontend)
 
-## Running end-to-end tests
+Clone the project
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+  git clone https://github.com/undernightcore/mockos-front.git
+```
 
-## Further help
+Install dependencies
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run start
+```
+
+Remember to point your **environment.ts** file to your **locally served backend** (in case you are also developing some back functionality)
+
+```javascript
+  export const environment = {
+    production: false,
+    //apiUrl: 'https://mockos-back.puntaserver.com',
+    apiUrl: 'http://localhost:3333'
+  };
+```
+## Host your own instance using Docker Compose
+
+This will come very soon with v0.0.1...
+
+
+
+
+## Roadmap
+
+- Check what I'm working on here -> https://github.com/users/undernightcore/projects/1
+
+
+## FAQ
+
+#### What tech stack is this using?
+
+For the Frontend: Angular, Angular Material, JSON editor, Socket.io, Luxon, Swal and Ngrx Translate.
+
+For the Backend: AdonisJS, Socket.io and PostgreSQL.
+
+#### How can I contribute?
+
+Thank you for considering contributing! I am working in an easy contributing guide that you can easily follow. 
+## Support
+
+For support, email undernightcore@gmail.com or my twitter @undernightcore. I will happily solve any issue that you may encounter, but first check if there is an already open one. 
+
