@@ -74,7 +74,7 @@
       "DELETE_MESSAGE": "This action is irreversible",
       "RESPONSES": "Responses",
       "RESPONSES_NOT_FOUND": "You have not created a response yet",
-      "INVALID_JSON": "JSON is invalid",
+      "INVALID_JSON": "WARNING: This JSON might be invalid or includes Handlebars syntax",
       "CREATE_RESPONSE": "Create response",
       "EDIT_RESPONSE": "Edit response",
       "RESPONSE_UNEXPECTEDLY_DELETED": "The response you were editing has been removed... Now you'll be creating it as a new one",

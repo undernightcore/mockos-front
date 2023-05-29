@@ -6,9 +6,7 @@ import {
   OnDestroy,
   ViewChild,
 } from '@angular/core';
-import JSONEditor from 'jsoneditor';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { jsonValidator } from '../../../../../../validators/json.validator';
 import { ResponsesService } from '../../../../../../services/responses.service';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { ResponseModalDataInterface } from './interfaces/response-modal-data.interface';
@@ -21,7 +19,13 @@ import { TranslateService } from '@ngx-translate/core';
 import { CompareResponsesComponent } from '../compare-responses/compare-responses.component';
 import { CreateResponseWithFileModel } from '../../../../../../models/create-response-with-file.model';
 import { CreateResponseModel } from '../../../../../../models/create-response.model';
-import { prettifyJson } from '../../../../../../utils/string.utils';
+import {
+  isValidJson,
+  prettifyJson,
+} from '../../../../../../utils/string.utils';
+import { Ace, edit } from 'ace-builds';
+import 'ace-builds/src-noconflict/theme-gruvbox';
+import 'ace-builds/src-noconflict/mode-json';
 
 @Component({
   selector: 'app-create-response',
@@ -30,23 +34,30 @@ import { prettifyJson } from '../../../../../../utils/string.utils';
 })
 export class CreateResponseComponent implements AfterViewInit, OnDestroy {
   @ViewChild('editor') editorElement!: ElementRef;
-  editor?: JSONEditor;
+  editor?: Ace.Editor;
   responseSubscription?: Subscription;
   newChanges = false;
 
   get isEditing() {
     return Boolean(this.data.responseData);
   }
+
   get fileInBack() {
     return this.data.responseData?.is_file
       ? this.data.responseData?.body
       : undefined;
   }
+
   get fileMode() {
     return (
       this.selectedTab === 1 && Boolean(this.selectedFile || this.fileInBack)
     );
   }
+
+  get warningInvalidJson() {
+    return !isValidJson(this.responseForm.controls.body.value || '{}');
+  }
+
   selectedTab = this.fileInBack ? 1 : 0;
   selectedFile = this.data.selectedFile;
 
@@ -63,7 +74,7 @@ export class CreateResponseComponent implements AfterViewInit, OnDestroy {
     ]),
     body: new FormControl(
       this.fileInBack ? '{}' : this.data.responseData?.body ?? '{}',
-      [Validators.required, jsonValidator]
+      [Validators.required]
     ),
     enabled: new FormControl(this.data.responseData?.enabled ?? true),
   });
@@ -78,15 +89,16 @@ export class CreateResponseComponent implements AfterViewInit, OnDestroy {
   ) {}
 
   ngAfterViewInit() {
-    this.editor = new JSONEditor(this.editorElement.nativeElement, {
-      mode: 'code',
-      mainMenuBar: false,
-      onChange: () =>
-        this.responseForm.controls.body.setValue(
-          this.editor?.getText() as string
-        ),
+    this.editor = edit(this.editorElement.nativeElement, {
+      mode: 'ace/mode/json',
+      theme: 'ace/theme/gruvbox',
     });
-    this.editor.setText(this.responseForm.controls.body.value ?? '');
+    this.editor.on('change', () => {
+      this.responseForm.controls.body.setValue(
+        this.editor?.getValue() as string
+      );
+    });
+    this.editor.session.setValue(this.responseForm.controls.body.value ?? '');
     this.#listenToChanges();
   }
 
@@ -136,8 +148,6 @@ export class CreateResponseComponent implements AfterViewInit, OnDestroy {
 
   handleTabChange() {
     this.selectedFile = undefined;
-    // TODO: Force editor resizing, should get better solution
-    this.editor?.validate();
   }
 
   compareChanges() {
@@ -165,7 +175,9 @@ export class CreateResponseComponent implements AfterViewInit, OnDestroy {
     this.responseForm.controls.body.setValue(
       prettifyJson(this.responseForm.value.body as string)
     );
-    this.editor?.setText(prettifyJson(this.responseForm.value.body as string));
+    this.editor?.session.setValue(
+      prettifyJson(this.responseForm.value.body as string)
+    );
   }
 
   #listenToChanges() {

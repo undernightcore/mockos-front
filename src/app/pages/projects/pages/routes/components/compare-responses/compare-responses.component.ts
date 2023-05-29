@@ -9,7 +9,6 @@ import {
 import { ResponseInterface } from '../../../../../../interfaces/response.interface';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { ResponseModalDataInterface } from '../create-response/interfaces/response-modal-data.interface';
-import JSONEditor from 'jsoneditor';
 import { DialogRef } from '@angular/cdk/dialog';
 import { RealtimeService } from '../../../../../../services/realtime.service';
 import { ResponsesService } from '../../../../../../services/responses.service';
@@ -17,6 +16,9 @@ import { interval, Subscription } from 'rxjs';
 import { DateTime } from 'luxon';
 import { TranslateService } from '@ngx-translate/core';
 import { CreateResponseComponent } from '../create-response/create-response.component';
+import { Ace, edit } from 'ace-builds';
+import 'ace-builds/src-noconflict/theme-gruvbox';
+import 'ace-builds/src-noconflict/mode-json';
 
 @Component({
   selector: 'app-compare-responses',
@@ -25,7 +27,7 @@ import { CreateResponseComponent } from '../create-response/create-response.comp
 })
 export class CompareResponsesComponent implements AfterViewInit, OnDestroy {
   localChanges: ResponseInterface;
-  localEditor?: JSONEditor;
+  localEditor?: Ace.Editor;
   localFile? = this.data.selectedFile;
   get localFileName() {
     return (
@@ -38,7 +40,7 @@ export class CompareResponsesComponent implements AfterViewInit, OnDestroy {
   @ViewChild('localEditor') localEditorElement!: ElementRef;
 
   originChanges?: ResponseInterface;
-  originEditor?: JSONEditor;
+  originEditor?: Ace.Editor;
   get originFileName() {
     return this.originChanges?.is_file ? this.originChanges.body : undefined;
   }
@@ -61,17 +63,19 @@ export class CompareResponsesComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.localEditor = new JSONEditor(this.localEditorElement.nativeElement, {
-      mode: 'code',
-      mainMenuBar: false,
-      onChangeText: (value) => (this.localChanges.body = value),
+    this.localEditor = edit(this.originEditorElement.nativeElement, {
+      mode: 'ace/mode/json',
+      theme: 'ace/theme/gruvbox',
     });
-    this.originEditor = new JSONEditor(this.originEditorElement.nativeElement, {
-      mode: 'code',
-      mainMenuBar: false,
-      onEditable: () => false,
+    this.localEditor.on('change', () => {
+      this.localChanges.body = this.localEditor?.getValue() as string;
     });
-    this.localEditor.setText(this.data.responseData?.body as string);
+    this.originEditor = edit(this.originEditorElement.nativeElement, {
+      readOnly: true,
+      mode: 'ace/mode/json',
+      theme: 'ace/theme/gruvbox',
+    });
+    this.localEditor.session.setValue(this.data.responseData?.body as string);
     this.#getResponse();
   }
 
@@ -112,7 +116,7 @@ export class CompareResponsesComponent implements AfterViewInit, OnDestroy {
       .getResponse(this.data.responseData.id)
       .subscribe((response) => {
         this.originChanges = response;
-        this.originEditor?.setText(response.body);
+        this.originEditor?.session.setValue(response.body);
         if (!this.responseSubscription) this.#listenToChanges();
         if (!this.intervalSubscription) this.#keepTimeUpdated();
       });

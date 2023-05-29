@@ -31,7 +31,7 @@
       </button>
     </div>
     <div
-      *ngIf="responseForm.controls.body.invalid && selectedTab === 0"
+      *ngIf="warningInvalidJson && selectedTab === 0"
       class="main-content__form__alert"
     >
       {{ "PAGES.ROUTES.INVALID_JSON" | translate }}
@@ -73,7 +73,7 @@
     </button>
   </div>
   <button
-    [disabled]="responseForm.controls.body.invalid"
+    [disabled]="warningInvalidJson"
     *ngIf="this.selectedTab === 0"
     mat-button
     (click)="prettifyJson()"

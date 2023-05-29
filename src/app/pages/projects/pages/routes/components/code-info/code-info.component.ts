@@ -8,9 +8,11 @@ import {
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogRef } from '@angular/cdk/dialog';
 import { AuthService } from '../../../../../../services/auth.service';
-import JSONEditor from 'jsoneditor';
 import { environment } from '../../../../../../../environments/environment';
 import { angularTemplate } from './templates/templates';
+import { Ace, edit } from 'ace-builds';
+import 'ace-builds/src-noconflict/theme-gruvbox';
+import 'ace-builds/src-noconflict/mode-json';
 
 @Component({
   selector: 'app-code-info',
@@ -19,7 +21,7 @@ import { angularTemplate } from './templates/templates';
 })
 export class CodeInfoComponent implements AfterViewInit {
   token = this.authService.token;
-  codeEditor?: JSONEditor;
+  codeEditor?: Ace.Editor;
   visible = false;
 
   @ViewChild('editor') editor!: ElementRef;
@@ -36,10 +38,10 @@ export class CodeInfoComponent implements AfterViewInit {
 
   #initializeForm() {
     if (!this.editor) return;
-    this.codeEditor = new JSONEditor(this.editor.nativeElement, {
-      mode: 'code',
-      onEditable: () => false,
-      mainMenuBar: false,
+    this.codeEditor = edit(this.editor.nativeElement, {
+      readOnly: true,
+      mode: 'ace/mode/json',
+      theme: 'ace/theme/gruvbox',
     });
     this.setFwkConf('angular');
   }
@@ -57,6 +59,6 @@ export class CodeInfoComponent implements AfterViewInit {
     ];
     const snippet = snippets.find((code) => code.code === fwk);
     if (!snippet) return;
-    this.codeEditor?.setText(snippet.action());
+    this.codeEditor?.session.setValue(snippet.action());
   }
 }
