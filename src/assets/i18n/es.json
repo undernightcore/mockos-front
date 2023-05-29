@@ -87,7 +87,8 @@
       "CLICK_TO_UPLOAD": "Haz click para subir un archivo",
       "INTEGRATE": "Integrar con tu proyecto",
       "YOUR_PROJECT_ID": "Tu ID de proyecto",
-      "YOUR_TOKEN": "Tu token"
+      "YOUR_TOKEN": "Tu token",
+      "EMPTY_JSON": "ERROR: Necesitas un body, si lo quieres vacío usa {} o \"\""
     },
     "MEMBERS": {
       "GO_BACK": "Volver al proyecto",

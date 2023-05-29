@@ -87,7 +87,8 @@
       "CLICK_TO_UPLOAD": "Click to upload file",
       "INTEGRATE": "Integrate with your project",
       "YOUR_PROJECT_ID": "Your project ID",
-      "YOUR_TOKEN": "Your token"
+      "YOUR_TOKEN": "Your token",
+      "EMPTY_JSON": "ERROR: You need a body, if you need it empty use {} or \"\""
     },
     "MEMBERS": {
       "GO_BACK": "Return to project",

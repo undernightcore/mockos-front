@@ -32,9 +32,15 @@
     </div>
     <div
       *ngIf="warningInvalidJson && selectedTab === 0"
-      class="main-content__form__alert"
+      class="main-content__form__warning"
     >
       {{ "PAGES.ROUTES.INVALID_JSON" | translate }}
+    </div>
+    <div
+      *ngIf="this.responseForm.controls.body.invalid && selectedTab === 0"
+      class="main-content__form__alert"
+    >
+      {{ "PAGES.ROUTES.EMPTY_JSON" | translate }}
     </div>
   </div>
   <mat-tab-group

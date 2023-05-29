@@ -1,5 +1,5 @@
 import { ResponseInterface } from '../interfaces/response.interface';
-import { prettifyJson } from '../utils/string.utils';
+import { isValidJson, prettifyJson } from '../utils/string.utils';
 
 export class ResponseModel {
   id: number;
@@ -16,7 +16,10 @@ export class ResponseModel {
     this.name = data.name;
     this.status = data.status;
     this.is_file = data.is_file;
-    this.body = !data.is_file ? prettifyJson(data.body) : data.body;
+    this.body =
+      !data.is_file && isValidJson(data.body)
+        ? prettifyJson(data.body)
+        : data.body;
     this.enabled = data.enabled;
     this.created_at = data.created_at;
     this.updated_at = data.updated_at;
