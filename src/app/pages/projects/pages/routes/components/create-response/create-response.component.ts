@@ -7,7 +7,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { jsonValidator } from '../../../../../../validators/json.validator';
 import { ResponsesService } from '../../../../../../services/responses.service';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { ResponseModalDataInterface } from './interfaces/response-modal-data.interface';
@@ -20,7 +19,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { CompareResponsesComponent } from '../compare-responses/compare-responses.component';
 import { CreateResponseWithFileModel } from '../../../../../../models/create-response-with-file.model';
 import { CreateResponseModel } from '../../../../../../models/create-response.model';
-import { prettifyJson } from '../../../../../../utils/string.utils';
+import {
+  isValidJson,
+  prettifyJson,
+} from '../../../../../../utils/string.utils';
 import { Ace, edit } from 'ace-builds';
 import 'ace-builds/src-noconflict/theme-gruvbox';
 import 'ace-builds/src-noconflict/mode-json';
@@ -39,16 +41,23 @@ export class CreateResponseComponent implements AfterViewInit, OnDestroy {
   get isEditing() {
     return Boolean(this.data.responseData);
   }
+
   get fileInBack() {
     return this.data.responseData?.is_file
       ? this.data.responseData?.body
       : undefined;
   }
+
   get fileMode() {
     return (
       this.selectedTab === 1 && Boolean(this.selectedFile || this.fileInBack)
     );
   }
+
+  get warningInvalidJson() {
+    return !isValidJson(this.responseForm.controls.body.value || '{}');
+  }
+
   selectedTab = this.fileInBack ? 1 : 0;
   selectedFile = this.data.selectedFile;
 
@@ -65,7 +74,7 @@ export class CreateResponseComponent implements AfterViewInit, OnDestroy {
     ]),
     body: new FormControl(
       this.fileInBack ? '{}' : this.data.responseData?.body ?? '{}',
-      [Validators.required, jsonValidator]
+      [Validators.required]
     ),
     enabled: new FormControl(this.data.responseData?.enabled ?? true),
   });
