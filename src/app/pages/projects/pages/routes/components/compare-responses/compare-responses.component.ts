@@ -63,7 +63,7 @@ export class CompareResponsesComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.localEditor = edit(this.originEditorElement.nativeElement, {
+    this.localEditor = edit(this.localEditorElement.nativeElement, {
       mode: 'ace/mode/json',
       theme: 'ace/theme/gruvbox',
     });
