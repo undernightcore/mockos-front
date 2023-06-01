@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://mockos-back.puntaserver.com'
+  apiUrl: 'https://api.mockos.io'
 };
