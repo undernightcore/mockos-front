@@ -1,48 +1,45 @@
 <div class="routes">
-  <app-navbar></app-navbar>
-  <div class="routes__body">
-    <div class="routes__body__list">
-      <div class="routes__body__list__actions">
-        <button (click)="openCreateModal()" mat-button>
-          <mat-icon>add</mat-icon>
-        </button>
-        <button [routerLink]="['/projects', projectId, 'members']" mat-button>
-          <mat-icon>person</mat-icon>
-        </button>
-        <button (click)="openForkModal()" mat-button>
-          <img src="assets/icons/source-control.svg" />
-        </button>
-        <button (click)="openCodeModal(projectId)" mat-button>
-          <mat-icon>code</mat-icon>
-        </button>
-      </div>
-      <div
-        *ngIf="routes"
-        (cdkDropListDropped)="handleSort($event)"
-        cdkDropList
-        infiniteScroll
-        [maxItems]="maxRoutes"
-        [currentItems]="routes.length"
-        [itemsPerPage]="20"
-        (newPageNeeded)="getRoutes($event, 20)"
-        class="routes__body__list__items"
-      >
-        <app-route-list-item
-          (click)="selectRoute(route)"
-          *ngFor="let route of routes"
-          [route]="route"
-        ></app-route-list-item>
-      </div>
+  <div class="routes__list">
+    <div class="routes__list__actions">
+      <button (click)="openCreateModal()" mat-button>
+        <mat-icon>add</mat-icon>
+      </button>
+      <button [routerLink]="['/projects', projectId, 'members']" mat-button>
+        <mat-icon>person</mat-icon>
+      </button>
+      <button (click)="openForkModal()" mat-button>
+        <img src="assets/icons/source-control.svg" />
+      </button>
+      <button (click)="openCodeModal(projectId)" mat-button>
+        <mat-icon>code</mat-icon>
+      </button>
     </div>
-    <div class="routes__body__info">
-      <app-route-info
-        *ngIf="selectedRoute"
-        (updatedRoute)="updateRoute($event)"
-        [route]="selectedRoute"
-      ></app-route-info>
-      <div *ngIf="!selectedRoute" class="routes__body__info__missing">
-        <h4>{{ "PAGES.ROUTES.SELECT_ROUTE" | translate }}</h4>
-      </div>
+    <div
+      *ngIf="routes"
+      (cdkDropListDropped)="handleSort($event)"
+      cdkDropList
+      infiniteScroll
+      [maxItems]="maxRoutes"
+      [currentItems]="routes.length"
+      [itemsPerPage]="20"
+      (newPageNeeded)="getRoutes($event, 20)"
+      class="routes__list__items"
+    >
+      <app-route-list-item
+        (click)="selectRoute(route)"
+        *ngFor="let route of routes"
+        [route]="route"
+      ></app-route-list-item>
+    </div>
+  </div>
+  <div class="routes__info">
+    <app-route-info
+      *ngIf="selectedRoute"
+      (updatedRoute)="updateRoute($event)"
+      [route]="selectedRoute"
+    ></app-route-info>
+    <div *ngIf="!selectedRoute" class="routes__info__missing">
+      <h4>{{ "PAGES.ROUTES.SELECT_ROUTE" | translate }}</h4>
     </div>
   </div>
 </div>

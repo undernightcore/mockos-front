@@ -1,56 +1,49 @@
 .auth {
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
-  height: 100vh;
-  width: 100vw;
+  font-family: var(--main-font);
+  height: 100%;
+  text-align: center;
+  row-gap: 30px;
+  padding: 30px 30px;
+  box-sizing: border-box;
 
-  &__body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    font-family: var(--main-font);
-    height: 100%;
-    text-align: center;
-    row-gap: 30px;
-    padding: 30px 30px;
+  &__form-container,
+  & > img {
+    justify-self: center;
+    width: 100%;
+    max-width: 600px;
+  }
 
-    &__form-container,
-    & > img {
-      justify-self: center;
-      width: 100%;
-      max-width: 600px;
-      min-width: 400px;
-    }
-
-    &__form-container {
-      &__form {
-        display: flex;
-        flex-direction: column;
-      }
-    }
-
-    &__buttons {
-      margin-top: 15px;
+  &__form-container {
+    &__form {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      align-items: center;
+    }
+  }
 
-      .btn-disabled {
-        background-color: var(--soft-gray);
-        color: var(--main-color);
-      }
+  &__buttons {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
 
-      &__dynamic-btn {
-        width: 100%;
-        color: black;
-        background-color: var(--main-color);
-      }
+    .btn-disabled {
+      background-color: var(--soft-gray);
+      color: var(--main-color);
+    }
 
-      &__register-btn {
-        width: fit-content;
-      }
+    &__dynamic-btn {
+      width: 100%;
+      color: black;
+      background-color: var(--main-color);
+    }
+
+    &__register-btn {
+      width: fit-content;
     }
   }
 }

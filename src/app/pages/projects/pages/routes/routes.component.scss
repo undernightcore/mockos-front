@@ -1,57 +1,46 @@
 .routes {
+  height: 100%;
   display: flex;
-  flex-direction: column;
-  height: 100vh;
 
-  &__body {
-    height: calc(100vh - 56px);
-
-    @media (min-width: 600px) {
-      height: calc(100vh - 64px);
-    }
-
+  &__list {
+    height: 100%;
+    width: 450px;
+    border-right: 1px solid var(--disabled-color);
     display: flex;
+    flex-direction: column;
 
-    &__list {
-      height: 100%;
-      width: 450px;
-      border-right: 1px solid var(--disabled-color);
+    &__actions {
+      z-index: 1;
+      position: sticky;
+      top: 0;
+      background-color: var(--main-color);
       display: flex;
-      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      padding: 12px;
 
-      &__actions {
-        z-index: 1;
-        position: sticky;
-        top: 0;
-        background-color: var(--main-color);
-        height: 64px;
-        display: flex;
-        gap: 12px;
-        align-items: center;
-        padding: 12px;
-
-        & > button {
-          background-color: var(--alt-color);
-          img {
-            height: 18px;
-          }
+      & > button {
+        background-color: var(--alt-color);
+        img {
+          height: 18px;
         }
       }
-
-      &__items {
-        overflow: auto;
-      }
     }
-    &__info {
-      height: 100%;
-      width: 100%;
 
-      &__missing {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
+    &__items {
+      overflow: auto;
+    }
+  }
+
+  &__info {
+    height: 100%;
+    width: 100%;
+
+    &__missing {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }
