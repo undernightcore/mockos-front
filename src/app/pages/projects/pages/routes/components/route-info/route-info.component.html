@@ -27,6 +27,9 @@
       formControlName="enabled"
     ></mat-slide-toggle>
   </div>
+  <div (click)="back.emit()" *ngIf="isMobile" class="route-info__back">
+    < {{ "PAGES.ROUTES.BACK_TO_LIST" | translate }}
+  </div>
   <mat-form-field>
     <input (blur)="updateRoute()" formControlName="endpoint" matInput />
   </mat-form-field>

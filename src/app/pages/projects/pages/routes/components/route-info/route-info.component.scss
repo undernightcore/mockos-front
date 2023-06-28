@@ -44,6 +44,11 @@
     }
   }
 
+  &__back {
+    padding-top: 8px;
+    cursor: pointer;
+  }
+
   &__title {
     display: flex;
     gap: 12px;
@@ -66,6 +71,10 @@
       display: grid;
       gap: 12px;
       grid-template-columns: repeat(2, 1fr);
+
+      @media (max-width: 1000px) {
+        grid-template-columns: 1fr;
+      }
     }
     &__empty {
       height: 100%;

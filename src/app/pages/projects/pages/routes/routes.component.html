@@ -1,5 +1,11 @@
-<div class="routes">
-  <div class="routes__list">
+<div
+  [ngClass]="{
+    isMobileSelected: isMobile && selectedRoute,
+    isMobileUnselected: isMobile && !selectedRoute
+  }"
+  class="routes"
+>
+  <div *ngIf="!isMobile || (isMobile && !selectedRoute)" class="routes__list">
     <div class="routes__list__actions">
       <button (click)="openCreateModal()" mat-button>
         <mat-icon>add</mat-icon>
@@ -18,6 +24,7 @@
       *ngIf="routes"
       (cdkDropListDropped)="handleSort($event)"
       cdkDropList
+      [cdkDropListDisabled]="isMobile"
       infiniteScroll
       [maxItems]="maxRoutes"
       [currentItems]="routes.length"
@@ -32,10 +39,11 @@
       ></app-route-list-item>
     </div>
   </div>
-  <div class="routes__info">
+  <div *ngIf="!isMobile || (isMobile && selectedRoute)" class="routes__info">
     <app-route-info
       *ngIf="selectedRoute"
       (updatedRoute)="updateRoute($event)"
+      (back)="selectedRoute = undefined"
       [route]="selectedRoute"
     ></app-route-info>
     <div *ngIf="!selectedRoute" class="routes__info__missing">

@@ -15,6 +15,7 @@ import { ProjectModalComponent } from '../../components/project-modal/project-mo
 import { CreateProjectInterface } from '../../../../interfaces/create-project.interface';
 import { ProjectService } from '../../../../services/project.service';
 import { CodeInfoComponent } from './components/code-info/code-info.component';
+import { DeviceService } from '../../../../services/device.service';
 
 @Component({
   selector: 'app-routes',
@@ -23,6 +24,7 @@ import { CodeInfoComponent } from './components/code-info/code-info.component';
 })
 export class RoutesComponent implements OnInit, OnDestroy {
   projectId?: number;
+  isMobile = false;
 
   routes?: RouteInterface[];
   selectedRoute?: RouteInterface;
@@ -30,6 +32,7 @@ export class RoutesComponent implements OnInit, OnDestroy {
 
   #isFetchingRoutes = false;
 
+  generalSubscriptions = new Subscription();
   projectSubscription?: Subscription;
   routeSubscription?: Subscription;
 
@@ -41,10 +44,12 @@ export class RoutesComponent implements OnInit, OnDestroy {
     private translateService: TranslateService,
     private dialogService: MatDialog,
     private realtimeService: RealtimeService,
-    private router: Router
+    private router: Router,
+    private deviceService: DeviceService
   ) {}
 
   ngOnInit() {
+    this.#listenToMediaQuery();
     this.activatedRoute.params.subscribe((params) => {
       this.projectId = params['id'];
       this.getRoutes(1);
@@ -53,6 +58,7 @@ export class RoutesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.generalSubscriptions.unsubscribe();
     this.projectSubscription?.unsubscribe();
     this.routeSubscription?.unsubscribe();
   }
@@ -177,6 +183,14 @@ export class RoutesComponent implements OnInit, OnDestroy {
             },
           });
       });
+  }
+
+  #listenToMediaQuery() {
+    this.generalSubscriptions.add(
+      this.deviceService.isMobile.subscribe(
+        (isMobile) => (this.isMobile = isMobile)
+      )
+    );
   }
 
   #listenToProjectChanges() {

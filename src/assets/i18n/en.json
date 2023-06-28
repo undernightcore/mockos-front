@@ -88,7 +88,8 @@
       "INTEGRATE": "Integrate with your project",
       "YOUR_PROJECT_ID": "Your project ID",
       "YOUR_TOKEN": "Your token",
-      "EMPTY_JSON": "ERROR: You need a body, if you need it empty use {} or \"\""
+      "EMPTY_JSON": "ERROR: You need a body, if you need it empty use {} or \"\"",
+      "BACK_TO_LIST": "Back to list"
     },
     "MEMBERS": {
       "GO_BACK": "Return to project",
