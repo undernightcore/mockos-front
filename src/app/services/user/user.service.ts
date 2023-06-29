@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
-import { PaginatedResponseInterface } from '../interfaces/paginated-response.interface';
-import { InvitationInterface } from '../interfaces/invitation.interface';
-import { MessageInterface } from '../interfaces/message.interface';
+import { environment } from '../../../environments/environment';
+import { PaginatedResponseInterface } from '../../interfaces/paginated-response.interface';
+import { InvitationInterface } from '../../interfaces/invitation.interface';
+import { MessageInterface } from '../../interfaces/message.interface';
 
 @Injectable({
   providedIn: 'root',

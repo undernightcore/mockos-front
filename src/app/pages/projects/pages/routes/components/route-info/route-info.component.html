@@ -17,6 +17,7 @@
         <button (click)="selectMethod('delete')" mat-menu-item>delete</button>
       </mat-menu>
       <mat-icon
+        *ngIf="!isMobile"
         (click)="isEditingTitle ? updateRoute() : (isEditingTitle = true)"
         >{{ isEditingTitle ? "save" : "edit" }}</mat-icon
       >
@@ -26,6 +27,9 @@
       (change)="updateRoute()"
       formControlName="enabled"
     ></mat-slide-toggle>
+  </div>
+  <div (click)="back.emit()" *ngIf="isMobile" class="route-info__back">
+    < {{ "PAGES.ROUTES.BACK_TO_LIST" | translate }}
   </div>
   <mat-form-field>
     <input (blur)="updateRoute()" formControlName="endpoint" matInput />

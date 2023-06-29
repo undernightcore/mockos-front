@@ -39,7 +39,7 @@
       grid-template-columns: 1fr;
       display: grid;
 
-      @media (min-width: 500px) {
+      @media (min-width: 700px) {
         grid-template-columns: repeat(2, 1fr);
       }
 

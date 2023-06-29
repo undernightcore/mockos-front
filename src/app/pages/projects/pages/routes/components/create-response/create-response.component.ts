@@ -7,14 +7,14 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ResponsesService } from '../../../../../../services/responses.service';
+import { ResponsesService } from '../../../../../../services/responses/responses.service';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { ResponseModalDataInterface } from './interfaces/response-modal-data.interface';
 import { CreateResponseInterface } from '../../../../../../interfaces/create-response.interface';
 import { DialogRef } from '@angular/cdk/dialog';
 import { openToast } from '../../../../../../utils/toast.utils';
 import { finalize, iif, Subscription } from 'rxjs';
-import { RealtimeService } from '../../../../../../services/realtime.service';
+import { RealtimeService } from '../../../../../../services/realtime/realtime.service';
 import { TranslateService } from '@ngx-translate/core';
 import { CompareResponsesComponent } from '../compare-responses/compare-responses.component';
 import { CreateResponseWithFileModel } from '../../../../../../models/create-response-with-file.model';
@@ -168,6 +168,7 @@ export class CreateResponseComponent implements AfterViewInit, OnDestroy {
         },
         selectedFile: this.selectedFile,
       },
+      panelClass: 'mobile-fullscreen',
     });
   }
 

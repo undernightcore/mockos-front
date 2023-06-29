@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
-import { PaginatedResponseInterface } from '../interfaces/paginated-response.interface';
+import { environment } from '../../../environments/environment';
+import { PaginatedResponseInterface } from '../../interfaces/paginated-response.interface';
 import {
   ForkedProjectInterface,
   ProjectInterface,
-} from '../interfaces/project.interface';
-import { CreateProjectInterface } from '../interfaces/create-project.interface';
-import { MessageInterface } from '../interfaces/message.interface';
-import { MemberInterface } from '../interfaces/member.interface';
+} from '../../interfaces/project.interface';
+import { CreateProjectInterface } from '../../interfaces/create-project.interface';
+import { MessageInterface } from '../../interfaces/message.interface';
+import { MemberInterface } from '../../interfaces/member.interface';
 
 @Injectable({
   providedIn: 'root',

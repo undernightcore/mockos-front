@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
-import { MessageInterface } from '../interfaces/message.interface';
-import { TokenInterface } from '../interfaces/token.interface';
+import { environment } from '../../../environments/environment';
+import { MessageInterface } from '../../interfaces/message.interface';
+import { TokenInterface } from '../../interfaces/token.interface';
 import { BehaviorSubject, tap } from 'rxjs';
 
 @Injectable({

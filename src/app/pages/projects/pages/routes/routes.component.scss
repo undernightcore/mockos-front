@@ -16,7 +16,6 @@
       background-color: var(--main-color);
       display: flex;
       gap: 12px;
-      align-items: center;
       padding: 12px;
 
       & > button {
@@ -42,5 +41,18 @@
       align-items: center;
       justify-content: center;
     }
+  }
+}
+
+.isMobileSelected {
+  .routes__info {
+    width: 100%;
+  }
+}
+
+.isMobileUnselected {
+  .routes__list {
+    width: 100%;
+    box-sizing: border-box;
   }
 }

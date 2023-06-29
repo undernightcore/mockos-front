@@ -1,32 +1,41 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import {
   HttpMethods,
   RouteInterface,
 } from '../../../../../../interfaces/route.interface';
 import { FormControl, FormGroup } from '@angular/forms';
-import { finalize } from 'rxjs';
-import { RealtimeService } from '../../../../../../services/realtime.service';
-import { RoutesService } from '../../../../../../services/routes.service';
+import { finalize, Subscription } from 'rxjs';
+import { RealtimeService } from '../../../../../../services/realtime/realtime.service';
+import { RoutesService } from '../../../../../../services/routes/routes.service';
 import { ResponseInterface } from '../../../../../../interfaces/response.interface';
 import { CreateResponseComponent } from '../create-response/create-response.component';
 import { ChoiceModalComponent } from '../../../../../../components/choice-modal/choice-modal.component';
 import { openToast } from '../../../../../../utils/toast.utils';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
-import { ResponsesService } from '../../../../../../services/responses.service';
+import { ResponsesService } from '../../../../../../services/responses/responses.service';
 import { ResponseModel } from '../../../../../../models/response.model';
+import { DeviceService } from '../../../../../../services/device/device.service';
 
 @Component({
   selector: 'app-route-info',
   templateUrl: './route-info.component.html',
   styleUrls: ['./route-info.component.scss'],
 })
-export class RouteInfoComponent {
+export class RouteInfoComponent implements OnInit, OnDestroy {
   @Input() set route(value: RouteInterface | undefined) {
     this.#reactToRouteChange(value);
   }
 
   @Output() updatedRoute = new EventEmitter<RouteInterface>();
+  @Output() back = new EventEmitter<void>();
 
   routeForm?: FormGroup;
   responses?: ResponseModel[];
@@ -35,13 +44,26 @@ export class RouteInfoComponent {
   #isFetchingResponses = false;
   isEditingTitle = false;
 
+  isMobile = false;
+
+  subscriptions = new Subscription();
+
   constructor(
     private realtimeService: RealtimeService,
     private routesService: RoutesService,
     private dialogService: MatDialog,
     private translateService: TranslateService,
-    private responsesService: ResponsesService
+    private responsesService: ResponsesService,
+    private deviceService: DeviceService
   ) {}
+
+  ngOnInit() {
+    this.#listenOnMediaQuery();
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
+  }
 
   getResponses(page: number, perPage = 20) {
     if (this.routeForm === undefined || this.#isFetchingResponses) return;
@@ -87,6 +109,7 @@ export class RouteInfoComponent {
       height: '90%',
       width: '70%',
       data: { routeId: this.routeForm.value.id, responseData },
+      panelClass: 'mobile-fullscreen',
     });
   }
 
@@ -130,6 +153,14 @@ export class RouteInfoComponent {
             openToast(result.message, 'success');
           });
       });
+  }
+
+  #listenOnMediaQuery() {
+    this.subscriptions.add(
+      this.deviceService.isMobile.subscribe(
+        (isMobile) => (this.isMobile = isMobile)
+      )
+    );
   }
 
   #reactToRouteChange(value?: RouteInterface) {
