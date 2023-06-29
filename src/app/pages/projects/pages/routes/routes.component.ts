@@ -155,6 +155,7 @@ export class RoutesComponent implements OnInit, OnDestroy {
       data: projectId,
       height: '80%',
       width: '70%',
+      panelClass: 'mobile-fullscreen',
     });
   }
 

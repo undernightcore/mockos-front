@@ -6,3 +6,11 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+@media (max-width: 1000px) {
+  .mobile-fullscreen {
+    height: 100% !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+}

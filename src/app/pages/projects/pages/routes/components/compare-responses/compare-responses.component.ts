@@ -107,6 +107,7 @@ export class CompareResponsesComponent implements AfterViewInit, OnDestroy {
       width: '70%',
       closeOnNavigation: true,
       data: state,
+      panelClass: 'mobile-fullscreen',
     });
   }
 

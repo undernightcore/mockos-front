@@ -56,6 +56,11 @@
 
       & > button {
         background-color: var(--alt-color);
+
+        @media (max-width: 1000px) {
+          white-space: normal;
+          line-height: normal;
+        }
       }
     }
   }

@@ -109,6 +109,7 @@ export class RouteInfoComponent implements OnInit, OnDestroy {
       height: '90%',
       width: '70%',
       data: { routeId: this.routeForm.value.id, responseData },
+      panelClass: 'mobile-fullscreen',
     });
   }
 
