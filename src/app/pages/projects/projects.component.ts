@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectService } from '../../services/project.service';
+import { ProjectService } from '../../services/project/project.service';
 import { ForkedProjectInterface } from '../../interfaces/project.interface';
 import { finalize, iif } from 'rxjs';
 import { ChoiceModalComponent } from '../../components/choice-modal/choice-modal.component';
@@ -8,7 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { openToast } from '../../utils/toast.utils';
 import { ProjectModalComponent } from './components/project-modal/project-modal.component';
 import { CreateProjectInterface } from '../../interfaces/create-project.interface';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-projects',

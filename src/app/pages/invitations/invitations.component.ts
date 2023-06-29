@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../services/user/user.service';
 import { finalize } from 'rxjs';
 import { InvitationInterface } from '../../interfaces/invitation.interface';
 import { MatDialog } from '@angular/material/dialog';

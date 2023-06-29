@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { PaginatedResponseInterface } from '../interfaces/paginated-response.interface';
-import { RouteInterface } from '../interfaces/route.interface';
-import { environment } from '../../environments/environment';
-import { CreateRouteInterface } from '../interfaces/create-route.interface';
-import { MessageInterface } from '../interfaces/message.interface';
+import { PaginatedResponseInterface } from '../../interfaces/paginated-response.interface';
+import { RouteInterface } from '../../interfaces/route.interface';
+import { environment } from '../../../environments/environment';
+import { CreateRouteInterface } from '../../interfaces/create-route.interface';
+import { MessageInterface } from '../../interfaces/message.interface';
 
 @Injectable({
   providedIn: 'root',

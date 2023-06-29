@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectService } from '../../../../services/project.service';
+import { ProjectService } from '../../../../services/project/project.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { ProjectInterface } from '../../../../interfaces/project.interface';

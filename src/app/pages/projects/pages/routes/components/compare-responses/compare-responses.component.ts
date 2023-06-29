@@ -10,8 +10,8 @@ import { ResponseInterface } from '../../../../../../interfaces/response.interfa
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { ResponseModalDataInterface } from '../create-response/interfaces/response-modal-data.interface';
 import { DialogRef } from '@angular/cdk/dialog';
-import { RealtimeService } from '../../../../../../services/realtime.service';
-import { ResponsesService } from '../../../../../../services/responses.service';
+import { RealtimeService } from '../../../../../../services/realtime/realtime.service';
+import { ResponsesService } from '../../../../../../services/responses/responses.service';
 import { interval, Subscription } from 'rxjs';
 import { DateTime } from 'luxon';
 import { TranslateService } from '@ngx-translate/core';

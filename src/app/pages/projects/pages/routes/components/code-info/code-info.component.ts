@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogRef } from '@angular/cdk/dialog';
-import { AuthService } from '../../../../../../services/auth.service';
+import { AuthService } from '../../../../../../services/auth/auth.service';
 import { environment } from '../../../../../../../environments/environment';
 import { angularTemplate } from './templates/templates';
 import { Ace, edit } from 'ace-builds';

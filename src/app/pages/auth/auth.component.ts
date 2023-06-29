@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { iif } from 'rxjs';
 import { repeatPasswordValidator } from '../../validators/repeat-password.validator';
 import { MatDialog } from '@angular/material/dialog';

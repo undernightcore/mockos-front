@@ -12,17 +12,17 @@ import {
 } from '../../../../../../interfaces/route.interface';
 import { FormControl, FormGroup } from '@angular/forms';
 import { finalize, Subscription } from 'rxjs';
-import { RealtimeService } from '../../../../../../services/realtime.service';
-import { RoutesService } from '../../../../../../services/routes.service';
+import { RealtimeService } from '../../../../../../services/realtime/realtime.service';
+import { RoutesService } from '../../../../../../services/routes/routes.service';
 import { ResponseInterface } from '../../../../../../interfaces/response.interface';
 import { CreateResponseComponent } from '../create-response/create-response.component';
 import { ChoiceModalComponent } from '../../../../../../components/choice-modal/choice-modal.component';
 import { openToast } from '../../../../../../utils/toast.utils';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
-import { ResponsesService } from '../../../../../../services/responses.service';
+import { ResponsesService } from '../../../../../../services/responses/responses.service';
 import { ResponseModel } from '../../../../../../models/response.model';
-import { DeviceService } from '../../../../../../services/device.service';
+import { DeviceService } from '../../../../../../services/device/device.service';
 
 @Component({
   selector: 'app-route-info',

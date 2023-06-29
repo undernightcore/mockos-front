@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { RoutesService } from '../../../../services/routes.service';
+import { RoutesService } from '../../../../services/routes/routes.service';
 import { RouteInterface } from '../../../../interfaces/route.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { openToast } from '../../../../utils/toast.utils';
@@ -7,15 +7,15 @@ import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateRouteComponent } from './components/create-route/create-route.component';
 import { CreateRouteInterface } from '../../../../interfaces/create-route.interface';
-import { RealtimeService } from '../../../../services/realtime.service';
+import { RealtimeService } from '../../../../services/realtime/realtime.service';
 import { finalize, Subscription } from 'rxjs';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { ResponsesService } from '../../../../services/responses.service';
+import { ResponsesService } from '../../../../services/responses/responses.service';
 import { ProjectModalComponent } from '../../components/project-modal/project-modal.component';
 import { CreateProjectInterface } from '../../../../interfaces/create-project.interface';
-import { ProjectService } from '../../../../services/project.service';
+import { ProjectService } from '../../../../services/project/project.service';
 import { CodeInfoComponent } from './components/code-info/code-info.component';
-import { DeviceService } from '../../../../services/device.service';
+import { DeviceService } from '../../../../services/device/device.service';
 
 @Component({
   selector: 'app-routes',
