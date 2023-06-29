@@ -89,7 +89,8 @@
       "YOUR_PROJECT_ID": "Your project ID",
       "YOUR_TOKEN": "Your token",
       "EMPTY_JSON": "ERROR: You need a body, if you need it empty use {} or \"\"",
-      "BACK_TO_LIST": "Back to list"
+      "BACK_TO_LIST": "Back to list",
+      "SEARCH_ROUTES": "Search endpoints"
     },
     "MEMBERS": {
       "GO_BACK": "Return to project",

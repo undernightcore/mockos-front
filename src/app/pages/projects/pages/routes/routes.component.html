@@ -20,6 +20,13 @@
         <mat-icon>code</mat-icon>
       </button>
     </div>
+    <div class="routes__list__search">
+      <mat-form-field appearance="fill">
+        <mat-label>{{ "PAGES.ROUTES.SEARCH_ROUTES" | translate }}</mat-label>
+        <input [formControl]="search" matInput />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
     <div
       *ngIf="routes"
       (cdkDropListDropped)="handleSort($event)"

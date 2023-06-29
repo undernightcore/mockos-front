@@ -8,7 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateRouteComponent } from './components/create-route/create-route.component';
 import { CreateRouteInterface } from '../../../../interfaces/create-route.interface';
 import { RealtimeService } from '../../../../services/realtime/realtime.service';
-import { finalize, Subscription } from 'rxjs';
+import { debounceTime, finalize, Subscription } from 'rxjs';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ResponsesService } from '../../../../services/responses/responses.service';
 import { ProjectModalComponent } from '../../components/project-modal/project-modal.component';
@@ -16,6 +16,7 @@ import { CreateProjectInterface } from '../../../../interfaces/create-project.in
 import { ProjectService } from '../../../../services/project/project.service';
 import { CodeInfoComponent } from './components/code-info/code-info.component';
 import { DeviceService } from '../../../../services/device/device.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-routes',
@@ -23,12 +24,13 @@ import { DeviceService } from '../../../../services/device/device.service';
   styleUrls: ['./routes.component.scss'],
 })
 export class RoutesComponent implements OnInit, OnDestroy {
-  projectId?: number;
+  projectId = Number(this.activatedRoute.snapshot.paramMap.get('id'));
   isMobile = false;
 
   routes?: RouteInterface[];
-  selectedRoute?: RouteInterface;
   maxRoutes = 0;
+  search = new FormControl('');
+  selectedRoute?: RouteInterface;
 
   #isFetchingRoutes = false;
 
@@ -50,11 +52,9 @@ export class RoutesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.#listenToMediaQuery();
-    this.activatedRoute.params.subscribe((params) => {
-      this.projectId = params['id'];
-      this.getRoutes(1);
-      this.#listenToProjectChanges();
-    });
+    this.#listenToSearch();
+    this.#listenToProjectChanges();
+    this.getRoutes(1);
   }
 
   ngOnDestroy() {
@@ -67,7 +67,7 @@ export class RoutesComponent implements OnInit, OnDestroy {
     if (this.projectId === undefined || this.#isFetchingRoutes) return;
     this.#isFetchingRoutes = true;
     this.routesService
-      .getRoutes(this.projectId, undefined, page, perPage)
+      .getRoutes(this.projectId, this.search.value || undefined, page, perPage)
       .pipe(finalize(() => (this.#isFetchingRoutes = false)))
       .subscribe((routes) => {
         this.routes =
@@ -192,6 +192,12 @@ export class RoutesComponent implements OnInit, OnDestroy {
         (isMobile) => (this.isMobile = isMobile)
       )
     );
+  }
+
+  #listenToSearch() {
+    this.search.valueChanges.pipe(debounceTime(500)).subscribe((search) => {
+      this.getRoutes(1, 20);
+    });
   }
 
   #listenToProjectChanges() {
