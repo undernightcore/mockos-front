@@ -5,9 +5,8 @@ import {
   CanActivateChild,
   Router,
   RouterStateSnapshot,
-  UrlTree,
 } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { map } from 'rxjs';
 import { AuthService } from '../services/auth/auth.service';
 
 @Injectable({
