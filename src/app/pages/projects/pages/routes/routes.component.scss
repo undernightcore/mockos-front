@@ -5,6 +5,7 @@
   &__list {
     height: 100%;
     width: 450px;
+    min-width: 450px;
     border-right: 1px solid var(--disabled-color);
     display: flex;
     flex-direction: column;
@@ -67,6 +68,7 @@
 .isMobileUnselected {
   .routes__list {
     width: 100%;
+    min-width: auto;
     box-sizing: border-box;
   }
 }
