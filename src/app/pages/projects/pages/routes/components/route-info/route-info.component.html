@@ -17,6 +17,7 @@
         <button (click)="selectMethod('delete')" mat-menu-item>delete</button>
       </mat-menu>
       <mat-icon
+        *ngIf="!isMobile"
         (click)="isEditingTitle ? updateRoute() : (isEditingTitle = true)"
         >{{ isEditingTitle ? "save" : "edit" }}</mat-icon
       >
