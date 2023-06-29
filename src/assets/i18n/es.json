@@ -89,7 +89,8 @@
       "YOUR_PROJECT_ID": "Tu ID de proyecto",
       "YOUR_TOKEN": "Tu token",
       "EMPTY_JSON": "ERROR: Necesitas un body, si lo quieres vacío usa {} o \"\"",
-      "BACK_TO_LIST": "Volver al listado"
+      "BACK_TO_LIST": "Volver al listado",
+      "SEARCH_ROUTES": "Buscar endpoints"
     },
     "MEMBERS": {
       "GO_BACK": "Volver al proyecto",
