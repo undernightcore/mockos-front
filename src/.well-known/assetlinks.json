@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "io.mockos.twa",
+      "sha256_cert_fingerprints": [
+        "88:37:21:6A:35:90:B3:2D:79:AE:45:AE:17:1D:03:5A:04:72:16:18:00:46:F9:10:C2:18:A5:CB:A7:24:AE:DC",
+        "77:4B:77:50:7C:D9:9C:23:CE:47:A8:FB:A2:29:BD:C8:BE:3B:92:5E:F8:2E:EB:74:B1:96:73:18:97:25:23:38"
+      ]
+    }
+  }
+]
