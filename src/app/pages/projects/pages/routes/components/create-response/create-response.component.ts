@@ -26,6 +26,7 @@ import {
 import { Ace, edit } from 'ace-builds';
 import 'ace-builds/src-noconflict/theme-gruvbox';
 import 'ace-builds/src-noconflict/mode-json';
+import 'ace-builds/src-noconflict/ext-searchbox';
 
 @Component({
   selector: 'app-create-response',
