@@ -8,11 +8,11 @@ import {
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogRef } from '@angular/cdk/dialog';
 import { AuthService } from '../../../../../../services/auth/auth.service';
-import { environment } from '../../../../../../../environments/environment';
 import { angularTemplate } from './templates/templates';
 import { Ace, edit } from 'ace-builds';
 import 'ace-builds/src-noconflict/theme-gruvbox';
 import 'ace-builds/src-noconflict/mode-json';
+import { EnvService } from '../../../../../../services/env/env.service';
 
 @Component({
   selector: 'app-code-info',
@@ -29,7 +29,8 @@ export class CodeInfoComponent implements AfterViewInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public projectId: number,
     public dialogRef: DialogRef,
-    private authService: AuthService
+    private authService: AuthService,
+    private envService: EnvService
   ) {}
 
   ngAfterViewInit() {
@@ -54,7 +55,8 @@ export class CodeInfoComponent implements AfterViewInit {
     const snippets = [
       {
         code: 'angular',
-        action: () => angularTemplate(this.projectId, environment.apiUrl),
+        action: () =>
+          angularTemplate(this.projectId, this.envService.getEnv('apiUrl')),
       },
     ];
     const snippet = snippets.find((code) => code.code === fwk);
