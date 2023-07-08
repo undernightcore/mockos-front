@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { io, Socket } from 'socket.io-client';
-import { environment } from '../../../environments/environment';
 import { Observable, tap } from 'rxjs';
 import { RealtimeType } from '../../interfaces/realtime-type.interface';
+import { EnvService } from '../env/env.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +10,8 @@ import { RealtimeType } from '../../interfaces/realtime-type.interface';
 export class RealtimeService {
   socket: Socket;
 
-  constructor() {
-    this.socket = io(environment.apiUrl);
+  constructor(private envService: EnvService) {
+    this.socket = io(this.envService.getEnv('apiUrl'));
   }
 
   listenProject(projectId: number) {

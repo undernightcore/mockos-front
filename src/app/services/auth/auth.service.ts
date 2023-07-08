@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
 import { MessageInterface } from '../../interfaces/message.interface';
 import { TokenInterface } from '../../interfaces/token.interface';
 import { BehaviorSubject, tap } from 'rxjs';
+import { EnvService } from '../env/env.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private envService: EnvService) {}
 
   #isLogged = new BehaviorSubject<boolean>(Boolean(this.token));
   isLogged = this.#isLogged.asObservable();
@@ -28,7 +28,7 @@ export class AuthService {
 
   login(email: string, password: string) {
     return this.http
-      .post<TokenInterface>(`${environment.apiUrl}/auth/login`, {
+      .post<TokenInterface>(`${this.envService.getEnv('apiUrl')}/auth/login`, {
         email,
         password,
       })
@@ -47,7 +47,7 @@ export class AuthService {
 
   register(name: string, email: string, password: string) {
     return this.http.post<MessageInterface>(
-      `${environment.apiUrl}/auth/register`,
+      `${this.envService.getEnv('apiUrl')}/auth/register`,
       {
         name,
         email,
