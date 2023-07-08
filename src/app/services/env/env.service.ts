@@ -10,7 +10,7 @@ export class EnvService {
   getEnv(key: string) {
     // Only way I can think for injecting env variables after compilation
     return (
-      (window as any)['mockos-env']?.[key] ?? (environment as any)[key] ?? ''
+      (window as any)['mockos_env']?.[key] ?? (environment as any)[key] ?? ''
     );
   }
 }
