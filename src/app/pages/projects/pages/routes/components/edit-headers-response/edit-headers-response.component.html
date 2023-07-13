@@ -1,0 +1,28 @@
+<div class="headers">
+  <div mat-dialog-title>Editar headers</div>
+  <div class="headers__content" mat-dialog-content>
+    <div class="headers__content__form">
+      <mat-form-field appearance="fill">
+        <mat-label>Key</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Value</mat-label>
+        <input [size]="10" matInput>
+      </mat-form-field>
+      <button mat-button>
+        <mat-icon>save</mat-icon>
+      </button>
+    </div>
+    <div class="headers__content__list">
+      <div class="headers__content__item">
+
+      </div>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button (click)="dialogRef.close()" mat-button>
+      {{ "ACTIONS.CLOSE" | translate }}
+    </button>
+  </div>
+</div>

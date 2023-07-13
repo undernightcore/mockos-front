@@ -129,6 +129,7 @@
     "COMPARE_AND_SAVE": "Comparar y guardar",
     "KEEP_LEFT": "Guardar izquierda",
     "KEEP_RIGHT": "Guardar derecha",
-    "PRETTIFY_JSON": "Formatear JSON"
+    "PRETTIFY_JSON": "Formatear JSON",
+    "CLOSE": "Cerrar"
   }
 }

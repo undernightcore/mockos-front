@@ -54,6 +54,7 @@
         (edit)="openCreateResponseModal(response)"
         (delete)="openDeleteResponseModal(response)"
         (select)="selectResponse(response)"
+        (config)="openHeadersModal(response)"
         [response]="response"
         *ngFor="let response of responses"
       ></app-response-list-item>

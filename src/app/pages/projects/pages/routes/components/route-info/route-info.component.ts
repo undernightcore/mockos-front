@@ -23,6 +23,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ResponsesService } from '../../../../../../services/responses/responses.service';
 import { ResponseModel } from '../../../../../../models/response.model';
 import { DeviceService } from '../../../../../../services/device/device.service';
+import { EditHeadersResponseComponent } from '../edit-headers-response/edit-headers-response.component';
 
 @Component({
   selector: 'app-route-info',
@@ -153,6 +154,15 @@ export class RouteInfoComponent implements OnInit, OnDestroy {
             openToast(result.message, 'success');
           });
       });
+  }
+
+  openHeadersModal(response: ResponseInterface) {
+    this.dialogService.open(EditHeadersResponseComponent, {
+      panelClass: 'mobile-fullscreen',
+      height: '60%',
+      width: '60%',
+      data: { response },
+    });
   }
 
   #listenOnMediaQuery() {

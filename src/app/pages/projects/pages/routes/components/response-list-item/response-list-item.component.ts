@@ -10,5 +10,6 @@ export class ResponseListItemComponent {
   @Input() response?: ResponseInterface;
   @Output() delete = new EventEmitter<void>();
   @Output() select = new EventEmitter<void>();
+  @Output() config = new EventEmitter<void>();
   @Output() edit = new EventEmitter<void>();
 }

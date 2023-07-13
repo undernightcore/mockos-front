@@ -1,0 +1,35 @@
+.headers {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  &__content {
+    max-height: none;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    &__form {
+      padding: 16px;
+      background-color: var(--alt-color);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      & > mat-form-field {
+        width: 100%;
+        min-width: 0;
+        margin-bottom: -1.25em;
+      }
+
+      & > button {
+        height: 52px;
+        background-color: var(--main-color);
+      }
+    }
+
+    &__list {
+      height: 100%;
+      overflow: auto;
+    }
+  }
+}
