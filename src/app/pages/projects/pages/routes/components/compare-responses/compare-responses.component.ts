@@ -21,7 +21,6 @@ import 'ace-builds/src-noconflict/theme-gruvbox';
 import 'ace-builds/src-noconflict/mode-json';
 import 'ace-builds/src-noconflict/ext-searchbox';
 
-
 @Component({
   selector: 'app-compare-responses',
   templateUrl: './compare-responses.component.html',
@@ -110,6 +109,7 @@ export class CompareResponsesComponent implements AfterViewInit, OnDestroy {
       closeOnNavigation: true,
       data: state,
       panelClass: 'mobile-fullscreen',
+      autoFocus: false,
     });
   }
 

@@ -46,6 +46,7 @@ export class ProjectsComponent implements OnInit {
             { project: project.name }
           ),
         },
+        autoFocus: false,
       })
       .afterClosed()
       .subscribe((confirmed) => {
@@ -59,7 +60,7 @@ export class ProjectsComponent implements OnInit {
 
   openCreateModal(project?: ForkedProjectInterface) {
     this.dialogService
-      .open(ProjectModalComponent, { data: { project } })
+      .open(ProjectModalComponent, { data: { project }, autoFocus: false })
       .afterClosed()
       .subscribe((data: CreateProjectInterface | undefined) => {
         if (!data) return;

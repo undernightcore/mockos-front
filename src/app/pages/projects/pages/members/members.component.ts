@@ -39,7 +39,11 @@ export class MembersComponent implements OnInit {
 
   openInviteModal(email?: string) {
     this.dialogService
-      .open(InviteModalComponent, { width: '500px', data: email })
+      .open(InviteModalComponent, {
+        width: '500px',
+        data: email,
+        autoFocus: false,
+      })
       .afterClosed()
       .subscribe((newEmail?: string) => {
         if (!newEmail || this.projectId === undefined) return;
@@ -66,7 +70,10 @@ export class MembersComponent implements OnInit {
       'PAGES.MEMBERS.LEAVE_PROJECT_MESSAGE'
     );
     this.dialogService
-      .open(ChoiceModalComponent, { data: { title, message } })
+      .open(ChoiceModalComponent, {
+        data: { title, message },
+        autoFocus: false,
+      })
       .afterClosed()
       .subscribe((leave) => {
         if (!leave) return;

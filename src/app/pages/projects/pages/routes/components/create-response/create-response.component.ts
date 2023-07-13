@@ -169,6 +169,7 @@ export class CreateResponseComponent implements AfterViewInit, OnDestroy {
         },
         selectedFile: this.selectedFile,
       },
+      autoFocus: false,
       panelClass: 'mobile-fullscreen',
     });
   }

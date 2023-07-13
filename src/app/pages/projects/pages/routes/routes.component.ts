@@ -126,6 +126,7 @@ export class RoutesComponent implements OnInit, OnDestroy {
         closeOnNavigation: true,
         width: '500px',
         data: retryData,
+        autoFocus: false,
       })
       .afterClosed()
       .subscribe((data: CreateRouteInterface | undefined) => {
@@ -156,6 +157,7 @@ export class RoutesComponent implements OnInit, OnDestroy {
       height: '80%',
       width: '70%',
       panelClass: 'mobile-fullscreen',
+      autoFocus: false,
     });
   }
 
@@ -167,6 +169,7 @@ export class RoutesComponent implements OnInit, OnDestroy {
     this.dialogService
       .open(ProjectModalComponent, {
         data: { message, project },
+        autoFocus: false,
         closeOnNavigation: true,
       })
       .afterClosed()

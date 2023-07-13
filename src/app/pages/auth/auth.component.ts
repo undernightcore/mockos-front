@@ -62,6 +62,7 @@ export class AuthComponent implements OnInit {
             title: this.translateService.instant('PAGES.AUTH.VERIFY_ACCOUNT'),
             message: (res as MessageInterface).message,
           },
+          autoFocus: false,
         })
         .afterClosed()
         .subscribe(() => {
