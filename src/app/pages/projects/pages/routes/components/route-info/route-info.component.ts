@@ -111,6 +111,7 @@ export class RouteInfoComponent implements OnInit, OnDestroy {
       width: '70%',
       data: { routeId: this.routeForm.value.id, responseData },
       panelClass: 'mobile-fullscreen',
+      autoFocus: false,
     });
   }
 
@@ -124,6 +125,7 @@ export class RouteInfoComponent implements OnInit, OnDestroy {
           }),
           message: this.translateService.instant('PAGES.ROUTES.DELETE_MESSAGE'),
         },
+        autoFocus: false,
       })
       .afterClosed()
       .subscribe((accepted) => {
@@ -144,6 +146,7 @@ export class RouteInfoComponent implements OnInit, OnDestroy {
           }),
           message: this.translateService.instant('PAGES.ROUTES.DELETE_MESSAGE'),
         },
+        autoFocus: false,
       })
       .afterClosed()
       .subscribe((accepted) => {
@@ -161,7 +164,8 @@ export class RouteInfoComponent implements OnInit, OnDestroy {
       panelClass: 'mobile-fullscreen',
       height: '60%',
       width: '60%',
-      data: { response },
+      data: response,
+      autoFocus: false,
     });
   }
 

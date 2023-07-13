@@ -4,19 +4,61 @@
     <div class="headers__content__form">
       <mat-form-field appearance="fill">
         <mat-label>Key</mat-label>
-        <input matInput>
+        <input matInput />
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Value</mat-label>
-        <input [size]="10" matInput>
+        <input matInput />
       </mat-form-field>
       <button mat-button>
-        <mat-icon>save</mat-icon>
+        <mat-icon>add</mat-icon>
       </button>
     </div>
-    <div class="headers__content__list">
-      <div class="headers__content__item">
-
+    <div
+      *ngIf="headers"
+      infiniteScroll
+      [maxItems]="maxHeaders"
+      [currentItems]="headers.length"
+      [itemsPerPage]="20"
+      (newPageNeeded)="getHeaders($event, 20)"
+      class="headers__content__list"
+    >
+      <div *ngFor="let header of headers" class="headers__content__list__item">
+        <ng-container *ngIf="editingHeaderForm.value.id !== header.id">
+          <mat-form-field>
+            <mat-label>Key</mat-label>
+            <input [ngModel]="header.key" [disabled]="true" matInput />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Value</mat-label>
+            <input [ngModel]="header.value" [disabled]="true" matInput />
+          </mat-form-field>
+          <button (click)="selectEditing(header)" mat-button>
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button (click)="deleteEditing()" mat-button>
+            <mat-icon>delete</mat-icon>
+          </button>
+        </ng-container>
+        <ng-container
+          [formGroup]="editingHeaderForm"
+          *ngIf="editingHeaderForm.value.id === header.id"
+        >
+          <mat-form-field>
+            <mat-label>Key</mat-label>
+            <input formControlName="key" matInput />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Value</mat-label>
+            <input formControlName="value" matInput />
+          </mat-form-field>
+          <button (click)="saveEditing()" mat-button>
+            <mat-icon>save</mat-icon>
+          </button>
+          <button (click)="cancelEditing()" mat-button>
+            <mat-icon>close</mat-icon>
+          </button>
+        </ng-container>
       </div>
     </div>
   </div>
