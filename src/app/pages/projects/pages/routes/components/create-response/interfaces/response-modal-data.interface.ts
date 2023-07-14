@@ -1,7 +1,7 @@
-import { ResponseInterface } from '../../../../../../../interfaces/response.interface';
+import { ResponseModel } from '../../../../../../../models/response.model';
 
 export interface ResponseModalDataInterface {
   routeId: number;
-  responseData?: ResponseInterface;
+  responseData?: ResponseModel;
   selectedFile?: File;
 }

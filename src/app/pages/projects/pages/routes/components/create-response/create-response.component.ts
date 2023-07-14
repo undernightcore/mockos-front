@@ -27,6 +27,7 @@ import { Ace, edit } from 'ace-builds';
 import 'ace-builds/src-noconflict/theme-gruvbox';
 import 'ace-builds/src-noconflict/mode-json';
 import 'ace-builds/src-noconflict/ext-searchbox';
+import { EditorTypeEnum } from '../../../../../../interfaces/response-type.interface';
 
 @Component({
   selector: 'app-create-response',
@@ -38,26 +39,6 @@ export class CreateResponseComponent implements AfterViewInit, OnDestroy {
   editor?: Ace.Editor;
   responseSubscription?: Subscription;
   newChanges = false;
-
-  get isEditing() {
-    return Boolean(this.data.responseData);
-  }
-
-  get fileInBack() {
-    return this.data.responseData?.is_file
-      ? this.data.responseData?.body
-      : undefined;
-  }
-
-  get fileMode() {
-    return (
-      this.selectedTab === 1 && Boolean(this.selectedFile || this.fileInBack)
-    );
-  }
-
-  get warningInvalidJson() {
-    return !isValidJson(this.responseForm.controls.body.value || '{}');
-  }
 
   selectedTab = this.fileInBack ? 1 : 0;
   selectedFile = this.data.selectedFile;
@@ -80,6 +61,26 @@ export class CreateResponseComponent implements AfterViewInit, OnDestroy {
     enabled: new FormControl(this.data.responseData?.enabled ?? true),
   });
 
+  get isEditing() {
+    return Boolean(this.data.responseData);
+  }
+
+  get fileInBack() {
+    return this.data.responseData?.is_file
+      ? this.data.responseData?.body
+      : undefined;
+  }
+
+  get fileMode() {
+    return (
+      this.selectedTab === 1 && Boolean(this.selectedFile || this.fileInBack)
+    );
+  }
+
+  get warningInvalidJson() {
+    return !isValidJson(this.responseForm.controls.body.value || '{}');
+  }
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ResponseModalDataInterface,
     public dialogRef: DialogRef,
@@ -91,7 +92,7 @@ export class CreateResponseComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     this.editor = edit(this.editorElement.nativeElement, {
-      mode: 'ace/mode/json',
+      mode: this.data.responseData?.editorType ?? EditorTypeEnum.JSON,
       theme: 'ace/theme/gruvbox',
     });
     this.editor.on('change', () => {
@@ -190,7 +191,7 @@ export class CreateResponseComponent implements AfterViewInit, OnDestroy {
       .subscribe((event) => {
         if (event === 'deleted') {
           this.#changeToCreateUnexpectedly();
-        } else {
+        } else if (event === 'updated') {
           this.newChanges = true;
         }
       });

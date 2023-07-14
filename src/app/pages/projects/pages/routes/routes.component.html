@@ -41,7 +41,7 @@
     >
       <app-route-list-item
         (click)="selectRoute(route)"
-        *ngFor="let route of routes"
+        *ngFor="let route of routes; trackBy: trackByRoute"
         [route]="route"
       ></app-route-list-item>
     </div>

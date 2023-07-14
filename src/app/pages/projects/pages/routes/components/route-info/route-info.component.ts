@@ -24,6 +24,7 @@ import { ResponsesService } from '../../../../../../services/responses/responses
 import { ResponseModel } from '../../../../../../models/response.model';
 import { DeviceService } from '../../../../../../services/device/device.service';
 import { EditHeadersResponseComponent } from '../edit-headers-response/edit-headers-response.component';
+import { calculateAmountToFetch } from '../../../../../../utils/page.utils';
 
 @Component({
   selector: 'app-route-info',
@@ -86,7 +87,7 @@ export class RouteInfoComponent implements OnInit, OnDestroy {
     this.updateRoute();
   }
 
-  selectResponse(response: ResponseInterface) {
+  selectResponse(response: ResponseModel) {
     this.responsesService
       .editResponse(
         response.id,
@@ -103,7 +104,7 @@ export class RouteInfoComponent implements OnInit, OnDestroy {
     this.updatedRoute.emit(this.routeForm.value);
   }
 
-  openCreateResponseModal(responseData?: ResponseInterface) {
+  openCreateResponseModal(responseData?: ResponseModel) {
     if (!this.routeForm) return;
     this.dialogService.open(CreateResponseComponent, {
       closeOnNavigation: true,
@@ -136,7 +137,7 @@ export class RouteInfoComponent implements OnInit, OnDestroy {
       });
   }
 
-  openDeleteResponseModal(response: ResponseInterface) {
+  openDeleteResponseModal(response: ResponseModel) {
     this.dialogService
       .open(ChoiceModalComponent, {
         closeOnNavigation: true,
@@ -159,7 +160,7 @@ export class RouteInfoComponent implements OnInit, OnDestroy {
       });
   }
 
-  openHeadersModal(response: ResponseInterface) {
+  openHeadersModal(response: ResponseModel) {
     this.dialogService.open(EditHeadersResponseComponent, {
       panelClass: 'mobile-fullscreen',
       height: '60%',
@@ -184,7 +185,7 @@ export class RouteInfoComponent implements OnInit, OnDestroy {
     this.getResponses(
       1,
       hasSelectedSameRoute
-        ? Math.ceil((this.responses!.length + 0.01) / 20) * 20
+        ? calculateAmountToFetch(this.responses?.length ?? 0, 20)
         : undefined
     );
     this.isEditingTitle = false;
@@ -202,5 +203,9 @@ export class RouteInfoComponent implements OnInit, OnDestroy {
           updated_at: new FormControl(value.updated_at),
         })
       : undefined;
+  }
+
+  trackByResponse(index: number, response: ResponseModel) {
+    return `${index}-${response.id}`;
   }
 }

@@ -17,6 +17,7 @@ import { ProjectService } from '../../../../services/project/project.service';
 import { CodeInfoComponent } from './components/code-info/code-info.component';
 import { DeviceService } from '../../../../services/device/device.service';
 import { FormControl } from '@angular/forms';
+import { calculateAmountToFetch } from '../../../../utils/page.utils';
 
 @Component({
   selector: 'app-routes',
@@ -209,9 +210,11 @@ export class RoutesComponent implements OnInit, OnDestroy {
     this.projectSubscription = this.realtimeService
       .listenProject(this.projectId)
       .subscribe((action) => {
-        if (!this.routes) return;
         if (action === 'updated') {
-          this.getRoutes(1, Math.ceil((this.routes.length + 0.01) / 20) * 20);
+          this.getRoutes(
+            1,
+            calculateAmountToFetch(this.routes?.length ?? 0, 20)
+          );
         } else if (action === 'deleted') {
           this.router.navigate(['/projects']);
         }
@@ -232,5 +235,9 @@ export class RoutesComponent implements OnInit, OnDestroy {
           this.selectedRoute = undefined;
         }
       });
+  }
+
+  trackByRoute(index: number, route: RouteInterface) {
+    return `${index}-${route.id}`;
   }
 }

@@ -56,7 +56,7 @@
         (select)="selectResponse(response)"
         (config)="openHeadersModal(response)"
         [response]="response"
-        *ngFor="let response of responses"
+        *ngFor="let response of responses; trackBy: trackByResponse"
       ></app-response-list-item>
     </div>
     <div class="route-info__responses__empty" *ngIf="!responses.length">

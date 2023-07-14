@@ -21,7 +21,12 @@ export class EditHeadersResponseComponent implements OnInit {
   headers?: HeadersInterface[];
   maxHeaders = 0;
 
-  #isFetchingHeaders = false;
+  isFetchingHeaders = false;
+
+  createHeaderForm = new FormGroup({
+    key: new FormControl<string>('', [Validators.required]),
+    value: new FormControl<string>('', [Validators.required]),
+  });
 
   editingHeaderForm = new FormGroup({
     id: new FormControl<number | undefined>(undefined),
@@ -42,12 +47,13 @@ export class EditHeadersResponseComponent implements OnInit {
   }
 
   getHeaders(page: number, perPage = 20) {
+    if (this.isFetchingHeaders) return;
     this.headersService
       .getHeaders(this.data.id, page, perPage)
       .pipe(
         tap({
-          subscribe: () => (this.#isFetchingHeaders = true),
-          finalize: () => (this.#isFetchingHeaders = false),
+          subscribe: () => (this.isFetchingHeaders = true),
+          finalize: () => (this.isFetchingHeaders = false),
         })
       )
       .subscribe((headers) => {
@@ -61,18 +67,10 @@ export class EditHeadersResponseComponent implements OnInit {
 
   selectEditing(header: HeadersInterface) {
     this.editingHeaderForm.patchValue(header);
+    console.log(this.editingHeaderForm.value);
   }
-
-  deleteEditing() {
-    const headerId = Number(this.editingHeaderForm.value.id);
-    if (isNaN(headerId)) return;
-    this.headersService.deleteHeader(headerId).subscribe(({ message }) => {
-      openToast(message, 'success');
-      this.getHeaders(1);
-    });
-  }
-
   saveEditing() {
+    if (this.editingHeaderForm.invalid) return;
     const { id, key, value } = this.editingHeaderForm
       .value as EditHeaderInterface;
     this.headersService
@@ -85,6 +83,24 @@ export class EditHeadersResponseComponent implements OnInit {
       });
   }
 
+  createHeader() {
+    if (this.createHeaderForm.invalid) return;
+    const header = this.createHeaderForm.value as CreateHeaderInterface;
+    this.headersService
+      .createHeader(this.data.id, header)
+      .subscribe(({ message }) => {
+        this.#clearCreationForm();
+        openToast(message, 'success');
+      });
+  }
+
+  deleteHeader(headerId: number) {
+    this.headersService.deleteHeader(headerId).subscribe(({ message }) => {
+      openToast(message, 'success');
+      this.getHeaders(1);
+    });
+  }
+
   #patchLocalHeader(headerId: number, { key, value }: CreateHeaderInterface) {
     const foundHeader = this.headers?.find(({ id }) => id === headerId);
     if (!foundHeader) return;
@@ -94,5 +110,13 @@ export class EditHeadersResponseComponent implements OnInit {
 
   cancelEditing() {
     this.editingHeaderForm.reset();
+  }
+
+  #clearCreationForm() {
+    this.createHeaderForm.reset();
+  }
+
+  trackByHeader(index: number, header: HeadersInterface) {
+    return `${index}-${header.id}`;
   }
 }
