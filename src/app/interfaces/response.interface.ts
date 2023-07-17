@@ -1,4 +1,4 @@
-import { HeadersInterface } from "./headers.interface";
+import { HeadersInterface } from './headers.interface';
 
 export interface ResponseInterface {
   id: number;
@@ -10,4 +10,11 @@ export interface ResponseInterface {
   enabled: boolean;
   created_at: string;
   updated_at: string;
+}
+
+export interface SimpleResponseInterface {
+  id: number;
+  name: string;
+  enabled: boolean;
+  status: number;
 }

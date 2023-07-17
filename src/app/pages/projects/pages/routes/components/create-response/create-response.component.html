@@ -47,7 +47,7 @@
     [(selectedIndex)]="selectedTab"
     (selectedIndexChange)="handleTabChange()"
   >
-    <mat-tab label="JSON">
+    <mat-tab [label]="'COMMON.TEXT' | translate">
       <div class="main-content__editor" #editor></div>
     </mat-tab>
     <mat-tab [label]="'COMMON.FILE' | translate">

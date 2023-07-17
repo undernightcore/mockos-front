@@ -51,10 +51,10 @@
   >
     <div class="route-info__responses__grid" *ngIf="responses.length">
       <app-response-list-item
-        (edit)="openCreateResponseModal(response)"
+        (edit)="openCreateResponseModal(response.id)"
         (delete)="openDeleteResponseModal(response)"
-        (select)="selectResponse(response)"
-        (config)="openHeadersModal(response)"
+        (select)="selectResponse(response.id)"
+        (config)="openHeadersModal(response.id)"
         [response]="response"
         *ngFor="let response of responses; trackBy: trackByResponse"
       ></app-response-list-item>

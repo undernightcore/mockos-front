@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://api.mockos.io',
+  apiUrl: 'http://localhost:3333',
 };

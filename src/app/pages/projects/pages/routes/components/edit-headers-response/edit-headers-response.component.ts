@@ -1,23 +1,25 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { DialogRef } from '@angular/cdk/dialog';
 import { HeadersService } from '../../../../../../services/headers/headers.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ResponseInterface } from '../../../../../../interfaces/response.interface';
 import { HeadersInterface } from '../../../../../../interfaces/headers.interface';
-import { tap } from 'rxjs';
+import { filter, Subscription, tap } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   CreateHeaderInterface,
   EditHeaderInterface,
 } from '../../../../../../interfaces/create-header.interface';
 import { openToast } from '../../../../../../utils/toast.utils';
+import { RealtimeService } from '../../../../../../services/realtime/realtime.service';
+import { calculateAmountToFetch } from '../../../../../../utils/page.utils';
 
 @Component({
   selector: 'app-edit-headers-response',
   templateUrl: './edit-headers-response.component.html',
   styleUrls: ['./edit-headers-response.component.scss'],
 })
-export class EditHeadersResponseComponent implements OnInit {
+export class EditHeadersResponseComponent implements OnInit, OnDestroy {
   headers?: HeadersInterface[];
   maxHeaders = 0;
 
@@ -36,20 +38,28 @@ export class EditHeadersResponseComponent implements OnInit {
     ]),
   });
 
+  realtimeSubscription?: Subscription;
+
   constructor(
     public dialogRef: DialogRef,
     private headersService: HeadersService,
-    @Inject(MAT_DIALOG_DATA) private data: ResponseInterface
+    private realtimeService: RealtimeService,
+    @Inject(MAT_DIALOG_DATA) private responseId: number
   ) {}
 
   ngOnInit() {
     this.getHeaders(1);
+    this.#listenOnChanges();
+  }
+
+  ngOnDestroy() {
+    this.realtimeSubscription?.unsubscribe();
   }
 
   getHeaders(page: number, perPage = 20) {
     if (this.isFetchingHeaders) return;
     this.headersService
-      .getHeaders(this.data.id, page, perPage)
+      .getHeaders(this.responseId, page, perPage)
       .pipe(
         tap({
           subscribe: () => (this.isFetchingHeaders = true),
@@ -67,7 +77,6 @@ export class EditHeadersResponseComponent implements OnInit {
 
   selectEditing(header: HeadersInterface) {
     this.editingHeaderForm.patchValue(header);
-    console.log(this.editingHeaderForm.value);
   }
   saveEditing() {
     if (this.editingHeaderForm.invalid) return;
@@ -79,7 +88,6 @@ export class EditHeadersResponseComponent implements OnInit {
         openToast(message, 'success');
         this.#patchLocalHeader(id, { key, value });
         this.cancelEditing();
-        this.getHeaders(1);
       });
   }
 
@@ -87,7 +95,7 @@ export class EditHeadersResponseComponent implements OnInit {
     if (this.createHeaderForm.invalid) return;
     const header = this.createHeaderForm.value as CreateHeaderInterface;
     this.headersService
-      .createHeader(this.data.id, header)
+      .createHeader(this.responseId, header)
       .subscribe(({ message }) => {
         this.#clearCreationForm();
         openToast(message, 'success');
@@ -97,8 +105,11 @@ export class EditHeadersResponseComponent implements OnInit {
   deleteHeader(headerId: number) {
     this.headersService.deleteHeader(headerId).subscribe(({ message }) => {
       openToast(message, 'success');
-      this.getHeaders(1);
     });
+  }
+
+  cancelEditing() {
+    this.editingHeaderForm.reset();
   }
 
   #patchLocalHeader(headerId: number, { key, value }: CreateHeaderInterface) {
@@ -108,8 +119,16 @@ export class EditHeadersResponseComponent implements OnInit {
     foundHeader.value = value;
   }
 
-  cancelEditing() {
-    this.editingHeaderForm.reset();
+  #listenOnChanges() {
+    this.realtimeSubscription = this.realtimeService
+      .listenResponse(this.responseId)
+      .pipe(filter((event) => event === 'headers'))
+      .subscribe(() => {
+        this.getHeaders(
+          1,
+          calculateAmountToFetch(this.headers?.length ?? 0, 20)
+        );
+      });
   }
 
   #clearCreationForm() {

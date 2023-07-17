@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ResponseInterface } from '../../../../../../interfaces/response.interface';
+import {
+  ResponseInterface,
+  SimpleResponseInterface,
+} from '../../../../../../interfaces/response.interface';
 import { ResponseModel } from '../../../../../../models/response.model';
 
 @Component({
@@ -8,7 +11,7 @@ import { ResponseModel } from '../../../../../../models/response.model';
   styleUrls: ['./response-list-item.component.scss'],
 })
 export class ResponseListItemComponent {
-  @Input() response?: ResponseModel;
+  @Input() response?: SimpleResponseInterface;
   @Output() delete = new EventEmitter<void>();
   @Output() select = new EventEmitter<void>();
   @Output() config = new EventEmitter<void>();

@@ -6,7 +6,6 @@ import {
   OnDestroy,
   ViewChild,
 } from '@angular/core';
-import { ResponseInterface } from '../../../../../../interfaces/response.interface';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { ResponseModalDataInterface } from '../create-response/interfaces/response-modal-data.interface';
 import { DialogRef } from '@angular/cdk/dialog';
@@ -19,6 +18,7 @@ import { CreateResponseComponent } from '../create-response/create-response.comp
 import { Ace, edit } from 'ace-builds';
 import 'ace-builds/src-noconflict/theme-gruvbox';
 import 'ace-builds/src-noconflict/mode-json';
+import 'ace-builds/src-noconflict/mode-html';
 import 'ace-builds/src-noconflict/ext-searchbox';
 import { ResponseModel } from '../../../../../../models/response.model';
 
@@ -65,19 +65,6 @@ export class CompareResponsesComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.localEditor = edit(this.localEditorElement.nativeElement, {
-      mode: 'ace/mode/json',
-      theme: 'ace/theme/gruvbox',
-    });
-    this.localEditor.on('change', () => {
-      this.localChanges.body = this.localEditor?.getValue() as string;
-    });
-    this.originEditor = edit(this.originEditorElement.nativeElement, {
-      readOnly: true,
-      mode: 'ace/mode/json',
-      theme: 'ace/theme/gruvbox',
-    });
-    this.localEditor.session.setValue(this.data.responseData?.body as string);
     this.#getResponse();
   }
 
@@ -114,13 +101,30 @@ export class CompareResponsesComponent implements AfterViewInit, OnDestroy {
     });
   }
 
+  #buildForm() {
+    this.localEditor = edit(this.localEditorElement.nativeElement, {
+      mode: this.data.responseData?.editorType,
+      theme: 'ace/theme/gruvbox',
+    });
+    this.localEditor.on('change', () => {
+      this.localChanges.body = this.localEditor?.getValue() as string;
+    });
+    this.originEditor = edit(this.originEditorElement.nativeElement, {
+      readOnly: true,
+      mode: this.originChanges?.editorType,
+      theme: 'ace/theme/gruvbox',
+    });
+    this.localEditor.session.setValue(this.data.responseData?.body as string);
+    this.originEditor?.session.setValue(this.originChanges?.body as string);
+  }
+
   #getResponse() {
     if (!this.data.responseData) return;
     this.responsesService
       .getResponse(this.data.responseData.id)
       .subscribe((response) => {
         this.originChanges = response;
-        this.originEditor?.session.setValue(response.body);
+        this.#buildForm();
         if (!this.responseSubscription) this.#listenToChanges();
         if (!this.intervalSubscription) this.#keepTimeUpdated();
       });

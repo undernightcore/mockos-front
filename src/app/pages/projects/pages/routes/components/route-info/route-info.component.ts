@@ -11,20 +11,19 @@ import {
   RouteInterface,
 } from '../../../../../../interfaces/route.interface';
 import { FormControl, FormGroup } from '@angular/forms';
-import { finalize, Subscription } from 'rxjs';
+import { finalize, iif, of, Subscription } from 'rxjs';
 import { RealtimeService } from '../../../../../../services/realtime/realtime.service';
 import { RoutesService } from '../../../../../../services/routes/routes.service';
-import { ResponseInterface } from '../../../../../../interfaces/response.interface';
 import { CreateResponseComponent } from '../create-response/create-response.component';
 import { ChoiceModalComponent } from '../../../../../../components/choice-modal/choice-modal.component';
 import { openToast } from '../../../../../../utils/toast.utils';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { ResponsesService } from '../../../../../../services/responses/responses.service';
-import { ResponseModel } from '../../../../../../models/response.model';
 import { DeviceService } from '../../../../../../services/device/device.service';
 import { EditHeadersResponseComponent } from '../edit-headers-response/edit-headers-response.component';
 import { calculateAmountToFetch } from '../../../../../../utils/page.utils';
+import { SimpleResponseInterface } from '../../../../../../interfaces/response.interface';
 
 @Component({
   selector: 'app-route-info',
@@ -40,7 +39,7 @@ export class RouteInfoComponent implements OnInit, OnDestroy {
   @Output() back = new EventEmitter<void>();
 
   routeForm?: FormGroup;
-  responses?: ResponseModel[];
+  responses?: SimpleResponseInterface[];
   maxResponses = 0;
 
   #isFetchingResponses = false;
@@ -87,15 +86,11 @@ export class RouteInfoComponent implements OnInit, OnDestroy {
     this.updateRoute();
   }
 
-  selectResponse(response: ResponseModel) {
+  selectResponse(responseId: number) {
     this.responsesService
-      .editResponse(
-        response.id,
-        { ...response, enabled: true },
-        response.is_file
-      )
-      .subscribe((result) => {
-        openToast(result.message, 'success');
+      .enableResponse(responseId)
+      .subscribe(({ message }) => {
+        openToast(message, 'success');
       });
   }
 
@@ -104,15 +99,16 @@ export class RouteInfoComponent implements OnInit, OnDestroy {
     this.updatedRoute.emit(this.routeForm.value);
   }
 
-  openCreateResponseModal(responseData?: ResponseModel) {
-    if (!this.routeForm) return;
-    this.dialogService.open(CreateResponseComponent, {
-      closeOnNavigation: true,
-      height: '90%',
-      width: '70%',
-      data: { routeId: this.routeForm.value.id, responseData },
-      panelClass: 'mobile-fullscreen',
-      autoFocus: false,
+  openCreateResponseModal(responseId?: number) {
+    this.#getResponse(responseId).subscribe((responseData) => {
+      this.dialogService.open(CreateResponseComponent, {
+        closeOnNavigation: true,
+        height: '90%',
+        width: '70%',
+        data: { routeId: this.routeForm?.value.id, responseData },
+        panelClass: 'mobile-fullscreen',
+        autoFocus: false,
+      });
     });
   }
 
@@ -137,7 +133,7 @@ export class RouteInfoComponent implements OnInit, OnDestroy {
       });
   }
 
-  openDeleteResponseModal(response: ResponseModel) {
+  openDeleteResponseModal(response: SimpleResponseInterface) {
     this.dialogService
       .open(ChoiceModalComponent, {
         closeOnNavigation: true,
@@ -160,12 +156,12 @@ export class RouteInfoComponent implements OnInit, OnDestroy {
       });
   }
 
-  openHeadersModal(response: ResponseModel) {
+  openHeadersModal(responseId: number) {
     this.dialogService.open(EditHeadersResponseComponent, {
       panelClass: 'mobile-fullscreen',
       height: '60%',
       width: '60%',
-      data: response,
+      data: responseId,
       autoFocus: false,
     });
   }
@@ -175,6 +171,14 @@ export class RouteInfoComponent implements OnInit, OnDestroy {
       this.deviceService.isMobile.subscribe(
         (isMobile) => (this.isMobile = isMobile)
       )
+    );
+  }
+
+  #getResponse(responseId?: number) {
+    return iif(
+      () => responseId !== undefined,
+      this.responsesService.getResponse(responseId as number),
+      of(undefined)
     );
   }
 
@@ -205,7 +209,7 @@ export class RouteInfoComponent implements OnInit, OnDestroy {
       : undefined;
   }
 
-  trackByResponse(index: number, response: ResponseModel) {
+  trackByResponse(index: number, response: SimpleResponseInterface) {
     return `${index}-${response.id}`;
   }
 }

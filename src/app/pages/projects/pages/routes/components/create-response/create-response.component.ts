@@ -25,7 +25,9 @@ import {
 } from '../../../../../../utils/string.utils';
 import { Ace, edit } from 'ace-builds';
 import 'ace-builds/src-noconflict/theme-gruvbox';
+import 'ace-builds/src-noconflict/theme-kr_theme';
 import 'ace-builds/src-noconflict/mode-json';
+import 'ace-builds/src-noconflict/mode-html';
 import 'ace-builds/src-noconflict/ext-searchbox';
 import { EditorTypeEnum } from '../../../../../../interfaces/response-type.interface';
 
@@ -78,7 +80,10 @@ export class CreateResponseComponent implements AfterViewInit, OnDestroy {
   }
 
   get warningInvalidJson() {
-    return !isValidJson(this.responseForm.controls.body.value || '{}');
+    return (
+      this.editor?.getOption('mode') === EditorTypeEnum.JSON &&
+      !isValidJson(this.responseForm.controls.body.value || '{}')
+    );
   }
 
   constructor(
@@ -110,17 +115,7 @@ export class CreateResponseComponent implements AfterViewInit, OnDestroy {
 
   handleSave() {
     if (this.responseForm.invalid && this.selectedTab === 0) return;
-    const body =
-      this.selectedTab === 1
-        ? new CreateResponseWithFileModel(
-            new CreateResponseModel(
-              this.responseForm.value as CreateResponseInterface
-            ),
-            this.selectedFile
-          ).formData
-        : new CreateResponseModel(
-            this.responseForm.value as CreateResponseInterface
-          );
+    const body = this.#prepareSaveBody();
     this.saving = true;
     iif(
       () => Boolean(this.data.responseData),
@@ -155,19 +150,19 @@ export class CreateResponseComponent implements AfterViewInit, OnDestroy {
   compareChanges() {
     if (!this.data.responseData) return;
     this.dialogRef.close();
+    this.data.responseData.mergeResponses({
+      is_file: this.fileMode,
+      body: this.fileMode
+        ? this.selectedFile?.name ?? this.fileInBack
+        : this.responseForm.value.body ?? undefined,
+    });
     this.dialogService.open(CompareResponsesComponent, {
       closeOnNavigation: true,
       height: '90%',
       width: '70%',
       data: {
         routeId: this.data.routeId,
-        responseData: {
-          ...this.data.responseData,
-          is_file: this.fileMode,
-          body: this.fileMode
-            ? this.selectedFile?.name ?? this.fileInBack
-            : this.responseForm.value.body,
-        },
+        responseData: this.data.responseData,
         selectedFile: this.selectedFile,
       },
       autoFocus: false,
@@ -207,5 +202,18 @@ export class CreateResponseComponent implements AfterViewInit, OnDestroy {
       'warning',
       5000
     );
+  }
+
+  #prepareSaveBody() {
+    return this.selectedTab === 1
+      ? new CreateResponseWithFileModel(
+          new CreateResponseModel(
+            this.responseForm.value as CreateResponseInterface
+          ),
+          this.selectedFile
+        ).formData
+      : new CreateResponseModel(
+          this.responseForm.value as CreateResponseInterface
+        );
   }
 }
