@@ -1,1 +1,1 @@
-export type RealtimeType = 'updated' | 'deleted';
+export type RealtimeType = 'updated' | 'deleted' | 'headers';

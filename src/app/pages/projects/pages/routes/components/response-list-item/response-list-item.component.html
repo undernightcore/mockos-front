@@ -9,7 +9,10 @@
     <span>{{ response.status }}</span>
   </div>
   <div class="response-card__actions">
-    <mat-icon *ngIf="!response.enabled" (click)="select.emit()">swap_horiz</mat-icon>
+    <mat-icon *ngIf="!response.enabled" (click)="select.emit()">
+      swap_horiz
+    </mat-icon>
+    <mat-icon (click)="config.emit()">code</mat-icon>
     <mat-icon (click)="delete.emit()">delete</mat-icon>
   </div>
 </div>

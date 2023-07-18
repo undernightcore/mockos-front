@@ -39,6 +39,7 @@ export class InvitationsComponent implements OnInit {
             'PAGES.INVITATIONS.ACCEPT_MESSAGE'
           ),
         },
+        autoFocus: false,
       })
       .afterClosed()
       .subscribe((accept) => {
@@ -64,6 +65,7 @@ export class InvitationsComponent implements OnInit {
             'PAGES.INVITATIONS.REJECT_MESSAGE'
           ),
         },
+        autoFocus: false,
       })
       .afterClosed()
       .subscribe((reject) => {

@@ -74,7 +74,7 @@
       "DELETE_MESSAGE": "Esta acción no se puede revertir",
       "RESPONSES": "Respuestas",
       "RESPONSES_NOT_FOUND": "Aún no has creado ninguna respuesta",
-      "INVALID_JSON": "ADVERTENCIA: Este JSON podría no ser válido o incluir sintaxis Handlebars",
+      "INVALID_JSON": "ADVERTENCIA: Este JSON podría no ser válido",
       "CREATE_RESPONSE": "Crear respuesta",
       "EDIT_RESPONSE": "Editar respuesta",
       "RESPONSE_UNEXPECTEDLY_DELETED": "La respuesta que estabas editando ha sido eliminada... Ahora es como si la estuvieras creando",
@@ -129,6 +129,7 @@
     "COMPARE_AND_SAVE": "Comparar y guardar",
     "KEEP_LEFT": "Guardar izquierda",
     "KEEP_RIGHT": "Guardar derecha",
-    "PRETTIFY_JSON": "Formatear JSON"
+    "PRETTIFY_JSON": "Formatear JSON",
+    "CLOSE": "Cerrar"
   }
 }

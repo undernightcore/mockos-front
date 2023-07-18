@@ -74,7 +74,7 @@
       "DELETE_MESSAGE": "This action is irreversible",
       "RESPONSES": "Responses",
       "RESPONSES_NOT_FOUND": "You have not created a response yet",
-      "INVALID_JSON": "WARNING: This JSON might be invalid or includes Handlebars syntax",
+      "INVALID_JSON": "WARNING: This JSON might be invalid",
       "CREATE_RESPONSE": "Create response",
       "EDIT_RESPONSE": "Edit response",
       "RESPONSE_UNEXPECTEDLY_DELETED": "The response you were editing has been removed... Now you'll be creating it as a new one",
@@ -129,6 +129,7 @@
     "COMPARE_AND_SAVE": "Compare and save",
     "KEEP_LEFT": "Keep left",
     "KEEP_RIGHT": "Keep right",
-    "PRETTIFY_JSON": "Prettify JSON"
+    "PRETTIFY_JSON": "Prettify JSON",
+    "CLOSE": "Close"
   }
 }

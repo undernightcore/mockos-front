@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { PaginatedResponseInterface } from '../../interfaces/paginated-response.interface';
-import { ResponseInterface } from '../../interfaces/response.interface';
+import {
+  ResponseInterface,
+  SimpleResponseInterface,
+} from '../../interfaces/response.interface';
 import { CreateResponseInterface } from '../../interfaces/create-response.interface';
 import { MessageInterface } from '../../interfaces/message.interface';
 import { map, Observable } from 'rxjs';
@@ -14,22 +17,12 @@ import { EnvService } from '../env/env.service';
 export class ResponsesService {
   constructor(private httpClient: HttpClient, private envService: EnvService) {}
 
-  getResponses(
-    routeId: number,
-    page = 1,
-    perPage = 10
-  ): Observable<PaginatedResponseInterface<ResponseModel>> {
-    return this.httpClient
-      .get<PaginatedResponseInterface<ResponseInterface>>(
-        `${this.envService.getEnv('apiUrl')}/routes/${routeId}/responses`,
-        { params: { page, perPage } }
-      )
-      .pipe(
-        map((responses) => ({
-          data: responses.data.map((response) => new ResponseModel(response)),
-          meta: responses.meta,
-        }))
-      );
+  getResponses(routeId: number, page = 1, perPage = 10) {
+    return this.httpClient.get<
+      PaginatedResponseInterface<SimpleResponseInterface>
+    >(`${this.envService.getEnv('apiUrl')}/routes/${routeId}/responses`, {
+      params: { page, perPage },
+    });
   }
 
   getResponse(responseId: number) {
@@ -61,6 +54,13 @@ export class ResponsesService {
       `${this.envService.getEnv('apiUrl')}/responses/${responseId}`,
       data,
       isFile ? { params: { isFile } } : undefined
+    );
+  }
+
+  enableResponse(responseId: number) {
+    return this.httpClient.post<MessageInterface>(
+      `${this.envService.getEnv('apiUrl')}/responses/${responseId}/enable`,
+      {}
     );
   }
 

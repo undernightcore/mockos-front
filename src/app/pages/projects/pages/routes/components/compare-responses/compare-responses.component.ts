@@ -6,7 +6,6 @@ import {
   OnDestroy,
   ViewChild,
 } from '@angular/core';
-import { ResponseInterface } from '../../../../../../interfaces/response.interface';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { ResponseModalDataInterface } from '../create-response/interfaces/response-modal-data.interface';
 import { DialogRef } from '@angular/cdk/dialog';
@@ -19,8 +18,9 @@ import { CreateResponseComponent } from '../create-response/create-response.comp
 import { Ace, edit } from 'ace-builds';
 import 'ace-builds/src-noconflict/theme-gruvbox';
 import 'ace-builds/src-noconflict/mode-json';
+import 'ace-builds/src-noconflict/mode-html';
 import 'ace-builds/src-noconflict/ext-searchbox';
-
+import { ResponseModel } from '../../../../../../models/response.model';
 
 @Component({
   selector: 'app-compare-responses',
@@ -28,7 +28,7 @@ import 'ace-builds/src-noconflict/ext-searchbox';
   styleUrls: ['./compare-responses.component.scss'],
 })
 export class CompareResponsesComponent implements AfterViewInit, OnDestroy {
-  localChanges: ResponseInterface;
+  localChanges: ResponseModel;
   localEditor?: Ace.Editor;
   localFile? = this.data.selectedFile;
   get localFileName() {
@@ -41,7 +41,7 @@ export class CompareResponsesComponent implements AfterViewInit, OnDestroy {
   }
   @ViewChild('localEditor') localEditorElement!: ElementRef;
 
-  originChanges?: ResponseInterface;
+  originChanges?: ResponseModel;
   originEditor?: Ace.Editor;
   get originFileName() {
     return this.originChanges?.is_file ? this.originChanges.body : undefined;
@@ -61,35 +61,22 @@ export class CompareResponsesComponent implements AfterViewInit, OnDestroy {
     private translateService: TranslateService,
     private dialogService: MatDialog
   ) {
-    this.localChanges = data.responseData as ResponseInterface;
+    this.localChanges = data.responseData as ResponseModel;
   }
 
   ngAfterViewInit() {
-    this.localEditor = edit(this.localEditorElement.nativeElement, {
-      mode: 'ace/mode/json',
-      theme: 'ace/theme/gruvbox',
-    });
-    this.localEditor.on('change', () => {
-      this.localChanges.body = this.localEditor?.getValue() as string;
-    });
-    this.originEditor = edit(this.originEditorElement.nativeElement, {
-      readOnly: true,
-      mode: 'ace/mode/json',
-      theme: 'ace/theme/gruvbox',
-    });
-    this.localEditor.session.setValue(this.data.responseData?.body as string);
     this.#getResponse();
   }
 
   keepLocal() {
     if (!this.originChanges) return;
+    this.localChanges.mergeResponses({
+      editorType: this.originChanges.editorType,
+      ...(this.localFile ? { body: this.originFileName, is_file: true } : {}),
+    });
     this.#returnToResponseModal({
       routeId: this.data.routeId,
-      responseData: {
-        ...this.data.responseData,
-        ...this.localChanges,
-        ...(this.localFile ? { body: this.originFileName, is_file: true } : {}),
-      },
+      responseData: this.localChanges,
       selectedFile: this.localFile,
     });
   }
@@ -98,7 +85,7 @@ export class CompareResponsesComponent implements AfterViewInit, OnDestroy {
     if (!this.originChanges) return;
     this.#returnToResponseModal({
       routeId: this.data.routeId,
-      responseData: { ...this.data.responseData, ...this.originChanges },
+      responseData: this.originChanges,
     });
   }
 
@@ -110,7 +97,25 @@ export class CompareResponsesComponent implements AfterViewInit, OnDestroy {
       closeOnNavigation: true,
       data: state,
       panelClass: 'mobile-fullscreen',
+      autoFocus: false,
     });
+  }
+
+  #buildForm() {
+    this.localEditor = edit(this.localEditorElement.nativeElement, {
+      mode: this.data.responseData?.editorType,
+      theme: 'ace/theme/gruvbox',
+    });
+    this.localEditor.on('change', () => {
+      this.localChanges.body = this.localEditor?.getValue() as string;
+    });
+    this.originEditor = edit(this.originEditorElement.nativeElement, {
+      readOnly: true,
+      mode: this.originChanges?.editorType,
+      theme: 'ace/theme/gruvbox',
+    });
+    this.localEditor.session.setValue(this.data.responseData?.body as string);
+    this.originEditor?.session.setValue(this.originChanges?.body as string);
   }
 
   #getResponse() {
@@ -119,7 +124,7 @@ export class CompareResponsesComponent implements AfterViewInit, OnDestroy {
       .getResponse(this.data.responseData.id)
       .subscribe((response) => {
         this.originChanges = response;
-        this.originEditor?.session.setValue(response.body);
+        this.#buildForm();
         if (!this.responseSubscription) this.#listenToChanges();
         if (!this.intervalSubscription) this.#keepTimeUpdated();
       });

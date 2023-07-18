@@ -28,6 +28,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { CodeInfoComponent } from './components/code-info/code-info.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouteInfoComponent } from './components/route-info/route-info.component';
+import { EditHeadersResponseComponent } from './components/edit-headers-response/edit-headers-response.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { RouteInfoComponent } from './components/route-info/route-info.component
     CompareResponsesComponent,
     CodeInfoComponent,
     RouteInfoComponent,
+    EditHeadersResponseComponent,
   ],
   imports: [
     CommonModule,
