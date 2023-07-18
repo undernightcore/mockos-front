@@ -90,7 +90,10 @@
       "YOUR_TOKEN": "Tu token",
       "EMPTY_JSON": "ERROR: Necesitas un body, si lo quieres vacío usa {} o \"\"",
       "BACK_TO_LIST": "Volver al listado",
-      "SEARCH_ROUTES": "Buscar endpoints"
+      "SEARCH_ROUTES": "Buscar endpoints",
+      "MISSING_HEADERS": "No hay headers para esta respuesta",
+      "EDIT_HEADERS": "Editar headers",
+      "HEADERS_HINT": "Técnicamente las respuestas siempre vienen con una cantidad mínima de headers. Por ejemplo, el content-type por defecto es 'application/json' para texto o 'application/octet-stream' para ficheros"
     },
     "MEMBERS": {
       "GO_BACK": "Volver al proyecto",
