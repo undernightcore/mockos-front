@@ -90,7 +90,10 @@
       "YOUR_TOKEN": "Your token",
       "EMPTY_JSON": "ERROR: You need a body, if you need it empty use {} or \"\"",
       "BACK_TO_LIST": "Back to list",
-      "SEARCH_ROUTES": "Search endpoints"
+      "SEARCH_ROUTES": "Search endpoints",
+      "MISSING_HEADERS": "There are no headers for this response",
+      "EDIT_HEADERS": "Modify headers",
+      "HEADERS_HINT": "Technically, responses always come with a minimum number of headers. For example, the default content-type is 'application/json' for text or 'application/octet-stream' for files"
     },
     "MEMBERS": {
       "GO_BACK": "Return to project",

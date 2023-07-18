@@ -1,5 +1,5 @@
 <div class="headers">
-  <div mat-dialog-title>Editar headers</div>
+  <div mat-dialog-title>{{ "PAGES.ROUTES.EDIT_HEADERS" | translate }}</div>
   <div class="headers__content" mat-dialog-content>
     <div [formGroup]="createHeaderForm" class="headers__content__form">
       <mat-form-field appearance="fill">
@@ -15,7 +15,7 @@
       </button>
     </div>
     <div
-      *ngIf="headers"
+      *ngIf="headers && headers.length"
       infiniteScroll
       [maxItems]="maxHeaders"
       [currentItems]="headers.length"
@@ -78,6 +78,18 @@
             <mat-icon>close</mat-icon>
           </button>
         </ng-container>
+      </div>
+    </div>
+    <div *ngIf="headers && !headers.length" class="headers__content__empty">
+      <img src="assets/images/undraw_drink_coffee_0asa.svg" />
+      <div class="headers__content__empty__info">
+        <h3>{{ "PAGES.ROUTES.MISSING_HEADERS" | translate }}</h3>
+        <mat-icon
+          [matTooltipClass]="'custom-tooltip'"
+          [matTooltip]="'PAGES.ROUTES.HEADERS_HINT' | translate"
+        >
+          info
+        </mat-icon>
       </div>
     </div>
   </div>
