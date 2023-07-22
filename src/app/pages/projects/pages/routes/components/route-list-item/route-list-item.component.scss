@@ -3,6 +3,11 @@
   padding: 16px;
   border-bottom: 1px solid var(--disabled-color);
   background-color: white;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--soft-gray);
+  }
 
   & > div {
     display: flex;
@@ -41,4 +46,8 @@
 
 .height-fit {
   height: fit-content !important;
+}
+
+.is-selected {
+  border-left: 5px solid var(--main-color) !important;
 }

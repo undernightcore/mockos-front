@@ -38,7 +38,9 @@
     &__items {
       grid-template-columns: 1fr;
       display: grid;
-
+      app-project-card {
+        cursor: pointer;
+      }
       @media (min-width: 700px) {
         grid-template-columns: repeat(2, 1fr);
       }

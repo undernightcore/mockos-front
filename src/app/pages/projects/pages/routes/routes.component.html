@@ -43,6 +43,7 @@
         (click)="selectRoute(route)"
         *ngFor="let route of routes; trackBy: trackByRoute"
         [route]="route"
+        [isSelected]="route.id === selectedRoute?.id"
       ></app-route-list-item>
     </div>
   </div>
