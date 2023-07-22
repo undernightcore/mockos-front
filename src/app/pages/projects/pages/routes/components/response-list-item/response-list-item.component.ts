@@ -1,9 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import {
-  ResponseInterface,
-  SimpleResponseInterface,
-} from '../../../../../../interfaces/response.interface';
-import { ResponseModel } from '../../../../../../models/response.model';
+import { SimpleResponseInterface } from '../../../../../../interfaces/response.interface';
 
 @Component({
   selector: 'app-response-list-item',
@@ -16,4 +12,14 @@ export class ResponseListItemComponent {
   @Output() select = new EventEmitter<void>();
   @Output() config = new EventEmitter<void>();
   @Output() edit = new EventEmitter<void>();
+
+  openConfigModal(click: MouseEvent) {
+    click.stopPropagation();
+    this.config.emit();
+  }
+
+  openDeleteModal(click: MouseEvent) {
+    click.stopPropagation();
+    this.delete.emit();
+  }
 }

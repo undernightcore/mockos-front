@@ -1,6 +1,6 @@
-<div *ngIf="project" class="project-card">
+<div *ngIf="project" class="project-card" [routerLink]="['/projects', project.id]">
   <img src="assets/icons/drop.svg" />
-  <div [routerLink]="['/projects', project.id]">
+  <div>
     <div>
       <h4>{{ project.name }}</h4>
       <div>
@@ -18,6 +18,6 @@
         ("PAGES.DASHBOARD.DESCRIPTION_NOT_FOUND" | translate)
     }}</span>
   </div>
-  <mat-icon (click)="edit.emit()">edit</mat-icon>
-  <mat-icon (click)="delete.emit()">delete</mat-icon>
+  <mat-icon (click)="openEditModal($event)">edit</mat-icon>
+  <mat-icon (click)="openDeleteModal($event)">delete</mat-icon>
 </div>

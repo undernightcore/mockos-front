@@ -2,9 +2,10 @@
   *ngIf="response"
   class="response-card"
   [ngClass]="response.enabled ? 'enabled' : 'disabled'"
+  (click)="edit.emit()"
 >
-  <img (click)="edit.emit()" src="assets/icons/drop.svg" />
-  <div (click)="edit.emit()" class="response-card__info">
+  <img src="assets/icons/drop.svg" />
+  <div class="response-card__info">
     <h4>{{ response.name }}</h4>
     <span>{{ response.status }}</span>
   </div>
@@ -12,7 +13,7 @@
     <mat-icon *ngIf="!response.enabled" (click)="select.emit()">
       swap_horiz
     </mat-icon>
-    <mat-icon (click)="config.emit()">code</mat-icon>
-    <mat-icon (click)="delete.emit()">delete</mat-icon>
+    <mat-icon (click)="openConfigModal($event)">code</mat-icon>
+    <mat-icon (click)="openDeleteModal($event)">delete</mat-icon>
   </div>
 </div>

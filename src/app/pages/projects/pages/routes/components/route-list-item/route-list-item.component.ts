@@ -8,6 +8,7 @@ import { RouteInterface } from '../../../../../../interfaces/route.interface';
 })
 export class RouteListItemComponent {
   @Input() route!: RouteInterface;
+  @Input() isSelected = false;
 
   constructor() {}
 }

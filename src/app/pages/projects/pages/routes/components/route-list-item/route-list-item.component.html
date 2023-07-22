@@ -1,4 +1,4 @@
-<div class="route-list-item" cdkDragPreviewClass="height-fit" cdkDrag>
+<div class="route-list-item" [class.is-selected]="isSelected" cdkDragPreviewClass="height-fit" cdkDrag>
   <div>
     <h4>{{ route.name }}</h4>
     <div [style.background-color]="route.enabled ? 'green' : 'var(--disabled-color)'"></div>

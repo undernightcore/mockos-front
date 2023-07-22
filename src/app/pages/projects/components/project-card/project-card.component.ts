@@ -10,4 +10,14 @@ export class ProjectCardComponent {
   @Input() project?: ForkedProjectInterface;
   @Output() edit = new EventEmitter<void>();
   @Output() delete = new EventEmitter<void>();
+
+  openEditModal(click: MouseEvent) {
+    click.stopPropagation();
+    this.edit.emit();
+  }
+
+  openDeleteModal(click: MouseEvent) {
+    click.stopPropagation();
+    this.delete.emit();
+  }
 }
