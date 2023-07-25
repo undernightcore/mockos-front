@@ -93,7 +93,9 @@
       "SEARCH_ROUTES": "Search endpoints",
       "MISSING_HEADERS": "There are no headers for this response",
       "EDIT_HEADERS": "Modify headers",
-      "HEADERS_HINT": "Technically, responses always come with a minimum number of headers. For example, the default content-type is 'application/json' for text or 'application/octet-stream' for files"
+      "HEADERS_HINT": "Technically, responses always come with a minimum number of headers. For example, the default content-type is 'application/json' for text or 'application/octet-stream' for files",
+      "DUPLICATE_RESPONSE_TITLE": "Duplicate response",
+      "DUPLICATE_RESPONSE_DESCRIPTION": "You are going to duplicate a response with it's body, status and headers"
     },
     "MEMBERS": {
       "GO_BACK": "Return to project",

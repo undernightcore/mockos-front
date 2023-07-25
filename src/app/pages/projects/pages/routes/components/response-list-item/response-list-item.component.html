@@ -13,6 +13,7 @@
     <mat-icon *ngIf="!response.enabled" (click)="select.emit()">
       swap_horiz
     </mat-icon>
+    <mat-icon (click)="openDuplicateModal($event)">content_copy</mat-icon>
     <mat-icon (click)="openConfigModal($event)">code</mat-icon>
     <mat-icon (click)="openDeleteModal($event)">delete</mat-icon>
   </div>

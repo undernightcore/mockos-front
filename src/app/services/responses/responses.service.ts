@@ -7,7 +7,7 @@ import {
 } from '../../interfaces/response.interface';
 import { CreateResponseInterface } from '../../interfaces/create-response.interface';
 import { MessageInterface } from '../../interfaces/message.interface';
-import { map, Observable } from 'rxjs';
+import { map } from 'rxjs';
 import { ResponseModel } from '../../models/response.model';
 import { EnvService } from '../env/env.service';
 
@@ -67,6 +67,13 @@ export class ResponsesService {
   deleteResponse(responseId: number) {
     return this.httpClient.delete<MessageInterface>(
       `${this.envService.getEnv('apiUrl')}/responses/${responseId}`
+    );
+  }
+
+  duplicateResponse(responseId: number, name: string) {
+    return this.httpClient.post<MessageInterface>(
+      `${this.envService.getEnv('apiUrl')}/responses/${responseId}/duplicate`,
+      { name }
     );
   }
 }

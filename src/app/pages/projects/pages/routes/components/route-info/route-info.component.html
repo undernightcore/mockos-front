@@ -55,6 +55,7 @@
         (delete)="openDeleteResponseModal(response)"
         (select)="selectResponse(response.id)"
         (config)="openHeadersModal(response.id)"
+        (duplicate)="openDuplicateModal(response.id)"
         [response]="response"
         *ngFor="let response of responses; trackBy: trackByResponse"
       ></app-response-list-item>
