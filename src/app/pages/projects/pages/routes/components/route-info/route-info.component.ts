@@ -24,6 +24,7 @@ import { DeviceService } from '../../../../../../services/device/device.service'
 import { EditHeadersResponseComponent } from '../edit-headers-response/edit-headers-response.component';
 import { calculateAmountToFetch } from '../../../../../../utils/page.utils';
 import { SimpleResponseInterface } from '../../../../../../interfaces/response.interface';
+import { DuplicateResponseComponent } from '../duplicate-response/duplicate-response.component';
 
 @Component({
   selector: 'app-route-info',
@@ -163,6 +164,13 @@ export class RouteInfoComponent implements OnInit, OnDestroy {
       width: '60%',
       data: responseId,
       autoFocus: false,
+    });
+  }
+
+  openDuplicateModal(responseId: number) {
+    this.dialogService.open(DuplicateResponseComponent, {
+      autoFocus: false,
+      data: responseId,
     });
   }
 

@@ -30,6 +30,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { RouteInfoComponent } from './components/route-info/route-info.component';
 import { EditHeadersResponseComponent } from './components/edit-headers-response/edit-headers-response.component';
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { DuplicateResponseComponent } from './components/duplicate-response/duplicate-response.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
     CodeInfoComponent,
     RouteInfoComponent,
     EditHeadersResponseComponent,
+    DuplicateResponseComponent,
   ],
   imports: [
     CommonModule,
