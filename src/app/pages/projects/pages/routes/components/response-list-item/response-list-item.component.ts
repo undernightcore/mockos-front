@@ -28,4 +28,9 @@ export class ResponseListItemComponent {
     click.stopPropagation();
     this.duplicate.emit();
   }
+
+  openSelectModal(click: MouseEvent) {
+    click.stopPropagation();
+    this.select.emit();
+  }
 }
