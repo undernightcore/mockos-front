@@ -10,7 +10,7 @@
     <span>{{ response.status }}</span>
   </div>
   <div class="response-card__actions">
-    <mat-icon *ngIf="!response.enabled" (click)="select.emit()">
+    <mat-icon *ngIf="!response.enabled" (click)="openSelectModal($event)">
       swap_horiz
     </mat-icon>
     <mat-icon (click)="openDuplicateModal($event)">content_copy</mat-icon>
