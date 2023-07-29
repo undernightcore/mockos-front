@@ -8,7 +8,7 @@ import { EnvService } from '../env/env.service';
 @Injectable({
   providedIn: 'root',
 })
-export class UserService {
+export class InvitationsService {
   constructor(private httpClient: HttpClient, private envService: EnvService) {}
 
   getInvitations(page = 1, perPage = 10) {

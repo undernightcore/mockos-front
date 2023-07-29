@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user/user.service';
+import { InvitationsService } from '../../services/invitations/invitations.service';
 import { finalize } from 'rxjs';
 import { InvitationInterface } from '../../interfaces/invitation.interface';
 import { MatDialog } from '@angular/material/dialog';
@@ -18,7 +18,7 @@ export class InvitationsComponent implements OnInit {
   maxInvitations = 0;
 
   constructor(
-    private userService: UserService,
+    private invitationsService: InvitationsService,
     private dialogService: MatDialog,
     private translateService: TranslateService
   ) {}
@@ -44,7 +44,7 @@ export class InvitationsComponent implements OnInit {
       .afterClosed()
       .subscribe((accept) => {
         if (!accept) return;
-        this.userService
+        this.invitationsService
           .acceptInvitation(invitation.id)
           .subscribe((message) => {
             openToast(message.message, 'success');
@@ -70,7 +70,7 @@ export class InvitationsComponent implements OnInit {
       .afterClosed()
       .subscribe((reject) => {
         if (!reject) return;
-        this.userService
+        this.invitationsService
           .rejectInvitation(invitation.id)
           .subscribe((message) => {
             openToast(message.message, 'success');
@@ -82,7 +82,7 @@ export class InvitationsComponent implements OnInit {
   getInvitationsList(page: number) {
     if (this.#isFetching) return;
     this.#isFetching = true;
-    this.userService
+    this.invitationsService
       .getInvitations(page, 20)
       .pipe(finalize(() => (this.#isFetching = false)))
       .subscribe((invitations) => {

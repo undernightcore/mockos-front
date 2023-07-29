@@ -28,7 +28,7 @@ export class AuthService {
 
   login(email: string, password: string) {
     return this.http
-      .post<TokenInterface>(`${this.envService.getEnv('apiUrl')}/auth/login`, {
+      .post<TokenInterface>(`${this.envService.getEnv('apiUrl')}/user/login`, {
         email,
         password,
       })
@@ -47,7 +47,7 @@ export class AuthService {
 
   register(name: string, email: string, password: string) {
     return this.http.post<MessageInterface>(
-      `${this.envService.getEnv('apiUrl')}/auth/register`,
+      `${this.envService.getEnv('apiUrl')}/user/register`,
       {
         name,
         email,

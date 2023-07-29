@@ -8,7 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { openToast } from '../../utils/toast.utils';
 import { ProjectModalComponent } from './components/project-modal/project-modal.component';
 import { CreateProjectInterface } from '../../interfaces/create-project.interface';
-import { UserService } from '../../services/user/user.service';
+import { InvitationsService } from '../../services/invitations/invitations.service';
 
 @Component({
   selector: 'app-projects',
@@ -25,7 +25,7 @@ export class ProjectsComponent implements OnInit {
     private projectService: ProjectService,
     private dialogService: MatDialog,
     private translateService: TranslateService,
-    private userService: UserService
+    private invitationsService: InvitationsService
   ) {}
 
   ngOnInit() {
@@ -101,7 +101,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   #getInvitationAmount() {
-    this.userService.getInvitations(1, 1).subscribe((invitations) => {
+    this.invitationsService.getInvitations(1, 1).subscribe((invitations) => {
       this.invitationNumber = invitations.meta.total;
     });
   }
