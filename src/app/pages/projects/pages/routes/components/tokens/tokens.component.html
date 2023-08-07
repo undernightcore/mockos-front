@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>{{ "PAGES.ROUTES.TOKENS_TITLE" | translate }}</h1>
+<div mat-dialog-content class="tokens">
+  <div class="tokens__section">
+    <h2>{{ "PAGES.ROUTES.YOUR_PROJECT_ID" | translate }}</h2>
+    <span>{{ projectId }}</span>
+  </div>
+  <div class="tokens__content"></div>
+</div>
+<div mat-dialog-actions>
+  <button (click)="dialogRef.close()" mat-button>
+    {{ "ACTIONS.ACCEPT" | translate }}
+  </button>
+</div>

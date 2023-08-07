@@ -85,7 +85,7 @@
       "FORKING_PROJECT": "You are forking this project. You'll be the only member at first, but it works just like another project.",
       "FORKED_FROM": "Forked from",
       "CLICK_TO_UPLOAD": "Click to upload file",
-      "INTEGRATE": "Integrate with your project",
+      "TOKENS_TITLE": "Token list",
       "YOUR_PROJECT_ID": "Your project ID",
       "YOUR_TOKEN": "Your token",
       "EMPTY_JSON": "ERROR: You need a body, if you need it empty use {} or \"\"",
