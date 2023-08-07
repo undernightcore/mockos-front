@@ -1,11 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { DialogRef } from '@angular/cdk/dialog';
 import { TokensService } from '../../../../../../services/tokens/tokens.service';
 import { TokensInterface } from '../../../../../../interfaces/tokens.interface';
 import { tap } from 'rxjs';
 import { openToast } from '../../../../../../utils/toast.utils';
 import { TranslateService } from '@ngx-translate/core';
+import { DeleteTokenComponent } from '../delete-token/delete-token.component';
 
 @Component({
   selector: 'app-tokens',
@@ -34,6 +35,16 @@ export class TokensComponent implements OnInit {
     this.#getTokens(page);
   }
 
+  handleDelete(tokenId: number) {
+    this.dialogService
+      .open(DeleteTokenComponent)
+      .afterClosed()
+      .subscribe((deleted: boolean) => {
+        if (!deleted) return;
+        this.#deleteToken(tokenId);
+      });
+  }
+
   showCopied() {
     openToast(
       this.translateService.instant('COMMON.COPIED_TO_CLIPBOARD'),
@@ -55,5 +66,12 @@ export class TokensComponent implements OnInit {
         this.tokens =
           page === 1 ? tokens.data : [...(this.tokens ?? []), ...tokens.data];
       });
+  }
+
+  #deleteToken(tokenId: number) {
+    this.tokensService.deleteToken(tokenId).subscribe(({ message }) => {
+      openToast(message, 'success');
+      this.#getTokens();
+    });
   }
 }

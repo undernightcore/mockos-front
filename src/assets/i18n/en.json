@@ -97,7 +97,9 @@
       "EDIT_HEADERS": "Modify headers",
       "HEADERS_HINT": "Technically, responses always come with a minimum number of headers. For example, the default content-type is 'application/json' for text or 'application/octet-stream' for files",
       "DUPLICATE_RESPONSE_TITLE": "Duplicate response",
-      "DUPLICATE_RESPONSE_DESCRIPTION": "You are going to duplicate a response with it's body, status and headers"
+      "DUPLICATE_RESPONSE_DESCRIPTION": "You are going to duplicate a response with it's body, status and headers",
+      "DELETE_TOKEN": "Are you sure?",
+      "DELETE_TOKEN_DESCRIPTION": "By deleting this token, all clients using it will be unable to connect to Mockos."
     },
     "MEMBERS": {
       "GO_BACK": "Return to project",

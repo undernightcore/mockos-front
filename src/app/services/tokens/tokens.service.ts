@@ -26,7 +26,7 @@ export class TokensService {
   }
 
   deleteToken(tokenId: number) {
-    return this.httpClient.get<MessageInterface>(
+    return this.httpClient.delete<MessageInterface>(
       `${this.envService.getEnv('apiUrl')}/tokens/${tokenId}`
     );
   }

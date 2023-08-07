@@ -32,6 +32,8 @@ import { EditHeadersResponseComponent } from './components/edit-headers-response
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { DuplicateResponseComponent } from './components/duplicate-response/duplicate-response.component';
 import { ClipboardModule } from "@angular/cdk/clipboard";
+import { DeleteTokenComponent } from './components/delete-token/delete-token.component';
+import { CreateTokenComponent } from './components/create-token/create-token.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { ClipboardModule } from "@angular/cdk/clipboard";
     RouteInfoComponent,
     EditHeadersResponseComponent,
     DuplicateResponseComponent,
+    DeleteTokenComponent,
+    CreateTokenComponent,
   ],
   imports: [
     CommonModule,

@@ -97,7 +97,9 @@
       "EDIT_HEADERS": "Editar headers",
       "HEADERS_HINT": "Técnicamente las respuestas siempre vienen con una cantidad mínima de headers. Por ejemplo, el content-type por defecto es 'application/json' para texto o 'application/octet-stream' para ficheros",
       "DUPLICATE_RESPONSE_TITLE": "Duplicar respuesta",
-      "DUPLICATE_RESPONSE_DESCRIPTION": "Vas a duplicar una respuesta, su cuerpo, estado y cabeceras."
+      "DUPLICATE_RESPONSE_DESCRIPTION": "Vas a duplicar una respuesta, su cuerpo, estado y cabeceras.",
+      "DELETE_TOKEN": "¿Estás seguro?",
+      "DELETE_TOKEN_DESCRIPTION": "Al eliminar este token, todos los clientes que lo estén utilizando no podrán conectarse a Mockos."
     },
     "MEMBERS": {
       "GO_BACK": "Volver al proyecto",
