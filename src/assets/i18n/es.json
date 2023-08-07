@@ -19,7 +19,9 @@
     "UPDATED": "Actualizado",
     "ORIGIN": "Origen",
     "FILE": "Archivo",
-    "TEXT": "Texto"
+    "TEXT": "Texto",
+    "CREATED": "Creado",
+    "COPIED_TO_CLIPBOARD": "Copiado al portapapeles"
   },
   "PAGES": {
     "HOME": {

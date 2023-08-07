@@ -1,10 +1,38 @@
-<h1 mat-dialog-title>{{ "PAGES.ROUTES.TOKENS_TITLE" | translate }}</h1>
+<div class="tokens__title" mat-dialog-title>
+  <h1>{{ "PAGES.ROUTES.TOKENS_TITLE" | translate }}</h1>
+  <span
+    >{{ "PAGES.ROUTES.YOUR_PROJECT_ID" | translate }} - {{ projectId }}</span
+  >
+</div>
 <div mat-dialog-content class="tokens">
-  <div class="tokens__section">
-    <h2>{{ "PAGES.ROUTES.YOUR_PROJECT_ID" | translate }}</h2>
-    <span>{{ projectId }}</span>
+  <div
+    *ngIf="tokens"
+    infiniteScroll
+    [maxItems]="maxTokens"
+    [itemsPerPage]="20"
+    [currentItems]="tokens.length"
+    (newPageNeeded)="handlePageChange($event)"
+    class="tokens__content"
+  >
+    <div *ngFor="let token of tokens" class="tokens__content__item">
+      <div class="tokens__content__item__info">
+        <mat-icon>key</mat-icon>
+        <div class="tokens__content__item__info__text">
+          <span>{{ token.name }}</span>
+          <span
+            >{{ "COMMON.CREATED" | translate }}
+            {{ token.created_at | date : "yyyy-MM-dd" }}</span
+          >
+        </div>
+      </div>
+      <div class="tokens__content__item__actions">
+        <mat-icon (click)="showCopied()" [cdkCopyToClipboard]="token.token"
+          >content_copy</mat-icon
+        >
+        <mat-icon>delete</mat-icon>
+      </div>
+    </div>
   </div>
-  <div class="tokens__content"></div>
 </div>
 <div mat-dialog-actions>
   <button (click)="dialogRef.close()" mat-button>

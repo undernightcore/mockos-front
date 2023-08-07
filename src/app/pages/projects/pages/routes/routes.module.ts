@@ -31,6 +31,7 @@ import { RouteInfoComponent } from './components/route-info/route-info.component
 import { EditHeadersResponseComponent } from './components/edit-headers-response/edit-headers-response.component';
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { DuplicateResponseComponent } from './components/duplicate-response/duplicate-response.component';
+import { ClipboardModule } from "@angular/cdk/clipboard";
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { DuplicateResponseComponent } from './components/duplicate-response/dupl
     InfiniteScrollModule,
     MatTabsModule,
     MatMenuModule,
-    MatTooltipModule
+    MatTooltipModule,
+    ClipboardModule
   ]
 })
 export class RoutesModule {}

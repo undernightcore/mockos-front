@@ -155,7 +155,7 @@ export class RoutesComponent implements OnInit, OnDestroy {
     if (!projectId) return;
     this.dialogService.open(TokensComponent, {
       data: projectId,
-      height: '70%',
+      height: '60%',
       width: '50%',
       panelClass: 'mobile-fullscreen',
       autoFocus: false,
