@@ -3,10 +3,10 @@
   {{ "PAGES.ROUTES.DELETE_TOKEN_DESCRIPTION" | translate }}
 </div>
 <div mat-dialog-actions>
-  <button (click)="dialogRef.close(false)" mat-button>
+  <button (click)="goToTokensModal()" mat-button>
     {{ "ACTIONS.CANCEL" | translate }}
   </button>
-  <button (click)="dialogRef.close(true)" mat-button>
+  <button (click)="deleteToken()" mat-button>
     {{ "ACTIONS.ACCEPT" | translate }}
   </button>
 </div>

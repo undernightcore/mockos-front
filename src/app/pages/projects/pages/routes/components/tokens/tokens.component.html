@@ -6,7 +6,7 @@
 </div>
 <div mat-dialog-content class="tokens">
   <div
-    *ngIf="tokens"
+    *ngIf="tokens && tokens.length"
     infiniteScroll
     [maxItems]="maxTokens"
     [itemsPerPage]="20"
@@ -33,9 +33,24 @@
       </div>
     </div>
   </div>
+  <div *ngIf="tokens && !tokens.length" class="tokens__empty">
+    <img src="assets/images/undraw_drink_coffee_0asa.svg" />
+    <div class="tokens__empty__info">
+      <h3>{{ "PAGES.ROUTES.MISSING_TOKENS" | translate }}</h3>
+      <mat-icon
+        [matTooltipClass]="'custom-tooltip'"
+        [matTooltip]="'PAGES.ROUTES.TOKENS_HINT' | translate"
+      >
+        info
+      </mat-icon>
+    </div>
+  </div>
 </div>
-<div mat-dialog-actions>
+<div class="actions" mat-dialog-actions>
   <button (click)="dialogRef.close()" mat-button>
-    {{ "ACTIONS.ACCEPT" | translate }}
+    {{ "ACTIONS.CLOSE" | translate }}
+  </button>
+  <button (click)="handleCreate()" mat-button>
+    {{ "ACTIONS.CREATE_TOKEN" | translate }}
   </button>
 </div>

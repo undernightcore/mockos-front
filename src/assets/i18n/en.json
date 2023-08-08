@@ -99,7 +99,11 @@
       "DUPLICATE_RESPONSE_TITLE": "Duplicate response",
       "DUPLICATE_RESPONSE_DESCRIPTION": "You are going to duplicate a response with it's body, status and headers",
       "DELETE_TOKEN": "Are you sure?",
-      "DELETE_TOKEN_DESCRIPTION": "By deleting this token, all clients using it will be unable to connect to Mockos."
+      "DELETE_TOKEN_DESCRIPTION": "By deleting this token, all clients using it will be unable to connect to Mockos.",
+      "MISSING_TOKENS": "There are no tokens for this project",
+      "TOKENS_HINT": "You won't be able to use Mockos from unauthenticated clients",
+      "CREATE_TOKEN": "Create new token",
+      "CREATE_TOKEN_DESCRIPTION": "You can use these tokens to authenticate from any client"
     },
     "MEMBERS": {
       "GO_BACK": "Return to project",
@@ -139,6 +143,7 @@
     "KEEP_LEFT": "Keep left",
     "KEEP_RIGHT": "Keep right",
     "PRETTIFY_JSON": "Prettify JSON",
-    "CLOSE": "Close"
+    "CLOSE": "Close",
+    "CREATE_TOKEN": "Create token"
   }
 }

@@ -99,7 +99,11 @@
       "DUPLICATE_RESPONSE_TITLE": "Duplicar respuesta",
       "DUPLICATE_RESPONSE_DESCRIPTION": "Vas a duplicar una respuesta, su cuerpo, estado y cabeceras.",
       "DELETE_TOKEN": "¿Estás seguro?",
-      "DELETE_TOKEN_DESCRIPTION": "Al eliminar este token, todos los clientes que lo estén utilizando no podrán conectarse a Mockos."
+      "DELETE_TOKEN_DESCRIPTION": "Al eliminar este token, todos los clientes que lo estén utilizando no podrán conectarse a Mockos.",
+      "MISSING_TOKENS": "No hay tokens disponibles para este proyecto",
+      "TOKENS_HINT": "No podrás usar Mockos desde clientes no autenticados",
+      "CREATE_TOKEN": "Crear nuevo token",
+      "CREATE_TOKEN_DESCRIPTION": "Puedes utilizar estos tokens para autenticarte desde cualquier cliente"
     },
     "MEMBERS": {
       "GO_BACK": "Volver al proyecto",
@@ -139,6 +143,7 @@
     "KEEP_LEFT": "Guardar izquierda",
     "KEEP_RIGHT": "Guardar derecha",
     "PRETTIFY_JSON": "Formatear JSON",
-    "CLOSE": "Cerrar"
+    "CLOSE": "Cerrar",
+    "CREATE_TOKEN": "Crear token"
   }
 }

@@ -7,6 +7,7 @@ import { tap } from 'rxjs';
 import { openToast } from '../../../../../../utils/toast.utils';
 import { TranslateService } from '@ngx-translate/core';
 import { DeleteTokenComponent } from '../delete-token/delete-token.component';
+import { CreateTokenComponent } from '../create-token/create-token.component';
 
 @Component({
   selector: 'app-tokens',
@@ -36,13 +37,17 @@ export class TokensComponent implements OnInit {
   }
 
   handleDelete(tokenId: number) {
-    this.dialogService
-      .open(DeleteTokenComponent)
-      .afterClosed()
-      .subscribe((deleted: boolean) => {
-        if (!deleted) return;
-        this.#deleteToken(tokenId);
-      });
+    this.dialogService.open(DeleteTokenComponent, {
+      data: { tokenId, projectId: this.projectId },
+    });
+    this.dialogRef.close();
+  }
+
+  handleCreate() {
+    this.dialogService.open(CreateTokenComponent, {
+      data: this.projectId,
+    });
+    this.dialogRef.close();
   }
 
   showCopied() {
@@ -66,12 +71,5 @@ export class TokensComponent implements OnInit {
         this.tokens =
           page === 1 ? tokens.data : [...(this.tokens ?? []), ...tokens.data];
       });
-  }
-
-  #deleteToken(tokenId: number) {
-    this.tokensService.deleteToken(tokenId).subscribe(({ message }) => {
-      openToast(message, 'success');
-      this.#getTokens();
-    });
   }
 }

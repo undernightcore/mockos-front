@@ -1,1 +1,25 @@
-<p>create-token works!</p>
+<h1 mat-dialog-title>
+  {{ "PAGES.ROUTES.CREATE_TOKEN" | translate }}
+</h1>
+<div mat-dialog-content>
+  <div class="message">
+    {{ "PAGES.ROUTES.CREATE_TOKEN_DESCRIPTION" | translate }}
+  </div>
+  <form>
+    <mat-form-field>
+      <input
+        [formControl]="nameControl"
+        [placeholder]="'COMMON.NAME' | translate"
+        matInput
+      />
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button (click)="goToTokensModal()" mat-button>
+    {{ "ACTIONS.CANCEL" | translate }}
+  </button>
+  <button (click)="createToken()" mat-button>
+    {{ "ACTIONS.CREATE" | translate }}
+  </button>
+</div>
