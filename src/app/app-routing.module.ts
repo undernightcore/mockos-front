@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
     path: 'projects',
     loadChildren: () =>
       import('./pages/projects/projects.module').then((m) => m.ProjectsModule),
+    canActivateChild: [AuthGuard],
   },
   {
     path: 'invitations',
@@ -30,6 +32,13 @@ const routes: Routes = [
       import('./pages/invitations/invitations.module').then(
         (m) => m.InvitationsModule
       ),
+    canActivateChild: [AuthGuard],
+  },
+  {
+    path: 'user',
+    loadChildren: () =>
+      import('./pages/user/user.module').then((m) => m.UserModule),
+    canActivateChild: [AuthGuard],
   },
   {
     path: '**',
