@@ -19,7 +19,9 @@
     "UPDATED": "Actualizado",
     "ORIGIN": "Origen",
     "FILE": "Archivo",
-    "TEXT": "Texto"
+    "TEXT": "Texto",
+    "CREATED": "Creado",
+    "COPIED_TO_CLIPBOARD": "Copiado al portapapeles"
   },
   "PAGES": {
     "HOME": {
@@ -85,7 +87,7 @@
       "FORKING_PROJECT": "Estás haciendo una rama del proyecto. Serás el único miembro, pero funciona como cualquier otro projecto normal.",
       "FORKED_FROM": "Rama de",
       "CLICK_TO_UPLOAD": "Haz click para subir un archivo",
-      "INTEGRATE": "Integrar con tu proyecto",
+      "TOKENS_TITLE": "Lista de tokens",
       "YOUR_PROJECT_ID": "Tu ID de proyecto",
       "YOUR_TOKEN": "Tu token",
       "EMPTY_JSON": "ERROR: Necesitas un body, si lo quieres vacío usa {} o \"\"",
@@ -95,7 +97,13 @@
       "EDIT_HEADERS": "Editar headers",
       "HEADERS_HINT": "Técnicamente las respuestas siempre vienen con una cantidad mínima de headers. Por ejemplo, el content-type por defecto es 'application/json' para texto o 'application/octet-stream' para ficheros",
       "DUPLICATE_RESPONSE_TITLE": "Duplicar respuesta",
-      "DUPLICATE_RESPONSE_DESCRIPTION": "Vas a duplicar una respuesta, su cuerpo, estado y cabeceras."
+      "DUPLICATE_RESPONSE_DESCRIPTION": "Vas a duplicar una respuesta, su cuerpo, estado y cabeceras.",
+      "DELETE_TOKEN": "¿Estás seguro?",
+      "DELETE_TOKEN_DESCRIPTION": "Al eliminar este token, todos los clientes que lo estén utilizando no podrán conectarse a Mockos.",
+      "MISSING_TOKENS": "No hay tokens disponibles para este proyecto",
+      "TOKENS_HINT": "No podrás usar Mockos desde clientes no autenticados",
+      "CREATE_TOKEN": "Crear nuevo token",
+      "CREATE_TOKEN_DESCRIPTION": "Puedes utilizar estos tokens para autenticarte desde cualquier cliente"
     },
     "MEMBERS": {
       "GO_BACK": "Volver al proyecto",
@@ -135,6 +143,7 @@
     "KEEP_LEFT": "Guardar izquierda",
     "KEEP_RIGHT": "Guardar derecha",
     "PRETTIFY_JSON": "Formatear JSON",
-    "CLOSE": "Cerrar"
+    "CLOSE": "Cerrar",
+    "CREATE_TOKEN": "Crear token"
   }
 }

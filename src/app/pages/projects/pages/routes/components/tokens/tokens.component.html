@@ -1,0 +1,56 @@
+<div class="tokens__title" mat-dialog-title>
+  <h1>{{ "PAGES.ROUTES.TOKENS_TITLE" | translate }}</h1>
+  <span
+    >{{ "PAGES.ROUTES.YOUR_PROJECT_ID" | translate }} - {{ projectId }}</span
+  >
+</div>
+<div mat-dialog-content class="tokens">
+  <div
+    *ngIf="tokens && tokens.length"
+    infiniteScroll
+    [maxItems]="maxTokens"
+    [itemsPerPage]="20"
+    [currentItems]="tokens.length"
+    (newPageNeeded)="handlePageChange($event)"
+    class="tokens__content"
+  >
+    <div *ngFor="let token of tokens" class="tokens__content__item">
+      <div class="tokens__content__item__info">
+        <mat-icon>key</mat-icon>
+        <div class="tokens__content__item__info__text">
+          <span>{{ token.name }}</span>
+          <span
+            >{{ "COMMON.CREATED" | translate }}
+            {{ token.created_at | date : "yyyy-MM-dd" }}</span
+          >
+        </div>
+      </div>
+      <div class="tokens__content__item__actions">
+        <mat-icon (click)="showCopied()" [cdkCopyToClipboard]="token.token"
+          >content_copy</mat-icon
+        >
+        <mat-icon (click)="handleDelete(token.id)">delete</mat-icon>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="tokens && !tokens.length" class="tokens__empty">
+    <img src="assets/images/undraw_drink_coffee_0asa.svg" />
+    <div class="tokens__empty__info">
+      <h3>{{ "PAGES.ROUTES.MISSING_TOKENS" | translate }}</h3>
+      <mat-icon
+        [matTooltipClass]="'custom-tooltip'"
+        [matTooltip]="'PAGES.ROUTES.TOKENS_HINT' | translate"
+      >
+        info
+      </mat-icon>
+    </div>
+  </div>
+</div>
+<div class="actions" mat-dialog-actions>
+  <button (click)="dialogRef.close()" mat-button>
+    {{ "ACTIONS.CLOSE" | translate }}
+  </button>
+  <button (click)="handleCreate()" mat-button>
+    {{ "ACTIONS.CREATE_TOKEN" | translate }}
+  </button>
+</div>

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CodeInfoComponent } from './code-info.component';
+import { TokensComponent } from './tokens.component';
 
-describe('CodeInfoComponent', () => {
-  let component: CodeInfoComponent;
-  let fixture: ComponentFixture<CodeInfoComponent>;
+describe('TokensComponent', () => {
+  let component: TokensComponent;
+  let fixture: ComponentFixture<TokensComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CodeInfoComponent ]
+      declarations: [ TokensComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CodeInfoComponent);
+    fixture = TestBed.createComponent(TokensComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

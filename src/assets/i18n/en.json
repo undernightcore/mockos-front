@@ -19,7 +19,9 @@
     "UPDATED": "Updated",
     "ORIGIN": "Origin",
     "FILE": "File",
-    "TEXT": "Text"
+    "TEXT": "Text",
+    "CREATED": "Created",
+    "COPIED_TO_CLIPBOARD": "Copied to the clipboard"
   },
   "PAGES": {
     "HOME": {
@@ -85,7 +87,7 @@
       "FORKING_PROJECT": "You are forking this project. You'll be the only member at first, but it works just like another project.",
       "FORKED_FROM": "Forked from",
       "CLICK_TO_UPLOAD": "Click to upload file",
-      "INTEGRATE": "Integrate with your project",
+      "TOKENS_TITLE": "Token list",
       "YOUR_PROJECT_ID": "Your project ID",
       "YOUR_TOKEN": "Your token",
       "EMPTY_JSON": "ERROR: You need a body, if you need it empty use {} or \"\"",
@@ -95,7 +97,13 @@
       "EDIT_HEADERS": "Modify headers",
       "HEADERS_HINT": "Technically, responses always come with a minimum number of headers. For example, the default content-type is 'application/json' for text or 'application/octet-stream' for files",
       "DUPLICATE_RESPONSE_TITLE": "Duplicate response",
-      "DUPLICATE_RESPONSE_DESCRIPTION": "You are going to duplicate a response with it's body, status and headers"
+      "DUPLICATE_RESPONSE_DESCRIPTION": "You are going to duplicate a response with it's body, status and headers",
+      "DELETE_TOKEN": "Are you sure?",
+      "DELETE_TOKEN_DESCRIPTION": "By deleting this token, all clients using it will be unable to connect to Mockos.",
+      "MISSING_TOKENS": "There are no tokens for this project",
+      "TOKENS_HINT": "You won't be able to use Mockos from unauthenticated clients",
+      "CREATE_TOKEN": "Create new token",
+      "CREATE_TOKEN_DESCRIPTION": "You can use these tokens to authenticate from any client"
     },
     "MEMBERS": {
       "GO_BACK": "Return to project",
@@ -135,6 +143,7 @@
     "KEEP_LEFT": "Keep left",
     "KEEP_RIGHT": "Keep right",
     "PRETTIFY_JSON": "Prettify JSON",
-    "CLOSE": "Close"
+    "CLOSE": "Close",
+    "CREATE_TOKEN": "Create token"
   }
 }

@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>{{ "PAGES.ROUTES.DELETE_TOKEN" | translate }}</h1>
+<div mat-dialog-content>
+  {{ "PAGES.ROUTES.DELETE_TOKEN_DESCRIPTION" | translate }}
+</div>
+<div mat-dialog-actions>
+  <button (click)="goToTokensModal()" mat-button>
+    {{ "ACTIONS.CANCEL" | translate }}
+  </button>
+  <button (click)="deleteToken()" mat-button>
+    {{ "ACTIONS.ACCEPT" | translate }}
+  </button>
+</div>

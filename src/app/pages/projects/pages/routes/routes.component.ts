@@ -14,7 +14,7 @@ import { ResponsesService } from '../../../../services/responses/responses.servi
 import { ProjectModalComponent } from '../../components/project-modal/project-modal.component';
 import { CreateProjectInterface } from '../../../../interfaces/create-project.interface';
 import { ProjectService } from '../../../../services/project/project.service';
-import { CodeInfoComponent } from './components/code-info/code-info.component';
+import { TokensComponent } from './components/tokens/tokens.component';
 import { DeviceService } from '../../../../services/device/device.service';
 import { FormControl } from '@angular/forms';
 import { calculateAmountToFetch } from '../../../../utils/page.utils';
@@ -151,12 +151,12 @@ export class RoutesComponent implements OnInit, OnDestroy {
       });
   }
 
-  openCodeModal(projectId?: number) {
+  openTokensModal(projectId?: number) {
     if (!projectId) return;
-    this.dialogService.open(CodeInfoComponent, {
+    this.dialogService.open(TokensComponent, {
       data: projectId,
-      height: '80%',
-      width: '70%',
+      height: '60%',
+      width: '50%',
       panelClass: 'mobile-fullscreen',
       autoFocus: false,
     });

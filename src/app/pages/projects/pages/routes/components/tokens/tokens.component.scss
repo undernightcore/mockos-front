@@ -1,0 +1,115 @@
+:host {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.tokens {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  height: 100%;
+  max-height: none;
+
+  &__title {
+    & > h1 {
+      margin: 0;
+    }
+
+    & > span {
+      color: gray;
+      font-weight: normal;
+      font-size: 16px;
+    }
+  }
+
+  &__content {
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    &__item {
+      padding: 16px 20px;
+      border: 1px solid var(--main-color);
+      border-radius: 20px;
+      display: flex;
+      justify-content: space-between;
+
+      &__info {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+
+        &__text {
+          display: flex;
+          flex-direction: column;
+
+          & > span {
+            &:first-child {
+              font-size: 14px;
+              font-weight: bold;
+            }
+
+            &:last-child {
+              font-size: 12px;
+            }
+          }
+        }
+      }
+
+      &__actions {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+
+        & > mat-icon {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  &__empty {
+    height: 100%;
+    display: flex;
+    overflow: auto;
+    gap: 12px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    & > img {
+      height: 50%;
+    }
+
+    &__info {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+
+      & > h3 {
+        margin: 0;
+      }
+
+      & > mat-icon {
+        font-size: 20px;
+        height: 20px;
+        width: 20px;
+      }
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+
+  & > button {
+    &:last-child {
+      background-color: var(--alt-color);
+    }
+  }
+}
