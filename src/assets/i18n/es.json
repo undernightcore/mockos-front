@@ -122,6 +122,13 @@
       "REJECT_TITLE": "¿Quieres rechazar la invitación a {{project}}?",
       "REJECT_MESSAGE": "Si cambias de opinión tendrán que volver a invitarte"
     },
+    "USER": {
+      "USER_TITLE": "Mis datos de usuario",
+      "UPDATE_USER": "Modificar datos de usuario",
+      "UPDATE_USER_DESCRIPTION": "Información relacionada sobre cómo otros usuarios te ven en su lista de miembros",
+      "UPDATE_EMAIL": "Actualizar correo electrónico",
+      "UPDATE_EMAIL_DESCRIPTION": "Te enviaremos un correo de confirmación a tu nueva dirección; una vez verificado, se convertirá en el correo de tu cuenta"
+    },
     "NOT_FOUND": {
       "PAGE_NOT_FOUND": "Página no encontrada",
       "SORRY": "Lo sentimos mucho..."
@@ -144,6 +151,7 @@
     "KEEP_RIGHT": "Guardar derecha",
     "PRETTIFY_JSON": "Formatear JSON",
     "CLOSE": "Cerrar",
-    "CREATE_TOKEN": "Crear token"
+    "CREATE_TOKEN": "Crear token",
+    "SAVE": "Guardar"
   }
 }

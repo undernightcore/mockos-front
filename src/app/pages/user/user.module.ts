@@ -6,6 +6,8 @@ import { UserComponent } from './user.component';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from "@angular/material/button";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { TranslateModule } from "@ngx-translate/core";
 
 @NgModule({
   declarations: [UserComponent],
@@ -14,7 +16,9 @@ import { MatButtonModule } from "@angular/material/button";
     UserRoutingModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    TranslateModule
   ]
 })
 export class UserModule {}

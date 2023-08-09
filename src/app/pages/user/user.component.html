@@ -1,14 +1,33 @@
 <div class="user">
-  <div class="user__info">
-    <h2>Modificar información de usuario</h2>
-    <p>Información relacionada a como otros usuarios te ven en el listado de miembros</p>
-    <mat-form-field appearance="outline">
-      <mat-label>Nombre de usuario</mat-label>
-      <input matInput>
-    </mat-form-field>
-    <button mat-button>Guardar</button>
+  <div class="user__header">
+    <h1>{{ "PAGES.USER.USER_TITLE" | translate }}</h1>
   </div>
-  <div class="user__email">
-    <h2>Modificar correo electrónico</h2>
+  <div class="user__content">
+    <div [formGroup]="userForm" class="user__content__info">
+      <h2>{{ "PAGES.USER.UPDATE_USER" | translate }}</h2>
+      <p>
+        {{ "PAGES.USER.UPDATE_USER_DESCRIPTION" | translate }}
+      </p>
+      <mat-form-field appearance="outline">
+        <mat-label>{{ "COMMON.NAME" | translate }}</mat-label>
+        <input formControlName="name" matInput />
+      </mat-form-field>
+      <button [disabled]="isFetching" (click)="updateUserData()" mat-button>
+        {{ "ACTIONS.SAVE" | translate }}
+      </button>
+    </div>
+    <div class="user__content__info">
+      <h2>{{ "PAGES.USER.UPDATE_EMAIL" | translate }}</h2>
+      <p>
+        {{ "PAGES.USER.UPDATE_EMAIL_DESCRIPTION" | translate }}
+      </p>
+      <mat-form-field appearance="outline">
+        <mat-label>{{ "COMMON.EMAIL" | translate }}</mat-label>
+        <input [formControl]="emailForm" matInput />
+      </mat-form-field>
+      <button [disabled]="isFetching" (click)="updateUserEmail()" mat-button>
+        {{ "ACTIONS.UPDATE" | translate }}
+      </button>
+    </div>
   </div>
 </div>
