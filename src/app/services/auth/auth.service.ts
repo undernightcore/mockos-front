@@ -4,6 +4,7 @@ import { MessageInterface } from '../../interfaces/message.interface';
 import { TokenInterface } from '../../interfaces/token.interface';
 import { BehaviorSubject, tap } from 'rxjs';
 import { EnvService } from '../env/env.service';
+import { UpdateUserData, UserInterface } from '../../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +27,17 @@ export class AuthService {
     }
   }
 
+  register(name: string, email: string, password: string) {
+    return this.http.post<MessageInterface>(
+      `${this.envService.getEnv('apiUrl')}/user/register`,
+      {
+        name,
+        email,
+        password,
+      }
+    );
+  }
+
   login(email: string, password: string) {
     return this.http
       .post<TokenInterface>(`${this.envService.getEnv('apiUrl')}/user/login`, {
@@ -45,14 +57,23 @@ export class AuthService {
     this.#isLogged.next(false);
   }
 
-  register(name: string, email: string, password: string) {
-    return this.http.post<MessageInterface>(
-      `${this.envService.getEnv('apiUrl')}/user/register`,
-      {
-        name,
-        email,
-        password,
-      }
+  getUser() {
+    return this.http.get<UserInterface>(
+      `${this.envService.getEnv('apiUrl')}/user`
+    );
+  }
+
+  modifyUser(data: UpdateUserData) {
+    return this.http.put<MessageInterface>(
+      `${this.envService.getEnv('apiUrl')}/user`,
+      data
+    );
+  }
+
+  modifyEmail(email: string) {
+    return this.http.put<MessageInterface>(
+      `${this.envService.getEnv('apiUrl')}/user/email`,
+      { email }
     );
   }
 }

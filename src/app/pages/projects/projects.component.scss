@@ -8,6 +8,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    margin: 24px;
     gap: 10px;
     padding: 30px;
     background-color: var(--main-color);
@@ -31,7 +32,7 @@
   }
 
   &__body {
-    padding: 10px;
+    padding: 0 24px 24px 24px;
     height: 100%;
     overflow: auto;
 

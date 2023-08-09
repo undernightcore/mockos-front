@@ -12,11 +12,11 @@
   }
   &__actions {
     & > button {
-      &:first-child {
-        color: black;
-      }
-      color: var(--main-color);
-    }
+      color: black;
 
+      &:last-child {
+        color: var(--main-color);
+      }
+    }
   }
 }

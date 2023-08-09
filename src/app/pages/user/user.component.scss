@@ -1,0 +1,72 @@
+.user {
+  font-family: var(--main-font);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: auto;
+  box-sizing: border-box;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    padding: 30px;
+    margin: 24px;
+    background-color: var(--main-color);
+
+    @media (min-width: 500px) {
+      padding: 50px;
+    }
+
+    & > h1 {
+      color: white;
+      margin: 0;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    height: 100%;
+    overflow: auto;
+    padding-bottom: 24px;
+
+    &__info {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 0 24px;
+
+      & > h2 {
+        margin: 0;
+      }
+
+      & > button {
+        background-color: var(--main-color);
+        color: white;
+        width: fit-content;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 34px;
+      }
+
+      & > mat-form-field {
+        width: 50%;
+
+        &::ng-deep {
+          .mat-form-field-wrapper {
+            padding-bottom: 1em;
+          }
+        }
+
+        @media (max-width: 1000px) {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
