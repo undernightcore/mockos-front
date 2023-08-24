@@ -7,18 +7,23 @@
 >
   <div *ngIf="!isMobile || (isMobile && !selectedRoute)" class="routes__list">
     <div class="routes__list__actions">
-      <button (click)="openCreateModal()" mat-button>
-        <mat-icon>add</mat-icon>
-      </button>
-      <button [routerLink]="['/projects', projectId, 'members']" mat-button>
-        <mat-icon>person</mat-icon>
-      </button>
-      <button (click)="openForkModal()" mat-button>
-        <img src="assets/icons/source-control.svg" />
-      </button>
-      <button (click)="openTokensModal(projectId)" mat-button>
-        <mat-icon>key</mat-icon>
-      </button>
+      <div class="routes__list__actions__wrapper">
+        <button (click)="openCreateModal()" mat-button>
+          <mat-icon>add</mat-icon>
+        </button>
+        <button [routerLink]="['/projects', projectId, 'members']" mat-button>
+          <mat-icon>person</mat-icon>
+        </button>
+        <button (click)="openForkModal()" mat-button>
+          <img src="assets/icons/source-control.svg" />
+        </button>
+        <button (click)="openTokensModal(projectId)" mat-button>
+          <mat-icon>key</mat-icon>
+        </button>
+        <a href="https://docs.mockos.io/docs/projects/endpoint/" target="_blank" mat-button>
+          <mat-icon>question_mark</mat-icon>
+        </a>
+      </div>
     </div>
     <div class="routes__list__search">
       <mat-form-field appearance="fill">

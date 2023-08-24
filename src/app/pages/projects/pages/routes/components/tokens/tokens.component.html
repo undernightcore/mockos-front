@@ -47,9 +47,19 @@
   </div>
 </div>
 <div class="actions" mat-dialog-actions>
-  <button (click)="dialogRef.close()" mat-button>
-    {{ "ACTIONS.CLOSE" | translate }}
-  </button>
+  <div class="actions__secondary">
+    <button (click)="dialogRef.close()" mat-button>
+      {{ "ACTIONS.CLOSE" | translate }}
+    </button>
+    <a
+      href="https://docs.mockos.io/docs/integrating/"
+      target="_blank"
+      mat-button
+    >
+      {{ "COMMON.DOCUMENTATION" | translate }}
+    </a>
+  </div>
+
   <button (click)="handleCreate()" mat-button>
     {{ "ACTIONS.CREATE_TOKEN" | translate }}
   </button>

@@ -107,9 +107,17 @@
   display: flex;
   justify-content: space-between;
 
-  & > button {
-    &:last-child {
-      background-color: var(--alt-color);
+  &__secondary {
+    display: flex;
+    gap: 12px;
+
+    & > a {
+        background-color: var(--featured-color);
+        color: white;
     }
+  }
+
+  & > button {
+    background-color: var(--alt-color);
   }
 }

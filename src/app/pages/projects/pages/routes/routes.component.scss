@@ -33,14 +33,23 @@
       position: sticky;
       top: 0;
       background-color: var(--main-color);
-      display: flex;
-      gap: 12px;
-      padding: 12px;
 
-      & > button {
-        background-color: var(--alt-color);
-        img {
-          height: 18px;
+      &__wrapper {
+        display: flex;
+        gap: 12px;
+        padding: 12px;
+        overflow-x: auto;
+
+        & > button {
+          background-color: var(--alt-color);
+          img {
+            height: 18px;
+          }
+        }
+
+        & > a {
+          color: white;
+          background-color: var(--featured-color);
         }
       }
     }
