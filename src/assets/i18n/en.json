@@ -21,7 +21,8 @@
     "FILE": "File",
     "TEXT": "Text",
     "CREATED": "Created",
-    "COPIED_TO_CLIPBOARD": "Copied to the clipboard"
+    "COPIED_TO_CLIPBOARD": "Copied to the clipboard",
+    "DOCUMENTATION": "Documentation"
   },
   "PAGES": {
     "HOME": {
