@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmModalComponent } from '../../components/confirm-modal/confirm-modal.component';
 import { MessageInterface } from '../../interfaces/message.interface';
 import { TranslateService } from '@ngx-translate/core';
+import { EnvService } from '../../services/env/env.service';
 
 @Component({
   selector: 'app-auth',
@@ -26,7 +27,8 @@ export class AuthComponent implements OnInit {
     private authService: AuthService,
     private dialogService: MatDialog,
     private router: Router,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private envService: EnvService
   ) {}
 
   ngOnInit() {
@@ -59,7 +61,11 @@ export class AuthComponent implements OnInit {
       this.dialogService
         .open(ConfirmModalComponent, {
           data: {
-            title: this.translateService.instant('PAGES.AUTH.VERIFY_ACCOUNT'),
+            title: this.translateService.instant(
+              this.envService.getEnv('isVerificationDisabled')
+                ? 'PAGES.AUTH.LOG_IN'
+                : 'PAGES.AUTH.VERIFY_ACCOUNT'
+            ),
             message: (res as MessageInterface).message,
           },
           autoFocus: false,
