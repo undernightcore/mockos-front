@@ -1,15 +1,16 @@
-
 ![Banner](src/assets/images/graphics/mockos-banner.png)
-
 
 ## Mockos - Build mocks for your API without code or config files
 
 Mockos is a **useful and practical tool for developers** looking to test their applications with **custom API mocks**, in a **collaborative way and without the need to install anything** on their computer.
-## Live demo
 
-https://mockos.io (Proudly hosted using Coolify.io)
+## Deployments
+
+- **Application** - https://mockos.io
+- **Documentation** - https://docs.mockos.io
 
 If you find any bugs/vulnerabilities feel free to open a new issue or/and contact me at undernightcore@gmail.com.
+
 ## Features
 
 - Create API responses using a **simple JSON editor**.
@@ -47,12 +48,9 @@ Remember to point your **environment.ts** file to your **locally served backend*
     apiUrl: 'http://localhost:3333'
   };
 ```
-## Host your own instance using Docker Compose
+## Host your own instance using Docker
 
-This will come very soon with v0.0.1...
-
-
-
+- Check our [self-hosting guide.](https://docs.mockos.io/docs/getting-started/self-hosting)
 
 ## Roadmap
 
