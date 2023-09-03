@@ -20,7 +20,11 @@
         <button (click)="openTokensModal(projectId)" mat-button>
           <mat-icon>key</mat-icon>
         </button>
-        <a href="https://docs.mockos.io/docs/projects/endpoint/" target="_blank" mat-button>
+        <a
+          href="https://docs.mockos.io/docs/projects/endpoint/"
+          target="_blank"
+          mat-button
+        >
           <mat-icon>question_mark</mat-icon>
         </a>
       </div>
@@ -44,12 +48,14 @@
       (newPageNeeded)="getRoutes($event, 20)"
       class="routes__list__items"
     >
-      <app-route-list-item
-        (click)="selectRoute(route)"
-        *ngFor="let route of routes; trackBy: trackByRoute"
-        [route]="route"
-        [isSelected]="route.id === selectedRoute?.id"
-      ></app-route-list-item>
+      <ng-container *ngFor="let route of routes; trackBy: trackByRoute">
+        <app-route-list-item
+          *ngIf="!route.is_folder"
+          (click)="selectRoute(route)"
+          [route]="route"
+          [isSelected]="route.id === selectedRoute?.id"
+        ></app-route-list-item>
+      </ng-container>
     </div>
   </div>
   <div *ngIf="!isMobile || (isMobile && selectedRoute)" class="routes__info">

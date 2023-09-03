@@ -1,6 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RoutesService } from '../../../../services/routes/routes.service';
-import { RouteInterface } from '../../../../interfaces/route.interface';
+import {
+  FolderInterface,
+  RouteInterface,
+} from '../../../../interfaces/route.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { openToast } from '../../../../utils/toast.utils';
 import { TranslateService } from '@ngx-translate/core';
@@ -28,7 +31,7 @@ export class RoutesComponent implements OnInit, OnDestroy {
   projectId = Number(this.activatedRoute.snapshot.paramMap.get('id'));
   isMobile = false;
 
-  routes?: RouteInterface[];
+  routes?: (RouteInterface | FolderInterface)[];
   maxRoutes = 0;
   search = new FormControl('');
   selectedRoute?: RouteInterface;
@@ -103,6 +106,7 @@ export class RoutesComponent implements OnInit, OnDestroy {
   }
 
   updateRoute(value: RouteInterface) {
+    if (value.is_folder) return;
     this.routesService.editRoute(value.id, value).subscribe({
       next: (newRoute) => {
         openToast(
@@ -116,7 +120,7 @@ export class RoutesComponent implements OnInit, OnDestroy {
         const oldRoute = this.routes?.find(
           (route) => route.id === this.selectedRoute?.id
         );
-        if (oldRoute) this.selectedRoute = oldRoute;
+        if (oldRoute && !oldRoute.is_folder) this.selectedRoute = oldRoute;
       },
     });
   }
@@ -199,7 +203,7 @@ export class RoutesComponent implements OnInit, OnDestroy {
   }
 
   #listenToSearch() {
-    this.search.valueChanges.pipe(debounceTime(500)).subscribe((search) => {
+    this.search.valueChanges.pipe(debounceTime(500)).subscribe(() => {
       this.getRoutes(1, 20);
     });
   }
@@ -237,7 +241,7 @@ export class RoutesComponent implements OnInit, OnDestroy {
       });
   }
 
-  trackByRoute(index: number, route: RouteInterface) {
+  trackByRoute(index: number, route: RouteInterface | FolderInterface) {
     return `${index}-${route.id}`;
   }
 }
