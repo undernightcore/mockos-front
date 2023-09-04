@@ -20,6 +20,9 @@
         <button (click)="openTokensModal(projectId)" mat-button>
           <mat-icon>key</mat-icon>
         </button>
+        <button (click)="sortingMode = !sortingMode" mat-button>
+          <mat-icon>{{ sortingMode ? "lock_open" : "lock" }}</mat-icon>
+        </button>
         <a
           href="https://docs.mockos.io/docs/projects/endpoint/"
           target="_blank"
@@ -38,6 +41,7 @@
     </div>
     <div
       *ngIf="routes"
+      [cdkDropListSortingDisabled]="!sortingMode"
       (cdkDropListDropped)="handleSort($event)"
       cdkDropList
       [cdkDropListDisabled]="isMobile"
@@ -55,7 +59,13 @@
           [route]="route"
           [isSelected]="route.id === selectedRoute?.id"
         ></app-route-list-item>
-        <app-folder-list-item *ngIf="route.is_folder" [folder]="route"></app-folder-list-item>
+        <app-folder-list-item
+          (mouseenter)="hoveringFolder = route"
+          (mouseleave)="hoveringFolder = undefined"
+          *ngIf="route.is_folder"
+          [folder]="route"
+          [sortable]="sortingMode"
+        ></app-folder-list-item>
       </ng-container>
     </div>
   </div>

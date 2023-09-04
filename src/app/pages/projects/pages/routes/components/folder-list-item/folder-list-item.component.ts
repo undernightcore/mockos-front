@@ -7,7 +7,10 @@ import { FolderInterface } from '../../../../../../interfaces/route.interface';
   styleUrls: ['./folder-list-item.component.scss'],
 })
 export class FolderListItemComponent {
-  sortable = true;
-
+  @Input() sortable = true;
   @Input() folder!: FolderInterface;
+
+  log(an: any) {
+    console.log(an);
+  }
 }

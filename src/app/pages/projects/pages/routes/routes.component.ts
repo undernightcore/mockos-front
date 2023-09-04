@@ -36,6 +36,9 @@ export class RoutesComponent implements OnInit, OnDestroy {
   search = new FormControl('');
   selectedRoute?: RouteInterface;
 
+  sortingMode = true;
+  hoveringFolder?: FolderInterface;
+
   #isFetchingRoutes = false;
 
   generalSubscriptions = new Subscription();
@@ -86,23 +89,11 @@ export class RoutesComponent implements OnInit, OnDestroy {
   }
 
   handleSort(event: CdkDragDrop<any>) {
-    if (!this.routes || this.projectId === undefined) return;
-    const previousState = [...this.routes];
-    moveItemInArray(this.routes, event.previousIndex, event.currentIndex);
-    this.routesService
-      .sortRoute(
-        this.projectId,
-        previousState[event.previousIndex].id,
-        previousState[event.currentIndex].id
-      )
-      .subscribe({
-        next: (result) => {
-          openToast(result.message, 'success');
-        },
-        error: () => {
-          this.routes = previousState;
-        },
-      });
+    if (this.sortingMode) {
+      this.#handleSort(event);
+    } else {
+      this.#handleMove(event);
+    }
   }
 
   updateRoute(value: RouteInterface) {
@@ -238,6 +229,37 @@ export class RoutesComponent implements OnInit, OnDestroy {
         } else if (action === 'deleted') {
           this.selectedRoute = undefined;
         }
+      });
+  }
+
+  #handleSort(event: CdkDragDrop<any>) {
+    if (!this.routes || this.projectId === undefined) return;
+    const previousState = [...this.routes];
+    moveItemInArray(this.routes, event.previousIndex, event.currentIndex);
+    this.routesService
+      .sortRoute(
+        this.projectId,
+        previousState[event.previousIndex].id,
+        previousState[event.currentIndex].id
+      )
+      .subscribe({
+        next: (result) => {
+          openToast(result.message, 'success');
+        },
+        error: () => {
+          this.routes = previousState;
+        },
+      });
+  }
+
+  #handleMove(event: CdkDragDrop<any>) {
+    if (!this.hoveringFolder || !this.routes) return;
+    const draggingRoute = this.routes[event.previousIndex];
+    if (!draggingRoute || draggingRoute.is_folder) return;
+    this.routesService
+      .moveRoute(this.projectId, draggingRoute.id, this.hoveringFolder.id)
+      .subscribe(({ message }) => {
+        openToast(message, 'success');
       });
   }
 
