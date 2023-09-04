@@ -55,6 +55,7 @@
           [route]="route"
           [isSelected]="route.id === selectedRoute?.id"
         ></app-route-list-item>
+        <app-folder-list-item *ngIf="route.is_folder" [folder]="route"></app-folder-list-item>
       </ng-container>
     </div>
   </div>

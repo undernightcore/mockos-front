@@ -28,6 +28,12 @@
     right: 16px;
   }
 
+  & > mat-icon {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+  }
+
   h4, p {
     margin-bottom: 0;
   }
