@@ -20,7 +20,11 @@
         <button (click)="openTokensModal(projectId)" mat-button>
           <mat-icon>key</mat-icon>
         </button>
-        <button (click)="sortingMode = !sortingMode" mat-button>
+        <button
+          *ngIf="!selectedFolder"
+          (click)="sortingMode = !sortingMode"
+          mat-button
+        >
           <mat-icon>{{ sortingMode ? "lock_open" : "lock" }}</mat-icon>
         </button>
         <a
@@ -31,6 +35,13 @@
           <mat-icon>question_mark</mat-icon>
         </a>
       </div>
+    </div>
+    <div *ngIf="selectedFolder" class="routes__list__folder">
+      <button (click)="selectFolder()" mat-button>
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <mat-icon>folder_open</mat-icon>
+      <h4>{{ selectedFolder.name }}</h4>
     </div>
     <div class="routes__list__search">
       <mat-form-field appearance="fill">
@@ -49,7 +60,9 @@
       [maxItems]="maxRoutes"
       [currentItems]="routes.length"
       [itemsPerPage]="20"
-      (newPageNeeded)="getRoutes($event, 20)"
+      (newPageNeeded)="
+        getRoutes($event, 20, this.selectedFolder?.id).subscribe()
+      "
       class="routes__list__items"
     >
       <ng-container *ngFor="let route of routes; trackBy: trackByRoute">
@@ -60,6 +73,7 @@
           [isSelected]="route.id === selectedRoute?.id"
         ></app-route-list-item>
         <app-folder-list-item
+          (click)="selectFolder(route)"
           (mouseenter)="hoveringFolder = route"
           (mouseleave)="hoveringFolder = undefined"
           *ngIf="route.is_folder"

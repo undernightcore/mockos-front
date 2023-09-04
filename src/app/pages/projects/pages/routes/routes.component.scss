@@ -4,8 +4,8 @@
 
   &__list {
     height: 100%;
-    width: 450px;
-    min-width: 450px;
+    width: 500px;
+    min-width: 500px;
     border-right: 1px solid var(--disabled-color);
     display: flex;
     flex-direction: column;
@@ -25,6 +25,23 @@
         mat-icon {
           cursor: pointer;
         }
+      }
+    }
+
+    &__folder {
+      padding: 12px 24px;
+      background-color: var(--alt-color);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      & > button {
+        color: white;
+        background-color: var(--featured-color);
+      }
+
+      & > h4 {
+        margin: 0;
       }
     }
 
