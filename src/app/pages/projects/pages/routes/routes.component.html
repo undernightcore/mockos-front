@@ -76,6 +76,8 @@
           (click)="selectRoute(route)"
           [route]="route"
           [isSelected]="route.id === selectedRoute?.id"
+          [showBackButton]="!!selectedFolder"
+          (back)="moveToRoot(route)"
         ></app-route-list-item>
         <app-folder-list-item
           (click)="selectFolder(route)"

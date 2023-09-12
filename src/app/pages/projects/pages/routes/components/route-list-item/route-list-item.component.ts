@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouteInterface } from '../../../../../../interfaces/route.interface';
 
 @Component({
@@ -9,6 +9,12 @@ import { RouteInterface } from '../../../../../../interfaces/route.interface';
 export class RouteListItemComponent {
   @Input() route!: RouteInterface;
   @Input() isSelected = false;
+  @Input() showBackButton = false;
 
-  constructor() {}
+  @Output() back = new EventEmitter();
+
+  goBack(event: MouseEvent) {
+    event.stopPropagation();
+    this.back.emit();
+  }
 }

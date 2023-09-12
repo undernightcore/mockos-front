@@ -4,23 +4,35 @@
   border-bottom: 1px solid var(--disabled-color);
   background-color: white;
   cursor: pointer;
+  display: flex;
+  gap: 12px;
+  align-items: center;
 
   &:hover {
     background-color: var(--soft-gray);
   }
 
-  & > div {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  & > button {
+    height: fit-content;
+    width: fit-content;
+    background-color: var(--alt-color);
+  }
 
+  & > div {
     & > div {
-      height: 8px;
-      width: 8px;
-      border-radius: 25px;
-      background-color: red;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      & > div {
+        height: 8px;
+        width: 8px;
+        border-radius: 25px;
+        background-color: red;
+      }
     }
   }
+
 
   app-http-chip {
     position: absolute;

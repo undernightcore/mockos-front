@@ -84,7 +84,7 @@ export class RoutesService {
     );
   }
 
-  moveRoute(projectId: number, origin: number, destination: number) {
+  moveRoute(projectId: number, origin: number, destination: number | null) {
     return this.httpClient.post<MessageInterface>(
       `${this.envService.getEnv('apiUrl')}/projects/${projectId}/move`,
       { origin, destination }

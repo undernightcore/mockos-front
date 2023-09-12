@@ -128,6 +128,14 @@ export class RoutesComponent implements OnInit, OnDestroy {
     });
   }
 
+  moveToRoot(route: RouteInterface) {
+    this.routesService
+      .moveRoute(this.projectId, route.id, null)
+      .subscribe(({ message }) => {
+        openToast(message, 'success');
+      });
+  }
+
   handleSort(event: CdkDragDrop<any>) {
     if (this.sortingMode) {
       this.#handleSort(event);
