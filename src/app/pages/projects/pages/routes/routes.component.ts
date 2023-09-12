@@ -297,19 +297,24 @@ export class RoutesComponent implements OnInit, OnDestroy {
   }
 
   #createRoute(data: CreateRouteInterface) {
-    this.routesService.createRoute(this.projectId, data).subscribe({
-      next: (newRoute) => {
-        openToast(
-          this.translateService.instant('PAGES.ROUTES.CREATED_SUCCESSFULLY', {
-            route: newRoute.name,
-          }),
-          'success'
-        );
-      },
-      error: () => {
-        this.openCreateModal(false, data);
-      },
-    });
+    this.routesService
+      .createRoute(this.projectId, {
+        ...data,
+        parentFolderId: this.selectedFolder?.id ?? null,
+      })
+      .subscribe({
+        next: (newRoute) => {
+          openToast(
+            this.translateService.instant('PAGES.ROUTES.CREATED_SUCCESSFULLY', {
+              route: newRoute.name,
+            }),
+            'success'
+          );
+        },
+        error: () => {
+          this.openCreateModal(false, data);
+        },
+      });
   }
 
   #createFolder(data: CreateFolderInterface) {
