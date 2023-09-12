@@ -34,6 +34,7 @@ import { DuplicateResponseComponent } from './components/duplicate-response/dupl
 import { ClipboardModule } from "@angular/cdk/clipboard";
 import { DeleteTokenComponent } from './components/delete-token/delete-token.component';
 import { CreateTokenComponent } from './components/create-token/create-token.component';
+import { FolderListItemComponent } from './components/folder-list-item/folder-list-item.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { CreateTokenComponent } from './components/create-token/create-token.com
     DuplicateResponseComponent,
     DeleteTokenComponent,
     CreateTokenComponent,
+    FolderListItemComponent,
   ],
   imports: [
     CommonModule,

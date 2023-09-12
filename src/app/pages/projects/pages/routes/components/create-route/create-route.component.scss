@@ -1,4 +1,16 @@
-form {
-  display: flex;
-  flex-direction: column;
+.create-route {
+  &::ng-deep {
+    .mat-tab-body-content {
+      overflow: unset;
+      padding-top: 10px;
+    }
+    mat-tab-body {
+      overflow: unset;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
 }

@@ -8,7 +8,7 @@
   <div *ngIf="!isMobile || (isMobile && !selectedRoute)" class="routes__list">
     <div class="routes__list__actions">
       <div class="routes__list__actions__wrapper">
-        <button (click)="openCreateModal()" mat-button>
+        <button (click)="openCreateModal(false)" mat-button>
           <mat-icon>add</mat-icon>
         </button>
         <button [routerLink]="['/projects', projectId, 'members']" mat-button>
@@ -20,10 +20,33 @@
         <button (click)="openTokensModal(projectId)" mat-button>
           <mat-icon>key</mat-icon>
         </button>
-        <a href="https://docs.mockos.io/docs/projects/endpoint/" target="_blank" mat-button>
+        <button
+          *ngIf="!selectedFolder"
+          (click)="sortingMode = !sortingMode"
+          mat-button
+        >
+          <mat-icon>{{ sortingMode ? "lock_open" : "lock" }}</mat-icon>
+        </button>
+        <a
+          href="https://docs.mockos.io/docs/projects/endpoint/"
+          target="_blank"
+          mat-button
+        >
           <mat-icon>question_mark</mat-icon>
         </a>
       </div>
+    </div>
+    <div *ngIf="selectedFolder" class="routes__list__folder">
+      <button (click)="selectFolder()" mat-button>
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <div>
+        <mat-icon>folder_open</mat-icon>
+        <h4>{{ selectedFolder.name }}</h4>
+      </div>
+      <button (click)="deleteFolder(selectedFolder)" mat-button>
+        <mat-icon>delete</mat-icon>
+      </button>
     </div>
     <div class="routes__list__search">
       <mat-form-field appearance="fill">
@@ -34,6 +57,7 @@
     </div>
     <div
       *ngIf="routes"
+      [cdkDropListSortingDisabled]="!sortingMode"
       (cdkDropListDropped)="handleSort($event)"
       cdkDropList
       [cdkDropListDisabled]="isMobile"
@@ -41,15 +65,29 @@
       [maxItems]="maxRoutes"
       [currentItems]="routes.length"
       [itemsPerPage]="20"
-      (newPageNeeded)="getRoutes($event, 20)"
+      (newPageNeeded)="
+        getRoutes($event, 20, this.selectedFolder?.id).subscribe()
+      "
       class="routes__list__items"
     >
-      <app-route-list-item
-        (click)="selectRoute(route)"
-        *ngFor="let route of routes; trackBy: trackByRoute"
-        [route]="route"
-        [isSelected]="route.id === selectedRoute?.id"
-      ></app-route-list-item>
+      <ng-container *ngFor="let route of routes; trackBy: trackByRoute">
+        <app-route-list-item
+          *ngIf="!route.is_folder"
+          (click)="selectRoute(route)"
+          [route]="route"
+          [isSelected]="route.id === selectedRoute?.id"
+          [showBackButton]="!!selectedFolder"
+          (back)="moveToRoot(route)"
+        ></app-route-list-item>
+        <app-folder-list-item
+          (click)="selectFolder(route)"
+          (mouseenter)="hoveringFolder = route"
+          (mouseleave)="hoveringFolder = undefined"
+          *ngIf="route.is_folder"
+          [folder]="route"
+          [sortable]="sortingMode"
+        ></app-folder-list-item>
+      </ng-container>
     </div>
   </div>
   <div *ngIf="!isMobile || (isMobile && selectedRoute)" class="routes__info">

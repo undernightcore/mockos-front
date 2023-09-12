@@ -5,4 +5,5 @@ export interface CreateRouteInterface {
   method: HttpMethods;
   endpoint: string;
   enabled: boolean;
+  parentFolderId?: number | null;
 }

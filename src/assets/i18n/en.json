@@ -22,7 +22,9 @@
     "TEXT": "Text",
     "CREATED": "Created",
     "COPIED_TO_CLIPBOARD": "Copied to the clipboard",
-    "DOCUMENTATION": "Documentation"
+    "DOCUMENTATION": "Documentation",
+    "ROUTE": "Route",
+    "FOLDER": "Folder"
   },
   "PAGES": {
     "HOME": {
@@ -104,7 +106,8 @@
       "MISSING_TOKENS": "There are no tokens for this project",
       "TOKENS_HINT": "You won't be able to use Mockos from unauthenticated clients",
       "CREATE_TOKEN": "Create new token",
-      "CREATE_TOKEN_DESCRIPTION": "You can use these tokens to authenticate from any client"
+      "CREATE_TOKEN_DESCRIPTION": "You can use these tokens to authenticate from any client",
+      "CREATE_NEW_FOLDER": "Create new folder"
     },
     "MEMBERS": {
       "GO_BACK": "Return to project",

@@ -1,6 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RoutesService } from '../../../../services/routes/routes.service';
-import { RouteInterface } from '../../../../interfaces/route.interface';
+import {
+  FolderInterface,
+  RouteInterface,
+} from '../../../../interfaces/route.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { openToast } from '../../../../utils/toast.utils';
 import { TranslateService } from '@ngx-translate/core';
@@ -8,9 +11,16 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateRouteComponent } from './components/create-route/create-route.component';
 import { CreateRouteInterface } from '../../../../interfaces/create-route.interface';
 import { RealtimeService } from '../../../../services/realtime/realtime.service';
-import { debounceTime, finalize, Subscription } from 'rxjs';
+import {
+  debounceTime,
+  filter,
+  finalize,
+  iif,
+  of,
+  Subscription,
+  tap,
+} from 'rxjs';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { ResponsesService } from '../../../../services/responses/responses.service';
 import { ProjectModalComponent } from '../../components/project-modal/project-modal.component';
 import { CreateProjectInterface } from '../../../../interfaces/create-project.interface';
 import { ProjectService } from '../../../../services/project/project.service';
@@ -18,6 +28,7 @@ import { TokensComponent } from './components/tokens/tokens.component';
 import { DeviceService } from '../../../../services/device/device.service';
 import { FormControl } from '@angular/forms';
 import { calculateAmountToFetch } from '../../../../utils/page.utils';
+import { CreateFolderInterface } from '../../../../interfaces/create-folder.interface';
 
 @Component({
   selector: 'app-routes',
@@ -28,10 +39,14 @@ export class RoutesComponent implements OnInit, OnDestroy {
   projectId = Number(this.activatedRoute.snapshot.paramMap.get('id'));
   isMobile = false;
 
-  routes?: RouteInterface[];
+  routes?: (RouteInterface | FolderInterface)[];
   maxRoutes = 0;
   search = new FormControl('');
   selectedRoute?: RouteInterface;
+  selectedFolder?: FolderInterface;
+
+  sortingMode = true;
+  hoveringFolder?: FolderInterface;
 
   #isFetchingRoutes = false;
 
@@ -42,7 +57,6 @@ export class RoutesComponent implements OnInit, OnDestroy {
   constructor(
     private routesService: RoutesService,
     private projectsService: ProjectService,
-    private responsesService: ResponsesService,
     private activatedRoute: ActivatedRoute,
     private translateService: TranslateService,
     private dialogService: MatDialog,
@@ -55,7 +69,7 @@ export class RoutesComponent implements OnInit, OnDestroy {
     this.#listenToMediaQuery();
     this.#listenToSearch();
     this.#listenToProjectChanges();
-    this.getRoutes(1);
+    this.getRoutes(1).subscribe();
   }
 
   ngOnDestroy() {
@@ -64,17 +78,33 @@ export class RoutesComponent implements OnInit, OnDestroy {
     this.routeSubscription?.unsubscribe();
   }
 
-  getRoutes(page: number, perPage = 20) {
-    if (this.projectId === undefined || this.#isFetchingRoutes) return;
-    this.#isFetchingRoutes = true;
-    this.routesService
-      .getRoutes(this.projectId, this.search.value || undefined, page, perPage)
-      .pipe(finalize(() => (this.#isFetchingRoutes = false)))
-      .subscribe((routes) => {
-        this.routes =
-          page === 1 ? routes.data : [...(this.routes ?? []), ...routes.data];
-        this.maxRoutes = routes.meta.total;
-      });
+  getRoutes(page: number, perPage = 20, folderId?: number) {
+    return iif(
+      () => !this.#isFetchingRoutes,
+      this.routesService
+        .getRoutes(
+          this.projectId,
+          folderId,
+          this.search.value || undefined,
+          page,
+          perPage
+        )
+        .pipe(
+          finalize(() => (this.#isFetchingRoutes = false)),
+          tap({
+            subscribe: () => (this.#isFetchingRoutes = true),
+            next: (routes) => {
+              this.routes =
+                page === 1
+                  ? routes.data
+                  : [...(this.routes ?? []), ...routes.data];
+              this.maxRoutes = routes.meta.total;
+            },
+            finalize: () => (this.#isFetchingRoutes = false),
+          })
+        ),
+      of(undefined)
+    );
   }
 
   selectRoute(route: RouteInterface) {
@@ -82,27 +112,40 @@ export class RoutesComponent implements OnInit, OnDestroy {
     this.#listenToRouteChanges(route.id);
   }
 
-  handleSort(event: CdkDragDrop<any>) {
-    if (!this.routes || this.projectId === undefined) return;
-    const previousState = [...this.routes];
-    moveItemInArray(this.routes, event.previousIndex, event.currentIndex);
+  selectFolder(folder?: FolderInterface) {
+    this.routeSubscription?.unsubscribe();
+    this.selectedRoute = undefined;
+    this.getRoutes(1, undefined, folder?.id).subscribe(() => {
+      this.selectedFolder = folder;
+      this.sortingMode = true;
+    });
+  }
+
+  deleteFolder(folder: FolderInterface) {
+    this.selectFolder();
+    this.routesService.deleteRoute(folder.id).subscribe(({ message }) => {
+      openToast(message, 'success');
+    });
+  }
+
+  moveToRoot(route: RouteInterface) {
     this.routesService
-      .sortRoute(
-        this.projectId,
-        previousState[event.previousIndex].id,
-        previousState[event.currentIndex].id
-      )
-      .subscribe({
-        next: (result) => {
-          openToast(result.message, 'success');
-        },
-        error: () => {
-          this.routes = previousState;
-        },
+      .moveRoute(this.projectId, route.id, null)
+      .subscribe(({ message }) => {
+        openToast(message, 'success');
       });
   }
 
+  handleSort(event: CdkDragDrop<any>) {
+    if (this.sortingMode) {
+      this.#handleSort(event);
+    } else {
+      this.#handleMove(event);
+    }
+  }
+
   updateRoute(value: RouteInterface) {
+    if (value.is_folder) return;
     this.routesService.editRoute(value.id, value).subscribe({
       next: (newRoute) => {
         openToast(
@@ -116,39 +159,36 @@ export class RoutesComponent implements OnInit, OnDestroy {
         const oldRoute = this.routes?.find(
           (route) => route.id === this.selectedRoute?.id
         );
-        if (oldRoute) this.selectedRoute = oldRoute;
+        if (oldRoute && !oldRoute.is_folder) this.selectedRoute = oldRoute;
       },
     });
   }
 
-  openCreateModal(retryData?: CreateRouteInterface) {
+  openCreateModal(
+    isFolder: boolean,
+    retryData?: CreateRouteInterface | CreateFolderInterface
+  ) {
     this.dialogService
       .open(CreateRouteComponent, {
         closeOnNavigation: true,
         width: '500px',
-        data: retryData,
+        data: { isFolder, data: retryData },
         autoFocus: false,
       })
       .afterClosed()
-      .subscribe((data: CreateRouteInterface | undefined) => {
-        if (!data || this.projectId === undefined) return;
-        this.routesService.createRoute(this.projectId, data).subscribe({
-          next: (newRoute) => {
-            openToast(
-              this.translateService.instant(
-                'PAGES.ROUTES.CREATED_SUCCESSFULLY',
-                {
-                  route: newRoute.name,
-                }
-              ),
-              'success'
-            );
-          },
-          error: () => {
-            this.openCreateModal(data);
-          },
-        });
-      });
+      .pipe(filter((data) => data))
+      .subscribe(
+        (data?: {
+          isFolder: boolean;
+          data: CreateRouteInterface | CreateFolderInterface;
+        }) => {
+          if (data!.isFolder) {
+            this.#createFolder(data!.data as CreateFolderInterface);
+          } else {
+            this.#createRoute(data!.data as CreateRouteInterface);
+          }
+        }
+      );
   }
 
   openTokensModal(projectId?: number) {
@@ -199,8 +239,8 @@ export class RoutesComponent implements OnInit, OnDestroy {
   }
 
   #listenToSearch() {
-    this.search.valueChanges.pipe(debounceTime(500)).subscribe((search) => {
-      this.getRoutes(1, 20);
+    this.search.valueChanges.pipe(debounceTime(500)).subscribe(() => {
+      this.getRoutes(1, 20, this.selectedFolder?.id).subscribe();
     });
   }
 
@@ -213,8 +253,9 @@ export class RoutesComponent implements OnInit, OnDestroy {
         if (action === 'updated') {
           this.getRoutes(
             1,
-            calculateAmountToFetch(this.routes?.length ?? 0, 20)
-          );
+            calculateAmountToFetch(this.routes?.length ?? 0, 20),
+            this.selectedFolder?.id
+          ).subscribe();
         } else if (action === 'deleted') {
           this.router.navigate(['/projects']);
         }
@@ -237,7 +278,75 @@ export class RoutesComponent implements OnInit, OnDestroy {
       });
   }
 
-  trackByRoute(index: number, route: RouteInterface) {
+  #handleSort(event: CdkDragDrop<any>) {
+    if (!this.routes || this.projectId === undefined) return;
+    const previousState = [...this.routes];
+    moveItemInArray(this.routes, event.previousIndex, event.currentIndex);
+    this.routesService
+      .sortRoute(
+        this.projectId,
+        previousState[event.previousIndex].id,
+        previousState[event.currentIndex].id
+      )
+      .subscribe({
+        next: (result) => {
+          openToast(result.message, 'success');
+        },
+        error: () => {
+          this.routes = previousState;
+        },
+      });
+  }
+
+  #handleMove(event: CdkDragDrop<any>) {
+    if (!this.hoveringFolder || !this.routes) return;
+    const draggingRoute = this.routes[event.previousIndex];
+    if (!draggingRoute || draggingRoute.is_folder) return;
+    this.routesService
+      .moveRoute(this.projectId, draggingRoute.id, this.hoveringFolder.id)
+      .subscribe(({ message }) => {
+        openToast(message, 'success');
+      });
+  }
+
+  #createRoute(data: CreateRouteInterface) {
+    this.routesService
+      .createRoute(this.projectId, {
+        ...data,
+        parentFolderId: this.selectedFolder?.id ?? null,
+      })
+      .subscribe({
+        next: (newRoute) => {
+          openToast(
+            this.translateService.instant('PAGES.ROUTES.CREATED_SUCCESSFULLY', {
+              route: newRoute.name,
+            }),
+            'success'
+          );
+        },
+        error: () => {
+          this.openCreateModal(false, data);
+        },
+      });
+  }
+
+  #createFolder(data: CreateFolderInterface) {
+    this.routesService.createFolder(this.projectId, data).subscribe({
+      next: (newRoute) => {
+        openToast(
+          this.translateService.instant('PAGES.ROUTES.CREATED_SUCCESSFULLY', {
+            route: newRoute.name,
+          }),
+          'success'
+        );
+      },
+      error: () => {
+        this.openCreateModal(true, data);
+      },
+    });
+  }
+
+  trackByRoute(index: number, route: RouteInterface | FolderInterface) {
     return `${index}-${route.id}`;
   }
 }
