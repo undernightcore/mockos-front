@@ -32,16 +32,21 @@
       padding: 12px 24px;
       background-color: var(--alt-color);
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 12px;
 
       & > button {
         color: white;
         background-color: var(--featured-color);
       }
 
-      & > h4 {
-        margin: 0;
+      & > div {
+        display: flex;
+        gap: 12px;
+
+        & > h4 {
+          margin: 0;
+        }
       }
     }
 

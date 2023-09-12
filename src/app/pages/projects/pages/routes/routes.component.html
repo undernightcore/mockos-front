@@ -40,8 +40,13 @@
       <button (click)="selectFolder()" mat-button>
         <mat-icon>arrow_back</mat-icon>
       </button>
-      <mat-icon>folder_open</mat-icon>
-      <h4>{{ selectedFolder.name }}</h4>
+      <div>
+        <mat-icon>folder_open</mat-icon>
+        <h4>{{ selectedFolder.name }}</h4>
+      </div>
+      <button (click)="deleteFolder(selectedFolder)" mat-button>
+        <mat-icon>delete</mat-icon>
+      </button>
     </div>
     <div class="routes__list__search">
       <mat-form-field appearance="fill">

@@ -21,7 +21,6 @@ import {
   tap,
 } from 'rxjs';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { ResponsesService } from '../../../../services/responses/responses.service';
 import { ProjectModalComponent } from '../../components/project-modal/project-modal.component';
 import { CreateProjectInterface } from '../../../../interfaces/create-project.interface';
 import { ProjectService } from '../../../../services/project/project.service';
@@ -58,7 +57,6 @@ export class RoutesComponent implements OnInit, OnDestroy {
   constructor(
     private routesService: RoutesService,
     private projectsService: ProjectService,
-    private responsesService: ResponsesService,
     private activatedRoute: ActivatedRoute,
     private translateService: TranslateService,
     private dialogService: MatDialog,
@@ -120,6 +118,13 @@ export class RoutesComponent implements OnInit, OnDestroy {
     this.getRoutes(1, undefined, folder?.id).subscribe(() => {
       this.selectedFolder = folder;
       this.sortingMode = true;
+    });
+  }
+
+  deleteFolder(folder: FolderInterface) {
+    this.selectFolder();
+    this.routesService.deleteRoute(folder.id).subscribe(({ message }) => {
+      openToast(message, 'success');
     });
   }
 
