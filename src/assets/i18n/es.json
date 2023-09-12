@@ -22,7 +22,9 @@
     "TEXT": "Texto",
     "CREATED": "Creado",
     "COPIED_TO_CLIPBOARD": "Copiado al portapapeles",
-    "DOCUMENTATION": "Documentación"
+    "DOCUMENTATION": "Documentación",
+    "ROUTE": "Ruta",
+    "FOLDER": "Carpeta"
   },
   "PAGES": {
     "HOME": {
@@ -104,7 +106,8 @@
       "MISSING_TOKENS": "No hay tokens disponibles para este proyecto",
       "TOKENS_HINT": "No podrás usar Mockos desde clientes no autenticados",
       "CREATE_TOKEN": "Crear nuevo token",
-      "CREATE_TOKEN_DESCRIPTION": "Puedes utilizar estos tokens para autenticarte desde cualquier cliente"
+      "CREATE_TOKEN_DESCRIPTION": "Puedes utilizar estos tokens para autenticarte desde cualquier cliente",
+      "CREATE_NEW_FOLDER": "Crear nueva carpeta"
     },
     "MEMBERS": {
       "GO_BACK": "Volver al proyecto",

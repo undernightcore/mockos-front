@@ -11,7 +11,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateRouteComponent } from './components/create-route/create-route.component';
 import { CreateRouteInterface } from '../../../../interfaces/create-route.interface';
 import { RealtimeService } from '../../../../services/realtime/realtime.service';
-import { debounceTime, finalize, iif, of, Subscription, tap } from 'rxjs';
+import {
+  debounceTime,
+  filter,
+  finalize,
+  iif,
+  of,
+  Subscription,
+  tap,
+} from 'rxjs';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ResponsesService } from '../../../../services/responses/responses.service';
 import { ProjectModalComponent } from '../../components/project-modal/project-modal.component';
@@ -21,6 +29,7 @@ import { TokensComponent } from './components/tokens/tokens.component';
 import { DeviceService } from '../../../../services/device/device.service';
 import { FormControl } from '@angular/forms';
 import { calculateAmountToFetch } from '../../../../utils/page.utils';
+import { CreateFolderInterface } from '../../../../interfaces/create-folder.interface';
 
 @Component({
   selector: 'app-routes',
@@ -142,19 +151,31 @@ export class RoutesComponent implements OnInit, OnDestroy {
     });
   }
 
-  openCreateModal(retryData?: CreateRouteInterface) {
+  openCreateModal(
+    isFolder: boolean,
+    retryData?: CreateRouteInterface | CreateFolderInterface
+  ) {
     this.dialogService
       .open(CreateRouteComponent, {
         closeOnNavigation: true,
         width: '500px',
-        data: retryData,
+        data: { isFolder, data: retryData },
         autoFocus: false,
       })
       .afterClosed()
-      .subscribe((data: CreateRouteInterface | undefined) => {
-        if (!data) return;
-        this.#createRoute(data);
-      });
+      .pipe(filter((data) => data))
+      .subscribe(
+        (data?: {
+          isFolder: boolean;
+          data: CreateRouteInterface | CreateFolderInterface;
+        }) => {
+          if (data!.isFolder) {
+            this.#createFolder(data!.data as CreateFolderInterface);
+          } else {
+            this.#createRoute(data!.data as CreateRouteInterface);
+          }
+        }
+      );
   }
 
   openTokensModal(projectId?: number) {
@@ -286,7 +307,23 @@ export class RoutesComponent implements OnInit, OnDestroy {
         );
       },
       error: () => {
-        this.openCreateModal(data);
+        this.openCreateModal(false, data);
+      },
+    });
+  }
+
+  #createFolder(data: CreateFolderInterface) {
+    this.routesService.createFolder(this.projectId, data).subscribe({
+      next: (newRoute) => {
+        openToast(
+          this.translateService.instant('PAGES.ROUTES.CREATED_SUCCESSFULLY', {
+            route: newRoute.name,
+          }),
+          'success'
+        );
+      },
+      error: () => {
+        this.openCreateModal(true, data);
       },
     });
   }

@@ -8,7 +8,7 @@
   <div *ngIf="!isMobile || (isMobile && !selectedRoute)" class="routes__list">
     <div class="routes__list__actions">
       <div class="routes__list__actions__wrapper">
-        <button (click)="openCreateModal()" mat-button>
+        <button (click)="openCreateModal(false)" mat-button>
           <mat-icon>add</mat-icon>
         </button>
         <button [routerLink]="['/projects', projectId, 'members']" mat-button>

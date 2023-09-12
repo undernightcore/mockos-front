@@ -70,7 +70,9 @@ export class RoutesService {
 
   createFolder(projectId: number, data: CreateFolderInterface) {
     return this.httpClient.post<RouteInterface>(
-      `${this.envService.getEnv('apiUrl')}/projects/${projectId}/routes`,
+      `${this.envService.getEnv(
+        'apiUrl'
+      )}/projects/${projectId}/routes?isFolder=true`,
       data
     );
   }
