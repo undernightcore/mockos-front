@@ -19,6 +19,8 @@
   }
 
   & > div {
+    width: 100%;
+
     & > div {
       display: flex;
       align-items: center;
@@ -30,6 +32,12 @@
         border-radius: 25px;
         background-color: red;
       }
+    }
+
+    & > p {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-right: 52px;
     }
   }
 
@@ -48,12 +56,6 @@
 
   h4, p {
     margin-bottom: 0;
-  }
-
-  & > p {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding-right: 52px;
   }
 
   &__placeholder {

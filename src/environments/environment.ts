@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3333',
+  apiUrl: 'https://api.mockos.io',
   isVerificationDisabled: true,
 };
