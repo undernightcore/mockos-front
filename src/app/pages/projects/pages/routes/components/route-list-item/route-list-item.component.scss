@@ -1,66 +1,88 @@
 .route-list-item {
   position: relative;
-  padding: 16px;
-  border-bottom: 1px solid var(--disabled-color);
   background-color: white;
   cursor: pointer;
-  display: flex;
-  gap: 12px;
-  align-items: center;
 
   &:hover {
     background-color: var(--soft-gray);
   }
 
-  & > button {
-    height: fit-content;
-    width: fit-content;
-    background-color: var(--alt-color);
+  &__divider {
+    height: 2px;
+    background-color: var(--main-color);
   }
 
-  & > div {
-    width: 100%;
+  &__content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border-bottom: 1px solid var(--disabled-color);
+
+    & > button {
+      height: fit-content;
+      width: fit-content;
+      background-color: var(--alt-color);
+    }
 
     & > div {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      width: 100%;
 
       & > div {
-        height: 8px;
-        width: 8px;
-        border-radius: 25px;
-        background-color: red;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        & > div {
+          height: 8px;
+          width: 8px;
+          border-radius: 25px;
+          background-color: red;
+        }
+      }
+
+      & > p {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-right: 52px;
       }
     }
 
-    & > p {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      padding-right: 52px;
+
+    app-http-chip {
+      position: absolute;
+      top: 16px;
+      right: 16px;
     }
-  }
 
+    & > mat-icon {
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+    }
 
-  app-http-chip {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-  }
-
-  & > mat-icon {
-    position: absolute;
-    right: 16px;
-    bottom: 16px;
-  }
-
-  h4, p {
-    margin-bottom: 0;
+    h4, p {
+      margin-bottom: 0;
+    }
   }
 
   &__placeholder {
     height: 77px;
     background-color: lightgray;
+  }
+
+  &__drop {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+
+    & > div {
+      height: 100%;
+    }
   }
 }
 
@@ -70,4 +92,10 @@
 
 .is-selected {
   border-left: 5px solid var(--main-color) !important;
+}
+
+.is-dragging {
+  &:hover {
+    background-color: white !important;
+  }
 }

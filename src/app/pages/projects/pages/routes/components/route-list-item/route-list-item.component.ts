@@ -9,9 +9,21 @@ import { RouteInterface } from '../../../../../../interfaces/route.interface';
 export class RouteListItemComponent {
   @Input() route!: RouteInterface;
   @Input() isSelected = false;
+  @Input() sortingMode = false;
   @Input() showBackButton = false;
 
+  dragZone?: 'up' | 'down';
+
+  @Output() draggingStart = new EventEmitter();
+  @Output() draggingEnd = new EventEmitter();
+
+  @Output() dropping = new EventEmitter<'up' | 'down' | undefined>();
   @Output() back = new EventEmitter();
+
+  draggingInEdge(position?: 'up' | 'down') {
+    this.dragZone = position;
+    this.dropping.emit(position)
+  }
 
   goBack(event: MouseEvent) {
     event.stopPropagation();

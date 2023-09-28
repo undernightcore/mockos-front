@@ -15,9 +15,11 @@ import {
   debounceTime,
   filter,
   finalize,
+  from,
   iif,
   of,
   Subscription,
+  switchMap,
   tap,
 } from 'rxjs';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -45,8 +47,8 @@ export class RoutesComponent implements OnInit, OnDestroy {
   selectedRoute?: RouteInterface;
   selectedFolder?: FolderInterface;
 
-  sortingMode = true;
-  hoveringFolder?: FolderInterface;
+  draggingItem?: RouteInterface | FolderInterface;
+  hoveringItem?: number | FolderInterface;
 
   #isFetchingRoutes = false;
 
@@ -117,7 +119,6 @@ export class RoutesComponent implements OnInit, OnDestroy {
     this.selectedRoute = undefined;
     this.getRoutes(1, undefined, folder?.id).subscribe(() => {
       this.selectedFolder = folder;
-      this.sortingMode = true;
     });
   }
 
@@ -137,11 +138,8 @@ export class RoutesComponent implements OnInit, OnDestroy {
   }
 
   handleSort(event: CdkDragDrop<any>) {
-    if (this.sortingMode) {
-      this.#handleSort(event);
-    } else {
-      this.#handleMove(event);
-    }
+    //this.#handleSort(event);
+    //this.#handleMove(event);
   }
 
   updateRoute(value: RouteInterface) {
@@ -214,19 +212,20 @@ export class RoutesComponent implements OnInit, OnDestroy {
         closeOnNavigation: true,
       })
       .afterClosed()
-      .subscribe((newProject?: CreateProjectInterface) => {
-        if (!newProject) return;
-        this.projectsService
-          .forkProject(this.projectId!, newProject)
-          .subscribe({
-            next: (data) => {
-              openToast(data.message, 'success');
-              this.router.navigate(['/projects']);
-            },
-            error: () => {
-              this.openForkModal(newProject);
-            },
-          });
+      .pipe(
+        filter((newProject) => Boolean(newProject)),
+        switchMap((newProject) =>
+          this.projectsService.forkProject(this.projectId!, newProject)
+        )
+      )
+      .subscribe({
+        next: (data) => {
+          openToast(data.message, 'success');
+          this.router.navigate(['/projects']);
+        },
+        error: () => {
+          this.openForkModal(project);
+        },
       });
   }
 
@@ -249,17 +248,18 @@ export class RoutesComponent implements OnInit, OnDestroy {
     this.projectSubscription?.unsubscribe();
     this.projectSubscription = this.realtimeService
       .listenProject(this.projectId)
-      .subscribe((action) => {
-        if (action === 'updated') {
-          this.getRoutes(
-            1,
-            calculateAmountToFetch(this.routes?.length ?? 0, 20),
-            this.selectedFolder?.id
-          ).subscribe();
-        } else if (action === 'deleted') {
-          this.router.navigate(['/projects']);
-        }
-      });
+      .pipe(
+        switchMap((event) =>
+          event === 'updated'
+            ? this.getRoutes(
+                1,
+                calculateAmountToFetch(this.routes?.length ?? 0, 20),
+                this.selectedFolder?.id
+              )
+            : from(this.router.navigate(['/projects']))
+        )
+      )
+      .subscribe();
   }
 
   #listenToRouteChanges(routeId: number) {
@@ -299,14 +299,14 @@ export class RoutesComponent implements OnInit, OnDestroy {
   }
 
   #handleMove(event: CdkDragDrop<any>) {
-    if (!this.hoveringFolder || !this.routes) return;
+    /*if (!this.hoveringFolder || !this.routes) return;
     const draggingRoute = this.routes[event.previousIndex];
     if (!draggingRoute || draggingRoute.is_folder) return;
     this.routesService
       .moveRoute(this.projectId, draggingRoute.id, this.hoveringFolder.id)
       .subscribe(({ message }) => {
         openToast(message, 'success');
-      });
+      });*/
   }
 
   #createRoute(data: CreateRouteInterface) {
