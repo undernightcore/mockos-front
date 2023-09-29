@@ -47,8 +47,8 @@ export class RoutesComponent implements OnInit, OnDestroy {
   selectedRoute?: RouteInterface;
   selectedFolder?: FolderInterface;
 
-  draggingItem?: RouteInterface | FolderInterface;
-  hoveringItem?: number | FolderInterface;
+  draggingIndex?: number;
+  hoveringIndex?: { index: number; move: boolean };
 
   #isFetchingRoutes = false;
 
@@ -137,9 +137,39 @@ export class RoutesComponent implements OnInit, OnDestroy {
       });
   }
 
-  handleSort(event: CdkDragDrop<any>) {
-    //this.#handleSort(event);
-    //this.#handleMove(event);
+  handleDraggingSort(droppingIndex: number, position?: 'up' | 'down') {
+    if (this.routes === undefined || this.draggingIndex === undefined) return;
+
+    const previousIndex =
+      droppingIndex < this.draggingIndex ? droppingIndex : droppingIndex - 1;
+    const posteriorIndex =
+      droppingIndex < this.draggingIndex ? droppingIndex + 1 : droppingIndex;
+
+    this.hoveringIndex =
+      position && this.routes
+        ? position === 'up'
+          ? { index: previousIndex, move: false }
+          : { index: posteriorIndex, move: false }
+        : undefined;
+  }
+
+  handleSort() {
+    if (
+      this.hoveringIndex === undefined ||
+      this.draggingIndex === undefined ||
+      !this.routes
+    ) {
+      this.draggingIndex = undefined;
+      return;
+    }
+
+    if (this.hoveringIndex.move) {
+      this.#handleMove(this.draggingIndex, this.hoveringIndex.index);
+    } else {
+      this.#handleSort(this.draggingIndex, this.hoveringIndex.index);
+    }
+
+    this.draggingIndex = undefined;
   }
 
   updateRoute(value: RouteInterface) {
@@ -278,16 +308,16 @@ export class RoutesComponent implements OnInit, OnDestroy {
       });
   }
 
-  #handleSort(event: CdkDragDrop<any>) {
-    if (!this.routes || this.projectId === undefined) return;
+  #handleSort(draggingIndex: number, hoveringIndex: number) {
+    if (this.projectId === undefined || !this.routes) return;
     const previousState = [...this.routes];
-    moveItemInArray(this.routes, event.previousIndex, event.currentIndex);
+    const draggingItem = this.routes[draggingIndex];
+    const hoveringItem = this.routes[hoveringIndex];
+
+    moveItemInArray(this.routes, draggingIndex, hoveringIndex);
+
     this.routesService
-      .sortRoute(
-        this.projectId,
-        previousState[event.previousIndex].id,
-        previousState[event.currentIndex].id
-      )
+      .sortRoute(this.projectId, draggingItem.id, hoveringItem.id)
       .subscribe({
         next: (result) => {
           openToast(result.message, 'success');
@@ -298,15 +328,17 @@ export class RoutesComponent implements OnInit, OnDestroy {
       });
   }
 
-  #handleMove(event: CdkDragDrop<any>) {
-    /*if (!this.hoveringFolder || !this.routes) return;
-    const draggingRoute = this.routes[event.previousIndex];
-    if (!draggingRoute || draggingRoute.is_folder) return;
+  #handleMove(draggingIndex: number, hoveringIndex: number) {
+    if (!this.routes) return;
     this.routesService
-      .moveRoute(this.projectId, draggingRoute.id, this.hoveringFolder.id)
+      .moveRoute(
+        this.projectId,
+        this.routes[draggingIndex].id,
+        this.routes[hoveringIndex].id
+      )
       .subscribe(({ message }) => {
         openToast(message, 'success');
-      });*/
+      });
   }
 
   #createRoute(data: CreateRouteInterface) {

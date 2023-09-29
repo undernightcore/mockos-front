@@ -1,6 +1,5 @@
 .folder-list-item {
   position: relative;
-  padding: 16px;
   border-bottom: 1px solid var(--disabled-color);
   background-color: white;
   cursor: pointer;
@@ -9,9 +8,17 @@
     background-color: var(--soft-gray);
   }
 
+  &__divider {
+    height: 2px;
+    background-color: var(--main-color);
+  }
+
   &__content {
     display: flex;
+    align-items: center;
     gap: 12px;
+    padding: 16px;
+    height: 40px;
 
     & > h4 {
       margin-bottom: 0;
@@ -19,11 +26,30 @@
   }
 
   &__placeholder {
-    height: 57px;
+    height: 74px;
     background-color: lightgray;
+  }
+
+  &__drop {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    top: 0;
+
+    &__zone {
+      height: 100%;
+    }
   }
 }
 
 .height-fit {
   height: fit-content !important;
+}
+
+.is-dragging {
+  &:hover {
+    background-color: white !important;
+  }
 }

@@ -1,7 +1,39 @@
-<div class="folder-list-item" cdkDragPreviewClass="height-fit" cdkDrag>
+<div
+  (cdkDragStarted)="draggingStart.emit()"
+  (cdkDragEnded)="draggingEnd.emit()"
+  [class.is-dragging]="sortingMode && dragZone"
+  class="folder-list-item"
+  cdkDragPreviewClass="height-fit"
+  cdkDrag
+>
+  <div
+    *ngIf="sortingMode && dragZone === 'up'"
+    class="folder-list-item__divider"
+  ></div>
   <div class="folder-list-item__content">
     <mat-icon>folder_open</mat-icon>
     <h4>{{ folder.name }}</h4>
   </div>
+  <div class="folder-list-item__drop">
+    <div
+      (mouseenter)="draggingInEdge('up')"
+      (mouseleave)="draggingInEdge(undefined)"
+      class="folder-list-item__drop__zone"
+    ></div>
+    <div
+      (mouseenter)="draggingInside(true)"
+      (mouseleave)="draggingInside(false)"
+      class="folder-list-item__drop__zone"
+    ></div>
+    <div
+      (mouseenter)="draggingInEdge('down')"
+      (mouseleave)="draggingInEdge(undefined)"
+      class="folder-list-item__drop__zone"
+    ></div>
+  </div>
+  <div
+    *ngIf="sortingMode && dragZone === 'down'"
+    class="folder-list-item__divider"
+  ></div>
   <div class="folder-list-item__placeholder" *cdkDragPlaceholder></div>
 </div>

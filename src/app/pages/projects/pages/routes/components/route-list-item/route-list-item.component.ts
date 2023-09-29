@@ -17,12 +17,13 @@ export class RouteListItemComponent {
   @Output() draggingStart = new EventEmitter();
   @Output() draggingEnd = new EventEmitter();
 
-  @Output() dropping = new EventEmitter<'up' | 'down' | undefined>();
+  @Output() dragging = new EventEmitter<'up' | 'down' | undefined>();
   @Output() back = new EventEmitter();
 
   draggingInEdge(position?: 'up' | 'down') {
     this.dragZone = position;
-    this.dropping.emit(position)
+    if (!this.sortingMode) return;
+    this.dragging.emit(position)
   }
 
   goBack(event: MouseEvent) {

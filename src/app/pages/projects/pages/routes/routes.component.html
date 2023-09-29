@@ -67,17 +67,25 @@
           *ngIf="!route.is_folder"
           (click)="selectRoute(route)"
           [route]="route"
-          (draggingStart)="draggingItem = route"
-          (draggingEnd)="draggingItem = undefined"
-          [sortingMode]="!!draggingItem"
+          (draggingStart)="draggingIndex = i"
+          (draggingEnd)="handleSort()"
+          [sortingMode]="draggingIndex !== undefined"
           [isSelected]="route.id === selectedRoute?.id"
           [showBackButton]="!!selectedFolder"
+          (dragging)="handleDraggingSort(i, $event)"
           (back)="moveToRoot(route)"
         ></app-route-list-item>
         <app-folder-list-item
-          (click)="selectFolder(route)"
           *ngIf="route.is_folder"
+          (click)="selectFolder(route)"
+          (draggingStart)="draggingIndex = i"
+          (draggingEnd)="handleSort()"
+          [sortingMode]="draggingIndex !== undefined"
           [folder]="route"
+          (dragging)="handleDraggingSort(i, $event)"
+          (dropping)="
+            hoveringIndex = $event ? { index: i, move: true } : undefined
+          "
         ></app-folder-list-item>
       </div>
     </div>
