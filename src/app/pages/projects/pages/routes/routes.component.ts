@@ -22,7 +22,7 @@ import {
   switchMap,
   tap,
 } from 'rxjs';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { moveItemInArray } from '@angular/cdk/drag-drop';
 import { ProjectModalComponent } from '../../components/project-modal/project-modal.component';
 import { CreateProjectInterface } from '../../../../interfaces/create-project.interface';
 import { ProjectService } from '../../../../services/project/project.service';
@@ -48,7 +48,7 @@ export class RoutesComponent implements OnInit, OnDestroy {
   selectedFolder?: FolderInterface;
 
   draggingIndex?: number;
-  hoveringIndex?: { index: number; move: boolean };
+  hoveringIndex?: { index: number | null; move: boolean };
 
   #isFetchingRoutes = false;
 
@@ -127,14 +127,6 @@ export class RoutesComponent implements OnInit, OnDestroy {
     this.routesService.deleteRoute(folder.id).subscribe(({ message }) => {
       openToast(message, 'success');
     });
-  }
-
-  moveToRoot(route: RouteInterface) {
-    this.routesService
-      .moveRoute(this.projectId, route.id, null)
-      .subscribe(({ message }) => {
-        openToast(message, 'success');
-      });
   }
 
   handleDraggingSort(droppingIndex: number, position?: 'up' | 'down') {
@@ -308,8 +300,9 @@ export class RoutesComponent implements OnInit, OnDestroy {
       });
   }
 
-  #handleSort(draggingIndex: number, hoveringIndex: number) {
-    if (this.projectId === undefined || !this.routes) return;
+  #handleSort(draggingIndex: number, hoveringIndex: number | null) {
+    if (this.projectId === undefined || !this.routes || hoveringIndex === null)
+      return;
     const previousState = [...this.routes];
     const draggingItem = this.routes[draggingIndex];
     const hoveringItem = this.routes[hoveringIndex];
@@ -328,13 +321,13 @@ export class RoutesComponent implements OnInit, OnDestroy {
       });
   }
 
-  #handleMove(draggingIndex: number, hoveringIndex: number) {
+  #handleMove(draggingIndex: number, hoveringIndex: number | null) {
     if (!this.routes) return;
     this.routesService
       .moveRoute(
         this.projectId,
         this.routes[draggingIndex].id,
-        this.routes[hoveringIndex].id
+        hoveringIndex !== null ? this.routes[hoveringIndex].id : null
       )
       .subscribe(({ message }) => {
         openToast(message, 'success');

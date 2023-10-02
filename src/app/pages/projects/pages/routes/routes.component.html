@@ -41,6 +41,16 @@
         <mat-icon>delete</mat-icon>
       </button>
     </div>
+    <div
+      *ngIf="selectedFolder && draggingIndex !== undefined"
+      class="routes__list__drop-zone"
+      (mouseenter)="hoveringIndex = { index: null, move: true }"
+      (mouseleave)="hoveringIndex = undefined"
+    >
+      <div class="routes__list__drop-zone__border">
+        <span>Drop here to leave folder</span>
+      </div>
+    </div>
     <div class="routes__list__search">
       <mat-form-field appearance="fill">
         <mat-label>{{ "PAGES.ROUTES.SEARCH_ROUTES" | translate }}</mat-label>
@@ -73,7 +83,6 @@
           [isSelected]="route.id === selectedRoute?.id"
           [showBackButton]="!!selectedFolder"
           (dragging)="handleDraggingSort(i, $event)"
-          (back)="moveToRoot(route)"
         ></app-route-list-item>
         <app-folder-list-item
           *ngIf="route.is_folder"
