@@ -15,12 +15,14 @@ import {
   debounceTime,
   filter,
   finalize,
+  from,
   iif,
   of,
   Subscription,
+  switchMap,
   tap,
 } from 'rxjs';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { moveItemInArray } from '@angular/cdk/drag-drop';
 import { ProjectModalComponent } from '../../components/project-modal/project-modal.component';
 import { CreateProjectInterface } from '../../../../interfaces/create-project.interface';
 import { ProjectService } from '../../../../services/project/project.service';
@@ -45,8 +47,8 @@ export class RoutesComponent implements OnInit, OnDestroy {
   selectedRoute?: RouteInterface;
   selectedFolder?: FolderInterface;
 
-  sortingMode = true;
-  hoveringFolder?: FolderInterface;
+  draggingIndex?: number;
+  hoveringIndex?: { index: number | null; move: boolean };
 
   #isFetchingRoutes = false;
 
@@ -117,7 +119,6 @@ export class RoutesComponent implements OnInit, OnDestroy {
     this.selectedRoute = undefined;
     this.getRoutes(1, undefined, folder?.id).subscribe(() => {
       this.selectedFolder = folder;
-      this.sortingMode = true;
     });
   }
 
@@ -128,20 +129,39 @@ export class RoutesComponent implements OnInit, OnDestroy {
     });
   }
 
-  moveToRoot(route: RouteInterface) {
-    this.routesService
-      .moveRoute(this.projectId, route.id, null)
-      .subscribe(({ message }) => {
-        openToast(message, 'success');
-      });
+  handleDraggingSort(droppingIndex: number, position?: 'up' | 'down') {
+    if (this.routes === undefined || this.draggingIndex === undefined) return;
+
+    const previousIndex =
+      droppingIndex < this.draggingIndex ? droppingIndex : droppingIndex - 1;
+    const posteriorIndex =
+      droppingIndex < this.draggingIndex ? droppingIndex + 1 : droppingIndex;
+
+    this.hoveringIndex =
+      position && this.routes
+        ? position === 'up'
+          ? { index: previousIndex, move: false }
+          : { index: posteriorIndex, move: false }
+        : undefined;
   }
 
-  handleSort(event: CdkDragDrop<any>) {
-    if (this.sortingMode) {
-      this.#handleSort(event);
-    } else {
-      this.#handleMove(event);
+  handleSort() {
+    if (
+      this.hoveringIndex === undefined ||
+      this.draggingIndex === undefined ||
+      !this.routes
+    ) {
+      this.draggingIndex = undefined;
+      return;
     }
+
+    if (this.hoveringIndex.move) {
+      this.#handleMove(this.draggingIndex, this.hoveringIndex.index);
+    } else {
+      this.#handleSort(this.draggingIndex, this.hoveringIndex.index);
+    }
+
+    this.draggingIndex = undefined;
   }
 
   updateRoute(value: RouteInterface) {
@@ -214,19 +234,20 @@ export class RoutesComponent implements OnInit, OnDestroy {
         closeOnNavigation: true,
       })
       .afterClosed()
-      .subscribe((newProject?: CreateProjectInterface) => {
-        if (!newProject) return;
-        this.projectsService
-          .forkProject(this.projectId!, newProject)
-          .subscribe({
-            next: (data) => {
-              openToast(data.message, 'success');
-              this.router.navigate(['/projects']);
-            },
-            error: () => {
-              this.openForkModal(newProject);
-            },
-          });
+      .pipe(
+        filter((newProject) => Boolean(newProject)),
+        switchMap((newProject) =>
+          this.projectsService.forkProject(this.projectId!, newProject)
+        )
+      )
+      .subscribe({
+        next: (data) => {
+          openToast(data.message, 'success');
+          this.router.navigate(['/projects']);
+        },
+        error: () => {
+          this.openForkModal(project);
+        },
       });
   }
 
@@ -249,17 +270,18 @@ export class RoutesComponent implements OnInit, OnDestroy {
     this.projectSubscription?.unsubscribe();
     this.projectSubscription = this.realtimeService
       .listenProject(this.projectId)
-      .subscribe((action) => {
-        if (action === 'updated') {
-          this.getRoutes(
-            1,
-            calculateAmountToFetch(this.routes?.length ?? 0, 20),
-            this.selectedFolder?.id
-          ).subscribe();
-        } else if (action === 'deleted') {
-          this.router.navigate(['/projects']);
-        }
-      });
+      .pipe(
+        switchMap((event) =>
+          event === 'updated'
+            ? this.getRoutes(
+                1,
+                calculateAmountToFetch(this.routes?.length ?? 0, 20),
+                this.selectedFolder?.id
+              )
+            : from(this.router.navigate(['/projects']))
+        )
+      )
+      .subscribe();
   }
 
   #listenToRouteChanges(routeId: number) {
@@ -278,16 +300,17 @@ export class RoutesComponent implements OnInit, OnDestroy {
       });
   }
 
-  #handleSort(event: CdkDragDrop<any>) {
-    if (!this.routes || this.projectId === undefined) return;
+  #handleSort(draggingIndex: number, hoveringIndex: number | null) {
+    if (this.projectId === undefined || !this.routes || hoveringIndex === null)
+      return;
     const previousState = [...this.routes];
-    moveItemInArray(this.routes, event.previousIndex, event.currentIndex);
+    const draggingItem = this.routes[draggingIndex];
+    const hoveringItem = this.routes[hoveringIndex];
+
+    moveItemInArray(this.routes, draggingIndex, hoveringIndex);
+
     this.routesService
-      .sortRoute(
-        this.projectId,
-        previousState[event.previousIndex].id,
-        previousState[event.currentIndex].id
-      )
+      .sortRoute(this.projectId, draggingItem.id, hoveringItem.id)
       .subscribe({
         next: (result) => {
           openToast(result.message, 'success');
@@ -298,12 +321,14 @@ export class RoutesComponent implements OnInit, OnDestroy {
       });
   }
 
-  #handleMove(event: CdkDragDrop<any>) {
-    if (!this.hoveringFolder || !this.routes) return;
-    const draggingRoute = this.routes[event.previousIndex];
-    if (!draggingRoute || draggingRoute.is_folder) return;
+  #handleMove(draggingIndex: number, hoveringIndex: number | null) {
+    if (!this.routes) return;
     this.routesService
-      .moveRoute(this.projectId, draggingRoute.id, this.hoveringFolder.id)
+      .moveRoute(
+        this.projectId,
+        this.routes[draggingIndex].id,
+        hoveringIndex !== null ? this.routes[hoveringIndex].id : null
+      )
       .subscribe(({ message }) => {
         openToast(message, 'success');
       });

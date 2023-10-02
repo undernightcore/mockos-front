@@ -9,12 +9,19 @@ import { RouteInterface } from '../../../../../../interfaces/route.interface';
 export class RouteListItemComponent {
   @Input() route!: RouteInterface;
   @Input() isSelected = false;
+  @Input() sortingMode = false;
   @Input() showBackButton = false;
 
-  @Output() back = new EventEmitter();
+  dragZone?: 'up' | 'down';
 
-  goBack(event: MouseEvent) {
-    event.stopPropagation();
-    this.back.emit();
+  @Output() draggingStart = new EventEmitter();
+  @Output() draggingEnd = new EventEmitter();
+
+  @Output() dragging = new EventEmitter<'up' | 'down' | undefined>();
+
+  draggingInEdge(position?: 'up' | 'down') {
+    this.dragZone = position;
+    if (!this.sortingMode) return;
+    this.dragging.emit(position)
   }
 }

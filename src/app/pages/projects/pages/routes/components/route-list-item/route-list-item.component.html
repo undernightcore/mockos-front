@@ -1,14 +1,39 @@
-<div class="route-list-item" [class.is-selected]="isSelected" cdkDragPreviewClass="height-fit" cdkDrag>
-  <button (click)="goBack($event)" *ngIf="showBackButton" mat-button>
-    <mat-icon>arrow_back</mat-icon>
-  </button>
-  <div>
+<div
+  [class.is-selected]="isSelected"
+  [class.is-dragging]="sortingMode && dragZone"
+  (cdkDragStarted)="draggingStart.emit()"
+  (cdkDragEnded)="draggingEnd.emit()"
+  cdkDragPreviewClass="height-fit"
+  cdkDrag
+  class="route-list-item"
+>
+  <div *ngIf="sortingMode && dragZone === 'up'" class="route-list-item__divider"></div>
+  <div class="route-list-item__content">
     <div>
-      <h4>{{ route.name }}</h4>
-      <div [style.background-color]="route.enabled ? 'green' : 'var(--disabled-color)'"></div>
+      <div>
+        <h4>{{ route.name }}</h4>
+        <div
+          [style.background-color]="
+          route.enabled ? 'green' : 'var(--disabled-color)'
+        "
+        ></div>
+      </div>
+      <p>{{ route.endpoint }}</p>
+      <app-http-chip [method]="route.method"></app-http-chip>
     </div>
-    <p>{{ route.endpoint }}</p>
-    <app-http-chip [method]="route.method"></app-http-chip>
   </div>
+  <div class="route-list-item__drop">
+    <div
+      (mouseenter)="draggingInEdge('up')"
+      (mouseleave)="draggingInEdge(undefined)"
+      class="route-list-item__drop__zone"
+    ></div>
+    <div
+      (mouseenter)="draggingInEdge('down')"
+      (mouseleave)="draggingInEdge(undefined)"
+      class="route-list-item__drop__zone"
+    ></div>
+  </div>
+  <div *ngIf="sortingMode && dragZone === 'down'" class="route-list-item__divider"></div>
   <div class="route-list-item__placeholder" *cdkDragPlaceholder></div>
 </div>
