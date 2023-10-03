@@ -15,10 +15,17 @@
           <span>{{ parsedRemote?.info?.version ?? "NONE" }}</span>
         </span>
       </ng-container>
+      <mat-form-field appearance="fill">
+        <mat-select [(ngModel)]="selectedLang">
+          <mat-option [value]="language" *ngFor="let language of languages">
+            {{ language }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
     <ngx-monaco-editor
       [formControl]="contract"
-      [options]="{ theme: 'vs-dark', language: 'json' }"
+      [options]="{ theme: 'vs-dark', language: selectedLang }"
     ></ngx-monaco-editor>
   </div>
   <div class="contracts__ui">
