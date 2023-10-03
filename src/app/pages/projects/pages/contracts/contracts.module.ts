@@ -3,15 +3,20 @@ import { CommonModule } from '@angular/common';
 
 import { ContractsRoutingModule } from './contracts-routing.module';
 import { ContractsComponent } from './contracts.component';
-
+import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-  declarations: [
-    ContractsComponent
-  ],
+  declarations: [ContractsComponent],
   imports: [
     CommonModule,
-    ContractsRoutingModule
-  ]
+    ContractsRoutingModule,
+    MonacoEditorModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
 })
-export class ContractsModule { }
+export class ContractsModule {}

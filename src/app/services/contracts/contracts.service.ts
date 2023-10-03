@@ -14,7 +14,7 @@ import { MessageInterface } from '../../interfaces/message.interface';
 export class ContractsService {
   constructor(private httpClient: HttpClient, private envService: EnvService) {}
 
-  getContract(projectId: string, version?: string) {
+  getContract(projectId: number, version?: string) {
     return this.httpClient.get<ContractInterface | null>(
       `${this.envService.getEnv('apiUrl')}/projects/${projectId}/contracts${
         version ? `/${version}` : ''
@@ -22,7 +22,7 @@ export class ContractsService {
     );
   }
 
-  getContractVersions(projectId: string) {
+  getContractVersions(projectId: number) {
     return this.httpClient.get<
       PaginatedResponseInterface<ContractVersionInterface>
     >(
@@ -33,8 +33,8 @@ export class ContractsService {
   }
 
   updateContract(
-    projectId: string,
-    originalVersion: number | null,
+    projectId: number,
+    originalVersion: string | null,
     swagger: string
   ) {
     return this.httpClient.put<MessageInterface>(
@@ -43,7 +43,7 @@ export class ContractsService {
     );
   }
 
-  rollbackContract(projectId: string, version: string) {
+  rollbackContract(projectId: number, version: string) {
     return this.httpClient.post<MessageInterface>(
       `${this.envService.getEnv(
         'apiUrl'

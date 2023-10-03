@@ -15,6 +15,7 @@ import { LangInterceptor } from "./interceptors/lang.interceptor";
 import {NavbarModule} from "./components/navbar/navbar.module";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import {MonacoEditorModule} from "ngx-monaco-editor-v2";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -42,6 +43,7 @@ export function HttpLoaderFactory(http: HttpClient) {
           // or after 30 seconds (whichever comes first).
           registrationStrategy: 'registerWhenStable:30000'
         }),
+      MonacoEditorModule.forRoot()
     ],
   providers: [
     {

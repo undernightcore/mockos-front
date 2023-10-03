@@ -12,3 +12,8 @@ export interface ContractVersionInterface {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface MinimalContractInterface {
+  swagger: string;
+  info: { version: string };
+}

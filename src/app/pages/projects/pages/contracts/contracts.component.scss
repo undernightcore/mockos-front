@@ -1,0 +1,65 @@
+.contracts {
+  display: flex;
+  height: 100%;
+
+  &__code {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    & > ngx-monaco-editor {
+      height: 100%;
+
+      &::ng-deep {
+        & > div {
+          height: 100%;
+        }
+      }
+    }
+
+    &__header {
+      display: flex;
+      height: 58px;
+      min-height: 58px;
+      padding: 0 12px;
+      align-items: center;
+      justify-content: flex-end;
+      background-color: var(--main-color);
+
+      & > span {
+        & > span {
+          color: var(--alt-color);
+        }
+      }
+    }
+  }
+
+  &__ui {
+    width: 50%;
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+
+    &__content {
+      height: 100%;
+      overflow: auto;
+    }
+
+    &__header {
+      display: flex;
+      height: 58px;
+      min-height: 58px;
+      padding: 0 12px;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+      background-color: var(--main-color);
+
+      & > button {
+        background-color: var(--alt-color);
+      }
+    }
+  }
+}

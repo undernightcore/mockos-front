@@ -1,1 +1,32 @@
-<p>contracts works!</p>
+<div class="contracts">
+  <div class="contracts__code">
+    <div class="contracts__code__header">
+      <ng-container *ngIf="!areSameContracts">
+        <span>
+          You are updating:
+          <span>{{ parsedRemote?.info?.version ?? "NONE" }}</span>
+          -->
+          <span>{{ parsedLocal?.info?.version ?? "NONE" }}</span>
+        </span>
+      </ng-container>
+      <ng-container *ngIf="areSameContracts">
+        <span>
+          Current version -
+          <span>{{ parsedRemote?.info?.version ?? "NONE" }}</span>
+        </span>
+      </ng-container>
+    </div>
+    <ngx-monaco-editor
+      [formControl]="contract"
+      [options]="{ theme: 'vs-dark', language: 'json' }"
+    ></ngx-monaco-editor>
+  </div>
+  <div class="contracts__ui">
+    <div class="contracts__ui__header">
+      <button *ngIf="!areSameContracts" (click)="updateContract()" mat-button>
+        <mat-icon>save</mat-icon>
+      </button>
+    </div>
+    <div #swagger class="contracts__ui__content"></div>
+  </div>
+</div>
