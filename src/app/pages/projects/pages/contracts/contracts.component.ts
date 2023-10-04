@@ -68,13 +68,9 @@ export class ContractsComponent implements AfterViewInit {
         ? this.#parseContract(contract?.swagger)
         : null;
 
-      this.selectedLang.setValue(
-        contract && isValidJson(contract.swagger) ? 'json' : 'yaml'
-      );
+      if (!this.editor) this.#recreateEditor(contract?.swagger);
 
-      this.#recreateEditor(contract?.swagger);
-
-      this.contract.setValue(contract?.swagger ?? '');
+      this.#setEditorValue(contract?.swagger ?? '');
     });
   }
 
@@ -129,11 +125,14 @@ export class ContractsComponent implements AfterViewInit {
     } catch {
       try {
         return load(value);
-      } catch (e) {
-        console.log(e);
-        return {};
+      } catch {
+        return { info: { version: this.parsedLocal?.info.version }};
       }
     }
+  }
+
+  #setEditorValue(value: string) {
+    this.editor?.session.setValue(value);
   }
 
   #calculateCurrentLanguage() {

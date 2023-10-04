@@ -133,6 +133,12 @@
       "UPDATE_EMAIL": "Update email",
       "UPDATE_EMAIL_DESCRIPTION": "We will send you a confirmation email to your new address, once verified it will become your account's email"
     },
+    "CONTRACTS": {
+      "INVALID_VERSION": "Your version {{local}} is INVALID or NOT GREATER than remote version {{remote}}",
+      "CURRENTLY_UPDATING": "You are updating",
+      "CURRENT_VERSION": "Current version",
+      "NONE_VERSION": "NONE"
+    },
     "NOT_FOUND": {
       "PAGE_NOT_FOUND": "Page not found",
       "SORRY": "We are very sorry..."

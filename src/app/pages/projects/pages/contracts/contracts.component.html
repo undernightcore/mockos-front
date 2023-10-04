@@ -3,16 +3,46 @@
     <div class="contracts__code__header">
       <ng-container *ngIf="!areSameContracts">
         <span>
-          You are updating:
-          <span>{{ parsedRemote?.info?.version ?? "NONE" }}</span>
+          {{ "PAGES.CONTRACTS.CURRENTLY_UPDATING" | translate }}:
+          <span>{{
+            parsedRemote?.info?.version ?? "PAGES.CONTRACTS.NONE_VERSION"
+              | translate
+          }}</span>
           -->
-          <span>{{ parsedLocal?.info?.version ?? "NONE" }}</span>
+          <span>{{
+            parsedLocal?.info?.version ?? "PAGES.CONTRACTS.NONE_VERSION"
+              | translate
+          }}</span>
+          <mat-icon
+            *ngIf="
+              !(
+                parsedRemote?.info?.version
+                | isValidVersion : parsedLocal?.info?.version
+              )
+            "
+            [matTooltip]="
+              'PAGES.CONTRACTS.INVALID_VERSION'
+                | translate
+                  : {
+                      remote:
+                        parsedRemote?.info?.version ??
+                          'PAGES.CONTRACTS.NONE_VERSION' | translate,
+                      local:
+                        parsedLocal?.info?.version ??
+                          'PAGES.CONTRACTS.NONE_VERSION' | translate
+                    }
+            "
+            >warning</mat-icon
+          >
         </span>
       </ng-container>
       <ng-container *ngIf="areSameContracts">
         <span>
-          Current version -
-          <span>{{ parsedRemote?.info?.version ?? "NONE" }}</span>
+          {{ "PAGES.CONTRACTS.CURRENT_VERSION" | translate }} -
+          <span>{{
+            parsedRemote?.info?.version ?? "PAGES.CONTRACTS.NONE_VERSION"
+              | translate
+          }}</span>
         </span>
       </ng-container>
       <mat-form-field appearance="fill">
@@ -23,7 +53,7 @@
         </mat-select>
       </mat-form-field>
     </div>
-   <div #editor class="contracts__code__editor"></div>
+    <div #editor class="contracts__code__editor"></div>
   </div>
   <div class="contracts__ui">
     <div class="contracts__ui__header">

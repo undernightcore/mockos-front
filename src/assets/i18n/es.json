@@ -133,6 +133,12 @@
       "UPDATE_EMAIL": "Actualizar correo electrónico",
       "UPDATE_EMAIL_DESCRIPTION": "Te enviaremos un correo de confirmación a tu nueva dirección; una vez verificado, se convertirá en el correo de tu cuenta"
     },
+    "CONTRACTS": {
+      "INVALID_VERSION": "Tu versión {{local}} es INVÁLIDA o NO ES MAYOR que la versión remota {{remote}}",
+      "CURRENTLY_UPDATING": "Estás actualizando",
+      "CURRENT_VERSION": "Versión actual",
+      "NONE_VERSION": "NINGUNA"
+    },
     "NOT_FOUND": {
       "PAGE_NOT_FOUND": "Página no encontrada",
       "SORRY": "Lo sentimos mucho..."
