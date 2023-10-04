@@ -8,14 +8,8 @@
     display: flex;
     flex-direction: column;
 
-    & > ngx-monaco-editor {
+    &__editor {
       height: 100%;
-
-      &::ng-deep {
-        & > div {
-          height: 100%;
-        }
-      }
     }
 
     &__header {

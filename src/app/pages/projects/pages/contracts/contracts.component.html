@@ -16,17 +16,14 @@
         </span>
       </ng-container>
       <mat-form-field appearance="fill">
-        <mat-select [(ngModel)]="selectedLang">
+        <mat-select [formControl]="selectedLang">
           <mat-option [value]="language" *ngFor="let language of languages">
             {{ language }}
           </mat-option>
         </mat-select>
       </mat-form-field>
     </div>
-    <ngx-monaco-editor
-      [formControl]="contract"
-      [options]="{ theme: 'vs-dark', language: selectedLang }"
-    ></ngx-monaco-editor>
+   <div #editor class="contracts__code__editor"></div>
   </div>
   <div class="contracts__ui">
     <div class="contracts__ui__header">

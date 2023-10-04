@@ -6,7 +6,15 @@ import { FormControl } from '@angular/forms';
 import { load } from 'js-yaml';
 import { MinimalContractInterface } from '../../../../interfaces/contract.interface';
 import { debounceTime } from 'rxjs';
-import {isValidJson} from "../../../../utils/string.utils";
+import { isValidJson } from '../../../../utils/string.utils';
+import { Ace, edit } from 'ace-builds';
+import { EditorTypeEnum } from '../../../../interfaces/response-type.interface';
+import Editor = Ace.Editor;
+
+import 'ace-builds/src-noconflict/mode-json';
+import 'ace-builds/src-noconflict/mode-yaml';
+import 'ace-builds/src-noconflict/ext-searchbox';
+import 'ace-builds/src-noconflict/theme-tomorrow_night_eighties';
 
 @Component({
   selector: 'app-contracts',
@@ -15,12 +23,15 @@ import {isValidJson} from "../../../../utils/string.utils";
 })
 export class ContractsComponent implements AfterViewInit {
   @ViewChild('swagger') private swaggerElement?: ElementRef<HTMLDivElement>;
+  @ViewChild('editor') private editorElement?: ElementRef<HTMLDivElement>;
+
   projectId = Number(this.activatedRoute.snapshot.paramMap.get('id'));
 
   swagger?: SwaggerUI;
+  editor?: Editor;
   contract = new FormControl('');
 
-  selectedLang = 'yaml';
+  selectedLang = new FormControl('json');
   languages = ['yaml', 'json'];
 
   parsedLocal?: MinimalContractInterface;
@@ -35,6 +46,7 @@ export class ContractsComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.#handleContractChange();
+    this.#handleLangChange();
     this.#getContract();
   }
 
@@ -56,7 +68,11 @@ export class ContractsComponent implements AfterViewInit {
         ? this.#parseContract(contract?.swagger)
         : null;
 
-      this.selectedLang = contract && isValidJson(contract.swagger) ? 'json' : 'yaml'
+      this.selectedLang.setValue(
+        contract && isValidJson(contract.swagger) ? 'json' : 'yaml'
+      );
+
+      this.#recreateEditor(contract?.swagger);
 
       this.contract.setValue(contract?.swagger ?? '');
     });
@@ -67,11 +83,36 @@ export class ContractsComponent implements AfterViewInit {
       this.parsedLocal = this.#parseContract(String(this.contract.value));
       this.areSameContracts = this.#calculateIfSameContracts();
 
-      this.#recreateEditor();
+      this.#recreateSwagger();
     });
   }
 
-  #recreateEditor() {
+  #handleLangChange() {
+    this.selectedLang.valueChanges.subscribe((value) => {
+      this.editor?.session.setMode(
+        value === 'json' ? EditorTypeEnum.JSON : EditorTypeEnum.YAML
+      );
+    });
+  }
+
+  #recreateEditor(content?: string) {
+    if (!this.editorElement) return;
+    this.editor = edit(this.editorElement.nativeElement, {
+      mode:
+        this.selectedLang.value === 'json'
+          ? EditorTypeEnum.JSON
+          : EditorTypeEnum.YAML,
+      value: content,
+      theme: 'ace/theme/tomorrow_night_eighties',
+      customScrollbar: true
+    });
+
+    this.editor.on('change', () =>
+      this.contract.setValue(this.editor?.getValue() ?? '')
+    );
+  }
+
+  #recreateSwagger() {
     if (!this.swaggerElement) return;
 
     SwaggerUI({
