@@ -6,7 +6,7 @@ import { FormControl } from '@angular/forms';
 import { load } from 'js-yaml';
 import { MinimalContractInterface } from '../../../../interfaces/contract.interface';
 import { debounceTime } from 'rxjs';
-import { isValidJson } from '../../../../utils/string.utils';
+import { isValidJson, isValidYaml } from '../../../../utils/string.utils';
 import { Ace, edit } from 'ace-builds';
 import { EditorTypeEnum } from '../../../../interfaces/response-type.interface';
 import Editor = Ace.Editor;
@@ -79,9 +79,11 @@ export class ContractsComponent implements AfterViewInit {
   }
 
   #handleContractChange() {
-    this.contract.valueChanges.pipe(debounceTime(100)).subscribe(() => {
-      this.parsedLocal = this.#parseContract(String(this.contract.value));
-      this.areSameContracts = this.#calculateIfSameContracts();
+    this.contract.valueChanges.pipe(debounceTime(200)).subscribe((value) => {
+      this.parsedLocal = this.#parseContract(String(value));
+
+      this.#calculateIfSameContracts();
+      this.#calculateCurrentLanguage();
 
       this.#recreateSwagger();
     });
@@ -104,7 +106,7 @@ export class ContractsComponent implements AfterViewInit {
           : EditorTypeEnum.YAML,
       value: content,
       theme: 'ace/theme/tomorrow_night_eighties',
-      customScrollbar: true
+      customScrollbar: true,
     });
 
     this.editor.on('change', () =>
@@ -134,10 +136,21 @@ export class ContractsComponent implements AfterViewInit {
     }
   }
 
+  #calculateCurrentLanguage() {
+    const type = this.contract.value
+      ? isValidJson(this.contract.value)
+        ? 'json'
+        : isValidYaml(this.contract?.value)
+        ? 'yaml'
+        : this.selectedLang.value
+      : this.selectedLang.value;
+
+    this.selectedLang.setValue(type);
+  }
+
   #calculateIfSameContracts() {
-    return (
+    this.areSameContracts =
       JSON.stringify(this.parsedRemote ?? {}) ===
-      JSON.stringify(this.parsedLocal ?? {})
-    );
+      JSON.stringify(this.parsedLocal ?? {});
   }
 }
