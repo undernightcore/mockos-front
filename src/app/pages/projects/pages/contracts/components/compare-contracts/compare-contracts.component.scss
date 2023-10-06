@@ -7,6 +7,10 @@
     height: 100%;
     max-height: none;
     overflow: auto;
+
+    & > ngx-monaco-diff-editor {
+      height: 100%;
+    }
   }
 
   & > div[mat-dialog-actions] {

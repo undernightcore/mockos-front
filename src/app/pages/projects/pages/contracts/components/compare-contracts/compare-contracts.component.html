@@ -1,14 +1,19 @@
 <div class="compare">
   <h1 mat-dialog-title>Merge contract changes</h1>
   <div mat-dialog-content>
-    <div #panels class="compare__panels"></div>
+    <ngx-monaco-diff-editor
+      *ngIf="originalModel && modifiedModel"
+      [originalModel]="originalModel"
+      [modifiedModel]="modifiedModel"
+      [options]="{ theme: 'vs-dark', glyphMargin: true, renderSideBySide: true }"
+    ></ngx-monaco-diff-editor>
   </div>
   <div mat-dialog-actions>
     <div>
-      <button [disabled]="this.remoteContract === undefined" mat-button>
+      <button mat-button>
         {{ "ACTIONS.KEEP_LEFT" | translate }}
       </button>
-      <button [disabled]="this.remoteContract === undefined" mat-button>
+      <button mat-button>
         {{ "ACTIONS.KEEP_RIGHT" | translate }}
       </button>
     </div>
@@ -16,7 +21,7 @@
       <button mat-button mat-dialog-close>
         {{ "ACTIONS.MERGE_LATER" | translate }}
       </button>
-      <button [disabled]="this.remoteContract === undefined" mat-button>
+      <button mat-button>
         {{ "ACTIONS.SAVE" | translate }}
       </button>
     </div>

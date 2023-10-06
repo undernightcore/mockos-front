@@ -28,7 +28,7 @@
               "src/assets",
               "src/manifest.webmanifest",
               "src/.well-known",
-              { "glob": "**/*", "input": "node_modules/monaco-editor", "output": "/assets/monaco/" },
+              { "glob": "**/*", "input": "node_modules/monaco-editor", "output": "assets/monaco" },
               { "glob": "worker-json.js", "input": "./node_modules/ace-builds/src-min/", "output": "/" },
               { "glob": "worker-yaml.js", "input": "./node_modules/ace-builds/src-min/", "output": "/" },
               { "glob": "worker-html.js", "input": "./node_modules/ace-builds/src-min/", "output": "/" }
@@ -36,7 +36,6 @@
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "./node_modules/swagger-ui/dist/swagger-ui.css",
-              "./node_modules/ace-diff/dist/ace-diff-dark.min.css",
               "src/styles.scss",
               "src/theme.scss"
             ],

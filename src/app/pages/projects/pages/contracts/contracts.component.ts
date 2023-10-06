@@ -142,7 +142,7 @@ export class ContractsComponent implements AfterViewInit, OnDestroy {
 
       this.#setEditorValue(contract?.swagger ?? '');
     } else {
-      this.openMergeModal();
+      this.openMergeModal(contract);
     }
   }
 
@@ -188,7 +188,9 @@ export class ContractsComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  openMergeModal() {
+  openMergeModal(originalContract: ContractInterface | null) {
+    if (!originalContract) return;
+
     this.realtimeSubscription?.unsubscribe();
 
     this.dialogService
@@ -196,7 +198,11 @@ export class ContractsComponent implements AfterViewInit, OnDestroy {
         height: '80%',
         width: '80%',
         panelClass: 'mobile-fullscreen',
-        data: { projectId: this.projectId }
+        data: {
+          projectId: this.projectId,
+          modifiedModel: this.contract.value ?? '',
+          originalModel: originalContract,
+        },
       })
       .afterClosed()
       .subscribe(() => {
