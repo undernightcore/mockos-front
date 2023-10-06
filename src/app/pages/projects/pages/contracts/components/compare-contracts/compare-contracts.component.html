@@ -1,0 +1,24 @@
+<div class="compare">
+  <h1 mat-dialog-title>Merge contract changes</h1>
+  <div mat-dialog-content>
+    <div #panels class="compare__panels"></div>
+  </div>
+  <div mat-dialog-actions>
+    <div>
+      <button [disabled]="this.remoteContract === undefined" mat-button>
+        {{ "ACTIONS.KEEP_LEFT" | translate }}
+      </button>
+      <button [disabled]="this.remoteContract === undefined" mat-button>
+        {{ "ACTIONS.KEEP_RIGHT" | translate }}
+      </button>
+    </div>
+    <div>
+      <button mat-button mat-dialog-close>
+        {{ "ACTIONS.MERGE_LATER" | translate }}
+      </button>
+      <button [disabled]="this.remoteContract === undefined" mat-button>
+        {{ "ACTIONS.SAVE" | translate }}
+      </button>
+    </div>
+  </div>
+</div>

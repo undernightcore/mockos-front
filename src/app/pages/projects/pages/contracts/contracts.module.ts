@@ -12,9 +12,11 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import { IsValidVersion } from './pipes/is-valid-version/is-valid-version.pipe';
 import {TranslateModule} from "@ngx-translate/core";
+import { CompareContractsComponent } from './components/compare-contracts/compare-contracts.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
-  declarations: [ContractsComponent, IsValidVersion],
+  declarations: [ContractsComponent, IsValidVersion, CompareContractsComponent],
   imports: [
     CommonModule,
     ContractsRoutingModule,
@@ -27,6 +29,7 @@ import {TranslateModule} from "@ngx-translate/core";
     FormsModule,
     MatTooltipModule,
     TranslateModule,
+    MatDialogModule,
   ],
 })
 export class ContractsModule {}

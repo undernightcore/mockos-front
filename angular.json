@@ -36,6 +36,7 @@
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "./node_modules/swagger-ui/dist/swagger-ui.css",
+              "./node_modules/ace-diff/dist/ace-diff-dark.min.css",
               "src/styles.scss",
               "src/theme.scss"
             ],

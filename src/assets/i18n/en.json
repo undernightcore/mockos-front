@@ -162,6 +162,7 @@
     "PRETTIFY_JSON": "Prettify JSON",
     "CLOSE": "Close",
     "CREATE_TOKEN": "Create token",
-    "SAVE": "Save"
+    "SAVE": "Save",
+    "MERGE_LATER": "Merge later"
   }
 }
