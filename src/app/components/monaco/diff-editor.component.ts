@@ -1,4 +1,4 @@
-import { Component, Inject, Input, NgZone } from '@angular/core';
+import {Component, EventEmitter, Inject, Input, NgZone, Output} from '@angular/core';
 import { fromEvent } from 'rxjs';
 
 import { BaseEditor } from './base-editor';
@@ -26,6 +26,8 @@ export class DiffEditorComponent extends BaseEditor {
 
   _originalModel!: DiffEditorModel;
   _modifiedModel!: DiffEditorModel;
+
+  @Output() modifiedChanged = new EventEmitter<string>();
 
   @Input('options')
   set options(options: any) {
@@ -89,6 +91,12 @@ export class DiffEditorComponent extends BaseEditor {
     this._editor.setModel({
       original: originalModel,
       modified: modifiedModel
+    });
+
+    const ed = this._editor.getModel().modified;
+
+    ed.onDidChangeContent(() => {
+      this.modifiedChanged.emit(ed.getValue() || '');
     });
 
     // refresh layout on resize event.

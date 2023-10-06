@@ -14,7 +14,16 @@ import {
   ContractInterface,
   MinimalContractInterface,
 } from '../../../../interfaces/contract.interface';
-import { debounceTime, map, Subscription, switchMap, tap } from 'rxjs';
+import {
+  catchError,
+  debounceTime,
+  map,
+  of,
+  Subscription,
+  switchMap,
+  tap,
+  throwError,
+} from 'rxjs';
 import { isValidJson, isValidYaml } from '../../../../utils/string.utils';
 import { Ace, edit } from 'ace-builds';
 import { EditorTypeEnum } from '../../../../interfaces/response-type.interface';
@@ -27,6 +36,7 @@ import 'ace-builds/src-noconflict/theme-tomorrow_night_eighties';
 import { RealtimeService } from '../../../../services/realtime/realtime.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CompareContractsComponent } from './components/compare-contracts/compare-contracts.component';
+import { openToast } from '../../../../utils/toast.utils';
 
 @Component({
   selector: 'app-contracts',
@@ -79,8 +89,17 @@ export class ContractsComponent implements AfterViewInit, OnDestroy {
         this.parsedRemote?.info?.version ?? null,
         this.contract.value ?? ''
       )
-      .pipe()
-      .subscribe();
+      .subscribe({
+        next: (message) => {
+          openToast(message.message, 'success');
+        },
+        error: (error) => {
+          if (error.status !== 409) return;
+          this.contractsService
+            .getContract(this.projectId)
+            .subscribe((contract) => this.#openMergeModal(contract));
+        },
+      });
   }
 
   #getInitialContract() {
@@ -142,7 +161,7 @@ export class ContractsComponent implements AfterViewInit, OnDestroy {
 
       this.#setEditorValue(contract?.swagger ?? '');
     } else {
-      this.openMergeModal(contract);
+      this.#openMergeModal(contract);
     }
   }
 
@@ -188,7 +207,7 @@ export class ContractsComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  openMergeModal(originalContract: ContractInterface | null) {
+  #openMergeModal(originalContract: ContractInterface | null) {
     if (!originalContract) return;
 
     this.realtimeSubscription?.unsubscribe();
@@ -205,8 +224,15 @@ export class ContractsComponent implements AfterViewInit, OnDestroy {
         },
       })
       .afterClosed()
-      .subscribe(() => {
+      .subscribe((value?: string) => {
         this.#listenOnRealtimeChanges();
+        if (!value) return;
+
+        this.parsedRemote = originalContract
+          ? this.#parseContract(originalContract?.swagger)
+          : null;
+
+        this.#setEditorValue(value);
       });
   }
 

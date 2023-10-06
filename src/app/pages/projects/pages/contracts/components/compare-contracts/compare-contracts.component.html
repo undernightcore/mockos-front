@@ -2,26 +2,27 @@
   <h1 mat-dialog-title>Merge contract changes</h1>
   <div mat-dialog-content>
     <ngx-monaco-diff-editor
-      *ngIf="originalModel && modifiedModel"
-      [originalModel]="originalModel"
-      [modifiedModel]="modifiedModel"
+      *ngIf="initialOriginalModel && initialModifiedModel"
+      [originalModel]="initialOriginalModel"
+      [modifiedModel]="initialModifiedModel"
       [options]="{ theme: 'vs-dark', glyphMargin: true, renderSideBySide: true }"
+      (modifiedChanged)="updatedModifiedModel = $event"
     ></ngx-monaco-diff-editor>
   </div>
   <div mat-dialog-actions>
     <div>
-      <button mat-button>
+      <button (click)="dialogRef.close(initialOriginalModel.code)" mat-button>
         {{ "ACTIONS.KEEP_LEFT" | translate }}
       </button>
-      <button mat-button>
+      <button (click)="dialogRef.close(updatedModifiedModel)" mat-button>
         {{ "ACTIONS.KEEP_RIGHT" | translate }}
       </button>
     </div>
     <div>
-      <button mat-button mat-dialog-close>
+      <button (click)="dialogRef.close()" mat-button mat-dialog-close>
         {{ "ACTIONS.MERGE_LATER" | translate }}
       </button>
-      <button mat-button>
+      <button (click)="dialogRef.close(updatedModifiedModel)" mat-button>
         {{ "ACTIONS.SAVE" | translate }}
       </button>
     </div>
