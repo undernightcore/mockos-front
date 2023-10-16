@@ -32,6 +32,10 @@
       & > img {
         height: 200px;
       }
+
+      &__start {
+        background-color: var(--alt-color);
+      }
     }
 
     &__row {

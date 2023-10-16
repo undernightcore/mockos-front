@@ -14,9 +14,9 @@
         {{ "PAGES.HOME.DESCRIPTION" | translate }}
       </h3>
       <button
-        *ngIf="isLogged !== undefined"
-        [routerLink]="isLogged ? '/projects' : '/auth/login'"
+        [routerLink]="'/projects'"
         mat-button
+        class="home__content__section__start"
       >
         {{ "ACTIONS.START_NOW" | translate }}
       </button>
