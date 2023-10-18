@@ -6,14 +6,4 @@ import { AuthService } from '../../services/auth/auth.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
-  isLogged?: boolean;
-
-  constructor(private authService: AuthService) {}
-
-  ngOnInit() {
-    this.authService.isLogged.subscribe((logged) => {
-      this.isLogged = logged;
-    });
-  }
-}
+export class HomeComponent {}

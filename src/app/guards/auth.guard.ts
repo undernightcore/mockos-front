@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     return this.authService.isLogged.pipe(
-      map((logged) => logged || this.router.createUrlTree(['/login']))
+      map((logged) => logged || this.router.createUrlTree(['/auth/login']))
     );
   }
   canActivateChild(
@@ -25,7 +25,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     state: RouterStateSnapshot
   ) {
     return this.authService.isLogged.pipe(
-      map((logged) => logged || this.router.createUrlTree(['/login']))
+      map((logged) => logged || this.router.createUrlTree(['/auth/login']))
     );
   }
 }
