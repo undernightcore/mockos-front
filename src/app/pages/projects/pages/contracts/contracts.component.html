@@ -1,65 +1,77 @@
 <div class="contracts">
   <div class="contracts__code">
     <div class="contracts__code__header">
-      <ng-container *ngIf="!areSameContracts">
-        <span>
-          {{ "PAGES.CONTRACTS.CURRENTLY_UPDATING" | translate }}:
-          <span>{{
-            parsedRemote?.info?.version ?? "PAGES.CONTRACTS.NONE_VERSION"
-              | translate
-          }}</span>
-          -->
-          <span>{{
-            parsedLocal?.info?.version ?? "PAGES.CONTRACTS.NONE_VERSION"
-              | translate
-          }}</span>
-          <mat-icon
-            *ngIf="
-              !(
-                parsedRemote?.info?.version
-                | isValidVersion : parsedLocal?.info?.version
-              )
-            "
-            [matTooltip]="
-              'PAGES.CONTRACTS.INVALID_VERSION'
+      <div class="contracts__code__header__versions">
+        <button mat-button>
+          <mat-icon>history</mat-icon>
+        </button>
+      </div>
+      <div class="contracts__code__header__info">
+        <ng-container *ngIf="!areSameContracts">
+          <span>
+            {{ "PAGES.CONTRACTS.CURRENTLY_UPDATING" | translate }}:
+            <span>{{
+              parsedRemote?.info?.version ?? "PAGES.CONTRACTS.NONE_VERSION"
                 | translate
-                  : {
-                      remote:
-                        parsedRemote?.info?.version ??
-                          'PAGES.CONTRACTS.NONE_VERSION' | translate,
-                      local:
-                        parsedLocal?.info?.version ??
-                          'PAGES.CONTRACTS.NONE_VERSION' | translate
-                    }
-            "
-            >warning</mat-icon
-          >
-        </span>
-      </ng-container>
-      <ng-container *ngIf="areSameContracts">
-        <span>
-          {{ "PAGES.CONTRACTS.CURRENT_VERSION" | translate }} -
-          <span>{{
-            parsedRemote?.info?.version ?? "PAGES.CONTRACTS.NONE_VERSION"
-              | translate
-          }}</span>
-        </span>
-      </ng-container>
-      <mat-form-field appearance="fill">
-        <mat-select [formControl]="selectedLang">
-          <mat-option [value]="language" *ngFor="let language of languages">
-            {{ language }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+            }}</span>
+            -->
+            <span>{{
+              parsedLocal?.info?.version ?? "PAGES.CONTRACTS.NONE_VERSION"
+                | translate
+            }}</span>
+            <mat-icon
+              *ngIf="
+                !(
+                  parsedRemote?.info?.version
+                  | isValidVersion : parsedLocal?.info?.version
+                )
+              "
+              [matTooltip]="
+                'PAGES.CONTRACTS.INVALID_VERSION'
+                  | translate
+                    : {
+                        remote:
+                          parsedRemote?.info?.version ??
+                            'PAGES.CONTRACTS.NONE_VERSION' | translate,
+                        local:
+                          parsedLocal?.info?.version ??
+                            'PAGES.CONTRACTS.NONE_VERSION' | translate
+                      }
+              "
+              >warning</mat-icon
+            >
+          </span>
+        </ng-container>
+        <ng-container *ngIf="areSameContracts">
+          <span>
+            {{ "PAGES.CONTRACTS.CURRENT_VERSION" | translate }} -
+            <span>{{
+              parsedRemote?.info?.version ?? "PAGES.CONTRACTS.NONE_VERSION"
+                | translate
+            }}</span>
+          </span>
+        </ng-container>
+        <mat-form-field appearance="fill">
+          <mat-select [formControl]="selectedLang">
+            <mat-option [value]="language" *ngFor="let language of languages">
+              {{ language }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
     </div>
     <div #editor class="contracts__code__editor"></div>
   </div>
   <div class="contracts__ui">
     <div class="contracts__ui__header">
-      <button *ngIf="!areSameContracts" (click)="updateContract()" mat-button>
-        <mat-icon>save</mat-icon>
-      </button>
+      <ng-container *ngIf="!areSameContracts">
+        <button (click)="getInitialContract()" mat-button>
+          <mat-icon>restart_alt</mat-icon>
+        </button>
+        <button (click)="updateContract()" mat-button>
+          <mat-icon>save</mat-icon>
+        </button>
+      </ng-container>
     </div>
     <div #swagger class="contracts__ui__content"></div>
   </div>

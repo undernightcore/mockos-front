@@ -14,9 +14,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CompareContractsComponent } from './components/compare-contracts/compare-contracts.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MonacoEditorModule } from '../../../../components/monaco/editor.module';
+import { ContractsVersionsComponent } from './components/contracts-versions/contracts-versions.component';
 
 @NgModule({
-  declarations: [ContractsComponent, IsValidVersion, CompareContractsComponent],
+  declarations: [ContractsComponent, IsValidVersion, CompareContractsComponent, ContractsVersionsComponent],
   imports: [
     CommonModule,
     ContractsRoutingModule,

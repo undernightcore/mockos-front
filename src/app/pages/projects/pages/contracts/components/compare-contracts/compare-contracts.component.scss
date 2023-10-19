@@ -3,6 +3,17 @@
   flex-direction: column;
   height: 100%;
 
+  &__header {
+    display: flex;
+    height: 28px;
+    background-color: var(--main-color);
+
+    & > div {
+      height: 100%;
+      width: 50%;
+    }
+  }
+
   & > div[mat-dialog-content] {
     height: 100%;
     max-height: none;

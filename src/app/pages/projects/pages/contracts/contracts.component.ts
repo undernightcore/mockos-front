@@ -75,7 +75,7 @@ export class ContractsComponent implements AfterViewInit, OnDestroy {
     this.#handleLangChange();
     this.#listenOnRealtimeChanges();
 
-    this.#getInitialContract();
+    this.getInitialContract();
   }
 
   ngOnDestroy() {
@@ -102,7 +102,7 @@ export class ContractsComponent implements AfterViewInit, OnDestroy {
       });
   }
 
-  #getInitialContract() {
+  getInitialContract() {
     this.contractsService.getContract(this.projectId).subscribe((contract) => {
       this.parsedRemote = contract
         ? this.#parseContract(contract?.swagger)
