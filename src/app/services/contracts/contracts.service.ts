@@ -22,13 +22,14 @@ export class ContractsService {
     );
   }
 
-  getContractVersions(projectId: number) {
+  getContractVersions(projectId: number, page = 1, perPage = 10) {
     return this.httpClient.get<
       PaginatedResponseInterface<ContractVersionInterface>
     >(
       `${this.envService.getEnv(
         'apiUrl'
-      )}/projects/${projectId}/contract-versions`
+      )}/projects/${projectId}/contract-versions`,
+      { params: { page, perPage } }
     );
   }
 

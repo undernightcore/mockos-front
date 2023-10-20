@@ -9,8 +9,8 @@ export interface ContractInterface {
 export interface ContractVersionInterface {
   id: number;
   version: string;
-  createdAt: string;
-  updatedAt: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface MinimalContractInterface {

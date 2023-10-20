@@ -15,9 +15,17 @@ import { CompareContractsComponent } from './components/compare-contracts/compar
 import { MatDialogModule } from '@angular/material/dialog';
 import { MonacoEditorModule } from '../../../../components/monaco/editor.module';
 import { ContractsVersionsComponent } from './components/contracts-versions/contracts-versions.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { InfiniteScrollModule } from '../../../../directives/infinite-scroll/infinite-scroll.module';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
-  declarations: [ContractsComponent, IsValidVersion, CompareContractsComponent, ContractsVersionsComponent],
+  declarations: [
+    ContractsComponent,
+    IsValidVersion,
+    CompareContractsComponent,
+    ContractsVersionsComponent,
+  ],
   imports: [
     CommonModule,
     ContractsRoutingModule,
@@ -31,6 +39,9 @@ import { ContractsVersionsComponent } from './components/contracts-versions/cont
     TranslateModule,
     MatDialogModule,
     MonacoEditorModule,
+    MatProgressSpinnerModule,
+    InfiniteScrollModule,
+    MatListModule,
   ],
 })
 export class ContractsModule {}

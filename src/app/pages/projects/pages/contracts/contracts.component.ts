@@ -37,6 +37,7 @@ import { RealtimeService } from '../../../../services/realtime/realtime.service'
 import { MatDialog } from '@angular/material/dialog';
 import { CompareContractsComponent } from './components/compare-contracts/compare-contracts.component';
 import { openToast } from '../../../../utils/toast.utils';
+import { ContractsVersionsComponent } from './components/contracts-versions/contracts-versions.component';
 
 @Component({
   selector: 'app-contracts',
@@ -111,6 +112,16 @@ export class ContractsComponent implements AfterViewInit, OnDestroy {
       if (!this.editor) this.#recreateEditor(contract?.swagger);
 
       this.#setEditorValue(contract?.swagger ?? '');
+    });
+  }
+
+  openVersionList() {
+    this.dialogService.open(ContractsVersionsComponent, {
+      panelClass: 'mobile-fullscreen',
+      height: '60%',
+      width: '40%',
+      autoFocus: false,
+      data: this.projectId
     });
   }
 
