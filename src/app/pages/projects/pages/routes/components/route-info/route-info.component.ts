@@ -45,6 +45,7 @@ export class RouteInfoComponent implements OnInit, OnDestroy {
 
   #isFetchingResponses = false;
   isFetchingNewRouteResponses = false;
+  fetchingResponseId?: number;
 
   isEditingTitle = false;
 
@@ -112,16 +113,25 @@ export class RouteInfoComponent implements OnInit, OnDestroy {
   }
 
   openCreateResponseModal(responseId?: number) {
-    this.#getResponse(responseId).subscribe((responseData) => {
-      this.dialogService.open(CreateResponseComponent, {
-        closeOnNavigation: true,
-        height: '90%',
-        width: '70%',
-        data: { routeId: this.routeForm?.value.id, responseData },
-        panelClass: 'mobile-fullscreen',
-        autoFocus: false,
+    if (this.fetchingResponseId !== undefined) return;
+
+    this.#getResponse(responseId)
+      .pipe(
+        tap({
+          subscribe: () => (this.fetchingResponseId = responseId),
+          finalize: () => (this.fetchingResponseId = undefined),
+        })
+      )
+      .subscribe((responseData) => {
+        this.dialogService.open(CreateResponseComponent, {
+          closeOnNavigation: true,
+          height: '90%',
+          width: '70%',
+          data: { routeId: this.routeForm?.value.id, responseData },
+          panelClass: 'mobile-fullscreen',
+          autoFocus: false,
+        });
       });
-    });
   }
 
   openDeleteModal(route: RouteInterface) {

@@ -57,6 +57,7 @@
         (config)="openHeadersModal(response.id)"
         (duplicate)="openDuplicateModal(response.id)"
         [response]="response"
+        [loading]="fetchingResponseId === response.id"
         *ngFor="let response of responses; trackBy: trackByResponse"
       ></app-response-list-item>
     </div>
@@ -69,6 +70,6 @@
     *ngIf="!responses || isFetchingNewRouteResponses"
     class="route-info__loading"
   >
-    <mat-spinner [diameter]="50"></mat-spinner>
+    <mat-spinner [diameter]="40"></mat-spinner>
   </div>
 </div>

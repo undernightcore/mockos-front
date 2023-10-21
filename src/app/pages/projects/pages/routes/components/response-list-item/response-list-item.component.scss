@@ -10,6 +10,18 @@
     width: 50px;
   }
 
+  & > mat-spinner {
+    width: 50px !important;
+    height: 44px !important;
+
+    &::ng-deep {
+      & > svg {
+        width: 100% !important;
+        height: 100% !important;
+      }
+    }
+  }
+
   &__info {
     width: 100%;
     display: flex;
