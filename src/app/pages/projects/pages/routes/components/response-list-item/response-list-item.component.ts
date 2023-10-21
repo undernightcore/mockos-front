@@ -8,6 +8,8 @@ import { SimpleResponseInterface } from '../../../../../../interfaces/response.i
 })
 export class ResponseListItemComponent {
   @Input() response?: SimpleResponseInterface;
+  @Input() loading = false;
+
   @Output() delete = new EventEmitter<void>();
   @Output() select = new EventEmitter<void>();
   @Output() config = new EventEmitter<void>();
