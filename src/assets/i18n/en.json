@@ -24,7 +24,9 @@
     "COPIED_TO_CLIPBOARD": "Copied to the clipboard",
     "DOCUMENTATION": "Documentation",
     "ROUTE": "Route",
-    "FOLDER": "Folder"
+    "FOLDER": "Folder",
+    "UPDATED_AT": "Updated at",
+    "AUTHOR": "Author"
   },
   "PAGES": {
     "HOME": {
@@ -137,7 +139,9 @@
       "INVALID_VERSION": "Your version {{local}} is INVALID or NOT GREATER than remote version {{remote}}",
       "CURRENTLY_UPDATING": "You are updating",
       "CURRENT_VERSION": "Current version",
-      "NONE_VERSION": "NONE"
+      "NONE_VERSION": "NONE",
+      "VERSION_LIST": "Version list",
+      "NO_PREVIOUS_VERSION": "No previous versions"
     },
     "NOT_FOUND": {
       "PAGE_NOT_FOUND": "Page not found",

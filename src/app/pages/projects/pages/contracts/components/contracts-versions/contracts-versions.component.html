@@ -1,9 +1,9 @@
 <div class="versions">
-  <h1 mat-dialog-title>Listado de versiones</h1>
+  <h1 mat-dialog-title>{{ "PAGES.CONTRACTS.VERSION_LIST" | translate }}</h1>
   <div mat-dialog-content>
     <div *ngIf="contracts" class="versions__content">
       <div class="versions__content__empty" *ngIf="!contracts.length">
-        <span>No hay versiones anteriores</span>
+        <span>{{ "PAGES.CONTRACTS.NO_PREVIOUS_VERSION" | translate }}</span>
       </div>
       <div
         class="versions__content__infinite"
@@ -15,9 +15,19 @@
         *ngIf="contracts.length"
       >
         <mat-selection-list [multiple]="false">
-          <mat-list-option *ngFor="let version of contracts">
+          <mat-list-option
+            *ngFor="let version of contracts"
+            class="versions__content__infinite__version"
+          >
             <span mat-line>{{ version.version }}</span>
-            <span mat-line>{{ version.created_at | date : "yyyy-MM-dd" }}</span>
+            <span mat-line>
+              <span>{{ "COMMON.UPDATED_AT" | translate }}: </span>
+              {{ version.created_at | date : "yyyy-MM-dd - HH:mm" }}
+            </span>
+            <span mat-line>
+              <span>{{ "COMMON.AUTHOR" | translate }}: </span>
+              {{ version.author?.name ?? "[deleted]" }}
+            </span>
           </mat-list-option>
         </mat-selection-list>
       </div>

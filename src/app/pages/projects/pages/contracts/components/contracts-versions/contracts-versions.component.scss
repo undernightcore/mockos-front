@@ -14,6 +14,16 @@
     &__infinite {
       height: 100%;
       overflow: auto;
+
+      &__version {
+        &::ng-deep {
+          span[mat-line] {
+            & > span {
+              color: var(--main-color);
+            }
+          }
+        }
+      }
     }
 
     &__empty {

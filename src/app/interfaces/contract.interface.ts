@@ -1,9 +1,12 @@
+import {UserInterface} from "./user.interface";
+
 export interface ContractInterface {
   id: number;
   version: string;
   swagger: string;
-  createdAt: string;
-  updatedAt: string;
+  created_at: string;
+  updated_at: string;
+  author: UserInterface | null;
 }
 
 export interface ContractVersionInterface {
@@ -11,6 +14,7 @@ export interface ContractVersionInterface {
   version: string;
   created_at: string;
   updated_at: string;
+  author: UserInterface | null;
 }
 
 export interface MinimalContractInterface {

@@ -24,7 +24,9 @@
     "COPIED_TO_CLIPBOARD": "Copiado al portapapeles",
     "DOCUMENTATION": "Documentación",
     "ROUTE": "Ruta",
-    "FOLDER": "Carpeta"
+    "FOLDER": "Carpeta",
+    "UPDATED_AT": "Actualizado el",
+    "AUTHOR": "Autor"
   },
   "PAGES": {
     "HOME": {
@@ -137,7 +139,9 @@
       "INVALID_VERSION": "Tu versión {{local}} es INVÁLIDA o NO ES MAYOR que la versión remota {{remote}}",
       "CURRENTLY_UPDATING": "Estás actualizando",
       "CURRENT_VERSION": "Versión actual",
-      "NONE_VERSION": "NINGUNA"
+      "NONE_VERSION": "NINGUNA",
+      "VERSION_LIST": "Listado de versiones",
+      "NO_PREVIOUS_VERSION": "No hay versiones anteriores"
     },
     "NOT_FOUND": {
       "PAGE_NOT_FOUND": "Página no encontrada",
