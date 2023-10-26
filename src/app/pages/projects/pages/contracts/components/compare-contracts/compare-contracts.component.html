@@ -1,15 +1,28 @@
 <div class="compare">
-  <h1 mat-dialog-title>Merge contract changes</h1>
+  <h1 mat-dialog-title>{{ "PAGES.CONTRACTS.MERGE_CHANGES" | translate }}</h1>
   <div mat-dialog-content>
     <div class="compare__header">
-      <div>a</div>
-      <div>b</div>
+      <div
+        [innerHTML]="
+          'PAGES.CONTRACTS.VERSION_UPDATED_BY'
+            | translate
+              : {
+                  version: data.originalModel.version,
+                  author: data.originalModel.author?.name ?? '[deleted]'
+                }
+        "
+      ></div>
+      <div>{{ "COMMON.YOUR_VERSION" | translate }}</div>
     </div>
     <ngx-monaco-diff-editor
       *ngIf="initialOriginalModel && initialModifiedModel"
       [originalModel]="initialOriginalModel"
       [modifiedModel]="initialModifiedModel"
-      [options]="{ theme: 'vs-dark', glyphMargin: true, renderSideBySide: true }"
+      [options]="{
+        theme: 'vs-dark',
+        glyphMargin: true,
+        renderSideBySide: true
+      }"
       (modifiedChanged)="updatedModifiedModel = $event"
     ></ngx-monaco-diff-editor>
   </div>

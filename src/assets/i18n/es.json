@@ -26,7 +26,9 @@
     "ROUTE": "Ruta",
     "FOLDER": "Carpeta",
     "UPDATED_AT": "Actualizado el",
-    "AUTHOR": "Autor"
+    "AUTHOR": "Autor",
+    "YOUR_VERSION": "Tu versión",
+    "PREVIEW": "Vista previa"
   },
   "PAGES": {
     "HOME": {
@@ -141,7 +143,11 @@
       "CURRENT_VERSION": "Versión actual",
       "NONE_VERSION": "NINGUNA",
       "VERSION_LIST": "Listado de versiones",
-      "NO_PREVIOUS_VERSION": "No hay versiones anteriores"
+      "NO_PREVIOUS_VERSION": "No hay versiones anteriores",
+      "VERSION_UPDATED_BY": "Versión <span>{{version}}</span> actualizada por <span>{{author}}</span>",
+      "MERGE_CHANGES": "Mergear cambios de contrato",
+      "ROLLBACK_TITLE": "¿Estás seguro de querer hacer rollback a la <span>{{version}}</span>?",
+      "ROLLBACK_MESSAGE": "Esta actualización fue hecha por <span>{{author}}</span> el <span>{{date}}</span> a las <span>{{time}}</span>. Todas las versiones posteriores a esta serán eliminadas."
     },
     "NOT_FOUND": {
       "PAGE_NOT_FOUND": "Página no encontrada",
@@ -167,6 +173,8 @@
     "CLOSE": "Cerrar",
     "CREATE_TOKEN": "Crear token",
     "SAVE": "Guardar",
-    "MERGE_LATER": "Mergear luego"
+    "MERGE_LATER": "Mergear luego",
+    "COMPARE_CHANGES": "Comparar cambios",
+    "ROLLBACK": "Rollback"
   }
 }

@@ -16,6 +16,7 @@
       >
         <mat-selection-list [multiple]="false">
           <mat-list-option
+            (click)="dialogRef.close(version)"
             *ngFor="let version of contracts"
             class="versions__content__infinite__version"
           >

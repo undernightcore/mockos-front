@@ -1,7 +1,5 @@
-<h1 mat-dialog-title>{{ data.title }}</h1>
-<div mat-dialog-content>
-  {{ data.message }}
-</div>
+<h1 [innerHTML]="data.title" mat-dialog-title></h1>
+<div [innerHTML]="data.message" mat-dialog-content></div>
 <div mat-dialog-actions>
   <button (click)="dialogRef.close(false)" mat-button>
     {{ "ACTIONS.CANCEL" | translate }}

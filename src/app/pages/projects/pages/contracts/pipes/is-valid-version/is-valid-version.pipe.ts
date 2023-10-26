@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import {isVersionGreater} from "../../../../../../utils/version.utils";
 
 @Pipe({
   name: 'isValidVersion',
@@ -7,7 +8,6 @@ export class IsValidVersion implements PipeTransform {
   transform(remoteVersion?: string, localVersion?: string | number) {
     if (!localVersion || typeof localVersion === 'number') return false;
 
-    const remoteParsedVersion = remoteVersion?.split('.').map(Number);
     const localParsedVersion = localVersion.split('.').map(Number);
 
     if (
@@ -16,6 +16,6 @@ export class IsValidVersion implements PipeTransform {
     )
       return false;
 
-    return localParsedVersion > (remoteParsedVersion ?? []);
+    return isVersionGreater(remoteVersion ?? '', localVersion)
   }
 }

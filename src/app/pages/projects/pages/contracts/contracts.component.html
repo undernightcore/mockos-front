@@ -9,13 +9,15 @@
       <div class="contracts__code__header__info">
         <ng-container *ngIf="!areSameContracts">
           <span>
-            {{ "PAGES.CONTRACTS.CURRENTLY_UPDATING" | translate }}:
-            <span>{{
+            <span class="contracts__code__header__info__hide"
+              >{{ "PAGES.CONTRACTS.CURRENTLY_UPDATING" | translate }}:</span
+            >
+            <span class="highlighted">{{
               parsedRemote?.info?.version ?? "PAGES.CONTRACTS.NONE_VERSION"
                 | translate
             }}</span>
-            -->
-            <span>{{
+            <span>--></span>
+            <span class="highlighted">{{
               parsedLocal?.info?.version ?? "PAGES.CONTRACTS.NONE_VERSION"
                 | translate
             }}</span>
@@ -45,7 +47,7 @@
         <ng-container *ngIf="areSameContracts">
           <span>
             {{ "PAGES.CONTRACTS.CURRENT_VERSION" | translate }} -
-            <span>{{
+            <span class="highlighted">{{
               parsedRemote?.info?.version ?? "PAGES.CONTRACTS.NONE_VERSION"
                 | translate
             }}</span>
@@ -64,14 +66,15 @@
   </div>
   <div class="contracts__ui">
     <div class="contracts__ui__header">
-      <ng-container *ngIf="!areSameContracts">
+      <h4>{{ "COMMON.PREVIEW" | translate }}</h4>
+      <div *ngIf="!areSameContracts">
         <button (click)="getInitialContract()" mat-button>
           <mat-icon>restart_alt</mat-icon>
         </button>
         <button (click)="updateContract()" mat-button>
           <mat-icon>save</mat-icon>
         </button>
-      </ng-container>
+      </div>
     </div>
     <div #swagger class="contracts__ui__content"></div>
   </div>

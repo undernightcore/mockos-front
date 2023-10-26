@@ -18,6 +18,7 @@ import { ContractsVersionsComponent } from './components/contracts-versions/cont
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { InfiniteScrollModule } from '../../../../directives/infinite-scroll/infinite-scroll.module';
 import { MatListModule } from '@angular/material/list';
+import { ContractInfoComponent } from './components/contract-info/contract-info.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { MatListModule } from '@angular/material/list';
     IsValidVersion,
     CompareContractsComponent,
     ContractsVersionsComponent,
+    ContractInfoComponent,
   ],
   imports: [
     CommonModule,

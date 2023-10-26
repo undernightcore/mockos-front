@@ -1,0 +1,17 @@
+:host {
+  & > h1 {
+    &::ng-deep {
+      & > span {
+        color: var(--main-color);
+      }
+    }
+  }
+
+  & > div {
+    &::ng-deep {
+      & > span {
+        color: var(--main-color);
+      }
+    }
+  }
+}

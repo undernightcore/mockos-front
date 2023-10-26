@@ -21,7 +21,7 @@ export class CompareContractsComponent {
   constructor(
     public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA)
-    private data: {
+    public data: {
       projectId: number;
       modifiedModel: string;
       originalModel: ContractInterface;

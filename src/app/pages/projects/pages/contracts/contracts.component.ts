@@ -12,12 +12,15 @@ import { FormControl } from '@angular/forms';
 import { load } from 'js-yaml';
 import {
   ContractInterface,
+  ContractVersionInterface,
   MinimalContractInterface,
 } from '../../../../interfaces/contract.interface';
 import {
   catchError,
   debounceTime,
+  filter,
   map,
+  mergeMap,
   of,
   Subscription,
   switchMap,
@@ -38,6 +41,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { CompareContractsComponent } from './components/compare-contracts/compare-contracts.component';
 import { openToast } from '../../../../utils/toast.utils';
 import { ContractsVersionsComponent } from './components/contracts-versions/contracts-versions.component';
+import { ContractInfoComponent } from './components/contract-info/contract-info.component';
+import { ContractInfoActionInterface } from './components/contract-info/interfaces/contract-info-action.interface';
+import { ChoiceModalComponent } from '../../../../components/choice-modal/choice-modal.component';
+import { isVersionGreater } from '../../../../utils/version.utils';
+import { TranslateService } from '@ngx-translate/core';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'app-contracts',
@@ -68,7 +77,8 @@ export class ContractsComponent implements AfterViewInit, OnDestroy {
     private contractsService: ContractsService,
     private activatedRoute: ActivatedRoute,
     private realtimeService: RealtimeService,
-    private dialogService: MatDialog
+    private dialogService: MatDialog,
+    private translateService: TranslateService
   ) {}
 
   ngAfterViewInit() {
@@ -116,13 +126,74 @@ export class ContractsComponent implements AfterViewInit, OnDestroy {
   }
 
   openVersionList() {
-    this.dialogService.open(ContractsVersionsComponent, {
-      panelClass: 'mobile-fullscreen',
-      height: '60%',
-      width: '40%',
-      autoFocus: false,
-      data: this.projectId
-    });
+    this.dialogService
+      .open(ContractsVersionsComponent, {
+        panelClass: 'mobile-fullscreen',
+        height: '60%',
+        width: '40%',
+        autoFocus: false,
+        data: this.projectId,
+      })
+      .afterClosed()
+      .pipe(filter((version) => version))
+      .subscribe(({ version }: ContractVersionInterface) => {
+        this.#openVersionInfo(version);
+      });
+  }
+
+  #openVersionInfo(version: string) {
+    this.dialogService
+      .open(ContractInfoComponent, {
+        panelClass: 'mobile-fullscreen',
+        height: '80%',
+        width: '70%',
+        autoFocus: false,
+        data: { projectId: this.projectId, version },
+      })
+      .afterClosed()
+      .pipe(filter((event) => event))
+      .subscribe((event: ContractInfoActionInterface) => {
+        if (event.action === 'compare' && event.contract) {
+          this.#openMergeModal(event.contract);
+        } else if (event.action === 'rollback') {
+          this.#openRollbackModal(event.contract);
+        }
+      });
+  }
+
+  #openRollbackModal(contract: ContractInterface) {
+    this.dialogService
+      .open(ChoiceModalComponent, {
+        data: {
+          title: this.translateService.instant(
+            'PAGES.CONTRACTS.ROLLBACK_TITLE',
+            { version: contract.version }
+          ),
+          message: this.translateService.instant(
+            'PAGES.CONTRACTS.ROLLBACK_MESSAGE',
+            {
+              author: contract.author?.name ?? '[deleted]',
+              date: DateTime.fromISO(contract.created_at).toFormat(
+                'yyyy-MM-dd'
+              ),
+              time: DateTime.fromISO(contract.created_at).toFormat('HH:mm'),
+            }
+          ),
+        },
+      })
+      .afterClosed()
+      .pipe(
+        filter((accepted) => accepted),
+        mergeMap(() =>
+          this.contractsService.rollbackContract(
+            this.projectId,
+            contract.version
+          )
+        )
+      )
+      .subscribe(() => {
+        this.getInitialContract();
+      });
   }
 
   #handleContractChange() {
@@ -239,9 +310,16 @@ export class ContractsComponent implements AfterViewInit, OnDestroy {
         this.#listenOnRealtimeChanges();
         if (!value) return;
 
-        this.parsedRemote = originalContract
-          ? this.#parseContract(originalContract?.swagger)
-          : null;
+        if (
+          isVersionGreater(
+            this.parsedRemote?.info.version ?? '',
+            originalContract.version
+          )
+        ) {
+          this.parsedRemote = originalContract
+            ? this.#parseContract(originalContract?.swagger)
+            : null;
+        }
 
         this.#setEditorValue(value);
       });

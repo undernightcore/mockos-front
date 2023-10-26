@@ -1,7 +1,15 @@
-.compare {
+.contract {
   display: flex;
   flex-direction: column;
   height: 100%;
+
+  & > h1 {
+    &::ng-deep {
+      & > span {
+        color: var(--main-color);
+      }
+    }
+  }
 
   &__header {
     display: flex;
@@ -28,8 +36,20 @@
     height: 100%;
     max-height: none;
     overflow: auto;
+  }
 
-    & > ngx-monaco-diff-editor {
+  &__loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  &__content {
+    height: 100%;
+    overflow: hidden;
+
+    & > ngx-monaco-editor {
       height: 100%;
     }
   }
@@ -40,22 +60,16 @@
     & > div {
       &:last-child {
         & button {
+          background-color: darkred;
+          color: white;
+
           &:last-child {
             background-color: var(--alt-color);
+            color: black;
           }
         }
       }
     }
 
-  }
-
-  &__panels {
-    height: 100%;
-
-    &::ng-deep {
-      & > .acediff__wrap {
-        position: relative;
-      }
-    }
   }
 }
