@@ -15,6 +15,10 @@ body {
   }
 }
 
+.mat-progress-spinner circle, .mat-spinner circle {
+  stroke: var(--main-color) !important;
+}
+
 .custom-tooltip {
   font-size: 14px;
 }

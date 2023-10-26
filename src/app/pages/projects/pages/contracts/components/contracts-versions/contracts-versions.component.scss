@@ -1,0 +1,43 @@
+.versions {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  & > div[mat-dialog-content] {
+    height: 100%;
+    max-height: none;
+  }
+
+  &__content {
+    height: 100%;
+
+    &__infinite {
+      height: 100%;
+      overflow: auto;
+
+      &__version {
+        &::ng-deep {
+          span[mat-line] {
+            & > span {
+              color: var(--main-color);
+            }
+          }
+        }
+      }
+    }
+
+    &__empty {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+  }
+
+  &__loading {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+}

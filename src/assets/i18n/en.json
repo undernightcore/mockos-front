@@ -24,7 +24,11 @@
     "COPIED_TO_CLIPBOARD": "Copied to the clipboard",
     "DOCUMENTATION": "Documentation",
     "ROUTE": "Route",
-    "FOLDER": "Folder"
+    "FOLDER": "Folder",
+    "UPDATED_AT": "Updated at",
+    "AUTHOR": "Author",
+    "YOUR_VERSION": "Your version",
+    "PREVIEW": "Preview"
   },
   "PAGES": {
     "HOME": {
@@ -133,6 +137,18 @@
       "UPDATE_EMAIL": "Update email",
       "UPDATE_EMAIL_DESCRIPTION": "We will send you a confirmation email to your new address, once verified it will become your account's email"
     },
+    "CONTRACTS": {
+      "INVALID_VERSION": "Your version {{local}} is INVALID or NOT GREATER than remote version {{remote}}",
+      "CURRENTLY_UPDATING": "You are updating",
+      "CURRENT_VERSION": "Current version",
+      "NONE_VERSION": "NONE",
+      "VERSION_LIST": "Version list",
+      "NO_PREVIOUS_VERSION": "No previous versions",
+      "VERSION_UPDATED_BY": "Version <span>{{version}}</span> updated by <span>{{author}}</span>",
+      "MERGE_CHANGES": "Merge contract changes",
+      "ROLLBACK_TITLE": "Are you sure you want to rollback to version <span>{{version}}</span>?",
+      "ROLLBACK_MESSAGE": "This update was made by <span>{{author}}</span> on <span>{{date}}</span> at <span>{{time}}</span>. All versions after this will be removed."
+    },
     "NOT_FOUND": {
       "PAGE_NOT_FOUND": "Page not found",
       "SORRY": "We are very sorry..."
@@ -156,6 +172,9 @@
     "PRETTIFY_JSON": "Prettify JSON",
     "CLOSE": "Close",
     "CREATE_TOKEN": "Create token",
-    "SAVE": "Save"
+    "SAVE": "Save",
+    "MERGE_LATER": "Merge later",
+    "COMPARE_CHANGES": "Compare changes",
+    "ROLLBACK": "Rollback"
   }
 }

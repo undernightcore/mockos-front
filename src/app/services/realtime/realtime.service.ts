@@ -51,4 +51,17 @@ export class RealtimeService {
       })
     );
   }
+
+  listenContract(contractId: number) {
+    return new Observable<RealtimeType>((subscriber) => {
+      this.socket.on(`swagger:${contractId}`, (data) => {
+        subscriber.next(data);
+      });
+    }).pipe(
+      tap({
+        unsubscribe: () =>
+          this.socket.removeAllListeners(`swagger:${contractId}`),
+      })
+    );
+  }
 }

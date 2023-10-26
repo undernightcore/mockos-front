@@ -1,0 +1,47 @@
+<div class="contract">
+  <h1
+    *ngIf="contract"
+    mat-dialog-title
+    [innerHTML]="
+      'PAGES.CONTRACTS.VERSION_UPDATED_BY'
+        | translate
+          : {
+              version: contract.version,
+              author: contract.author?.name ?? '[deleted]'
+            }
+    "
+  ></h1>
+  <div mat-dialog-content>
+    <div *ngIf="contract" class="contract__content">
+      <ngx-monaco-editor
+        [ngModel]="contract.swagger"
+        [options]="{ theme: 'vs-dark', language: 'yaml', readOnly: true }"
+      ></ngx-monaco-editor>
+    </div>
+    <div *ngIf="!contract" class="contract__loading">
+      <mat-spinner [diameter]="50"></mat-spinner>
+    </div>
+  </div>
+  <div *ngIf="contract" mat-dialog-actions>
+    <div>
+      <button (click)="dialogRef.close()" mat-button>
+        {{ "ACTIONS.CLOSE" | translate }}
+      </button>
+    </div>
+    <div>
+      <button
+        (click)="dialogRef.close({ action: 'rollback', contract })"
+        mat-button
+        mat-dialog-close
+      >
+        {{ "ACTIONS.ROLLBACK" | translate }}
+      </button>
+      <button
+        (click)="dialogRef.close({ action: 'compare', contract })"
+        mat-button
+      >
+        {{ "ACTIONS.COMPARE_CHANGES" | translate }}
+      </button>
+    </div>
+  </div>
+</div>

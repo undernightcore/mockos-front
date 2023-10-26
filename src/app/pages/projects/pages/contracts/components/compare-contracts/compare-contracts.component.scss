@@ -1,0 +1,61 @@
+.compare {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &__header {
+    display: flex;
+    height: 28px;
+    background-color: var(--main-color);
+
+    & > div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 50%;
+      white-space: break-spaces;
+
+      ::ng-deep {
+        & > span {
+          color: var(--soft-gray);
+        }
+      }
+    }
+  }
+
+  & > div[mat-dialog-content] {
+    height: 100%;
+    max-height: none;
+    overflow: auto;
+
+    & > ngx-monaco-diff-editor {
+      height: 100%;
+    }
+  }
+
+  & > div[mat-dialog-actions] {
+    justify-content: space-between;
+
+    & > div {
+      &:last-child {
+        & button {
+          &:last-child {
+            background-color: var(--alt-color);
+          }
+        }
+      }
+    }
+
+  }
+
+  &__panels {
+    height: 100%;
+
+    &::ng-deep {
+      & > .acediff__wrap {
+        position: relative;
+      }
+    }
+  }
+}

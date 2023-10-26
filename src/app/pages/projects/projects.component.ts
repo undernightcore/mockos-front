@@ -9,6 +9,7 @@ import { openToast } from '../../utils/toast.utils';
 import { ProjectModalComponent } from './components/project-modal/project-modal.component';
 import { CreateProjectInterface } from '../../interfaces/create-project.interface';
 import { InvitationsService } from '../../services/invitations/invitations.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-projects',
@@ -25,7 +26,8 @@ export class ProjectsComponent implements OnInit {
     private projectService: ProjectService,
     private dialogService: MatDialog,
     private translateService: TranslateService,
-    private invitationsService: InvitationsService
+    private invitationsService: InvitationsService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -83,6 +85,10 @@ export class ProjectsComponent implements OnInit {
           this.getProjects(1);
         });
       });
+  }
+
+  openContractPage(project: ForkedProjectInterface) {
+    this.router.navigate(['/projects', project?.id, 'contracts'])
   }
 
   getProjects(page: number) {

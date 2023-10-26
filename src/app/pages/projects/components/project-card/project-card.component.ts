@@ -10,6 +10,7 @@ export class ProjectCardComponent {
   @Input() project?: ForkedProjectInterface;
   @Output() edit = new EventEmitter<void>();
   @Output() delete = new EventEmitter<void>();
+  @Output() contract = new EventEmitter<void>();
 
   openEditModal(click: MouseEvent) {
     click.stopPropagation();
@@ -19,5 +20,10 @@ export class ProjectCardComponent {
   openDeleteModal(click: MouseEvent) {
     click.stopPropagation();
     this.delete.emit();
+  }
+
+  openContractPage(click: MouseEvent) {
+    click.stopPropagation();
+    this.contract.emit()
   }
 }

@@ -1,0 +1,133 @@
+.contracts {
+  display: flex;
+  height: 100%;
+
+  @media (max-width: 1200px) {
+    flex-direction: column-reverse;
+  }
+
+  &__code {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    @media (max-width: 1200px) {
+      width: 100%;
+      height: 50%;
+    }
+
+    &__editor {
+      height: 100%;
+    }
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      height: 58px;
+      min-height: 58px;
+      background-color: var(--main-color);
+      padding: 0 12px;
+
+      &__versions {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        height: 100%;
+
+        & > button {
+          background-color: var(--alt-color);
+        }
+      }
+
+      &__info {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        justify-content: flex-end;
+        height: 100%;
+
+        &__hide {
+          @media (max-width: 500px) {
+            display: none;
+          }
+        }
+
+        & > mat-form-field {
+          &::ng-deep {
+            .mat-form-field-wrapper {
+              margin-bottom: -1.34375em;
+
+              & > .mat-form-field-flex {
+                padding: 0 0.75em;
+              }
+            }
+
+            .mat-form-field-infix {
+              padding: 0 0 0.75em 0;
+              width: 100%;
+            }
+          }
+        }
+
+        & > span {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+
+          & > mat-icon {
+            height: 14px;
+            width: 14px;
+            font-size: 14px;
+            color: darkred;
+          }
+        }
+      }
+    }
+  }
+
+  &__ui {
+    width: 50%;
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+
+    @media (max-width: 1200px) {
+      width: 100%;
+      height: 50%;
+    }
+
+    &__content {
+      height: 100%;
+      overflow: auto;
+    }
+
+    &__header {
+      display: flex;
+      height: 58px;
+      min-height: 58px;
+      padding: 0 12px;
+      align-items: center;
+      justify-content: space-between;
+      background-color: var(--main-color);
+
+      & > h4 {
+        margin: 0;
+      }
+
+      & > div {
+        display: flex;
+        gap: 12px;
+
+        & > button {
+          background-color: var(--alt-color);
+        }
+      }
+    }
+  }
+}
+
+.highlighted {
+    color: var(--alt-color);
+}

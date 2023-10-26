@@ -1,0 +1,47 @@
+<div class="compare">
+  <h1 mat-dialog-title>{{ "PAGES.CONTRACTS.MERGE_CHANGES" | translate }}</h1>
+  <div mat-dialog-content>
+    <div class="compare__header">
+      <div
+        [innerHTML]="
+          'PAGES.CONTRACTS.VERSION_UPDATED_BY'
+            | translate
+              : {
+                  version: data.originalModel.version,
+                  author: data.originalModel.author?.name ?? '[deleted]'
+                }
+        "
+      ></div>
+      <div>{{ "COMMON.YOUR_VERSION" | translate }}</div>
+    </div>
+    <ngx-monaco-diff-editor
+      *ngIf="initialOriginalModel && initialModifiedModel"
+      [originalModel]="initialOriginalModel"
+      [modifiedModel]="initialModifiedModel"
+      [options]="{
+        theme: 'vs-dark',
+        glyphMargin: true,
+        renderSideBySide: true
+      }"
+      (modifiedChanged)="updatedModifiedModel = $event"
+    ></ngx-monaco-diff-editor>
+  </div>
+  <div mat-dialog-actions>
+    <div>
+      <button (click)="dialogRef.close(initialOriginalModel.code)" mat-button>
+        {{ "ACTIONS.KEEP_LEFT" | translate }}
+      </button>
+      <button (click)="dialogRef.close(updatedModifiedModel)" mat-button>
+        {{ "ACTIONS.KEEP_RIGHT" | translate }}
+      </button>
+    </div>
+    <div>
+      <button (click)="dialogRef.close()" mat-button mat-dialog-close>
+        {{ "ACTIONS.MERGE_LATER" | translate }}
+      </button>
+      <button (click)="dialogRef.close(updatedModifiedModel)" mat-button>
+        {{ "ACTIONS.SAVE" | translate }}
+      </button>
+    </div>
+  </div>
+</div>

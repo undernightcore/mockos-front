@@ -1,0 +1,75 @@
+.contract {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  & > h1 {
+    &::ng-deep {
+      & > span {
+        color: var(--main-color);
+      }
+    }
+  }
+
+  &__header {
+    display: flex;
+    height: 28px;
+    background-color: var(--main-color);
+
+    & > div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 50%;
+      white-space: break-spaces;
+
+      ::ng-deep {
+        & > span {
+          color: var(--soft-gray);
+        }
+      }
+    }
+  }
+
+  & > div[mat-dialog-content] {
+    height: 100%;
+    max-height: none;
+    overflow: auto;
+  }
+
+  &__loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  &__content {
+    height: 100%;
+    overflow: hidden;
+
+    & > ngx-monaco-editor {
+      height: 100%;
+    }
+  }
+
+  & > div[mat-dialog-actions] {
+    justify-content: space-between;
+
+    & > div {
+      &:last-child {
+        & button {
+          background-color: darkred;
+          color: white;
+
+          &:last-child {
+            background-color: var(--alt-color);
+            color: black;
+          }
+        }
+      }
+    }
+
+  }
+}
