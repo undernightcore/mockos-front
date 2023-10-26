@@ -41,7 +41,7 @@
     </button>
   </div>
   <div
-    *ngIf="responses"
+    *ngIf="responses && !isFetchingNewRouteResponses"
     infiniteScroll
     [maxItems]="maxResponses"
     [currentItems]="responses.length"
@@ -57,6 +57,7 @@
         (config)="openHeadersModal(response.id)"
         (duplicate)="openDuplicateModal(response.id)"
         [response]="response"
+        [loading]="fetchingResponseId === response.id"
         *ngFor="let response of responses; trackBy: trackByResponse"
       ></app-response-list-item>
     </div>
@@ -64,5 +65,11 @@
       <img src="assets/images/undraw_drink_coffee_0asa.svg" />
       <h3>{{ "PAGES.ROUTES.RESPONSES_NOT_FOUND" | translate }}</h3>
     </div>
+  </div>
+  <div
+    *ngIf="!responses || isFetchingNewRouteResponses"
+    class="route-info__loading"
+  >
+    <mat-spinner [diameter]="40"></mat-spinner>
   </div>
 </div>

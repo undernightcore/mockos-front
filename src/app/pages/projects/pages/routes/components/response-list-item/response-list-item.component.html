@@ -4,7 +4,9 @@
   [ngClass]="response.enabled ? 'enabled' : 'disabled'"
   (click)="edit.emit()"
 >
-  <img src="assets/icons/drop.svg" />
+  <img *ngIf="!loading" src="assets/icons/drop.svg" />
+  <mat-spinner *ngIf="loading"></mat-spinner>
+
   <div class="response-card__info">
     <h4>{{ response.name }}</h4>
     <span>{{ response.status }}</span>

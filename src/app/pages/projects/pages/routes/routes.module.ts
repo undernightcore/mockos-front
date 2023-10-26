@@ -35,6 +35,7 @@ import { ClipboardModule } from "@angular/cdk/clipboard";
 import { DeleteTokenComponent } from './components/delete-token/delete-token.component';
 import { CreateTokenComponent } from './components/create-token/create-token.component';
 import { FolderListItemComponent } from './components/folder-list-item/folder-list-item.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { FolderListItemComponent } from './components/folder-list-item/folder-li
     MatTabsModule,
     MatMenuModule,
     MatTooltipModule,
-    ClipboardModule
-  ]
+    ClipboardModule,
+    MatProgressSpinnerModule,
+  ],
 })
 export class RoutesModule {}

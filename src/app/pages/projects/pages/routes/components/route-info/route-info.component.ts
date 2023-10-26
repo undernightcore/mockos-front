@@ -11,7 +11,7 @@ import {
   RouteInterface,
 } from '../../../../../../interfaces/route.interface';
 import { FormControl, FormGroup } from '@angular/forms';
-import { finalize, iif, of, Subscription } from 'rxjs';
+import { finalize, iif, of, Subscription, tap } from 'rxjs';
 import { RealtimeService } from '../../../../../../services/realtime/realtime.service';
 import { RoutesService } from '../../../../../../services/routes/routes.service';
 import { CreateResponseComponent } from '../create-response/create-response.component';
@@ -44,6 +44,9 @@ export class RouteInfoComponent implements OnInit, OnDestroy {
   maxResponses = 0;
 
   #isFetchingResponses = false;
+  isFetchingNewRouteResponses = false;
+  fetchingResponseId?: number;
+
   isEditingTitle = false;
 
   isMobile = false;
@@ -51,7 +54,6 @@ export class RouteInfoComponent implements OnInit, OnDestroy {
   subscriptions = new Subscription();
 
   constructor(
-    private realtimeService: RealtimeService,
     private routesService: RoutesService,
     private dialogService: MatDialog,
     private translateService: TranslateService,
@@ -69,10 +71,20 @@ export class RouteInfoComponent implements OnInit, OnDestroy {
 
   getResponses(page: number, perPage = 20) {
     if (this.routeForm === undefined || this.#isFetchingResponses) return;
-    this.#isFetchingResponses = true;
     this.responsesService
       .getResponses(this.routeForm.value.id, page, perPage)
-      .pipe(finalize(() => (this.#isFetchingResponses = false)))
+      .pipe(
+        tap({
+          subscribe: () => {
+            if (page === 1) this.isFetchingNewRouteResponses = true;
+            this.#isFetchingResponses = true;
+          },
+          finalize: () => {
+            if (page === 1) this.isFetchingNewRouteResponses = false;
+            this.#isFetchingResponses = false;
+          },
+        })
+      )
       .subscribe((responses) => {
         this.responses =
           page === 1
@@ -101,16 +113,25 @@ export class RouteInfoComponent implements OnInit, OnDestroy {
   }
 
   openCreateResponseModal(responseId?: number) {
-    this.#getResponse(responseId).subscribe((responseData) => {
-      this.dialogService.open(CreateResponseComponent, {
-        closeOnNavigation: true,
-        height: '90%',
-        width: '70%',
-        data: { routeId: this.routeForm?.value.id, responseData },
-        panelClass: 'mobile-fullscreen',
-        autoFocus: false,
+    if (this.fetchingResponseId !== undefined) return;
+
+    this.#getResponse(responseId)
+      .pipe(
+        tap({
+          subscribe: () => (this.fetchingResponseId = responseId),
+          finalize: () => (this.fetchingResponseId = undefined),
+        })
+      )
+      .subscribe((responseData) => {
+        this.dialogService.open(CreateResponseComponent, {
+          closeOnNavigation: true,
+          height: '90%',
+          width: '70%',
+          data: { routeId: this.routeForm?.value.id, responseData },
+          panelClass: 'mobile-fullscreen',
+          autoFocus: false,
+        });
       });
-    });
   }
 
   openDeleteModal(route: RouteInterface) {
