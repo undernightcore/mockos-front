@@ -12,6 +12,7 @@ import { ForkedProjectInterface } from '../../../../interfaces/project.interface
 import { fromEvent, take } from 'rxjs';
 import { CdkMenuTrigger } from '@angular/cdk/menu';
 import { FormControl } from '@angular/forms';
+import { LayoutService } from '../../../../services/layout/layout.service';
 
 @Component({
   selector: 'app-project-card',
@@ -29,6 +30,10 @@ export class ProjectCardComponent implements OnInit {
   @Output() selected = new EventEmitter<boolean>();
 
   selectedForm = new FormControl(false, { nonNullable: true });
+
+  showProjectsAsList$ = this.layoutService.showProjectsAsList$;
+
+  constructor(private layoutService: LayoutService) {}
 
   ngOnInit() {
     this.selectedForm.valueChanges.subscribe((value) =>

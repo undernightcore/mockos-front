@@ -1,52 +1,114 @@
-<div *ngIf="project" class="project">
-  <div class="project__actions">
+<ng-container *ngIf="project">
+  <div *ngIf="showProjectsAsList$ | async; else grid" class="project-list">
     <app-checkbox [formControl]="selectedForm"></app-checkbox>
-    <img
-      [cdkMenuTriggerFor]="menu"
-      (cdkMenuOpened)="listenOnScroll()"
-      [cdkMenuPosition]="[
-        { originX: 'end', originY: 'bottom', overlayX: 'end', overlayY: 'top' }
-      ]"
-      alt="vertical dots"
-      src="assets/images/icons/vertical-dots.svg"
-    />
-    <ng-template #menu>
-      <div class="project__actions__menu" cdkMenu>
-        <div (click)="openEditModal()">
-          <img alt="edit icon" src="assets/images/icons/pencil.svg" />
-          <span>{{ 'COMMON.EDIT' | translate}}</span>
-        </div>
-        <div (click)="openDeleteModal()">
-          <img alt="edit icon" src="assets/images/icons/bin.svg" />
-          <span>{{ 'ACTIONS.DELETE' | translate}}</span>
-        </div>
-      </div>
-    </ng-template>
-  </div>
-  <div class="project__info">
-    <div class="project__info__type">
+
+    <div class="project-list__title"></div>
+
+    <div class="project-list__type">
       {{ project.forkedProject?.name ?? "Origin" }}
     </div>
-    <div class="project__info__data">
-      <span class="project__info__data__date">{{
+
+    <div class="project-list__title">
+      {{ project.name | uppercase }}
+    </div>
+
+    <div class="project-list__content">
+      <span class="project-list__content__date">{{
         project.created_at | date : "dd/MM/yyyy"
       }}</span>
-      <span class="project__info__data__name">{{
-        project.name | uppercase
-      }}</span>
-      <span class="project__info__data__description">{{
+
+      <span class="project-list__content__description">{{
         project.description ?? "No description"
       }}</span>
     </div>
-    <div class="project__info__actions">
+
+    <div class="project-list__actions">
       <app-button
         [compressed]="true"
         [routerLink]="['/projects', project.id]"
-        [size]="'small'"
+        size="small"
       >
         <img alt="code icon" src="assets/images/icons/link.svg" />
-        <span>{{ 'COMMON.ENDPOINTS' | translate}}</span>
+        <span>{{ "COMMON.ENDPOINTS" | translate }}</span>
       </app-button>
     </div>
+
+    <div class="project-list__menu">
+      <img
+        [cdkMenuTriggerFor]="menu"
+        (cdkMenuOpened)="listenOnScroll()"
+        [cdkMenuPosition]="[
+          {
+            originX: 'end',
+            originY: 'bottom',
+            overlayX: 'end',
+            overlayY: 'top'
+          }
+        ]"
+        alt="vertical dots"
+        src="assets/images/icons/vertical-dots.svg"
+      />
+    </div>
   </div>
-</div>
+
+  <ng-template #grid>
+    <div class="project">
+      <div class="project__actions">
+        <app-checkbox [formControl]="selectedForm"></app-checkbox>
+        <img
+          [cdkMenuTriggerFor]="menu"
+          (cdkMenuOpened)="listenOnScroll()"
+          [cdkMenuPosition]="[
+            {
+              originX: 'end',
+              originY: 'bottom',
+              overlayX: 'end',
+              overlayY: 'top'
+            }
+          ]"
+          alt="vertical dots"
+          src="assets/images/icons/vertical-dots.svg"
+        />
+      </div>
+      <div class="project__info">
+        <div class="project__info__type">
+          {{ project.forkedProject?.name ?? "Origin" }}
+        </div>
+        <div class="project__info__data">
+          <span class="project__info__data__date">{{
+            project.created_at | date : "dd/MM/yyyy"
+          }}</span>
+          <span class="project__info__data__name">{{
+            project.name | uppercase
+          }}</span>
+          <span class="project__info__data__description">{{
+            project.description ?? "No description"
+          }}</span>
+        </div>
+        <div class="project__info__actions">
+          <app-button
+            [compressed]="true"
+            [routerLink]="['/projects', project.id]"
+            [size]="'small'"
+          >
+            <img alt="code icon" src="assets/images/icons/link.svg" />
+            <span>{{ "COMMON.ENDPOINTS" | translate }}</span>
+          </app-button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #menu>
+    <div class="menu" cdkMenu>
+      <div (click)="openEditModal()">
+        <img alt="edit icon" src="assets/images/icons/pencil.svg" />
+        <span>{{ "COMMON.EDIT" | translate }}</span>
+      </div>
+      <div (click)="openDeleteModal()">
+        <img alt="edit icon" src="assets/images/icons/bin.svg" />
+        <span>{{ "ACTIONS.DELETE" | translate }}</span>
+      </div>
+    </div>
+  </ng-template>
+</ng-container>

@@ -30,6 +30,7 @@ import { ProjectService } from '../../services/project/project.service';
 import { RealtimeService } from '../../services/realtime/realtime.service';
 import { openToast } from '../../utils/toast.utils';
 import { ProjectModalComponent } from './components/project-modal/project-modal.component';
+import { LayoutService } from '../../services/layout/layout.service';
 
 @Component({
   selector: 'app-projects',
@@ -87,12 +88,17 @@ export class ProjectsComponent implements AfterViewInit {
 
   selectedProjects = new Set<number>();
 
+  showProjectsAsList$ = this.layoutService.showProjectsAsList.pipe(
+    shareReplay(1)
+  );
+
   constructor(
     private appManager: AppManagerService,
     private projectService: ProjectService,
     private dialogService: MatDialog,
     private translateService: TranslateService,
-    private realtimeService: RealtimeService
+    private realtimeService: RealtimeService,
+    private layoutService: LayoutService
   ) {}
 
   ngAfterViewInit() {
@@ -231,5 +237,9 @@ export class ProjectsComponent implements AfterViewInit {
 
   resetFilters() {
     this.filters.setValue({ onlyBranches: 'false', sort: 'created_at' });
+  }
+
+  toggleProjectsAsList(value: boolean) {
+    this.layoutService.setShowProjectsAsList(value);
   }
 }

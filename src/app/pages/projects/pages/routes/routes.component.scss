@@ -1,28 +1,29 @@
 .routes {
-    display: flex;
-    gap: 20px;
+  display: flex;
+  gap: 20px;
+  height: 100%;
+  padding: 12px 28px 28px 28px;
+  box-sizing: border-box;
+
+  &__actions {
     height: 100%;
-    padding: 12px 28px 28px 28px;
+    overflow: auto;
+    min-width: 82px;
+  }
+
+  &__list {
+    padding: 24px;
+    height: 100%;
+    background-color: #1d1b20;
+    border-radius: 16px;
     box-sizing: border-box;
-    
-    &__actions {
-        height: 100%;
-        overflow: auto;
-        min-width: 82px;
-    }
+    min-width: 506px;
+    max-width: 506px;
+  }
 
-    &__list {
-        padding: 24px;
-        height: 100%;
-        background-color: #1D1B20;
-        border-radius: 16px;
-        box-sizing: border-box;
-        min-width: 506px;
-        max-width: 506px;
-    }
-
-    &__info {
-        height: 100%;
-        width: 100%;
-    }
+  &__info {
+    height: 100%;
+    flex-grow: 1;
+    overflow: hidden;
+  }
 }

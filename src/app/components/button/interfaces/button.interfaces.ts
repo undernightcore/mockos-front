@@ -1,1 +1,1 @@
-export type ButtonSizeInterface = 'small' | 'medium' | 'large';
+export type ButtonSizeInterface = 'small' | 'mid-small' | 'medium' | 'large';

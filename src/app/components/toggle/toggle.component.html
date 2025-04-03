@@ -1,14 +1,12 @@
 <button
-  class="button"
+  class="toggle"
   [disabled]="disabled"
-  [style.background]="background ?? backgroundColor ?? 'transparent'"
-  [style.border-color]="borderColor"
-  [style.color]="color"
   [ngClass]="{
     small: size === 'small',
     midSmall: size === 'mid-small',
     disabled,
-    compressed
+    compressed,
+    checked
   }"
 >
   <ng-content></ng-content>

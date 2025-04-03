@@ -3,6 +3,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { SimpleResponseInterface } from 'src/app/interfaces/response.interface';
 import { ResponseMenuOptionInterface } from '../../interfaces/response-menu-option.interface';
+import { shareReplay } from 'rxjs';
+import { LayoutService } from '../../../../../../services/layout/layout.service';
 
 @Component({
   selector: 'app-response-list-item',
@@ -21,6 +23,10 @@ export class ResponseListItemComponent {
   @Output() duplicate = new EventEmitter<void>();
   @Output() enableResponse = new EventEmitter<void>();
 
+  showResponsesAsList$ = this.layoutService.showResponsesAsList$.pipe(
+    shareReplay(1)
+  );
+
   buttons: ResponseMenuOptionInterface[] = [
     {
       icon: 'pencil',
@@ -30,7 +36,7 @@ export class ResponseListItemComponent {
     {
       icon: 'header',
       action: this.config,
-      label: this.translateService.instant(`COMMON.HEADERS`)
+      label: this.translateService.instant(`COMMON.HEADERS`),
     },
     {
       icon: 'duplicate',
@@ -49,7 +55,10 @@ export class ResponseListItemComponent {
     },
   ];
 
-  constructor(private translateService: TranslateService) {}
+  constructor(
+    private translateService: TranslateService,
+    private layoutService: LayoutService
+  ) {}
 
   responseMenuClick(click: MouseEvent, button: ResponseMenuOptionInterface) {
     click.stopPropagation();

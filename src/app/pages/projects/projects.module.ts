@@ -27,6 +27,10 @@ import { CheckboxGroupModule } from '../../components/checkbox-group/checkbox-gr
 import { DialogModule } from '../../components/dialog/dialog.module';
 import { InputModule } from '../../components/input/input.module';
 import { ProjectManagerService } from './pages/routes/services/project.manager';
+import { ToggleComponent } from '../../components/toggle/toggle.component';
+import { SvgIconComponent } from '../../components/svg-icon/svg-icon.component';
+import { ToggleModule } from '../../components/toggle/toggle.module';
+import { SvgIconModule } from '../../components/svg-icon/svg-icon.module';
 
 @NgModule({
   declarations: [
@@ -58,6 +62,8 @@ import { ProjectManagerService } from './pages/routes/services/project.manager';
     CheckboxGroupModule,
     DialogModule,
     InputModule,
-  ]
+    ToggleModule,
+    SvgIconModule,
+  ],
 })
 export class ProjectsModule {}

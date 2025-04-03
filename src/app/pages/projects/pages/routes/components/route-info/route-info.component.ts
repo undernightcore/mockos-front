@@ -8,6 +8,7 @@ import {
   filter,
   map,
   of,
+  shareReplay,
   startWith,
   switchMap,
   take,
@@ -24,7 +25,8 @@ import { ProjectManagerService } from '../../services/project.manager';
 import { CreateResponseComponent } from '../create-response/create-response.component';
 import { DuplicateResponseComponent } from '../duplicate-response/duplicate-response.component';
 import { LiveMockComponent } from '../live-mock/live-mock.component';
-import {HeadersModalComponent} from "../../../../../../components/headers-modal/headers-modal.component";
+import { HeadersModalComponent } from '../../../../../../components/headers-modal/headers-modal.component';
+import { LayoutService } from '../../../../../../services/layout/layout.service';
 
 @Component({
   selector: 'app-route-info',
@@ -47,11 +49,16 @@ export class RouteInfoComponent {
     .asObservable()
     .pipe(map((set) => Array.from(set)));
 
+  showResponsesAsList$ = this.layoutService.showResponsesAsList$.pipe(
+    shareReplay(1)
+  );
+
   constructor(
     private projectManager: ProjectManagerService,
     private dialogService: MatDialog,
     private responsesService: ResponsesService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private layoutService: LayoutService
   ) {}
 
   openCreateResponse(routeId: number, responseId?: number) {
@@ -193,5 +200,9 @@ export class RouteInfoComponent {
       currentSet.add(responseId);
     }
     this.selectedResponseIdsSubject.next(currentSet);
+  }
+
+  toggleResponsesAsList(value: boolean) {
+    this.layoutService.setShowResponsesAsList(value);
   }
 }

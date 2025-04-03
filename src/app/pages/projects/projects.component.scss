@@ -27,6 +27,14 @@
       flex-direction: column;
       gap: 28px;
 
+      &--expanded {
+        flex-grow: 1;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+
       & > span {
         color: white;
         font-weight: 300;
@@ -72,11 +80,45 @@
   &__list {
     width: 100%;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
+
+    &__header {
+      width: 100%;
+      height: 72px;
+      min-height: 72px;
+      background-color: #1d1b20;
+      padding: 0 12px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box;
+
+      &__buttons {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      &__toggles {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+    }
 
     &__grid {
       display: grid;
       gap: 20px;
       grid-template-columns: repeat(auto-fill, minmax(294px, 1fr));
+
+      &--list {
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        flex-grow: 1;
+      }
     }
   }
 }

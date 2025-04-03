@@ -50,6 +50,10 @@ import { RouteListComponent } from './components/route-list/route-list.component
 import { TokensComponent } from './components/tokens/tokens.component';
 import { RoutesRoutingModule } from './routes-routing.module';
 import { RoutesComponent } from './routes.component';
+import { ToggleComponent } from '../../../../components/toggle/toggle.component';
+import { SvgIconComponent } from '../../../../components/svg-icon/svg-icon.component';
+import { ToggleModule } from '../../../../components/toggle/toggle.module';
+import { SvgIconModule } from '../../../../components/svg-icon/svg-icon.module';
 
 @NgModule({
   declarations: [
@@ -107,6 +111,8 @@ import { RoutesComponent } from './routes.component';
     MatMenuModule,
     MatBadgeModule,
     HeadersModalModule,
+    ToggleModule,
+    SvgIconModule,
   ],
 })
 export class RoutesModule {}

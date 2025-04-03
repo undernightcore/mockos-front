@@ -1,4 +1,4 @@
-.button {
+.toggle {
   padding: 8px 16px;
   width: 100%;
   height: 56px;
@@ -12,6 +12,23 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
+  background-color: transparent;
+  border-color: #cac4d0;
+
+  ::ng-deep {
+    & svg {
+      fill: #cac4d0;
+    }
+  }
+}
+
+.checked {
+  background-color: #cac4d0;
+  ::ng-deep {
+    & svg {
+      fill: #1d1b20;
+    }
+  }
 }
 
 .small {

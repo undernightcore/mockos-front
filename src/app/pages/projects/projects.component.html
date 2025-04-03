@@ -36,35 +36,68 @@
           </div>
         </app-checkbox-group>
       </div>
-      <div class="projects__filters__section">
-        <span> {{ "COMMON.SELECT" | translate }}</span>
+      <div
+        class="projects__filters__section projects__filters__section--expanded"
+      >
         <div class="projects__filters__section__actions">
-          <app-button (click)="selectProjects(data.projects)">
-            {{ "COMMON.ALL" | translate }}</app-button
-          >
-          <app-button (click)="selectProjects([])">
-            {{ "COMMON.DESELECTION" | translate }}</app-button
-          >
-        </div>
-      </div>
-      <div class="projects__filters__section">
-        <span> {{ "ACTIONS.ERASE" | translate }}</span>
-        <div class="projects__filters__section__actions">
-          <app-button
-            [disabled]="!selectedProjects.size"
-            (click)="openDeleteMultipleModal()"
-          >
-            {{ "COMMON.SELECTION" | translate }}</app-button
-          >
           <app-button (click)="resetFilters()">
-            {{ "COMMON.FILTERS" | translate }}</app-button
+            {{ "COMMON.DELETE_FILTERS" | translate }}</app-button
           >
         </div>
       </div>
     </div>
     <ng-container *ngIf="data.total; else empty">
       <div class="projects__list">
-        <div class="projects__list__grid">
+        <div class="projects__list__header">
+          <div class="projects__list__header__buttons">
+            <app-button
+              size="mid-small"
+              (click)="selectProjects(data.projects)"
+            >
+              {{ "COMMON.SELECT_ALL" | translate }}</app-button
+            >
+            <app-button size="mid-small" (click)="selectProjects([])">
+              {{ "COMMON.DESELECTION_ALL" | translate }}</app-button
+            >
+
+            <app-button
+              [style.width]="'48px'"
+              size="mid-small"
+              [disabled]="!selectedProjects.size"
+              (click)="openDeleteMultipleModal()"
+            >
+              <img src="/assets/images/icons/bin.svg"
+            /></app-button>
+          </div>
+
+          <div class="projects__list__header__toggles">
+            <app-toggle
+              size="mid-small"
+              [style.width]="'48px'"
+              [checked]="(showProjectsAsList$ | async) === true"
+              (click)="toggleProjectsAsList(true)"
+            >
+              <app-svg-icon
+                localPath="/assets/images/icons/event_list.svg"
+              ></app-svg-icon>
+            </app-toggle>
+
+            <app-toggle
+              size="mid-small"
+              [style.width]="'48px'"
+              [checked]="(showProjectsAsList$ | async) === false"
+              (click)="toggleProjectsAsList(false)"
+            >
+              <app-svg-icon
+                localPath="/assets/images/icons/dashboard.svg"
+              ></app-svg-icon>
+            </app-toggle>
+          </div>
+        </div>
+        <div
+          class="projects__list__grid"
+          [class.projects__list__grid--list]="showProjectsAsList$ | async"
+        >
           <app-project-card
             *ngFor="let project of data.projects"
             [project]="project"

@@ -1,19 +1,23 @@
-<div
-  *ngIf="response"
-  class="response"
-  [class.selected]="response.enabled"
-  (click)="onComponentClick($event)"
->
-  <div class="response__actions">
+<ng-container *ngIf="response">
+  <div
+    class="response-list"
+    *ngIf="showResponsesAsList$ | async; else responseGrid"
+    (click)="onComponentClick($event)"
+  >
     <app-checkbox
       [highContrast]="response.enabled"
       (click)="onSelectedClick($event)"
     ></app-checkbox>
 
-    <div class="response__actions__icons" (click)="$event.stopPropagation()">
+    <div class="response-list__content">
+      <span class="response-list__content__status">{{ response.status }}</span>
+      <span class="response-list__content__name">{{ response.name }}</span>
+    </div>
+
+    <div class="response-list__icons" (click)="$event.stopPropagation()">
       <div
-        class="response__actions__icons__badge"
-        [class.response__actions__icons__badge--invisible]="
+        class="response-list__icons__badge"
+        [class.response-list__icons__badge--invisible]="
           !response.processor.enabled
         "
         *ngIf="response.processor"
@@ -35,37 +39,81 @@
         (click)="$event.stopPropagation()"
       />
     </div>
+  </div>
 
-    <ng-template #menu>
-      <div cdkMenu>
-        <div class="response__actions__menu">
-          <app-button
-            *ngIf="!response.enabled"
-            size="small"
-            backgroundColor="#4088FF"
-            borderColor="unset"
-            color="#fff"
-            (click)="enableResponse.emit()"
-            >Activar</app-button
-          >
+  <ng-template #responseGrid>
+    <div
+      class="response"
+      [class.selected]="response.enabled"
+      (click)="onComponentClick($event)"
+    >
+      <div class="response__actions">
+        <app-checkbox
+          [highContrast]="response.enabled"
+          (click)="onSelectedClick($event)"
+        ></app-checkbox>
+
+        <div
+          class="response__actions__icons"
+          (click)="$event.stopPropagation()"
+        >
           <div
-            *ngFor="let button of buttons; trackBy: trackByButton"
-            class="response__actions__menu__item"
-            [class.response__actions__menu__item--disabled]="button.disabled"
-            (click)="responseMenuClick($event, button)"
+            class="response__actions__icons__badge"
+            [class.response__actions__icons__badge--invisible]="
+              !response.processor.enabled
+            "
+            *ngIf="response.processor"
+            matBadge="1"
+            matBadgeSize="small"
           >
             <img
-              [src]="'/assets/images/icons/' + button.icon + '.svg'"
-              [alt]="button.label"
+              src="/assets/images/icons/processor.svg"
+              alt=""
+              (click)="$event.stopPropagation(); processor.emit()"
             />
-            <span>{{ button.label }}</span>
           </div>
+
+          <img
+            #responseActions="cdkMenuTriggerFor"
+            [cdkMenuTriggerFor]="menu"
+            src="/assets/images/icons/vertical-dots.svg"
+            alt=""
+            (click)="$event.stopPropagation()"
+          />
         </div>
       </div>
-    </ng-template>
-  </div>
-  <div class="response__info">
-    <span>{{ response.status }}</span>
-    <span>{{ response.name }}</span>
-  </div>
-</div>
+      <div class="response__info">
+        <span>{{ response.status }}</span>
+        <span>{{ response.name }}</span>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #menu>
+    <div cdkMenu>
+      <div class="response__actions__menu">
+        <app-button
+          *ngIf="!response.enabled"
+          size="small"
+          backgroundColor="#4088FF"
+          borderColor="unset"
+          color="#fff"
+          (click)="enableResponse.emit()"
+          >Activar</app-button
+        >
+        <div
+          *ngFor="let button of buttons; trackBy: trackByButton"
+          class="response__actions__menu__item"
+          [class.response__actions__menu__item--disabled]="button.disabled"
+          (click)="responseMenuClick($event, button)"
+        >
+          <img
+            [src]="'/assets/images/icons/' + button.icon + '.svg'"
+            [alt]="button.label"
+          />
+          <span>{{ button.label }}</span>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</ng-container>

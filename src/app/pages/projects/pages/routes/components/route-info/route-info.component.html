@@ -1,27 +1,53 @@
 <div *ngLet="route$ | async as route" class="route">
   <div class="route__actions">
-    <app-button
-      [disabled]="!route"
-      size="small"
-      backgroundColor="#4088FF"
-      color="white"
-      borderColor="#4088FF"
-      (click)="route && openCreateResponse(route.id)"
-      >{{ "COMMON.NEW_RESPONSE" | translate }}</app-button
-    >
-    <div *ngIf="selectedResponseIds$ | async as selectedIds">
+    <div class="route__buttons">
       <app-button
-        *ngIf="selectedIds.length"
         [disabled]="!route"
         size="small"
-        background="#D32F2F"
-        borderColor="#D32F2F"
+        backgroundColor="#4088FF"
         color="white"
-        (click)="openDeleteSelectedResponses()"
+        borderColor="#4088FF"
+        (click)="route && openCreateResponse(route.id)"
+        >{{ "COMMON.NEW_RESPONSE" | translate }}</app-button
       >
-        <span>{{ "ACTIONS.DELETE" | translate }}</span>
-        <img alt="delete icon" src="assets/images/icons/bin.svg" />
-      </app-button>
+      <div *ngIf="selectedResponseIds$ | async as selectedIds">
+        <app-button
+          *ngIf="selectedIds.length"
+          [disabled]="!route"
+          size="small"
+          background="#D32F2F"
+          borderColor="#D32F2F"
+          color="white"
+          (click)="openDeleteSelectedResponses()"
+        >
+          <span>{{ "ACTIONS.DELETE" | translate }}</span>
+          <img alt="delete icon" src="assets/images/icons/bin.svg" />
+        </app-button>
+      </div>
+    </div>
+
+    <div class="route__toggles">
+      <app-toggle
+        size="mid-small"
+        [style.width]="'48px'"
+        [checked]="(showResponsesAsList$ | async) === true"
+        (click)="toggleResponsesAsList(true)"
+      >
+        <app-svg-icon
+          localPath="/assets/images/icons/event_list.svg"
+        ></app-svg-icon>
+      </app-toggle>
+
+      <app-toggle
+        size="mid-small"
+        [style.width]="'48px'"
+        [checked]="(showResponsesAsList$ | async) === false"
+        (click)="toggleResponsesAsList(false)"
+      >
+        <app-svg-icon
+          localPath="/assets/images/icons/dashboard.svg"
+        ></app-svg-icon>
+      </app-toggle>
     </div>
   </div>
   <ng-container *ngIf="routes$ | async as routes; else loading">
@@ -33,7 +59,10 @@
         <ng-container *ngLet="responses$ | async as responses">
           <div
             *ngIf="!(loadingResponses$ | async); else loading"
-            class="route__responses__grid"
+            class="route__responses__container-grid"
+            [class.route__responses__container-list]="
+              showResponsesAsList$ | async
+            "
           >
             <app-response-list-item
               *ngFor="let response of responses"
