@@ -1,25 +1,54 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, config } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LayoutService {
-  //TODO: Initial state should be loaded & saved when dismounted
+  key = 'config';
 
-  showProjectsAsList = new BehaviorSubject<boolean>(false);
-  showProjectsAsList$ = this.showProjectsAsList.asObservable();
+  #showProjectsAsList = new BehaviorSubject<boolean>(false);
+  showProjectsAsList$ = this.#showProjectsAsList.asObservable();
 
-  showResponsesAsList = new BehaviorSubject<boolean>(false);
-  showResponsesAsList$ = this.showResponsesAsList.asObservable();
+  #showResponsesAsList = new BehaviorSubject<boolean>(false);
+  showResponsesAsList$ = this.#showResponsesAsList.asObservable();
 
-  constructor() {}
+  constructor() {
+    this.#loadFromLocalStorage();
+  }
 
   setShowProjectsAsList(value: boolean) {
-    this.showProjectsAsList.next(value);
+    this.#showProjectsAsList.next(value);
+
+    this.#saveToLocalStorage();
   }
 
   setShowResponsesAsList(value: boolean) {
-    this.showResponsesAsList.next(value);
+    this.#showResponsesAsList.next(value);
+
+    this.#saveToLocalStorage();
+  }
+
+  #loadFromLocalStorage() {
+    const value = localStorage.getItem(this.key) || '{}';
+
+    try {
+      const { showProjectsAsList, showResponsesAsList } = JSON.parse(value);
+
+      this.#showProjectsAsList.next(showProjectsAsList ?? false);
+      this.#showResponsesAsList.next(showResponsesAsList ?? false);
+    } catch (e) {
+      console.error('Error parsing localStorage value:', e);
+    }
+  }
+
+  #saveToLocalStorage() {
+    localStorage.setItem(
+      this.key,
+      JSON.stringify({
+        showProjectsAsList: this.#showProjectsAsList.value,
+        showResponsesAsList: this.#showResponsesAsList.value,
+      })
+    );
   }
 }

@@ -88,7 +88,7 @@ export class ProjectsComponent implements AfterViewInit {
 
   selectedProjects = new Set<number>();
 
-  showProjectsAsList$ = this.layoutService.showProjectsAsList.pipe(
+  showProjectsAsList$ = this.layoutService.showProjectsAsList$.pipe(
     shareReplay(1)
   );
 
