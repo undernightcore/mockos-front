@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { ProjectManagerService } from '../../services/project.manager';
-import { debounceTime, map, startWith, switchMap } from 'rxjs';
 import { FormControl } from '@angular/forms';
+import { debounceTime, map, startWith, switchMap } from 'rxjs';
 import { RouteInterface } from 'src/app/interfaces/route.interface';
 import { FolderAndRoutesInterface } from '../../interfaces/folder-and-routes.interface';
+import { ProjectManagerService } from '../../services/project.manager';
 
 @Component({
   selector: 'app-route-list',
@@ -20,16 +20,31 @@ export class RouteListComponent {
       this.projectManager.folderAndRoutes$.pipe(
         map((routes) =>
           search
-            ? routes?.filter((route) =>
-                route.is_folder
-                  ? route.folder.name
-                      .toLowerCase()
-                      .includes(search.toLowerCase()) ||
-                    route.routes.some((child) =>
-                      child.name.toLowerCase().includes(search.toLowerCase())
-                    )
-                  : route.name.toLowerCase().includes(search.toLowerCase())
-              )
+            ? routes
+                ?.map((route) =>
+                  route.is_folder
+                    ? {
+                        ...route,
+                        routes: route.routes.filter(
+                          (child) =>
+                            child.name
+                              .toLowerCase()
+                              .includes(search.toLowerCase()) ||
+                            child.endpoint
+                              .toLowerCase()
+                              .includes(search.toLowerCase())
+                        ),
+                      }
+                    : route
+                )
+                .filter((route) =>
+                  route.is_folder
+                    ? route.routes.length > 0
+                    : route.name.toLowerCase().includes(search.toLowerCase()) ||
+                      route.endpoint
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                )
             : routes
         )
       )
