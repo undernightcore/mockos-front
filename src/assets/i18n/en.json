@@ -67,30 +67,27 @@
   "PAGES": {
     "HOME": {
       "TITLE": "Home",
-      "FOR_YOUR_API": "for your API",
-      "NO_CODE_NO_CONF": "no code or configuration files",
-      "DESCRIPTION": "Mockos is a useful and practical tool for developers looking to test their applications with customized API mocks, collaboratively and without installing anything on their computer.",
       "SECTIONS": {
         "CREATE": {
-          "TITLE": "A simple yet complete way to mock JSON responses and files",
-          "DESCRIPTION": "Allows editing JSON with an easy-to-use, error-proof editor. You can also upload files up to 8 MB (configurable)."
+          "TITLE": "Create and manage mock JSON responses with ease",
+          "DESCRIPTION": "Edit JSON data through a clean, dependable editor that prevents syntax errors. You can also upload files up to 8 MB, with adjustable size limits."
         },
         "COMPARE": {
-          "TITLE": "Fully reactive and collaborative functionality, no more configuration files",
-          "DESCRIPTION": "No need to share and maintain messy configuration files anymore, stay agile even when mocking APIs."
+          "TITLE": "Collaborate in real time without extra configuration",
+          "DESCRIPTION": "All changes update instantly for every user. There is no need to handle or distribute configuration files manually."
         },
         "INVITE": {
-          "TITLE": "Invite your friends to the party! They might not accept... But that's okay!",
-          "DESCRIPTION": "Mocking can be tricky, but it's much easier and more fun with friends! Take advantage of Mockos' fully-equipped friend system!"
+          "TITLE": "Invite teammates to collaborate on your mocks",
+          "DESCRIPTION": "Share your workspace with others to review or edit mock data together. Roles and permissions help maintain control of your projects."
         },
         "BRANCH": {
-          "TITLE": "Not in the mood for socializing? We’ve got something for you! Now you can branch out and work on your own.",
-          "DESCRIPTION": "Making changes that might break someone’s code? Create a project branch and merge when you're ready."
+          "TITLE": "Work independently with project branches",
+          "DESCRIPTION": "Create separate branches for changes or new features. Test safely, then merge your updates when everything is ready."
         }
       },
-      "HEADER_1": "Build Mocks for your API with no code or configuration files",
-      "HEADER_2": "Mockos is a useful and practical tool for developers looking to test their applications with customized API mocks, collaboratively and without installing anything on their computer.",
-      "START_RIGHT_NOW_BTN": "Start right now",
+      "HEADER_1": "Build and Share Mocks for your API.<br> No Code. Zero Setup.",
+      "HEADER_2": "Collaborate seamlessly, test instantly.",
+      "START_RIGHT_NOW_BTN": "Get started",
       "PRESS": "Press",
       "ACCESS_NOW": "to access now"
     },

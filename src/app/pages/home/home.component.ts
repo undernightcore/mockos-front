@@ -1,12 +1,6 @@
 import { Component, HostListener } from '@angular/core';
-import { AppManagerService } from '../../services/app/app-manager.service';
-import {
-  fromEvent,
-  map,
-  shareReplay,
-  take,
-} from 'rxjs';
 import { Router } from '@angular/router';
+import { AppManagerService } from '../../services/app/app-manager.service';
 
 @Component({
   selector: 'app-home',
@@ -14,17 +8,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  sticky$ = fromEvent<{ target: HTMLDivElement }>(window, 'scroll', {
-    capture: true,
-  }).pipe(
-    map(() => true),
-    take(1),
-    shareReplay(1)
-  );
-
   @HostListener('window:keydown.m')
   onMPress() {
-    this.router.navigate(['/auth', 'login'])
+    this.router.navigate(['/auth', 'login']);
   }
 
   constructor(appManager: AppManagerService, private router: Router) {

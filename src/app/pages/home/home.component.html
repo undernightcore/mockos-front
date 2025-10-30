@@ -1,9 +1,5 @@
 <div #home class="home">
-  <div
-    *ngIf="{ sticky: sticky$ | async } as status"
-    class="home__header"
-    [class.sticky]="status.sticky"
-  >
+  <div class="home__header" [class.sticky]="true">
     <div class="home__header__background"></div>
     <div auto-animate class="home__header__content">
       <img
@@ -11,18 +7,12 @@
         src="/assets/logo.svg"
         alt="mockos logo"
       />
-      <img
-        class="home__header__content__action"
-        *ngIf="!status.sticky"
-        src="/assets/images/icons/mouse.svg"
-        alt=""
-      />
     </div>
   </div>
   <div class="home__content">
     <div class="home__content__container">
       <div class="home__content__container__hero">
-        <h1>{{ "PAGES.HOME.HEADER_1" | translate }}</h1>
+        <h1 innerHTML="{{ 'PAGES.HOME.HEADER_1' | translate }}"></h1>
         <h2>
           {{ "PAGES.HOME.HEADER_2" | translate }}
         </h2>

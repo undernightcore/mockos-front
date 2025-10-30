@@ -1,4 +1,4 @@
-.home {  
+.home {
   &__header {
     position: sticky;
     top: 0;
@@ -71,7 +71,7 @@
 
         & > h1 {
           margin: 0;
-          font-family: Michroma, 'sans-serif';
+          font-family: Michroma, "sans-serif";
           font-weight: 400;
           color: white;
           text-align: center;
@@ -87,7 +87,7 @@
 
         & > h2 {
           margin: 0;
-          font-family: Roboto, 'sans-serif';
+          font-family: Roboto, "sans-serif";
           color: white;
           font-size: 24px;
           font-weight: 300;
@@ -141,7 +141,7 @@
 
           & > h3 {
             margin: 0;
-            font-family: Roboto, 'sans-serif';
+            font-family: Roboto, "sans-serif";
             color: white;
             font-size: 32px;
             font-weight: 700;
@@ -157,7 +157,7 @@
 
           & > h4 {
             margin: 0;
-            font-family: Roboto, 'sans-serif';
+            font-family: Roboto, "sans-serif";
             color: white;
             font-size: 16px;
             font-weight: 300;
@@ -206,7 +206,7 @@
         & > h2 {
           margin: 0;
           text-align: center;
-          font-family: 'Roboto', sans-serif;
+          font-family: "Roboto", sans-serif;
           font-weight: 700;
           font-size: 32px;
           letter-spacing: 0.1px;
@@ -223,7 +223,7 @@
         & > h3 {
           margin: 0;
           text-align: center;
-          font-family: 'Roboto', sans-serif;
+          font-family: "Roboto", sans-serif;
           font-weight: 300;
           font-size: 16px;
           line-height: 19.2px;
@@ -250,7 +250,7 @@
             display: none;
           }
 
-          & > span  {
+          & > span {
             font-size: 24px;
             font-weight: 300;
             line-height: 24px;
@@ -281,7 +281,6 @@
     width: 140px;
   }
 }
-
 
 @keyframes zoom {
   0% {
