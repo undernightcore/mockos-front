@@ -50,6 +50,7 @@ import { RouteListComponent } from './components/route-list/route-list.component
 import { TokensComponent } from './components/tokens/tokens.component';
 import { RoutesRoutingModule } from './routes-routing.module';
 import { RoutesComponent } from './routes.component';
+import { BuildPromptComponent } from './components/build-prompt/build-prompt.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { RoutesComponent } from './routes.component';
     MethodSelectorComponent,
     LiveMockComponent,
     ForkProjectComponent,
+    BuildPromptComponent,
   ],
   imports: [
     CommonModule,

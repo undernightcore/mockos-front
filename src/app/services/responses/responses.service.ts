@@ -11,6 +11,7 @@ import {
 } from '../../interfaces/response.interface';
 import { ResponseModel } from '../../models/response.model';
 import { EnvService } from '../env/env.service';
+import { PromptInterface } from 'src/app/interfaces/prompt.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -33,6 +34,13 @@ export class ResponsesService {
         `${this.envService.getEnv('apiUrl')}/responses/${responseId}`
       )
       .pipe(map((response) => new ResponseModel(response)));
+  }
+
+  getResponsePrompt(responseId: number, request: string) {
+    return this.httpClient.post<PromptInterface>(
+      `${this.envService.getEnv('apiUrl')}/responses/${responseId}/prompt`,
+      { request }
+    );
   }
 
   createResponse(

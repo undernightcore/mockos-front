@@ -1,0 +1,35 @@
+<app-dialog [title]="'PAGES.ROUTES.BUILD_PROMPT' | translate">
+  <div class="main-content">
+    <div class="main-content__warning">
+      <div>
+        <img src="/assets/images/icons/question-mark.svg" />
+        <span>{{ "PAGES.ROUTES.PROMPT_EXAMPLE" | translate }}</span>
+      </div>
+    </div>
+    <div class="main-content__form">
+      <app-input
+        [label]="'PAGES.ROUTES.PROMPT' | translate"
+        [control]="promptForm"
+        (enterTriggered)="handleCopyAndClose()"
+      ></app-input>
+    </div>
+    <div class="main-content__actions">
+      <div>
+        <app-button [style.width.px]="200" (click)="handleClose()">{{
+          "ACTIONS.CANCEL" | translate
+        }}</app-button>
+      </div>
+      <div>
+        <app-button
+          [style.width.px]="200"
+          color="#1D1B20"
+          backgroundColor="white"
+          borderColor="white"
+          [disabled]="!promptForm.valid"
+          (click)="handleCopyAndClose()"
+          >{{ "ACTIONS.COPY_AND_CLOSE" | translate }}</app-button
+        >
+      </div>
+    </div>
+  </div>
+</app-dialog>

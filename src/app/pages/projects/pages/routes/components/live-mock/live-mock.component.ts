@@ -1,7 +1,7 @@
 import { DialogRef } from '@angular/cdk/dialog';
 import { Component, Inject, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { finalize, Subscription } from 'rxjs';
 import { LIVE_MOCK_TEMPLATE } from '../../../../../../const/live-mock.const';
@@ -9,6 +9,7 @@ import { EditProcessorInterface } from '../../../../../../interfaces/edit-proces
 import { ProcessorInterface } from '../../../../../../interfaces/processor.interface';
 import { ResponsesService } from '../../../../../../services/responses/responses.service';
 import { openToast } from '../../../../../../utils/toast.utils';
+import { BuildPromptComponent } from '../build-prompt/build-prompt.component';
 
 @Component({
   selector: 'app-live-mock',
@@ -33,7 +34,8 @@ export class LiveMockComponent implements OnDestroy {
     },
     public dialogRef: DialogRef,
     private responsesService: ResponsesService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private dialogService: MatDialog
   ) {
     if (this.data.processor) {
       this.liveMockForm.patchValue({
@@ -74,6 +76,12 @@ export class LiveMockComponent implements OnDestroy {
           this.#changeToCreateUnexpectedly(errorMessage);
         },
       });
+  }
+
+  handleBuildPrompt() {
+    this.dialogService.open(BuildPromptComponent, {
+      data: this.data.responseId,
+    });
   }
 
   #changeToCreateUnexpectedly(error: string) {

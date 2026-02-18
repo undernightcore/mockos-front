@@ -174,7 +174,12 @@
       "EDIT_ROUTE": "Edit route",
       "METHOD": "Method*",
       "BIT_EMPTY": "This is a bit empty",
-      "NOT_SELECTED_YET": "You haven't selected anything yet"
+      "NOT_SELECTED_YET": "You haven't selected anything yet",
+      "CODE_FEELING_LOST": "Feeling lost? Ask the AI what you want the code to do!",
+      "BUILD_PROMPT": "Build prompt",
+      "PROMPT_EXAMPLE": "An example could be: Paginate using «page» and «pageSize» query params.",
+      "PROMPT": "Prompt",
+      "PROMPT_COPIED": "Prompt copied successfully"
     },
     "MEMBERS": {
       "GO_BACK": "Go back to the project",
@@ -253,7 +258,8 @@
     "ENTER": "Enter",
     "ERASE": "Erase",
     "DELETE_FILE": "Delete file",
-    "ADD": "Add"
+    "ADD": "Add",
+    "COPY_AND_CLOSE": "Copy and close"
   },
   "ERRORS": {
     "ERROR": "Error",

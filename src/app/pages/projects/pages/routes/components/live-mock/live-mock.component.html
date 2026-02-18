@@ -1,5 +1,19 @@
 <app-dialog [title]="'PAGES.ROUTES.LIVE_MOCK_CONFIG' | translate">
   <div class="main-content">
+    <div class="main-content__warning">
+      <div>
+        <img src="/assets/images/icons/star.svg" />
+        <span>{{ "PAGES.ROUTES.CODE_FEELING_LOST" | translate }}</span>
+      </div>
+      <app-button
+        backgroundColor="rgb(239, 183, 240)"
+        borderColor="rgb(239, 183, 240)"
+        color="black"
+        size="small"
+        (click)="handleBuildPrompt()"
+        >{{ "PAGES.ROUTES.BUILD_PROMPT" | translate }}</app-button
+      >
+    </div>
     <div class="main-content__editor">
       <ngx-monaco-editor
         [formControl]="liveMockForm.controls.code"

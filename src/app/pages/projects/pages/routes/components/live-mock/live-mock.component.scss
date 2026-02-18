@@ -37,19 +37,27 @@
     align-items: center;
     justify-content: space-between;
     min-height: 56px;
+    gap: 8px;
     padding: 0 16px;
     background-color: #322f35;
     border-radius: 8px;
+    border: 1px solid rgb(239, 183, 240);
     box-sizing: border-box;
 
-    & > span {
+    & > div {
       display: flex;
-      gap: 4px;
-      font-family: Roboto;
-      font-weight: 400;
-      font-size: 16px;
-      letter-spacing: 0.25px;
-      color: #f5eff7;
+      align-items: center;
+      gap: 8px;
+
+      & > span {
+        display: flex;
+        gap: 4px;
+        font-family: Roboto;
+        font-weight: 400;
+        font-size: 16px;
+        letter-spacing: 0.25px;
+        color: #f5eff7;
+      }
     }
   }
 

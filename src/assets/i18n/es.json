@@ -174,7 +174,12 @@
       "EDIT_ROUTE": "Editar ruta",
       "METHOD": "Método*",
       "BIT_EMPTY": "Esto está un poco vacío",
-      "NOT_SELECTED_YET": "Aún no has seleccionado nada"
+      "NOT_SELECTED_YET": "Aún no has seleccionado nada",
+      "CODE_FEELING_LOST": "¿Te sientes perdido? ¡Pregúntale a la IA qué quieres que haga el código!",
+      "BUILD_PROMPT": "Promptear",
+      "PROMPT_EXAMPLE": "Un ejemplo podría ser: Paginar utilizando los query params «page» y «pageSize».",
+      "PROMPT": "Prompt",
+      "PROMPT_COPIED": "Prompt copiado"
     },
     "MEMBERS": {
       "GO_BACK": "Volver al proyecto",
@@ -253,7 +258,8 @@
     "ENTER": "Entrar",
     "ERASE": "Borrar",
     "DELETE_FILE": "Borrar archivo",
-    "ADD": "Añadir"
+    "ADD": "Añadir",
+    "COPY_AND_CLOSE": "Copiar y cerrar"
   },
   "ERRORS": {
     "ERROR": "Error",
