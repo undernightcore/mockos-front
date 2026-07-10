@@ -1,36 +1,59 @@
-<div align="center">
-    <img alt="mockos" height="200px" src="https://github.com/undernightcore/mockos-ui/blob/assets/mockos.png?raw=true">
-</div>
+# MockosUi
 
-## Mockos
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.19.
 
-Create API mocks **collaboratively**, **fully online** and with **custom code logic**.
+## Development server
 
-## Deployments
+To start a local development server, run:
 
-- **Application** - https://mockos.io
-- **Documentation** - https://docs.mockos.io
+```bash
+ng serve
+```
 
-If you find any bugs/vulnerabilities feel free to open a new issue or/and contact me at undernightcore@gmail.com.
+Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Features
+## Code scaffolding
 
-- Create API responses using a **simple JSON editor**.
-- Create **fully dynamic responses** with our **JS sandbox**, like a **real API**!
-- Stay in sync with other people thanks to **realtime and compare capabilities**.
-- Create **multiple projects** and invite **multiple members** to help you mock API responses.
-- **Import OpenAPI/Swagger** contracts and *create mocks automatically*.
+Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
-## Host your own instance using Docker
+```bash
+ng generate component component-name
+```
 
-- Check our [self-hosting guide.](https://docs.mockos.io/docs/getting-started/self-hosting)
+For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
 
-## Screenshots
+```bash
+ng generate --help
+```
 
-![Projects](https://github.com/undernightcore/mockos-ui/blob/assets/projects.png?raw=true)
+## Building
 
-![Routes](https://github.com/undernightcore/mockos-ui/blob/assets/routes.png?raw=true)
+To build the project run:
 
-![Response](https://github.com/undernightcore/mockos-ui/blob/assets/response.png?raw=true)
+```bash
+ng build
+```
 
-![Live](https://github.com/undernightcore/mockos-ui/blob/assets/live.png?raw=true)
+This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+
+## Running unit tests
+
+To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+
+```bash
+ng test
+```
+
+## Running end-to-end tests
+
+For end-to-end (e2e) testing, run:
+
+```bash
+ng e2e
+```
+
+Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+
+## Additional Resources
+
+For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
